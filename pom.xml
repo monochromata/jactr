@@ -36,9 +36,9 @@
 
 	<!-- TODO: Switch to Anthony's/JactrTeam's repository -->
 	<scm>
-		<connection>scm:git:https://github.com/amharrison/jactr.git/</connection>
-		<developerConnection>scm:git:https://github.com/amharrison/jactr.git/</developerConnection>
-		<url>https://github.com/amharrison/jactr/</url>
+		<connection>scm:git:https://github.com/monochromata/jactr.git/</connection>
+		<developerConnection>scm:git:https://github.com/monochromata/jactr.git/</developerConnection>
+		<url>https://github.com/monochromata/jactr/</url>
 	</scm>
 
 	<modules>
