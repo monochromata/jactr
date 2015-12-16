@@ -7,7 +7,8 @@ Bundle-Vendor: jactr.org
 Require-Bundle: org.jactr,
  org.jactr.io,
  org.commonreality.core,
- org.jactr.support
+ commons-logging;bundle-version="1.1.1",
+ org.apache.commons.logging;bundle-version="1.1.1"
 Export-Package: org.jactr.modules.threaded.goal,
  org.jactr.modules.threaded.goal.buffer,
  org.jactr.modules.threaded.io,

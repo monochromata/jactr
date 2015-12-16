@@ -7,9 +7,12 @@ Bundle-Vendor: lahiatt
 Require-Bundle: org.jactr,
  org.jactr.io,
  org.jactr.tools,
- org.jactr.support,
  org.commonreality.core,
- org.apache.log4j
+ org.apache.log4j,
+ commons-logging;bundle-version="1.1.1",
+ org.apache.commons.logging;bundle-version="1.1.1",
+ org.javolution;bundle-version="5.2.3",
+ org.javolution.core-java;bundle-version="6.0.0"
 Eclipse-BuddyPolicy: registered
 Eclipse-RegisterBuddy: org.apache.commons.logging,
  org.apache.log4j,

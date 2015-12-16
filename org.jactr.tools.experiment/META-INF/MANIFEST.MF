@@ -25,14 +25,17 @@ Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.jactr,
  org.jactr.io,
  org.jactr.tools,
- org.jactr.support,
  org.commonreality.sensors.xml;bundle-version="1.0.0";resolution:=optional,
  org.commonreality.api;bundle-version="1.0.0",
  org.commonreality.core;bundle-version="1.2.8",
  org.commonreality.net;bundle-version="1.0.0",
  org.commonreality.sensors;bundle-version="1.0.0",
  org.commonreality.time;bundle-version="1.0.0",
- org.commonreality.modalities;bundle-version="1.0.0"
+ org.commonreality.modalities;bundle-version="1.0.0",
+ org.javolution;bundle-version="5.2.3",
+ org.javolution.core-java;bundle-version="6.0.0",
+ commons-logging;bundle-version="1.1.1",
+ org.apache.commons.logging;bundle-version="1.1.1"
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Eclipse-BuddyPolicy: registered

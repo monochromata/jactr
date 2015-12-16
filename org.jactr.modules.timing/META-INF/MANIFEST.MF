@@ -5,9 +5,10 @@ Bundle-SymbolicName: org.jactr.modules.temporal;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: jactr.org
 Require-Bundle: org.jactr,
- org.jactr.support,
  org.jactr.io,
- org.commonreality.api;bundle-version="1.0.0"
+ org.commonreality.api;bundle-version="1.0.0",
+ commons-logging;bundle-version="1.1.1",
+ org.apache.commons.logging;bundle-version="1.1.1"
 Export-Package: org.jactr.modules.temporal,
  org.jactr.modules.temporal.buffer,
  org.jactr.modules.temporal.buffer.processor,
