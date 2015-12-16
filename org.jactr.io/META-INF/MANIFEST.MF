@@ -40,9 +40,12 @@ Export-Package: org.antlr,
 Eclipse-BuddyPolicy: registered 
 Eclipse-RegisterBuddy: org.jactr, org.commonreality, org.apache.log4j
 Require-Bundle: org.jactr,
- org.jactr.support,
  org.eclipse.core.runtime,
- org.commonreality.core
+ org.commonreality.core,
+ commons-logging;bundle-version="1.1.1",
+ org.apache.commons.logging;bundle-version="1.1.1",
+ org.javolution;bundle-version="5.2.3",
+ org.javolution.core-java;bundle-version="6.0.0"
 Bundle-ClassPath: .,
  lib/antlr-3.1.1.jar
 Bundle-Vendor: jactr.org
