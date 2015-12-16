@@ -138,11 +138,11 @@
 									<id>commons-logging:commons-logging:1.1.1</id>
 									<source>true</source>
 									<instructions>
-										<!-- Ignoring non-satisfiable imports for javax.servlet and org.apache.avalon.framework.logger -->
-										<Import-Package>org.apache.log,org.apache.log4j</Import-Package>
+										<!-- Ignoring non-satisfiable imports for org.apache.log, javax.servlet and org.apache.avalon.framework.logger -->
+										<Import-Package>org.apache.log4j</Import-Package>
 										<!-- Ignoring uses-statements for org.apache.commons.logging.impl: 
-											org.apache.avalon.framework.logger,javax.servlet -->
-										<Export-Package>org.apache.commons.logging;uses:="org.apache.commons.logging.impl",org.apache.commons.logging.impl;uses:="org.apache.commons.logging,org.apache.log4j,org.apache.log"</Export-Package>
+											org.apache.log,org.apache.avalon.framework.logger,javax.servlet -->
+										<Export-Package>org.apache.commons.logging;uses:="org.apache.commons.logging.impl",org.apache.commons.logging.impl;uses:="org.apache.commons.logging,org.apache.log4j"</Export-Package>
 									</instructions>
 								</artifact>
 							</artifacts>
