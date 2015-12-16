@@ -38,7 +38,7 @@ Export-Package: org.antlr,
  org.jactr.io.resolver,
  org.jactr.io.writer
 Eclipse-BuddyPolicy: registered 
-Eclipse-RegisterBuddy: org.jactr, org.commonreality, org.apache.log4j
+Eclipse-RegisterBuddy: org.jactr, org.commonreality.core, org.apache.log4j
 Require-Bundle: org.jactr,
  org.eclipse.core.runtime,
  org.commonreality.core,
