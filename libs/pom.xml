@@ -171,6 +171,14 @@
 										<Export-Package>org.apache.commons.logging;uses:="org.apache.commons.logging.impl",org.apache.commons.logging.impl;uses:="org.apache.commons.logging,org.apache.log4j"</Export-Package>
 									</instructions>
 								</artifact>
+								<artifact>
+									<id>org.mozilla:rhino:1.7.7</id>
+									<source>true</source>
+									<instructions>
+										<Import-Package>*</Import-Package>
+										<Export-Package>*</Export-Package>
+									</instructions>
+								</artifact>
 							</artifacts>
 						</configuration>
 					</execution>
