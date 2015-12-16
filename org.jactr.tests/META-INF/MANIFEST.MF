@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: jACT-R Tests
+Bundle-SymbolicName: org.jactr.tests; singleton:=true
+Bundle-Version: 1.0.10.qualifier
+Bundle-Localization: plugin
+Eclipse-BuddyPolicy: registered 
+Eclipse-RegisterBuddy: org.jactr, org.jactr.io, org.jactr.launching, org.jactr.tools,
+ org.jactr.tools.masterslave, org.jactr.tools.shell, org.commonreality.api, org.commonreality.core,
+ org.commonreality.mina, org.commonreality.mina.core, org.commonreality.modalities,
+ org.commonreality.net, org.commonreality.netty, org.commonreality.netty.core,
+ org.commonreality.sensors, org.commonreality.sensors.base, org.commonreality.sensors.swing,
+ org.commonreality.sensors.xml, org.commonreality.time, org.apache.log4j
+Require-Bundle: org.apache.log4j, org.jactr,
+ org.jactr.io,
+ org.jactr.launching,
+ org.jactr.tools,
+ org.jactr.tools.masterslave,
+ org.jactr.tools.shell,
+ org.eclipse.core.runtime,
+ org.commonreality.api,
+ org.commonreality.core,
+ org.commonreality.mina,
+ org.commonreality.mina.core,
+ org.commonreality.modalities,
+ org.commonreality.net,
+ org.commonreality.netty,
+ org.commonreality.netty.core,
+ org.commonreality.sensors,
+ org.commonreality.sensors.base,
+ org.commonreality.sensors.swing,
+ org.commonreality.sensors.xml,
+ org.commonreality.time
+Bundle-Vendor: jactr.org
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+

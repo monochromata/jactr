@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.jactr"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.jactr.io"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.jactr.launching"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.jactr.support"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.jactr.tools"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.mina"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.jactr.tools.shell"/>
-	<classpathentry kind="lib" path="/org.jactr.support/lib/org/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/org.jactr.io/lib/antlr-3.1.1.jar" sourcepath="/Users/harrison/Desktop/Inbox/downloads/2008-11-06/antlr-3.1.1/runtime/Java/src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.jactr.tools.masterslave"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.sensors.xml"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.mina.core"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.api"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.modalities"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.net"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.netty"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.netty.core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.sensors"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.sensors.base"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.sensors.swing"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.support"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.commonreality.time"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
