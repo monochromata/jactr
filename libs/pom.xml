@@ -39,7 +39,7 @@
 			<!-- Read license files into properties -->
 			<plugin>
 				<groupId>org.codehaus.gmaven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
+				<artifactId>groovy-maven-plugin</artifactId>
 				<version>2.0</version>
 				<executions>
 					<execution>
