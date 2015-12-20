@@ -49,12 +49,12 @@
 						</goals>
 						<configuration>
 							<properties>
-								<apache.license.2.0.file>Apache_License_2.0.txt</apache.license.2.0.file>
+								<apache_license_20_file>Apache_License_2.0.txt</apache_license_20_file>
 							</properties>
 							<source>
 								def al2File = new
-								File(project.properties.apache.license.2.0.file)
-								project.properties.apache.license.2.0 = al2File.getText()
+								File(project.properties.apache_license_20_file)
+								project.properties.apache_license_20 = al2File.getText()
 							</source>
 						</configuration>
 					</execution>
@@ -215,7 +215,7 @@
 										- Unnamed - avalon-framework:avalon-framework:jar:4.1.3
 										- Unnamed - log4j:log4j:jar:1.2.12
 										- Unnamed - logkit:logkit:jar:1.0.1</copyright>
-									<license>apache.license.2.0</license>
+									<license>apache_license_20</license>
 									<generateSourceFeature>true</generateSourceFeature>
 									<artifacts>
 										<artifact>
