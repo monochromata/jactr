@@ -50,7 +50,8 @@
 						</goals>
 						<configuration>
 							<source>
-								def al2File = new File(project.properties.apache_license_20_file)
+								def al2File = new
+								File(project.properties.apache_license_20_file)
 								project.properties.apache_license_20 = al2File.getText()
 							</source>
 						</configuration>
@@ -181,6 +182,20 @@
 										<Export-Package>*</Export-Package>
 									</instructions>
 								</artifact>
+								<!-- TODO: Will be superseded by a feature defined below when p2-maven-plugin 
+									supports feature definitions -->
+								<artifact>
+									<id>commons-logging:commons-logging:${commons.logging.version}</id>
+									<source>true</source>
+									<instructions>
+										<!-- Ignoring non-satisfiable imports for org.apache.log, javax.servlet 
+											and org.apache.avalon.framework.logger -->
+										<Import-Package>org.apache.log4j</Import-Package>
+										<!-- Ignoring uses-statements for org.apache.commons.logging.impl: 
+											org.apache.log,org.apache.avalon.framework.logger,javax.servlet -->
+										<Export-Package>org.apache.commons.logging;uses:="org.apache.commons.logging.impl",org.apache.commons.logging.impl;uses:="org.apache.commons.logging,org.apache.log4j"</Export-Package>
+									</instructions>
+								</artifact>
 								<artifact>
 									<id>org.mozilla:rhino:1.7.7</id>
 									<source>true</source>
@@ -190,6 +205,8 @@
 									</instructions>
 								</artifact>
 							</artifacts>
+							<!-- TODO: Ineffective until https://github.com/reficio/p2-maven-plugin/pull/75 
+								gets merged -->
 							<featureDefinitions>
 								<feature>
 									<id>commons-logging.feature</id>
@@ -216,7 +233,7 @@
 										- Unnamed -
 										log4j:log4j:jar:1.2.12
 										- Unnamed - logkit:logkit:jar:1.0.1</copyright>
-									<license>apache_license_20</license>
+									<license>${apache_license_20}</license>
 									<generateSourceFeature>true</generateSourceFeature>
 									<artifacts>
 										<artifact>
