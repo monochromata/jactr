@@ -49,11 +49,10 @@
 						</goals>
 						<configuration>
 							<properties>
-								<apache_license_20_file>Apache_License_2.0.txt</apache_license_20_file>
+								<apache_license_20_file>${basedir}/Apache_License_2.0.txt</apache_license_20_file>
 							</properties>
 							<source>
-								def al2File = new
-								File(project.properties.apache_license_20_file)
+								def al2File = new File(project.properties.apache_license_20_file)
 								project.properties.apache_license_20 = al2File.getText()
 							</source>
 						</configuration>
