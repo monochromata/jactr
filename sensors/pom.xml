@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jactr</groupId>
+		<artifactId>parent</artifactId>
+		<version>${newVersion}</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
+	<groupId>org.jactr</groupId>
+	<artifactId>sensors</artifactId>
+	<version>${newVersion}</version>
+	<description>Integrates various CommonReality sensors into jACT-R.</description>
+
+	<distributionManagement>
+		<!-- TODO: downloadUrl -->
+		<site>
+			<id>ftp.monochromata.de</id>
+			<url>sftp://ftp.monochromata.de/webseiten/maven/sites/${project.groupId}.${project.artifactId}/</url>
+		</site>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>modalities</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>sensors.swing</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jactr</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jactr</groupId>
+			<artifactId>io</artifactId>
+		</dependency>
+	</dependencies>
+</project>

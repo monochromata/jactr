@@ -89,6 +89,87 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- Duplicates the dependencies also covered by the libs module -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons.logging.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.javolution</groupId>
+				<artifactId>javolution</artifactId>
+				<version>${javolution.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.javolution</groupId>
+				<artifactId>javolution-core-java</artifactId>
+				<version>${javolution.core.java.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>api</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>core</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>modalities</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>modalities.spatial</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>sensors</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>sensors.base</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>sensors.swing</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>net</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>time</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>support</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jactr</groupId>
+				<artifactId>core</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jactr</groupId>
+				<artifactId>io</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<pluginManagement>
 			<plugins>
