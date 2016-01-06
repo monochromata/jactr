@@ -38,6 +38,10 @@
 			<artifactId>sensors.swing</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>sensors.xml</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.jactr</groupId>
 			<artifactId>core</artifactId>
 		</dependency>

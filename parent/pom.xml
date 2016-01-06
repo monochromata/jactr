@@ -44,6 +44,11 @@
 		<docfilessubdirs>true</docfilessubdirs>
 		<!-- Include sources in JavaDoc -->
 		<linksource>true</linksource>
+		<!-- TODO: Update to commons-logging:commons-logging:1.2 -->
+		<commons.logging.version>1.1.1</commons.logging.version>
+		<javolution.version>5.2.3</javolution.version>
+		<javolution.core.java.version>6.0.0</javolution.core.java.version>
+		<commonreality.version>1.0.0</commonreality.version>
 		<mars-repo.url>http://download.eclipse.org/releases/mars</mars-repo.url>
 		<!-- TODO: Use a URL on jactr.org -->
 		<jactr.libs.repo.url>http://monochromata.de/eclipse/sites/org.jactr.libs</jactr.libs.repo.url>
@@ -110,52 +115,57 @@
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>api</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>core</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>modalities</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>modalities.spatial</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>sensors</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>sensors.base</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>sensors.swing</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>sensors.xml</artifactId>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>net</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>time</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>support</artifactId>
-				<version>${newVersion}</version>
+				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
