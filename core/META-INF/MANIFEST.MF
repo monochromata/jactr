@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: jACT-R Core
 Bundle-Version: 2.0.0.qualifier
-Bundle-SymbolicName: org.jactr; singleton:=true
+Bundle-SymbolicName: org.jactr.core;singleton:=true
 Bundle-Vendor: jactr.org
 DynamicImport-Package: *
 Export-Package: org.jactr.core.buffer,

@@ -4,12 +4,12 @@
 
    
 
-   <extension-point id="extensions" name="jACT-R Extensions" schema="schema/org.jactr.extension.exsd"/>
-   <extension-point id="modules" name="jACT-R Modules" schema="schema/org.jactr.module.exsd"/>
+   <extension-point id="extensions" name="jACT-R Extensions" schema="schema/extension.exsd"/>
+   <extension-point id="modules" name="jACT-R Modules" schema="schema/module.exsd"/>
    <extension-point id="instruments" name="jACT-R Instruments" schema="schema/instrument.exsd"/>
    <extension-point id="scriptfactory" name="Script Factory" schema="schema/scriptfactory.exsd"/>
    
-   <extension point="org.jactr.modules" name="jACT-R Core Modules" id="org.jactr.core.modules">
+   <extension point="org.jactr.core.modules" name="jACT-R Core Modules">
       <module
             class="org.jactr.core.module.declarative.six.DefaultDeclarativeModule6"
             defaultEnabled="true"
@@ -152,7 +152,7 @@ NOTE: This module works but its values have not been verified.
    </extension>
 
    
-   <extension point="org.jactr.instruments" name="jACT-R Core Instruments" id="org.jactr.core.instruments">
+   <extension point="org.jactr.core.instruments" name="jACT-R Core Instruments">
       <instrument
             class="org.jactr.core.logging.impl.DefaultModelLogger"
             hidden="false"
@@ -173,7 +173,7 @@ http://jactr.org/node/142
       </instrument>
    </extension>
    <extension
-         point="org.jactr.scriptfactory">
+         point="org.jactr.core.scriptfactory">
       <factory
             class="org.jactr.scripting.javascript.JavascriptFactory">
       </factory>
