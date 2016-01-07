@@ -134,6 +134,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
+				<artifactId>net</artifactId>
+				<version>${commonreality.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
 				<artifactId>sensors</artifactId>
 				<version>${commonreality.version}</version>
 			</dependency>
@@ -154,17 +159,17 @@
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
-				<artifactId>net</artifactId>
+				<artifactId>support</artifactId>
+				<version>${commonreality.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
+				<artifactId>tests</artifactId>
 				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
 				<artifactId>time</artifactId>
-				<version>${commonreality.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.commonreality</groupId>
-				<artifactId>support</artifactId>
 				<version>${commonreality.version}</version>
 			</dependency>
 			<dependency>
