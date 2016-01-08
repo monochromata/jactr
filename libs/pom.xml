@@ -163,8 +163,7 @@
 									<!-- Is already a bundle, hence no instructions are specified. -->
 								</artifact>
 								<artifact>
-									<!-- TODO: Update to org.apache.commons:commons-collections4:4.1 -->
-									<id>commons-collections:commons-collections:3.2.1</id>
+									<id>commons-collections:commons-collections:${commons.collections.version}</id>
 									<source>true</source>
 									<!-- Is already a bundle, hence no instructions are specified. -->
 								</artifact>
@@ -175,7 +174,7 @@
 									<!-- Is already a bundle, hence no instructions are specified. -->
 								</artifact>
 								<artifact>
-									<id>commons-primitives:commons-primitives:1.0</id>
+									<id>commons-primitives:commons-primitives:${commons.primitives.version}</id>
 									<source>true</source>
 									<instructions>
 										<Import-Package>*</Import-Package>
@@ -197,7 +196,7 @@
 									</instructions>
 								</artifact>
 								<artifact>
-									<id>org.mozilla:rhino:1.7.7</id>
+									<id>org.mozilla:rhino:${rhino.version}</id>
 									<source>true</source>
 									<instructions>
 										<Import-Package>*</Import-Package>

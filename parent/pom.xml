@@ -46,6 +46,11 @@
 		<linksource>true</linksource>
 		<!-- TODO: Update to commons-logging:commons-logging:1.2 -->
 		<commons.logging.version>1.1.1</commons.logging.version>
+		<!-- TODO: Update? -->
+		<commons.primitives.version>1.0</commons.primitives.version>
+		<!-- TODO: Update to org.apache.commons:commons-collections4:4.1 -->
+        <commons.collections.version>3.2.1</commons.collections.version>
+        <rhino.version>1.7.7</rhino.version>
 		<javolution.version>5.2.3</javolution.version>
 		<javolution.core.java.version>6.0.0</javolution.core.java.version>
 		<commonreality.version>1.0.0</commonreality.version>
@@ -101,6 +106,16 @@
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
 				<version>${commons.logging.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-primitives</groupId>
+				<artifactId>commons-primitives</artifactId>
+				<version>${commons.primitives.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons.collections.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.javolution</groupId>
@@ -181,6 +196,11 @@
 				<groupId>org.jactr</groupId>
 				<artifactId>io</artifactId>
 				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mozilla</groupId>
+				<artifactId>rhino</artifactId>
+				<version>${rhino.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
