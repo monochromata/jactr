@@ -273,7 +273,7 @@
 							<!-- TODO: Use the jactr.org server -->
 							<serverId>ftp.monochromata.de</serverId>
 							<!-- TODO: Use the jactr.org server -->
-							<url>sftp://ftp.monochromata.de/webseiten/eclipse/sites/org.jactr.libs</url>
+							<url>sftp://ftp.monochromata.de/webseiten/eclipse/sites/${project.groupId}.libs</url>
 							<!-- <toDir></toDir> -->
 						</configuration>
 					</execution>
