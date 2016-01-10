@@ -55,13 +55,17 @@
 		<javolution.core.java.version>6.0.0</javolution.core.java.version>
 		<commonreality.version>1.0.0</commonreality.version>
 		<mars-repo.url>http://download.eclipse.org/releases/mars</mars-repo.url>
-		<!-- TODO: Use a URL on jactr.org -->
-		<jactr.libs.repo.url>http://monochromata.de/eclipse/sites/org.jactr.libs</jactr.libs.repo.url>
-		<jactr.path>maven/releases/${project.groupId}</jactr.path>
-		<!-- TODO: Use a URL on jactr.org -->
-		<jactr.repo.url>http://monochromata.de/${jactr.path}</jactr.repo.url>
-		<!-- TODO: Use a URL on jactr.org -->
-		<jactr.upload.url>sftp://ftp.monochromata.de/webseiten/${jactr.path}</jactr.upload.url>
+		<!-- TODO: Use jactr.org -->
+		<jactr.server>monochromata.de</jactr.server>
+		<jactr.ftp.server>ftp.${jactr.server}</jactr.ftp.server>
+		<jactr.download.prefix>http://${jactr.server}</jactr.download.prefix>
+		<jactr.upload.prefix>sftp://${jactr.ftp.server}/webseiten</jactr.upload.prefix>
+		<jactr.p2repo.path>eclipse/sites/${project.groupId}</jactr.p2repo.path>
+		<jactr.p2repo.url>${jactr.download.prefix}/${jactr.p2repo.path}</jactr.p2repo.url>
+		<jactr.p2repo.upload.url>${jactr.upload.prefix}/${jactr.p2repo.path}</jactr.p2repo.upload.url>
+		<jactr.repo.path>maven/releases/${project.groupId}</jactr.repo.path>
+		<jactr.repo.url>${jactr.download.prefix}/${jactr.repo.path}</jactr.repo.url>
+		<jactr.repo.upload.url>${jactr.upload.prefix}/${jactr.repo.path}</jactr.repo.upload.url>
 	</properties>
 
 	<!-- The repository contents constitute an implicit target platform definition. -->
@@ -72,9 +76,8 @@
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>jactr-libs</id>
-			<url>${jactr.libs.repo.url}</url>
-			<layout>p2</layout>
+			<id>jactr-repo</id>
+			<url>${jactr.repo.url}</url>
 		</repository>
 	</repositories>
 
@@ -89,12 +92,12 @@
 	<distributionManagement>
 		<repository>
 			<id>release-repository</id>
-			<url>${jactr.upload.url}</url>
+			<url>${jactr.repo.upload.url}</url>
 		</repository>
 		<!-- TODO: there are no snapshots, actually -->
 		<snapshotRepository>
 			<id>snapshot-repository</id>
-			<url>${jactr.upload.url}</url>
+			<url>${jactr.repo.upload.url}</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>

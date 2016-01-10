@@ -15,8 +15,7 @@
 
 	<properties>
 		<maven.deploy.skip>true</maven.deploy.skip>
-		<!-- TODO: Update to commons-logging:commons-logging:1.2 -->
-		<commons.logging.version>1.1.1</commons.logging.version>
+		<maven.site.deploy.skip>true</maven.site.deploy.skip>
 		<apache_license_20_file>${basedir}/Apache_License_2.0.txt</apache_license_20_file>
 	</properties>
 
@@ -270,10 +269,8 @@
 						<configuration>
 							<fromDir>${project.build.directory}/repository</fromDir>
 							<includes>*/**</includes>
-							<!-- TODO: Use the jactr.org server -->
-							<serverId>ftp.monochromata.de</serverId>
-							<!-- TODO: Use the jactr.org server -->
-							<url>sftp://ftp.monochromata.de/webseiten/eclipse/sites/${project.groupId}.libs</url>
+							<serverId>${jactr.ftp.server}</serverId>
+							<url>${jactr.p2repo.upload.url}</url>
 							<!-- <toDir></toDir> -->
 						</configuration>
 					</execution>
