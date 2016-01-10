@@ -4,7 +4,7 @@ Bundle-Name: Threaded cognition plug-in
 Bundle-SymbolicName: org.jactr.modules.threaded;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: jactr.org
-Require-Bundle: org.jactr,
+Require-Bundle: org.jactr.core,
  org.jactr.io,
  org.commonreality.core,
  commons-logging;bundle-version="1.1.1",

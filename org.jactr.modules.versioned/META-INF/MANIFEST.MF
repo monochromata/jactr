@@ -4,7 +4,7 @@ Bundle-Name: org.jactr.modules.versioned
 Bundle-SymbolicName: org.jactr.modules.versioned;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-Vendor: lahiatt
-Require-Bundle: org.jactr,
+Require-Bundle: org.jactr.core,
  org.jactr.io,
  org.jactr.tools,
  org.commonreality.core,

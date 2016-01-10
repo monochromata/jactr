@@ -3,7 +3,7 @@
 <plugin>
 
       
-   <extension point="org.jactr.modules" name="Threaded Cognition Modules" id="org.jactr.core.modules">
+   <extension point="org.jactr.core.modules" name="Threaded Cognition Modules">
      
       <module
             class="org.jactr.modules.threaded.procedural.DefaultThreadedProceduralModule6"
