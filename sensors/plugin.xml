@@ -2,7 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="org.jactr.extensions">
+         point="org.jactr.core.extensions">
       <model-extension
             class="org.jactr.sensors.swing.SwingExtension"
             name="SwingExtension">
