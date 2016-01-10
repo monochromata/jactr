@@ -93,7 +93,7 @@
      </readerwriter>
   </extension>
   <extension
-        point="org.jactr.instruments">
+        point="org.jactr.core.instruments">
      <instrument
            class="org.jactr.io.logging.XMLLogger"
            hidden="false"

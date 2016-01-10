@@ -4,11 +4,7 @@ Bundle-Name: jACT-R IO
 Bundle-SymbolicName: org.jactr.io; singleton:=true
 Bundle-Version: 1.0.10.qualifier
 Bundle-Localization: plugin
-Export-Package: org.antlr,
- org.antlr.runtime,
- org.antlr.runtime.misc,
- org.antlr.runtime.tree,
- org.jactr.io,
+Export-Package: org.jactr.io,
  org.jactr.io.activator,
  org.jactr.io.antlr3.builder,
  org.jactr.io.antlr3.compiler,
@@ -46,8 +42,7 @@ Require-Bundle: org.jactr.core,
  org.apache.commons.logging;bundle-version="1.1.1",
  org.javolution;bundle-version="5.2.3",
  org.javolution.core-java;bundle-version="6.0.0"
-Bundle-ClassPath: .,
- lib/antlr-3.1.1.jar
+Bundle-ClassPath: .
 Bundle-Vendor: jactr.org
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.jactr.io.activator.Activator

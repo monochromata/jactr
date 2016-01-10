@@ -53,8 +53,13 @@
         <rhino.version>1.7.7</rhino.version>
 		<javolution.version>5.2.3</javolution.version>
 		<javolution.core.java.version>6.0.0</javolution.core.java.version>
-		<commonreality.version>1.0.0</commonreality.version>
+		<commonreality.version>2.0.0</commonreality.version>
 		<mars-repo.url>http://download.eclipse.org/releases/mars</mars-repo.url>
+		<!-- TODO: Use commonreality.org -->
+		<commonreality.server>monochromata.de</commonreality.server>
+		<commonreality.download.prefix>http://${commonreality.server}</commonreality.download.prefix>
+		<commonreality.repo.path>maven/releases/org.commonreality</commonreality.repo.path>
+		<commonreality.repo.url>${commonreality.download.prefix}/${commonreality.repo.path}</commonreality.repo.url>
 		<!-- TODO: Use jactr.org -->
 		<jactr.server>monochromata.de</jactr.server>
 		<jactr.ftp.server>ftp.${jactr.server}</jactr.ftp.server>
@@ -74,6 +79,10 @@
 			<id>mars</id>
 			<url>${mars-repo.url}</url>
 			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>commonreality-repo</id>
+			<url>${commonreality.repo.url}</url>
 		</repository>
 		<repository>
 			<id>jactr-repo</id>
@@ -198,6 +207,11 @@
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>io</artifactId>
+				<version>${newVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jactr</groupId>
+				<artifactId>sensors</artifactId>
 				<version>${newVersion}</version>
 			</dependency>
 			<dependency>

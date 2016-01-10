@@ -42,9 +42,8 @@
 	</scm>
 
 	<modules>
-		<!-- Note that libs is built separately up-front -->
-		<!-- TODO: Add further modules and make sure libs is deployed first ... -->
 		<module>core</module>
+		<module>io</module>
 		<module>sensors</module>
 	</modules>
 

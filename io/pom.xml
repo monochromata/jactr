@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jactr</groupId>
+		<artifactId>parent</artifactId>
+		<version>${newVersion}</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
+	<groupId>org.jactr</groupId>
+	<artifactId>io</artifactId>
+	<version>${newVersion}</version>
+	<description>jACT-R IO capabilities</description>
+
+	<distributionManagement>
+		<!-- TODO: downloadUrl -->
+		<site>
+			<id>ftp.monochromata.de</id>
+			<url>sftp://ftp.monochromata.de/webseiten/maven/sites/${project.groupId}.${project.artifactId}/</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<!-- TODO: Update to version 3.5.1, maybe using group org.antlr:antlr4 -->
+		<antlr.version>3.1.1</antlr.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jactr</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.javolution</groupId>
+			<artifactId>javolution</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.javolution</groupId>
+			<artifactId>javolution-core-java</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
