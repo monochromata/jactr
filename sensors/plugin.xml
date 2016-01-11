@@ -57,6 +57,18 @@
             </description>
          </property>
       </sensor>
+      <sensor
+            class="org.commonreality.sensors.swing.DefaultSwingSensor"
+            clock-owner="false"
+            name="SwingSensor">
+         <description>Provides basic support for perceiving Swing-based GUIs. The configural url provides the creators and processors required to segment the display. If none is provided, default.xml will be used. To enable keyboard/mouse manipulation, use the DefaultKeyboardSensor with the org.commonreality.sensors.swing.SwingActuator</description>
+         <property
+               name="ConfigurationURL" value="">
+            <description>
+               description body text
+            </description>
+         </property>
+      </sensor>
    </extension>
 
    <extension
