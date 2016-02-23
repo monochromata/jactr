@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>org.jactr</groupId>
 		<artifactId>parent</artifactId>
-		<version>${newVersion}</version>
+		<version>2.0.0</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.jactr</groupId>
 	<artifactId>libs</artifactId>
-	<version>${newVersion}</version>
+	<version>2.0.0</version>
 	<description>Creates a P2 repository (a.k.a. update site) with dependencies of bundles in group org.jactr.</description>
 	<packaging>pom</packaging>
 
