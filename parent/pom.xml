@@ -61,7 +61,7 @@
 		<commonreality.repo.path>maven/releases/org.commonreality</commonreality.repo.path>
 		<commonreality.repo.url>${commonreality.download.prefix}/${commonreality.repo.path}</commonreality.repo.url>
 		<!-- TODO: Use jactr.org -->
-		<jactr>${project.version}</jactr.version>
+		<jactr.version>${project.version}</jactr.version>
 		<jactr.server>monochromata.de</jactr.server>
 		<jactr.ftp.server>ftp.${jactr.server}</jactr.ftp.server>
 		<jactr.download.prefix>http://${jactr.server}</jactr.download.prefix>
