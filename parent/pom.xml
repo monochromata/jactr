@@ -4,8 +4,10 @@
 	<groupId>org.jactr</groupId>
 	<artifactId>parent</artifactId>
 	<version>2.0.0</version>
-	<packaging>pom</packaging>
+	<name>Parent</name>
 	<description>A parent for artifacts in group org.junit.</description>
+	<url>http://monochromata.de/maven/sites/org.jactr/</url>
+	<packaging>pom</packaging>
 
 	<developers>
 		<developer>
@@ -19,8 +21,6 @@
 			<url>http://www.monochromata.de</url>
 		</developer>
 	</developers>
-
-	<!-- TODO: GPG key/signing -->
 
 	<licenses>
 		<license>
@@ -61,6 +61,7 @@
 		<commonreality.repo.path>maven/releases/org.commonreality</commonreality.repo.path>
 		<commonreality.repo.url>${commonreality.download.prefix}/${commonreality.repo.path}</commonreality.repo.url>
 		<!-- TODO: Use jactr.org -->
+		<jactr>${project.version}</jactr.version>
 		<jactr.server>monochromata.de</jactr.server>
 		<jactr.ftp.server>ftp.${jactr.server}</jactr.ftp.server>
 		<jactr.download.prefix>http://${jactr.server}</jactr.download.prefix>
@@ -202,22 +203,22 @@
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>core</artifactId>
-				<version>${project.version}</version>
+				<version>${jactr.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>io</artifactId>
-				<version>${project.version}</version>
+				<version>${jactr.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>launching</artifactId>
-				<version>${project.version}</version>
+				<version>${jactr.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>sensors</artifactId>
-				<version>${project.version}</version>
+				<version>${jactr.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mozilla</groupId>
