@@ -51,6 +51,7 @@
 		<module>core</module>
 		<module>launching</module>
 		<module>io</module>
+		<module>parent</module>
 		<module>sensors</module>
 		<module>p2repo</module>
 	</modules>
