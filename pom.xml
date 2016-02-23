@@ -49,7 +49,6 @@
 
 	<modules>
 		<module>core</module>
-		<module>launching</module>
 		<module>io</module>
 		<module>parent</module>
 		<module>sensors</module>

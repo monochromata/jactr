@@ -227,11 +227,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
-				<artifactId>launching</artifactId>
-				<version>${jactr.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jactr</groupId>
 				<artifactId>sensors</artifactId>
 				<version>${jactr.version}</version>
 			</dependency>

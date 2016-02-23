@@ -53,10 +53,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jactr</groupId>
-			<artifactId>launching</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jactr</groupId>
 			<artifactId>modules.threaded</artifactId>
 		</dependency>
 		<dependency>
