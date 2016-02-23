@@ -202,17 +202,22 @@
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>core</artifactId>
-				<version>${newVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>io</artifactId>
-				<version>${newVersion}</version>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jactr</groupId>
+				<artifactId>launching</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
 				<artifactId>sensors</artifactId>
-				<version>${newVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mozilla</groupId>
