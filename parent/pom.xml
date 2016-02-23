@@ -53,7 +53,7 @@
         <rhino.version>1.7.7</rhino.version>
 		<javolution.version>5.2.3</javolution.version>
 		<javolution.core.java.version>6.0.0</javolution.core.java.version>
-		<commonreality.version>2.0.0</commonreality.version>
+		<commonreality.version>2.0.89</commonreality.version>
 		<mars-repo.url>http://download.eclipse.org/releases/mars</mars-repo.url>
 		<!-- TODO: Use commonreality.org -->
 		<commonreality.server>monochromata.de</commonreality.server>

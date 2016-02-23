@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See https://wiki.eclipse.org/Equinox/p2/Query_Language_for_p2 and 
+         https://wiki.eclipse.org/Installable_Units -->
+<site>
+	<category-def name="org.jactr.category" label="jACT-R">
+		<description>
+			jACT-R plug-ins
+		</description>
+	</category-def>
+	<category-def name="org.commonreality.dependencies.category"
+		label="Dependencies of CommonReality">
+		<description>
+			Third-party plugins required by jACT-R
+		</description>
+	</category-def>
+	<iu>
+		<category name="org.commonreality.category" />
+		<query>
+			<expression type="match"><![CDATA[properties.exists(p | p.key == 'org.eclipse.equinox.p2.provider' && p.value=='jactr.org')]]></expression>
+		</query>
+	</iu>
+	<iu>
+		<category name="org.commonreality.dependencies.category" />
+		<query>
+			<expression type="match"><![CDATA[!properties.exists(p | p.key =='org.eclipse.equinox.p2.provider' && p.value=='jactr.org')]]></expression>
+		</query>
+	</iu>
+</site>
