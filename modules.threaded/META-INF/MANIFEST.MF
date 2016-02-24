@@ -11,6 +11,5 @@ Require-Bundle: org.jactr.core,
  org.apache.commons.logging;bundle-version="1.1.1"
 Export-Package: org.jactr.modules.threaded.goal,
  org.jactr.modules.threaded.goal.buffer,
- org.jactr.modules.threaded.io,
  org.jactr.modules.threaded.procedural
 Eclipse-RegisterBuddy: org.commonreality, org.jactr.io, org.apache.log4j
