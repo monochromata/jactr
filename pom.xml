@@ -52,6 +52,7 @@
 		<module>io</module>
 		<module>modules.threaded</module>
 		<module>modules.timed</module>
+		<module>modules.versioned</module>
 		<module>parent</module>
 		<module>sensors</module>
 		<module>p2repo</module>
