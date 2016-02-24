@@ -50,6 +50,7 @@
 	<modules>
 		<module>core</module>
 		<module>io</module>
+		<module>modules.threaded</module>
 		<module>parent</module>
 		<module>sensors</module>
 		<module>p2repo</module>
