@@ -11,7 +11,11 @@
   <version>2.0.0</version>
   <name>modules.threaded</name>
   <description>Threaded jACT-R modules</description>
-  <build>
-
-  </build>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.jactr</groupId>
+  		<artifactId>core</artifactId>
+  	</dependency>
+  </dependencies>
 </project>
