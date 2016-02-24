@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.jactr.io; singleton:=true
 Bundle-Version: 1.0.10.qualifier
 Bundle-Localization: plugin
 Export-Package: org.jactr.io,
- org.jactr.io.activator,
  org.jactr.io.antlr3.builder,
  org.jactr.io.antlr3.compiler,
  org.jactr.io.antlr3.generator.lisp,
