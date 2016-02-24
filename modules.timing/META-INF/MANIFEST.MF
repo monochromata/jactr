@@ -12,6 +12,5 @@ Require-Bundle: org.jactr,
 Export-Package: org.jactr.modules.temporal,
  org.jactr.modules.temporal.buffer,
  org.jactr.modules.temporal.buffer.processor,
- org.jactr.modules.temporal.io,
  org.jactr.modules.temporal.six
 Eclipse-RegisterBuddy: org.jactr, org.jactr.io, org.commonreality, org.apache.log4j, org.apache.commons.logging 
