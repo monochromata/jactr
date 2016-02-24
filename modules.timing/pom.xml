@@ -11,4 +11,12 @@
   <version>2.0.0</version>
   <name>modules.timing</name>
   <description>Timed jACT-R modules</description>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.jactr</groupId>
+  		<artifactId>core</artifactId>
+  	</dependency>
+  </dependencies>
+  
 </project>
