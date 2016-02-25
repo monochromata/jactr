@@ -8,16 +8,13 @@
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.jactr</groupId>
-	<artifactId>modules.versioned</artifactId>
+	<artifactId>tools.masterslave</artifactId>
 	<version>2.0.0</version>
-	<name>modules.versioned</name>
-	<description>Versioned jACT-R modules</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>3.1.1</version>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jactr</groupId>
@@ -26,10 +23,6 @@
 		<dependency>
 			<groupId>org.jactr</groupId>
 			<artifactId>io</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jactr</groupId>
-			<artifactId>tools</artifactId>
 		</dependency>
 	</dependencies>
 </project>

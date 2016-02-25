@@ -4,7 +4,7 @@ Bundle-Name: Temporal Plug-in
 Bundle-SymbolicName: org.jactr.modules.temporal;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: jactr.org
-Require-Bundle: org.jactr,
+Require-Bundle: org.jactr.core,
  org.jactr.io,
  org.commonreality.api;bundle-version="1.0.0",
  commons-logging;bundle-version="1.1.1",

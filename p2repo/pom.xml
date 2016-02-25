@@ -211,11 +211,6 @@
 									<!-- Is already a bundle, hence no instructions are specified. -->
 								</artifact>
 								<artifact>
-									<id>commons-lang:commons-lang:${commons.lang.version}</id>
-									<source>true</source>
-									<!-- Is already a bundle, hence no instructions are specified. -->
-								</artifact>
-								<artifact>
 									<id>commons-primitives:commons-primitives:1.0</id>
 									<source>true</source>
 									<instructions>
@@ -237,16 +232,16 @@
 										<Export-Package>org.apache.commons.logging;uses:="org.apache.commons.logging.impl",org.apache.commons.logging.impl;uses:="org.apache.commons.logging,org.apache.log4j"</Export-Package>
 									</instructions>
 								</artifact>
-								<artifact>
-									<id>org.slf4j:slf4j-api:${slf4j.version}</id>
-									<source>true</source>
-									<!-- Is already a bundle, hence no instructions are specified. -->
-								</artifact>
-								<artifact>
-									<id>org.slf4j:slf4j-nop:${slf4j.version}</id>
-									<source>true</source>
-									<!-- Is already a bundle, hence no instructions are specified. -->
-								</artifact>
+<!-- 								<artifact> -->
+<!-- 									<id>org.slf4j:slf4j-api:${slf4j.version}</id> -->
+<!-- 									<source>true</source> -->
+<!-- 									Is already a bundle, hence no instructions are specified. -->
+<!-- 								</artifact> -->
+<!-- 								<artifact> -->
+<!-- 									<id>org.slf4j:slf4j-nop:${slf4j.version}</id> -->
+<!-- 									<source>true</source> -->
+<!-- 									Is already a bundle, hence no instructions are specified. -->
+<!-- 								</artifact> -->
 							</artifacts>
 							<!-- TODO: Ineffective until https://github.com/reficio/p2-maven-plugin/pull/75 
 								gets merged -->

@@ -55,6 +55,10 @@
 		<module>modules.versioned</module>
 		<module>parent</module>
 		<module>sensors</module>
+		<module>tools</module>
+		<module>tools.experiment</module>
+		<module>tools.masterslave</module>
+		<module>tools.shell</module>
 		<module>p2repo</module>
 	</modules>
 
