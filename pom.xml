@@ -54,6 +54,7 @@
 		<module>modules.timing</module>
 		<module>modules.versioned</module>
 		<module>parent</module>
+		<module>scripting</module>
 		<module>sensors</module>
 		<module>tools</module>
 		<module>tools.experiment</module>

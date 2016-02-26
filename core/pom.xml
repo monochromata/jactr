@@ -65,9 +65,5 @@
 			<groupId>org.javolution</groupId>
 			<artifactId>javolution-core-java</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.mozilla</groupId>
-			<artifactId>rhino</artifactId>
-		</dependency>
 	</dependencies>
 </project>

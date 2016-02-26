@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jactr</groupId>
+		<artifactId>parent</artifactId>
+		<version>2.0.0</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
+	<groupId>org.jactr</groupId>
+	<artifactId>scripting</artifactId>
+	<version>2.0.0</version>
+	<description>Scripting for jACT-R.</description>
+
+	<distributionManagement>
+		<!-- TODO: downloadUrl -->
+		<site>
+			<id>ftp.monochromata.de</id>
+			<url>sftp://ftp.monochromata.de/webseiten/maven/sites/${project.groupId}.${project.artifactId}/</url>
+		</site>
+	</distributionManagement>
+
+	<dependencies>
+ 		<dependency>
+ 			<groupId>org.jactr</groupId>
+ 			<artifactId>core</artifactId>
+ 		</dependency>
+ 		<dependency>
+ 			<groupId>org.mozilla</groupId>
+ 			<artifactId>rhino</artifactId>
+ 		</dependency>
+	</dependencies>
+</project>

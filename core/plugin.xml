@@ -7,7 +7,6 @@
    <extension-point id="extensions" name="jACT-R Extensions" schema="schema/extension.exsd"/>
    <extension-point id="modules" name="jACT-R Modules" schema="schema/module.exsd"/>
    <extension-point id="instruments" name="jACT-R Instruments" schema="schema/instrument.exsd"/>
-   <extension-point id="scriptfactory" name="Script Factory" schema="schema/scriptfactory.exsd"/>
    
    <extension point="org.jactr.core.modules" name="jACT-R Core Modules">
       <module
@@ -171,12 +170,6 @@ http://jactr.org/node/142
          <parameter name="MaxFileSize" value="1"></parameter>
          <parameter name="NumberOfBackups" value="2"></parameter>
       </instrument>
-   </extension>
-   <extension
-         point="org.jactr.core.scriptfactory">
-      <factory
-            class="org.jactr.scripting.javascript.JavascriptFactory">
-      </factory>
    </extension>
    
    

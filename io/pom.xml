@@ -36,10 +36,6 @@
 			<version>3.1.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jactr</groupId>
-			<artifactId>core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.commonreality</groupId>
 			<artifactId>core</artifactId>
 		</dependency>
@@ -50,6 +46,14 @@
 		<dependency>
 			<groupId>org.javolution</groupId>
 			<artifactId>javolution-core-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jactr</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jactr</groupId>
+			<artifactId>scripting</artifactId>
 		</dependency>
 	</dependencies>
 

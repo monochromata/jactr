@@ -159,11 +159,7 @@ Export-Package: org.jactr.core.buffer,
  org.jactr.modules.pm.vocal.buffer.six,
  org.jactr.modules.pm.vocal.delegate,
  org.jactr.modules.pm.vocal.event,
- org.jactr.modules.pm.vocal.six,
- org.jactr.scripting,
- org.jactr.scripting.action,
- org.jactr.scripting.condition,
- org.jactr.scripting.javascript
+ org.jactr.modules.pm.vocal.six
 Eclipse-BuddyPolicy: registered
 Eclipse-RegisterBuddy: org.commonreality, org.apache.log4j
 Require-Bundle: org.commonreality.core,
@@ -177,6 +173,5 @@ Require-Bundle: org.commonreality.core,
  commons-logging;bundle-version="1.1.1",
  commons-primitives;bundle-version="1.0.0",
  org.apache.commons.logging;bundle-version="1.1.1",
- org.apache.commons.collections;bundle-version="3.2.1",
- org.mozilla.rhino;bundle-version="1.7.7"
+ org.apache.commons.collections;bundle-version="3.2.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
