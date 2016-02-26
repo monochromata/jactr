@@ -3,7 +3,7 @@
 <plugin>
    <extension-point id="commands" name="Import Commands from Package" schema="schema/commands.exsd"/>
    <extension
-         point="org.jactr.instruments">
+         point="org.jactr.core.instruments">
       <instrument
             class="org.jactr.tools.shell.BeanShellInterface"
             name="BeanShell">

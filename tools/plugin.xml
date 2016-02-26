@@ -6,7 +6,7 @@
    <extension-point id="sinks" name="Trace data sinks" schema="schema/sinks.exsd"/>
 
    <extension
-         point="org.jactr.instruments" name="jACT-R Tools Instruments" id="org.jactr.tools.instruments">
+         point="org.jactr.core.instruments" name="jACT-R Tools Instruments" id="org.jactr.tools.instruments">
        
       <instrument
             class="org.jactr.tools.io.ModelRecorder"
@@ -388,7 +388,7 @@ This is provided here for diagnosing individual model runs. Iterative runs autom
       </tracer>
    </extension>
    <extension
-         point="org.jactr.extensions">
+         point="org.jactr.core.extensions">
       <model-extension
             class="org.jactr.modules.pm.visual.scene.SceneChangeExtension"
             name="Scene Change Detector">
@@ -421,7 +421,7 @@ This is provided here for diagnosing individual model runs. Iterative runs autom
       </astparticipant>
    </extension>
    <extension
-         point="org.jactr.modules">
+         point="org.jactr.core.modules">
       <module
             class="org.jactr.modules.general.GeneralBufferModule"
             defaultEnabled="false"

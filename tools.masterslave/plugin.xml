@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.jactr.extensions">
+         point="org.jactr.core.extensions">
       <model-extension
             class="org.jactr.tools.masterslave.master.MasterExtension"
             name="Master Model Extension">
