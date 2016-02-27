@@ -242,11 +242,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
-				<artifactId>tests</artifactId>
-				<version>${commonreality.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.commonreality</groupId>
 				<artifactId>time</artifactId>
 				<version>${commonreality.version}</version>
 			</dependency>
