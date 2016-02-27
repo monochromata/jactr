@@ -25,6 +25,7 @@
 		<antlr.version>3.1.1</antlr.version>
 	</properties>
 
+	<!-- Needs to be kept in sync with the Require-Bundle and Eclipse-BuddyPolicy attributes for io in the p2repo POM -->
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -33,7 +34,6 @@
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr</artifactId>
-			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.commonreality</groupId>

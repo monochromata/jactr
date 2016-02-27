@@ -20,6 +20,7 @@
 		</site>
 	</distributionManagement>
 
+	<!-- Needs to be kept in sync with Require-Bundle and Eclipse-RegisterBuddy attributes for sensors in p2repo POM -->
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>

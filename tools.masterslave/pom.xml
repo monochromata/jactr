@@ -11,6 +11,7 @@
 	<artifactId>tools.masterslave</artifactId>
 	<version>2.0.0</version>
 
+	<!-- Needs to be kept in sync with Require-Bundle and Eclipse-RegisterBuddy attributes for tools.masterslave in p2repo POM -->
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>

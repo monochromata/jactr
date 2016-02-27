@@ -11,6 +11,7 @@
 	<artifactId>tools</artifactId>
 	<version>2.0.0</version>
 
+	<!-- Needs to be kept in sync with the Require-Bundle and Eclipse-RegisterBuddy attributes for toosl in the p2repo POM -->
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -24,10 +25,10 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math</artifactId>
 		</dependency>
-			<dependency>
-				<groupId>org.commonreality</groupId>
-				<artifactId>netty</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>netty</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.jactr</groupId>
 			<artifactId>core</artifactId>

@@ -12,6 +12,7 @@
   <name>modules.threaded</name>
   <description>Threaded jACT-R modules</description>
   
+  <!-- Needs to be kept in sync with the Require-Bundle and Eclipse-RegisterBuddy attributes for modules.threaded in p2repo POM -->
   <dependencies>
   	<dependency>
   		<groupId>org.jactr</groupId>

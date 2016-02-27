@@ -57,7 +57,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jactr</groupId>
-			<artifactId>modules.timing</artifactId>
+			<artifactId>modules.temporal</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jactr</groupId>
@@ -240,6 +240,30 @@
 										<Export-Package>org.apache.commons.logging;uses:="org.apache.commons.logging.impl",org.apache.commons.logging.impl;uses:="org.apache.commons.logging,org.apache.log4j"</Export-Package>
 									</instructions>
 								</artifact>
+								<artifact>
+									<id>org.mozilla:rhino:${rhino.version}</id>
+									<source>true</source>
+									<instructions>
+										<Import-Package>*</Import-Package>
+										<Export-Package>*</Export-Package>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.beanshell:bsh-core:${beanshell.version}</id>
+									<source>true</source>
+									<instructions>
+										<Import-Package>*</Import-Package>
+										<Export-Package>*</Export-Package>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.antlr:antlr:${antlr.version}</id>
+									<source>true</source>
+									<instructions>
+										<Import-Package>*</Import-Package>
+										<Export-Package>*</Export-Package>
+									</instructions>
+								</artifact>
 <!-- 								<artifact> -->
 <!-- 									<id>org.slf4j:slf4j-api:${slf4j.version}</id> -->
 <!-- 									<source>true</source> -->
@@ -250,6 +274,226 @@
 <!-- 									<source>true</source> -->
 <!-- 									Is already a bundle, hence no instructions are specified. -->
 <!-- 								</artifact> -->
+								<artifact>
+									<id>org.jactr:core:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>jACT-R Core</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.core</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in core POM -->
+										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",commons-primitives;bundle-version="${commons.primitives.version}",commons-collections;bundle-version="${commons.collections.version}",org.commonreality.api;bundle-version="${commonreality.version}",org.commonreality.core;bundle-version="${commonreality.version}",org.commonreality.modalities;bundle-version="${commonreality.version}",org.commonreality.net;bundle-version="${commonreality.version}",org.commonreality.sensors;bundle-version="${commonreality.version}",org.commonreality.time;bundle-version="${commonreality.version}", org.javolution;bundle-version="${javolution.version}",org.javolution.core-java;bundle-version="${javolution.core.java.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>commons-logging,commons-primitives,commons-collections,org.commonreality.api,org.commonreality.core,org.commonreality.modalities,org.commonreality.net,org.commonreality.sensors,org.commonreality.time, org.javolution,org.javolution.core-java</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:io:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>jACT-R IO</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.io</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in io POM -->
+										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",org.antlr;bundle-version="${antlr.version}",org.commonreality.core;bundle-version="${commonreality.version}",org.javolution;bundle-version="${javolution.version}",org.javolution.core-java;bundle-version="${javolution.core.java.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.scripting;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>commons-logging,org.antlr,org.commonreality.core,org.javolution,org.javolution.core-java,org.jactr.core,org.jactr.scripting</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:modules.threaded:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>Threaded-cognition plug-in for jACT-R</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.modules.threaded</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in modules.threaded POM -->
+										<Require-Bundle>org.jactr.core;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>org.jactr.core</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:modules.temporal:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>Temporal plug-in for jACT-R</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.modules.temporal</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in modules.temporal POM -->
+										<Require-Bundle>org.jactr.core;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>org.jactr.core</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:modules.versioned:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>Versioned modules for jACT-R</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.modules.versioned</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in modules.versioned POM -->
+										<Require-Bundle>org.antlr;bundle-version="${antlr.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.io;bundle-version="${jactr.version}",org.jactr.tools;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>org.antlr,org.jactr.core,org.jactr.io,org.jactr.tools</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:scripting:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>Scripting for jACT-R</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.scripting</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in scripting POM -->
+										<Require-Bundle>org.jactr.core;bundle-version="${jactr.version}",org.mozilla.rhino;bundle-version="${rhino.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>org.jactr.core,org.mozilla.rhino</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:sensors:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>jACT-R-specific commonreality sensors</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.sensors</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in sensors POM -->
+										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",org.commonreality.api;bundle-version="${commonreality.version}",org.commonreality.modalities;bundle-version="${commonreality.version}",org.commonreality.sensors.swing;bundle-version="${commonreality.version}",org.commonreality.sensors.xml;bundle-version="${commonreality.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.io;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>commons-logging,org.commonreality.api,org.commonreality.modalities,org.commonreality.sensors.swing,org.commonreality.sensors.xml,org.jactr.core,org.jactr.io</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:tools:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>jACT-R tools</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.tools</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in tools POM -->
+										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",commons-cli;bundle-version="${commons.cli.version}",commons-math;bundle-version="${commons.math.version}",org.commonreality.netty;bundle-version="${commonreality.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.io;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>commons-logging,commons-cli,commons-math,org.commonreality.netty,org.jactr.core,org.jactr.io</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:tools.experiment:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>jACT-R's general experiment framework</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.tools.experiment</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in tools.experiment POM -->
+										<Require-Bundle>org.commonreality.sensors.xml;bundle-version="${commonreality.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.tools;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>org.commonreality.sensors.xml,org.jactr.core,org.jactr.tools</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:tools.masterslave:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>jACT-R Master-slave tools</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.tools.masterslave</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in tools.masterslave POM -->
+										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.io;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>commons-logging,org.jactr.core,org.jactr.io</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
+								<artifact>
+									<id>org.jactr:tools.shell:${jactr.version}</id>
+									<source>true</source>
+									<singleton>true</singleton>
+									<instructions>
+										<Bundle-ManifestVersion>${bundle.manifest.version}</Bundle-ManifestVersion>
+										<Bundle-Name>jACT-R Beanshell plug-in</Bundle-Name>
+										<Bundle-SymbolicName>org.jactr.tools.shell</Bundle-SymbolicName>
+										<Bundle-Version>${jactr.version}</Bundle-Version>
+										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
+										<!-- Needs to be kept in sync with dependencies in tools.shell POM -->
+										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",org.beanshell.bsh-core;bundle-version="${beanshell.bundle.version}",org.jactr.core;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>commons-logging,org.beanshell.bsh-core,org.jactr.core</Eclipse-RegisterBuddy>
+										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+										<Export-Package>*</Export-Package>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									</instructions>
+								</artifact>
 							</artifacts>
 							<!-- TODO: Ineffective until https://github.com/reficio/p2-maven-plugin/pull/75 
 								gets merged -->

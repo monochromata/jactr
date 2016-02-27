@@ -7,11 +7,12 @@
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
   <groupId>org.jactr</groupId>
-  <artifactId>modules.timing</artifactId>
+  <artifactId>modules.temporal</artifactId>
   <version>2.0.0</version>
   <name>modules.timing</name>
   <description>Timed jACT-R modules</description>
   
+  <!-- Needs to be kept in sync with the Require-Bundle and Eclipse-RegisterBuddy attributes for modules.timing in the p2repo POM -->
   <dependencies>
   	<dependency>
   		<groupId>org.jactr</groupId>

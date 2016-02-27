@@ -13,6 +13,7 @@
 	<name>modules.versioned</name>
 	<description>Versioned jACT-R modules</description>
 
+	<!-- Needs to be kept in sync with Require-Bundle and Eclipse-RegisterBuddy attributes for modules.versioned in the p2repo POM -->
 	<dependencies>
 		<dependency>
 			<groupId>org.antlr</groupId>

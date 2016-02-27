@@ -51,7 +51,7 @@
 		<module>core</module>
 		<module>io</module>
 		<module>modules.threaded</module>
-		<module>modules.timing</module>
+		<module>modules.temporal</module>
 		<module>modules.versioned</module>
 		<module>parent</module>
 		<module>scripting</module>
