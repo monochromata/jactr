@@ -126,6 +126,11 @@
 			<url>${jactr.repo.upload.url}</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
+		<!-- TODO: downloadUrl -->
+		<site>
+			<id>ftp.monochromata.de</id>
+			<url>${jactr.upload.prefix}/maven/sites/${project.groupId}.${project.artifactId}/</url>
+		</site>
 	</distributionManagement>
 
 	<dependencyManagement>
