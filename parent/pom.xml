@@ -44,6 +44,10 @@
 		<docfilessubdirs>true</docfilessubdirs>
 		<!-- Include sources in JavaDoc -->
 		<linksource>true</linksource>
+		<junit.version>4.12</junit.version>
+		<hamcrest.version>1.3</hamcrest.version>
+		<jmock.version>2.8.1</jmock.version>
+		<equalsverifier.version>1.7.5</equalsverifier.version>
 		<beanshell.version.prefix>2.0</beanshell.version.prefix>
 		<beanshell.version.suffix>b4</beanshell.version.suffix>
 		<beanshell.version>${beanshell.version.prefix}${beanshell.version.suffix}</beanshell.version>
@@ -328,6 +332,20 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+			<version>${jmock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.jqno.equalsverifier</groupId>
+			<artifactId>equalsverifier</artifactId>
+			<version>${equalsverifier.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<pluginManagement>
