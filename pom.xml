@@ -33,6 +33,14 @@
 			<url>http://www.gnu.org/licenses/lgpl-3.0.en.html</url>
 		</license>
 	</licenses>
+	
+	<distributionManagement>
+		<!-- TODO: downloadUrl -->
+		<site>
+			<id>ftp.monochromata.de</id>
+			<url>sftp://ftp.monochromata.de/webseiten/maven/sites/${project.groupId}/</url>
+		</site>
+	</distributionManagement>
 
 	<!-- TODO: Switch to Anthony's/JactrTeam's repository -->
 	<scm>
