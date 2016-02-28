@@ -70,9 +70,7 @@
 		<mars-repo.url>http://download.eclipse.org/releases/mars</mars-repo.url>
 		<!-- TODO: Use commonreality.org -->
 		<commonreality.server>monochromata.de</commonreality.server>
-		<commonreality.download.prefix>http://${commonreality.server}</commonreality.download.prefix>
-		<commonreality.repo.path>maven/releases/org.commonreality</commonreality.repo.path>
-		<commonreality.repo.url>${commonreality.download.prefix}/${commonreality.repo.path}</commonreality.repo.url>
+		<commonreality.repo.url>http://${commonreality.server}/maven/releases/org.commonreality</commonreality.repo.url>
 		<!-- TODO: Use jactr.org -->
 		<jactr.version>${project.version}</jactr.version>
 		<jactr.server>monochromata.de</jactr.server>
