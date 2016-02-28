@@ -12,12 +12,6 @@
 	<version>2.0.0</version>
 	<packaging>pom</packaging>
 
-	<properties>
-		<maven.deploy.skip>true</maven.deploy.skip>
-		<maven.site.skip>true</maven.site.skip>
-		<maven.site.deploy.skip>true</maven.site.deploy.skip>
-	</properties>
-
 	<developers>
 		<developer>
 			<name>Anthony Harrison</name>
