@@ -135,7 +135,7 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- Duplicates the dependencies also covered by the libs module -->
+			<!-- Duplicates the dependencies also covered by the p2repo module -->
 			<dependency>
 				<groupId>org.beanshell</groupId>
 				<artifactId>bsh-classgen</artifactId>
