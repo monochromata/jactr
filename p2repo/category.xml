@@ -7,20 +7,20 @@
 			jACT-R plug-ins
 		</description>
 	</category-def>
-	<category-def name="org.commonreality.dependencies.category"
-		label="Dependencies of CommonReality">
+	<category-def name="org.jactr.dependencies.category"
+		label="Dependencies of jACT-R">
 		<description>
 			Third-party plugins required by jACT-R
 		</description>
 	</category-def>
 	<iu>
-		<category name="org.commonreality.category" />
+		<category name="org.jactr.category" />
 		<query>
 			<expression type="match"><![CDATA[properties.exists(p | p.key == 'org.eclipse.equinox.p2.provider' && p.value=='jactr.org')]]></expression>
 		</query>
 	</iu>
 	<iu>
-		<category name="org.commonreality.dependencies.category" />
+		<category name="org.jactr.dependencies.category" />
 		<query>
 			<expression type="match"><![CDATA[!properties.exists(p | p.key =='org.eclipse.equinox.p2.provider' && p.value=='jactr.org')]]></expression>
 		</query>
