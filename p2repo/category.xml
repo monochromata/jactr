@@ -25,4 +25,5 @@
 			<expression type="match"><![CDATA[!properties.exists(p | p.key =='org.eclipse.equinox.p2.provider' && p.value=='jactr.org')]]></expression>
 		</query>
 	</iu>
+   <repository-reference location="${commonreality.p2repo.url}" enabled="true" />
 </site>

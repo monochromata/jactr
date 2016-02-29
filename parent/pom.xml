@@ -71,6 +71,7 @@
 		<!-- TODO: Use commonreality.org -->
 		<commonreality.server>monochromata.de</commonreality.server>
 		<commonreality.repo.url>http://${commonreality.server}/maven/releases/org.commonreality</commonreality.repo.url>
+		<commonreality.p2repo.url>http://${commonreality.server}/eclipse/sites/org.commonreality</commonreality.p2repo.url>
 		<!-- TODO: Use jactr.org -->
 		<jactr.version>${project.version}</jactr.version>
 		<jactr.server>monochromata.de</jactr.server>
