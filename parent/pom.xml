@@ -65,6 +65,7 @@
 		<commons.collections.bundle.symbolic.name>org.apache.commons.collections</commons.collections.bundle.symbolic.name>
 		<!-- TODO: Update to org.apache.commons:commons-math3:3.6 -->
 		<commons.math.version>2.1</commons.math.version>
+		<commons.math.bundle.symbolic.name>org.apache.commons.math</commons.math.bundle.symbolic.name>
 		<rhino.version>1.7.7</rhino.version>
 		<javolution.version>5.2.3</javolution.version>
 		<javolution.core.java.version>6.0.0</javolution.core.java.version>

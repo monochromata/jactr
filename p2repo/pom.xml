@@ -431,8 +431,8 @@
 										<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 										<Bundle-RequiredExecutionEnvironment>${bundle.required.execution.environment}</Bundle-RequiredExecutionEnvironment>
 										<!-- Needs to be kept in sync with dependencies in tools POM -->
-										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",${commons.cli.bundle.symbolic.name};bundle-version="${commons.cli.version}",org.apache.commons.commons-math;bundle-version="${commons.math.version}",org.commonreality.netty;bundle-version="${commonreality.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.io;bundle-version="${jactr.version}"</Require-Bundle>
-										<Eclipse-RegisterBuddy>commons-logging,${commons.cli.bundle.symbolic.name},org.apache.commons.commons-math,org.commonreality.netty,org.jactr.core,org.jactr.io</Eclipse-RegisterBuddy>
+										<Require-Bundle>commons-logging;bundle-version="${commons.logging.version}",${commons.cli.bundle.symbolic.name};bundle-version="${commons.cli.version}",${commons.math.bundle.symbolic.name};bundle-version="${commons.math.version}",org.commonreality.netty;bundle-version="${commonreality.version}",org.jactr.core;bundle-version="${jactr.version}",org.jactr.io;bundle-version="${jactr.version}"</Require-Bundle>
+										<Eclipse-RegisterBuddy>commons-logging,${commons.cli.bundle.symbolic.name},${commons.math.bundle.symbolic.name},org.commonreality.netty,org.jactr.core,org.jactr.io</Eclipse-RegisterBuddy>
 										<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
 										<Export-Package>*</Export-Package>
 										<Bundle-ClassPath>.</Bundle-ClassPath>
