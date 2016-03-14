@@ -40,6 +40,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<retryFailedDeploymentCount>3</retryFailedDeploymentCount>
 		<!-- Copy nested JavaDoc resources -->
 		<docfilessubdirs>true</docfilessubdirs>
 		<!-- Include sources in JavaDoc -->
