@@ -20,6 +20,9 @@
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.site.deploy.skip>true</maven.site.deploy.skip>
 		<apache_license_20_file>${basedir}/Apache_License_2.0.txt</apache_license_20_file>
+		<apache_license_20_file>${basedir}/Apache_License_2.0.txt</apache_license_20_file>
+		<!-- TODO: Remove again: temporarily skipping jarsigner that signs after md5 checksums is artifacts.jar -->
+		<jarsigner.skip>true</jarsigner.skip>
 		<jarsigner.keystore.path>${basedir}/self-signing.keystore</jarsigner.keystore.path>
 	</properties>
 
