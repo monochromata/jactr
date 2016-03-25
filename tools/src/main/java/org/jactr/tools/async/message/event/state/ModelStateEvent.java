@@ -20,15 +20,9 @@ import java.io.StringWriter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.tools.async.message.BaseMessage;
-/**
- * @author developer
- *
- */
+
 public class ModelStateEvent extends BaseMessage implements IModelStateEvent, Serializable
 {
-  /**
-   * 
-   */
   private static final long serialVersionUID = -8424278848820498054L;
 
   /**
@@ -66,17 +60,11 @@ public class ModelStateEvent extends BaseMessage implements IModelStateEvent, Se
     return _exception;
   }
   
-  /**
-   * @see org.jactr.tools.async.message.command.state.IStateCommand#getSimulationTime()
-   */
   public double getSimulationTime()
   {
     return _simulationTime;
   }
 
-  /**
-   * @see org.jactr.tools.async.message.command.state.IStateCommand#getSystemTime()
-   */
   public long getSystemTime()
   {
     return _systemTime;

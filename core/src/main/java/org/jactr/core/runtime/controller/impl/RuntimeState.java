@@ -100,9 +100,7 @@ public class RuntimeState
   }
 
   /**
-   * true if any models are currently running
-   * 
-   * @return
+   * @return true if any models are currently running
    */
   public boolean isRunning()
   {
@@ -118,9 +116,7 @@ public class RuntimeState
   }
 
   /**
-   * true if all the models are suspended
-   * 
-   * @return
+   * @return true if all the models are suspended
    */
   public boolean isSuspended()
   {
@@ -172,7 +168,7 @@ public class RuntimeState
   /**
    * called just before a model starts to execute..
    * 
-   * @param model
+   * @param model the model
    */
   public void starting(IModel model)
   {

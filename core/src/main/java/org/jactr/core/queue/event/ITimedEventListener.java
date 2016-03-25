@@ -19,23 +19,28 @@ import java.util.EventListener;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ITimedEventListener extends EventListener
 {
 
   /**
    * an event has been fired (its time has expired)
+   * 
+   * @param tee the event
    */
   public void eventFired(TimedEventEvent tee);
 
   /**
    * an event has been queued
+   * 
+   * @param tee the event
    */
   public void eventQueued(TimedEventEvent tee);
 
   /**
    * an event has been aborted and dequeued
+   * 
+   * @param tee the event
    */
   public void eventAborted(TimedEventEvent tee);
   
@@ -43,7 +48,8 @@ public interface ITimedEventListener extends EventListener
   /**
    * the timed event is an IIntermediateTimedEvent and it has
    * received an update 
-   * @param tee
+   * 
+   * @param tee the event
    */
   public void eventUpdated(TimedEventEvent tee);
 

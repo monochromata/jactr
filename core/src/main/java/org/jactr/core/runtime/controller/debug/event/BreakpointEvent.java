@@ -21,7 +21,7 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.debug.BreakpointType;
 
 /**
- * @author developer
+ * 
  */
 public class BreakpointEvent extends
     AbstractACTREvent<IModel, IBreakpointListener>

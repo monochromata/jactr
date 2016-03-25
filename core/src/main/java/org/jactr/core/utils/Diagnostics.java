@@ -166,7 +166,7 @@ public class Diagnostics
    * @param precisionFailure
    *          called when there is a failure. passed clock time, actual
    *          precision
-   * @param clock
+   * @param clock TODO
    */
   static public void precisionTest(double clock,
       BiConsumer<Double, Double> precisionFailure)
@@ -185,10 +185,10 @@ public class Diagnostics
   }
 
   /**
-   * @param clock
-   * @param window
-   * @param windowFailure
-   * @param precisionFailure
+   * @param clock TODO
+   * @param window TODO
+   * @param windowFailure TODO
+   * @param precisionFailure TODO
    */
   static public void timeSanityCheck(double clock, TimeWindow window,
       BiConsumer<Double, TimeWindow> windowFailure,

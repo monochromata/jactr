@@ -65,10 +65,10 @@ public class RetrievalModuleEvent extends
    * (i.e., error). If candidates are available, use
    * {@link #RetrievalModuleEvent(IRetrievalModule, ChunkTypeRequest, IChunk, double, Collection)}
    * 
-   * @param source
-   * @param pattern
-   * @param chunk
-   * @param retrievalTime
+   * @param source TODO
+   * @param pattern TODO
+   * @param chunk TODO
+   * @param retrievalTime TODO
    */
   public RetrievalModuleEvent(IRetrievalModule source,
       ChunkTypeRequest pattern, IChunk chunk, double retrievalTime)
@@ -77,10 +77,10 @@ public class RetrievalModuleEvent extends
   }
 
   /**
-   * @param source
-   * @param pattern
-   * @param chunk
-   * @param retrievalTime
+   * @param source TODO
+   * @param pattern TODO
+   * @param chunk TODO
+   * @param retrievalTime TODO
    * @param allCandidates
    *          all the retrieval candidates, including chunk
    */
@@ -102,7 +102,7 @@ public class RetrievalModuleEvent extends
   /**
    * duration of the retrieval, not the end time.
    * 
-   * @return
+   * @return TODO
    */
   public double getRetrievalTime()
   {

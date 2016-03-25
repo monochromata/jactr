@@ -40,8 +40,8 @@ public class SlotMatchFailure extends AbstractMatchFailure
   /**
    * call for when the container doesn't actually have the slot
    * 
-   * @param container
-   * @param cSlot
+   * @param container TODO
+   * @param cSlot TODO
    */
   public SlotMatchFailure(IUniqueSlotContainer container, IConditionalSlot cSlot)
   {
@@ -53,10 +53,11 @@ public class SlotMatchFailure extends AbstractMatchFailure
    * failure when the mismatchedSlot in the container does not meet the
    * condition
    * 
-   * @param container
-   * @param cSlot
-   * @param mismatchedSlot
-   * @param variableDefinition
+   * @param condition TODO
+   * @param container TODO
+   * @param cSlot TODO
+   * @param mismatchedSlot TODO
+   * @param variableDefinition TODO
    *          the slot that bound the variable value (if any) or possibly the
    *          buffer
    */

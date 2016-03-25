@@ -65,7 +65,6 @@ public class ProductionLoopDetector implements IInstrument, IParameterized
   @Override
   public void initialize()
   {
-
   }
 
   public void setTerminateOnDetectionEnabled(boolean onOff)
@@ -99,8 +98,8 @@ public class ProductionLoopDetector implements IInstrument, IParameterized
    * since this is executed inline with the model, throwing a
    * ModelTerminatedException will do what we expect it to.
    * 
-   * @param simulationTime
-   * @param instantiation
+   * @param simulationTime TODO
+   * @param instantiation TODO
    */
   protected void loopDetected(double simulationTime,
       IInstantiation instantiation)

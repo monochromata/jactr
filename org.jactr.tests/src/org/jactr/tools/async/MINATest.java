@@ -46,7 +46,7 @@ import org.jactr.tools.async.shadow.ShadowController;
  * of the actual NetworkedIODebugController. They can both run as either servers
  * or clients.
  * 
- * @author developer
+ * 
  */
 public class MINATest extends TestCase
 {

@@ -26,7 +26,7 @@ import org.jactr.tools.tracer.transformer.IEventTransformer;
 import org.jactr.tools.tracer.transformer.ITransformedEvent;
 
 /**
- * @author developer
+ * 
  */
 public class ActivationBufferEventTransformer implements IEventTransformer
 {

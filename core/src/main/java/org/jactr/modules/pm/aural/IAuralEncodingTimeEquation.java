@@ -16,7 +16,7 @@ package org.jactr.modules.pm.aural;
 import org.jactr.core.chunk.IChunk;
 
 /**
- * @author developer
+ * 
  */
 public interface IAuralEncodingTimeEquation
 {

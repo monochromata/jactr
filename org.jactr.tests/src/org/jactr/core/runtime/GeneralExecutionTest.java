@@ -29,7 +29,7 @@ import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.resolver.ASTResolver;
 
 /**
- * @author developer
+ * 
  */
 public class GeneralExecutionTest extends TestCase
 {

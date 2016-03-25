@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 import org.jactr.tools.async.message.command.ICommand;
 /**
- * @author developer
+ * 
  *
  */
 public interface IRuntimeStateCommand extends ICommand, Serializable, IStateCommand

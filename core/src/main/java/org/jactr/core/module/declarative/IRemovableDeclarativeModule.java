@@ -19,7 +19,7 @@ public interface IRemovableDeclarativeModule extends IDeclarativeModule
    * , or {@link ISymbolicChunkType#getChunks()}. Any further references to the
    * chunk (e.g. by other chunks) may or may not be replaced by tombstones.
    * 
-   * @param chunk
+   * @param chunk TODO
    */
   public void removeChunk(IChunk chunk);
 }

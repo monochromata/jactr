@@ -20,7 +20,7 @@ import org.jactr.core.module.imaginal.six.DefaultImaginalModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class ImaginalModuleParticipant extends BasicASTParticipant
 {

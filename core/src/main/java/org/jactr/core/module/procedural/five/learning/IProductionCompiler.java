@@ -17,7 +17,7 @@ import org.jactr.core.module.procedural.IProceduralModule;
 import org.jactr.core.production.IInstantiation;
 import org.jactr.core.production.IProduction;
 /**
- * @author developer
+ * 
  *
  */
 public interface IProductionCompiler

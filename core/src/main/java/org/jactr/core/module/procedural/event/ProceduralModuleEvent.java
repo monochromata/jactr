@@ -100,7 +100,7 @@ public class ProceduralModuleEvent extends
    * the production(s) for create, add, merge, change and parameter events. the
    * {@link IInstantiation}(s) for conflict set, will fire and fire events.
    * 
-   * @return
+   * @return TODO
    */
   public Collection<IProduction> getProductions()
   {
@@ -111,7 +111,7 @@ public class ProceduralModuleEvent extends
    * the production for create, add, merge and change events. the
    * {@link IInstantiation} for will fire and fired events.
    * 
-   * @return
+   * @return TODO
    */
   public IProduction getProduction()
   {

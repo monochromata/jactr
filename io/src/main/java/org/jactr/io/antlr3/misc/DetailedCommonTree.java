@@ -22,9 +22,6 @@ import org.antlr.runtime.tree.Tree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/**
- * @author developer
- */
 public class DetailedCommonTree extends CommonTree
 {
   /**
@@ -39,9 +36,6 @@ public class DetailedCommonTree extends CommonTree
 
   private URL              _source;
 
-  /**
-   * @param arg0
-   */
   public DetailedCommonTree(CommonTree arg0, URL source)
   {
     super(arg0);
@@ -59,9 +53,6 @@ public class DetailedCommonTree extends CommonTree
     return new DetailedCommonTree(this, _source);
   }
 
-  /**
-   * @param arg0
-   */
   public DetailedCommonTree(Token arg0, URL source)
   {
     super(arg0);

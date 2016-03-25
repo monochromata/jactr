@@ -59,8 +59,8 @@ public class MasterExtension implements IExtension
   /**
    * finds the installed instanceof the master extension in the given model
    * 
-   * @param model
-   * @return
+   * @param model TODO
+   * @return TODO
    */
   static public MasterExtension getMaster(IModel model)
   {
@@ -372,10 +372,11 @@ public class MasterExtension implements IExtension
   }
 
   /**
-   * @bug this code will not work w/ multiple inheritance
-   * @param source
-   * @param destination
-   * @param sourceToCopy
+   * TODO: BUG: this code will not work w/ multiple inheritance
+   * 
+   * @param source TODO
+   * @param destination TODO
+   * @param sourceToCopy TODO
    */
   protected void createChunkType(IChunkType source, IModel destination,
       Map sourceToCopy)

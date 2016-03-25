@@ -17,7 +17,7 @@ import org.jactr.core.utils.parameter.ParameterHandler;
  * differences between this version and
  * {@link DefaultDeclarativeLearningModule4}.
  * 
- * @see {@linkplain http://jactr.org/node/129}
+ * <p><a href="http://jactr.org/node/129">http://jactr.org/node/129</a></p>
  * @author harrison
  */
 public class DefaultDeclarativeLearningModule6 extends

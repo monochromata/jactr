@@ -126,8 +126,12 @@ public class LispGenerator extends TreeParser {
     }
 
     /**
-     indent the set of string buffers
-    */
+     * indent the set of string buffers
+     * 
+     * @param collection TODO
+     * @param spaces TODO
+     * @return TODO
+     */
     protected Collection<StringBuilder> indent(Collection<StringBuilder> collection, int spaces)
     {
     	for(StringBuilder string : collection)

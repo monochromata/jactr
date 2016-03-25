@@ -21,7 +21,6 @@ import org.jactr.core.utils.IInstallable;
  * listener interfaces in order to actually do their work.
  * 
  * @author harrison
- * @created April 25, 2003
  */
 public interface IExtension extends
     org.jactr.core.utils.parameter.IParameterized, IInstallable, IInitializable

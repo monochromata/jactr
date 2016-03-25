@@ -20,23 +20,20 @@ import org.jactr.core.queue.ITimedEvent;
  * this is a timed event that operates upon a specific buffer. This is
  * primarily for tracking purposes so that we can inspect arbitrary timed
  * events and know what buffer they will be affecting.
- * @author developer
  *
  */
 public interface IBufferBasedTimedEvent extends ITimedEvent
 {
 
-  /**
-   * return the buffer that this timed event will be posting changes
+  /** 
+   * @return the buffer that this timed event will be posting changes
    * to.
-   * @return
    */
   public IActivationBuffer getBuffer();
   
   /**
-   * return the chunk that is (or will be) in the buffer that will be
+   * @return the chunk that is (or will be) in the buffer that will be
    * manipulated
-   * @return
    */
   public IChunk getBoundChunk();
 }

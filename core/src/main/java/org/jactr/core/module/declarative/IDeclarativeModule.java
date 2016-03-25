@@ -32,17 +32,17 @@ import org.jactr.core.production.request.ChunkTypeRequest;
 /**
  * one of two specialized modules, this one handles all declarative memory
  * operations for the model, in particular adding and retrieving of chunks,
- * chunktypes all operation return values are wrapped in Future<> to better
- * support backend concurrencies.<br/>
- * Clients can implement this interface, but should consider extending
+ * chunktypes all operation return values are wrapped in {@code Future<>} to better
+ * support backend concurrencies.
+ * 
+ * <p>Clients can implement this interface, but should consider extending
  * {@link AbstractDeclarativeModule} or {@link DefaultDeclarativeModule}. In
  * either case, when the module makes calls to its front facing methods, it
  * should not assume that it is in the installed declarative memory module.
  * Rather it should use {@link #getModel()} and
  * {@link IModel#getDeclarativeModule()}. This permits the local decM to be
- * wrapped by a delegating one (say to access external database stores).
+ * wrapped by a delegating one (say to access external database stores).</p>
  * 
- * @author developer
  * @see java.util.concurrent.Future
  */
 public interface IDeclarativeModule extends IModule
@@ -54,10 +54,10 @@ public interface IDeclarativeModule extends IModule
    * set. typically this will just delegate to the factory methods, but is
    * provided here so that declarative modules can insert custom creators
    * 
-   * @param parent
+   * @param parents
    *            maybe null
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   public CompletableFuture<IChunkType> createChunkType(
       Collection<IChunkType> parents, String name);
@@ -71,23 +71,21 @@ public interface IDeclarativeModule extends IModule
    * chunktype to the parent's list of children (if there is a parent) and then
    * add it to the internal data stores
    * 
-   * @param chunkType
-   * @return
+   * @param chunkType TODO
+   * @return TODO
    */
   public CompletableFuture<IChunkType> addChunkType(IChunkType chunkType);
 
   /**
    * return the named chunktype. Case insensitive, but preserving
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   public CompletableFuture<IChunkType> getChunkType(String name);
 
   /**
-   * return all the chunk types in this model
-   * 
-   * @return
+   * @return all the chunk types in this model
    */
   public CompletableFuture<Collection<IChunkType>> getChunkTypes();
 
@@ -96,22 +94,24 @@ public interface IDeclarativeModule extends IModule
    * 
    * @param parent
    *            must not be null (duh)
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   public CompletableFuture<IChunk> createChunk(IChunkType parent, String name);
   
   
   /**
    * request that this chunk be disposed.
-   * @param chunk
+   * 
+   * @param chunk TODO
    */
   public void dispose(IChunk chunk);
   
   /**
    * code responsible for the setting up and maintaining of associative links,
    * may be null.
-   * @return
+   * 
+   * @return TODO
    */
   public IAssociativeLinkageSystem getAssociativeLinkageSystem();
   
@@ -119,18 +119,16 @@ public interface IDeclarativeModule extends IModule
    * the code responsible for linking memories. Can be null if this is unsupported.
    * Typically this will be called by a declarative learning module to install
    * custom version
-   * @param linkageSystem
+   * 
+   * @param linkageSystem TODO
    */
   public void setAssociativeLinkageSystem(IAssociativeLinkageSystem linkageSystem);
-  
- 
-
 
   /**
    * return a copy of source chunk
    * 
-   * @param sourceChunk
-   * @return
+   * @param sourceChunk TODO
+   * @return TODO
    */
   public CompletableFuture<IChunk> copyChunk(IChunk sourceChunk);
 
@@ -141,8 +139,7 @@ public interface IDeclarativeModule extends IModule
    * add this chunk to the model and optionally check for duplicates so that it
    * can be merged if necessary
    * 
-   * @param chunk
-   * @param checkForDuplicates
+   * @param chunk TODO
    * @return a future wrapper of the actual chunk reference that was installed.
    *         if the chunk was actually merged, the original chunk is returned
    */
@@ -152,30 +149,30 @@ public interface IDeclarativeModule extends IModule
    * because encoding might be async, we need a method to determine if a given
    * chunk is scheduled for encoding
    * 
-   * @param chunk
-   * @return
+   * @param chunk TODO
+   * @return TODO
    */
   public boolean willEncode(IChunk chunk);
 
   /**
    * return the named chunk, case insensitive but preserving
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   public CompletableFuture<IChunk> getChunk(String name);
 
   /**
    * return all chunks. This can be a <b>very</b> expensive operation
    * 
-   * @return
+   * @return TODO
    */
   public CompletableFuture<Collection<IChunk>> getChunks();
 
   /**
    * return the number of chunks in the model. this might be an estimate
    * 
-   * @return
+   * @return TODO
    */
   public long getNumberOfChunks();
 
@@ -185,12 +182,12 @@ public interface IDeclarativeModule extends IModule
    * (":slotName"), for instance if you reuse the ChunkTypePattern from a
    * retrieval request, they must be removed first.
    * 
-   * @param request
+   * @param request TODO
    * @param sorter
    *          sort order, may be null
    * @param filter
    *          filter function, may be null
-   * @return
+   * @return TODO
    */
   public CompletableFuture<Collection<IChunk>> findExactMatches(
       ChunkTypeRequest request,
@@ -199,11 +196,11 @@ public interface IDeclarativeModule extends IModule
   /**
    * search DM for all the chunks that partially match
    * 
-   * @param request
+   * @param request TODO
    * @param sorter
    *            may be null
    * @param filter TODO
-   * @return
+   * @return TODO
    */
   public CompletableFuture<Collection<IChunk>> findPartialMatches(
       ChunkTypeRequest request,
@@ -216,40 +213,40 @@ public interface IDeclarativeModule extends IModule
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getBusyChunk();
 
   /**
-   * snag the busy chunk.<br>
+   * snag the empty chunk.<br>
    * <br>
    * <b>Note</b> : this should not be called by the declarative memory module
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getEmptyChunk();
 
   /**
-   * snag the busy chunk.<br>
+   * snag the error chunk.<br>
    * <br>
    * <b>Note</b> : this should not be called by the declarative memory module
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getErrorChunk();
 
   /**
-   * snag the busy chunk.<br>
+   * snag the free chunk.<br>
    * <br>
    * <b>Note</b> : this should not be called by the declarative memory module
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getFreeChunk();
 
@@ -260,40 +257,40 @@ public interface IDeclarativeModule extends IModule
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getFullChunk();
 
   /**
-   * snag the busy chunk.<br>
+   * snag the new chunk.<br>
    * <br>
    * <b>Note</b> : this should not be called by the declarative memory module
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getNewChunk();
 
   /**
-   * snag the busy chunk.<br>
+   * snag the requested chunk.<br>
    * <br>
    * <b>Note</b> : this should not be called by the declarative memory module
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getRequestedChunk();
 
   /**
-   * snag the busy chunk.<br>
+   * snag the unrequested chunk.<br>
    * <br>
    * <b>Note</b> : this should not be called by the declarative memory module
    * if the retrieval will access the future methods as it might result in
    * deadlock.
    * 
-   * @return
+   * @return TODO
    */
   public IChunk getUnrequestedChunk();
 
@@ -304,10 +301,5 @@ public interface IDeclarativeModule extends IModule
 
   public void addListener(IDeclarativeModuleListener listener, Executor executor);
 
-
   public void removeListener(IDeclarativeModuleListener listener);
-
-// public void addListener(ISearchListener listener, Executor executor);
-//
-// public void removeListener(ISearchListener listener);
 }

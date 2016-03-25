@@ -44,7 +44,7 @@ import org.jactr.tools.async.credentials.PlainTextCredentials;
  * Both RemoteInterface and ShadowControll rely on this common substrate that
  * deals with all the networking
  * 
- * @author developer
+ * 
  */
 public abstract class NetworkedEndpoint implements IParameterized
 {
@@ -95,9 +95,6 @@ public abstract class NetworkedEndpoint implements IParameterized
   private Condition                           _connected        = _lock
                                                                     .newCondition();
 
-  /**
-   * 
-   */
   public NetworkedEndpoint()
   {
     super();
@@ -117,7 +114,7 @@ public abstract class NetworkedEndpoint implements IParameterized
    * return the actual backing map for the default handlers. Used to confiugre
    * the handlers (again, before the first connection), by non-extenders
    * 
-   * @return
+   * @return TODO
    */
   public Map<Class<?>, IMessageHandler<?>> getDefaultHandlers()
   {
@@ -127,7 +124,7 @@ public abstract class NetworkedEndpoint implements IParameterized
   /**
    * override to provide a session listener. defaults handles
    * 
-   * @return
+   * @return TODO
    */
   protected ISessionListener createSessionListener()
   {
@@ -190,7 +187,7 @@ public abstract class NetworkedEndpoint implements IParameterized
    * The active session, if connected. Exposed publicly so that other tools can
    * hook into the existing connection
    * 
-   * @return
+   * @return TODO
    */
   public ISessionInfo<?> getActiveSession()
   {
@@ -237,7 +234,7 @@ public abstract class NetworkedEndpoint implements IParameterized
   /**
    * set the provider and possibly update the address information
    * 
-   * @param provider
+   * @param provider TODO
    */
   public void setTransportProvider(ITransportProvider provider)
   {
@@ -256,7 +253,7 @@ public abstract class NetworkedEndpoint implements IParameterized
    * set the service for this end point (typically ClientServie or
    * ServerService)
    * 
-   * @param service
+   * @param service TODO
    */
   public void setService(INetworkService service)
   {
@@ -266,7 +263,7 @@ public abstract class NetworkedEndpoint implements IParameterized
   /**
    * set our protocol
    * 
-   * @param protocol
+   * @param protocol TODO
    */
   public void setProtocol(IProtocolConfiguration protocol)
   {
@@ -277,7 +274,7 @@ public abstract class NetworkedEndpoint implements IParameterized
    * set the string version of the address, if the transport has already been
    * provided, the acutal address will be recomputed
    * 
-   * @param addressInfo
+   * @param addressInfo TODO
    */
   public void setAddressInfo(String addressInfo)
   {
@@ -296,7 +293,8 @@ public abstract class NetworkedEndpoint implements IParameterized
   /**
    * set the connection credentials
    * 
-   * @param credentialInfo
+   * @param credentialInfo TODO
+   * @return TODO
    */
   public ICredentials setCredentialInformation(String credentialInfo)
   {
@@ -329,9 +327,6 @@ public abstract class NetworkedEndpoint implements IParameterized
     return null;
   }
 
-  /**
-   * @param credClass
-   */
   public void setCredentialsClass(Class<? extends ICredentials> credClass)
   {
     _credentialsClass = credClass;
@@ -340,9 +335,7 @@ public abstract class NetworkedEndpoint implements IParameterized
   }
 
   /**
-   * return the actual credentials that we are using
-   * 
-   * @return
+   * @return the actual credentials that we are using
    */
   public ICredentials getActualCredentials()
   {
@@ -350,9 +343,7 @@ public abstract class NetworkedEndpoint implements IParameterized
   }
 
   /**
-   * return the socket address that we are actually connected to
-   * 
-   * @return
+   * @return the socket address that we are actually connected to
    */
   public SocketAddress getActualAddress()
   {
@@ -404,7 +395,7 @@ public abstract class NetworkedEndpoint implements IParameterized
   /**
    * wait for all the pending writes
    * 
-   * @throws Exception
+   * @throws Exception TODO
    */
   protected void disconnect() throws Exception
   {
@@ -413,6 +404,9 @@ public abstract class NetworkedEndpoint implements IParameterized
 
   /**
    * try to establish the connection
+   * 
+   * @param force TODO
+   * @throws Exception TODO
    */
   synchronized protected void disconnect(boolean force) throws Exception
   {
@@ -441,9 +435,6 @@ public abstract class NetworkedEndpoint implements IParameterized
     }
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getParameter(java.lang.String)
-   */
   public String getParameter(String key)
   {
     if (key.equalsIgnoreCase(ADDRESS)) return _addressInformation;
@@ -473,9 +464,6 @@ public abstract class NetworkedEndpoint implements IParameterized
     return null;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getPossibleParameters()
-   */
   public Collection<String> getPossibleParameters()
   {
     ArrayList<String> str = new ArrayList<String>();
@@ -488,18 +476,11 @@ public abstract class NetworkedEndpoint implements IParameterized
     return str;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getSetableParameters()
-   */
   public Collection<String> getSetableParameters()
   {
     return getPossibleParameters();
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#setParameter(java.lang.String,
-   *      java.lang.String)
-   */
   public void setParameter(String key, String value)
   {
     if (ADDRESS.equalsIgnoreCase(key))
@@ -519,8 +500,8 @@ public abstract class NetworkedEndpoint implements IParameterized
   /**
    * utility for the instantiation of mina parameters
    * 
-   * @param className
-   * @return
+   * @param className TODO
+   * @return TODO
    */
   protected Class getClass(String className)
   {
@@ -537,8 +518,8 @@ public abstract class NetworkedEndpoint implements IParameterized
   /**
    * utility for the instantiation of mina parameters
    * 
-   * @param className
-   * @return
+   * @param className TODO
+   * @return TODO
    */
   protected Object instance(String className)
   {

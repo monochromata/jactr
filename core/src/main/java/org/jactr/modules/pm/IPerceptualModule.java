@@ -18,7 +18,7 @@ import java.util.concurrent.Executor;
 import org.jactr.core.module.asynch.IAsynchronousModule;
 import org.jactr.modules.pm.common.symbol.ISymbolGrounder;
 /**
- * @author developer
+ * 
  *
  */
 public interface IPerceptualModule extends IAsynchronousModule

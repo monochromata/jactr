@@ -26,7 +26,7 @@ import org.jactr.modules.pm.common.buffer.AbstractRequestDelegate;
 /**
  * reset the visual system - merely calls IVisualModule.reset()
  * 
- * @author developer
+ * 
  */
 public class ClearRequestDelegate extends AbstractRequestDelegate
 {

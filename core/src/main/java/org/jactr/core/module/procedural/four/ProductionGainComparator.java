@@ -19,27 +19,12 @@ import org.jactr.core.production.four.ISubsymbolicProduction4;
 /*
  * sorts descending based on current expected Gain
  */
-/**
- * Description of the Class
- * 
- * @author harrison
- * @created April 18, 2003
- */
 public class ProductionGainComparator implements
     java.util.Comparator<IProduction>
 {
 
-  /**
-   * Description of the Field
-   */
   protected boolean _randomTieBreaks = false;
 
-  /**
-   * Constructor for the ProductionGainComparator object
-   * 
-   * @param randomTieBreaks
-   *          Description of the Parameter
-   */
   public ProductionGainComparator(boolean randomTieBreaks)
   {
     _randomTieBreaks = randomTieBreaks;
@@ -47,15 +32,6 @@ public class ProductionGainComparator implements
 
   /*
    * 1 one <two 0 one=two -1 one>two
-   */
-  /**
-   * Description of the Method
-   * 
-   * @param one
-   *          Description of the Parameter
-   * @param two
-   *          Description of the Parameter
-   * @return Description of the Return Value
    */
   public int compare(IProduction one, IProduction two)
   {
@@ -94,13 +70,6 @@ public class ProductionGainComparator implements
     }
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @param one
-   *          Description of the Parameter
-   * @return Description of the Return Value
-   */
   public boolean equals(Object one)
   {
     return false;

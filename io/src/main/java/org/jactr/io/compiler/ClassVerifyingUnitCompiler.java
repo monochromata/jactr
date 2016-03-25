@@ -32,8 +32,6 @@ import org.jactr.io.antlr3.misc.CommonTreeException;
 /**
  * verifies that all class_spec references are valid. specifically MODULE,
  * EXTENSION, PROXY_ACTION, PROXY_CONDITION
- * 
- * @author developer
  */
 public class ClassVerifyingUnitCompiler implements IUnitCompiler
 {
@@ -43,10 +41,6 @@ public class ClassVerifyingUnitCompiler implements IUnitCompiler
   static private final Log LOGGER = LogFactory
                                       .getLog(ClassVerifyingUnitCompiler.class);
 
-  /**
-   * @see org.jactr.io.compiler.IUnitCompiler#compile(org.antlr.runtime.tree.CommonTree,
-   *      java.util.Collection, java.util.Collection)
-   */
   public void compile(CommonTree node, Collection<Exception> info, Collection<Exception> warnings,
       Collection<Exception> errors)
   {
@@ -95,7 +89,10 @@ public class ClassVerifyingUnitCompiler implements IUnitCompiler
   /**
    * will throw an exception if it doesn't work
    * 
-   * @param className
+   * @param classSpecNode TODO
+   * @param className TODO
+   * @param ofType TODO
+   * @throws Exception if it doesn't work
    */
   protected void tryToLoadClass(CommonTree classSpecNode, String className,
       Class ofType) throws Exception
@@ -107,9 +104,6 @@ public class ClassVerifyingUnitCompiler implements IUnitCompiler
             + " does not match required type " + ofType.getName());
   }
 
-  /**
-   * @see org.jactr.io.compiler.IUnitCompiler#getRelevantTypes()
-   */
   public Collection<Integer> getRelevantTypes()
   {
     Integer[] types = { JACTRBuilder.MODULE, JACTRBuilder.EXTENSION,
@@ -118,17 +112,11 @@ public class ClassVerifyingUnitCompiler implements IUnitCompiler
     return Arrays.asList(types);
   }
 
-  /**
-   * @see org.jactr.io.compiler.IUnitCompiler#postCompile()
-   */
   public void postCompile()
   {
 
   }
 
-  /**
-   * @see org.jactr.io.compiler.IUnitCompiler#preCompile()
-   */
   public void preCompile()
   {
 

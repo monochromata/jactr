@@ -22,7 +22,6 @@ import org.jactr.core.queue.ITimedEvent;
  * Description of the Class
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class AbstractTimedEvent implements ITimedEvent
 {
@@ -34,14 +33,8 @@ public class AbstractTimedEvent implements ITimedEvent
 
   protected boolean                  _hasFired             = false;
 
-  /**
-   * Description of the Field
-   */
   protected double                   _startTime;
 
-  /**
-   * Description of the Field
-   */
   protected double                   _endTime;
 
   protected String                   _toString;
@@ -109,7 +102,7 @@ public class AbstractTimedEvent implements ITimedEvent
   }
 
   /**
-   * @return
+   * @return TODO
    */
   protected boolean shouldWarnOnTimeSlips()
   {

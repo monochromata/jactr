@@ -21,47 +21,44 @@ import org.jactr.core.event.IParameterListener;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IProductionListener extends EventListener, IParameterListener
 {
   
   /**
    * production has been added to the model
-   * @param pe
+   * 
+   * @param pe TODO
    */
   public void productionEncoded(ProductionEvent pe);
   
   
   /**
    * production has been successfully instantiated
-   * @param pe
+   * 
+   * @param pe TODO
    */
   public void productionInstantiated(ProductionEvent pe);
   
   /**
    * production has been fired, you can access the production or its
    * instantiation
-   * @param pe
+   * 
+   * @param pe TODO
    */
   public void productionFired(ProductionEvent pe);
   
   
   /**
    * condition has been added, only available before encoding
-   * @param pe
+   * 
+   * @param pe TODO
    */
   public void conditionAdded(ProductionEvent pe);
   
-  /**
-   * 
-   * @param pe
-   */
   public void conditionRemoved(ProductionEvent pe);
   
-  
   public void actionAdded(ProductionEvent pe);
-  
   
   public void actionRemoved(ProductionEvent pe);
 }

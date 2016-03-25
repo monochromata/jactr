@@ -39,18 +39,12 @@ import org.jactr.core.utils.parameter.SimilarityParameterHandler;
  * default implementation of ISubsymbolicChunk
  * 
  * @author harrison
- * @created December 4, 2002
  * @see org.jactr.core.chunk.ISubsymbolicChunk
  */
 public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
     implements ISubsymbolicChunk5
 {
 
-  /**
-   * Description of the Field
-   * 
-   * @since
-   */
   public final static String                          SIMILARITY_ACTIVATION = "SimilarityActivation";
 
   private static transient Log                        LOGGER                = LogFactory
@@ -82,15 +76,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
     if (wrapper != null) setSimilarity(wrapper, 1);
   }
 
-  /**
-   * Sets the Parameter attribute of the DefaultSubsymbolicChunk5 object
-   * 
-   * @param key
-   *          The new Parameter value
-   * @param value
-   *          The new Parameter value
-   * @since
-   */
   @Override
   public void setParameter(String key, String value)
   {
@@ -112,15 +97,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
       super.setParameter(key, value);
   }
 
-  /**
-   * Sets the Similarity attribute of the DefaultSubsymbolicChunk5 object
-   * 
-   * @param c
-   *          The new Similarity value
-   * @param value
-   *          The new Similarity value
-   * @since
-   */
   public void setSimilarity(IChunk c, double value)
   {
     if (c == null) return;
@@ -143,14 +119,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
       _parentChunk.dispatch(new ChunkEvent(_parentChunk, c, oldValue, value));
   }
 
-  /**
-   * Sets the SimilarityActivation attribute of the DefaultSubsymbolicChunk5
-   * object
-   * 
-   * @param act
-   *          The new SimilarityActivation value
-   * @since
-   */
   public void setSimilarityActivation(double act)
   {
     double oldSim = getSimilarityActivation();
@@ -179,7 +147,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
    * @param key
    *          Description of Parameter
    * @return The Parameter value
-   * @since
    */
   @Override
   public String getParameter(String key)
@@ -205,7 +172,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
    * object
    * 
    * @return The PossibleParameters value
-   * @since
    */
   @Override
   public Collection<String> getSetableParameters()
@@ -222,7 +188,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
    * @param c
    *          Description of Parameter
    * @return The Similarity value
-   * @since
    */
   public double getSimilarity(IChunk c)
   {
@@ -248,7 +213,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
    * Gets the Similarities attribute of the DefaultSubsymbolicChunk5 object
    * 
    * @return The Similarities value
-   * @since
    */
   public Collection<Object[]> getSimilarities(Collection<Object[]> container)
   {
@@ -273,7 +237,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
    * object
    * 
    * @return The SimilarityActivation value
-   * @since
    */
   public double getSimilarityActivation()
   {
@@ -295,7 +258,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
    * @param p
    *          Description of Parameter
    * @return The Activation value
-   * @since
    */
   public double getActivation(ChunkTypeRequest p)
   {
@@ -311,11 +273,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
     return getActivation() + getSimilarityActivation();
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @since
-   */
   @Override
   public void dispose()
   {
@@ -328,13 +285,6 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
 
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @param p
-   *          Description of Parameter
-   * @since
-   */
   protected double computeSimilarityActivation(ChunkTypeRequest p)
   {
     if (p == null) return 0;

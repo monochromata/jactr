@@ -20,7 +20,7 @@ import org.jactr.core.model.IModel;
 import org.jactr.core.utils.ModelerException;
 
 /**
- * @bug why is this not an interface with an abstract implementation like
+ * TODO: why is this not an interface with an abstract implementation like
  *      IBufferAction?
  */
 public abstract class AbstractBufferCondition extends AbstractSlotCondition

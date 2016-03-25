@@ -48,8 +48,8 @@ public class FutureManager<K, C>
    * retrieve an existing future for the key, or create a new one for it if
    * absent
    * 
-   * @param key
-   * @return
+   * @param key TODO
+   * @return TODO
    */
   public Future<C> acquireOrGet(K key)
   {
@@ -62,9 +62,9 @@ public class FutureManager<K, C>
   /**
    * release the future by setting the result
    * 
-   * @param key
-   * @param result
-   * @return
+   * @param key TODO
+   * @param result TODO
+   * @return TODO
    */
   public Future<C> release(K key, C result)
   {
@@ -76,9 +76,9 @@ public class FutureManager<K, C>
   /**
    * release the future by setting the exception
    * 
-   * @param key
-   * @param exception
-   * @return
+   * @param key TODO
+   * @param exception TODO
+   * @return TODO
    */
   public Future<C> release(K key, Throwable exception)
   {
@@ -90,7 +90,7 @@ public class FutureManager<K, C>
   /**
    * override if you want to use an extended version of managed future
    * 
-   * @return
+   * @return TODO
    */
   protected ListenableFuture<C> newFuture()
   {

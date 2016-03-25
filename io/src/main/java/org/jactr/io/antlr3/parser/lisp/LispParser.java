@@ -257,9 +257,12 @@ public TreeAdaptor getTreeAdaptor() {
      }
      
     /**
-     attempt to set the parameters specified in parameterList to the objects
-     contained in container
-    */ 
+     * attempt to set the parameters specified in parameterList to the objects
+     * contained in container
+     * 
+     * @param parameterList TODO
+     * @param containers TODO
+     */ 
     protected void setParameters(CommonTree parameterList, Map<String, CommonTree> containers)
     {
      /*

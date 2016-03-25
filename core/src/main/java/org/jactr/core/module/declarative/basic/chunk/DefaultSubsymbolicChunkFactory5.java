@@ -31,7 +31,7 @@ public class DefaultSubsymbolicChunkFactory5 implements
 
   /**
    * @return true, if, when copying chunks, we want to duplicate the links that
-   *         spread from original->other. creating copy->other. (default: false)
+   *         spread from original to other. creating copy to other. (default: false)
    */
   public boolean shouldCopyOutboundLinks()
   {
@@ -40,9 +40,9 @@ public class DefaultSubsymbolicChunkFactory5 implements
 
   /**
    * @return true, if, when copying chunks, we want to duplicate the links that
-   *         spread from other->original. creating other->copy. (default: true)
+   *         spread from other to original. creating other to copy. (default: true)
    *         This is the normative containment link for slot values. That is,
-   *         copy has a slot that equals other, resulting in the other->copy
+   *         copy has a slot that equals other, resulting in the other to copy
    *         link.
    */
   public boolean shouldCopyInboundLinks()

@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.io.generator.ICodeGenerator;
 
 /**
- * @author developer
+ * 
  */
 public class CodeGeneratorWriter implements IModelWriter
 {

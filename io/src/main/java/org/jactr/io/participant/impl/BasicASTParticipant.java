@@ -36,7 +36,7 @@ import org.jactr.io.participant.IASTTrimmer;
  * nodes during the call to shouldExclude() it will also take care of the
  * parameters if provided
  * 
- * @author developer
+ * 
  */
 public class BasicASTParticipant implements IASTParticipant
 {

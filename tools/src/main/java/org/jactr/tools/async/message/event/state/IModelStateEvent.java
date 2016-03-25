@@ -13,7 +13,7 @@
  */
 package org.jactr.tools.async.message.event.state;
 /**
- * @author developer
+ * 
  *
  */
 public interface IModelStateEvent extends IStateEvent

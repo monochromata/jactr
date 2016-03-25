@@ -27,8 +27,9 @@ public class BufferUtilities
   /**
    * marks this chunk as being contained within this buffer
    * 
-   * @param chunk
-   * @param buffer
+   * @param chunk the chunk to mark
+   * @param buffer the buffer
+   * @param activation TODO
    */
   @SuppressWarnings("unchecked")
   static public void markContained(IChunk chunk, IActivationBuffer buffer,
@@ -123,12 +124,12 @@ public class BufferUtilities
 
   /**
    * return all the buffers that contain this chunk. if isStrict, the
-   * containment check will use {@link IChunk#equals(Object)}, otherwise it will
+   * containment check will use {@link Object#equals(Object)}, otherwise it will
    * use {@link IChunk#equalsSymbolic(IChunk)}
    * 
-   * @param chunk
-   * @param isStric
-   * @return
+   * @param chunk the chunk
+   * @param isStrict TODO
+   * @return all buffers containing the chunk
    */
   static public Collection<IActivationBuffer> getContainingBuffers(
       IChunk chunk, boolean isStrict)

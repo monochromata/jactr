@@ -19,7 +19,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author developer
+ * 
  */
 public class PlainTextCredentials implements ICredentials, Serializable
 {

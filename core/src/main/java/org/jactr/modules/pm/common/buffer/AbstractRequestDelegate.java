@@ -32,7 +32,7 @@ import org.jactr.modules.pm.buffer.IPerceptualBuffer;
  * to initialize the processor, handles returns true be sure to set the buffer
  * state slot value!!
  * 
- * @author developer
+ * 
  */
 public abstract class AbstractRequestDelegate extends AsynchronousRequestDelegate
 {

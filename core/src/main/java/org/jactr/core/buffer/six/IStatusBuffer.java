@@ -73,10 +73,11 @@ public interface IStatusBuffer extends IActivationBuffer,
    * the slots the status buffers will contain or their possible values, it is
    * up to the status buffers to attempt to bind variable values
    * 
-   * @param request
-   * @param bindings
-   * @return
-   * @throws CannotMatchException
+   * @param request TODO
+   * @param bindings TODO
+   * @param isIterative TODO
+   * @return TODO
+   * @throws CannotMatchException TODO
    */
   public int bind(SlotBasedRequest request, VariableBindings bindings,
       boolean isIterative) throws CannotMatchException;

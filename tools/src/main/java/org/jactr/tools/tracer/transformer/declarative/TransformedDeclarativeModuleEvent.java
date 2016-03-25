@@ -21,16 +21,11 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.module.declarative.event.DeclarativeModuleEvent;
 import org.jactr.tools.async.message.IMessage;
 import org.jactr.tools.tracer.transformer.AbstractTransformedEvent;
-/**
- * @author developer
- *
- */
+
 public class TransformedDeclarativeModuleEvent extends AbstractTransformedEvent
     implements IMessage, Serializable
 {
-  /**
-   * 
-   */
+
   private static final long serialVersionUID = 1747334896625017333L;
 
 
@@ -42,12 +37,7 @@ public class TransformedDeclarativeModuleEvent extends AbstractTransformedEvent
 
   
   private DeclarativeModuleEvent.Type _type;
-  /**
-   * @param source
-   * @param systemTime
-   * @param simulationTime
-   * @param ast
-   */
+
   public TransformedDeclarativeModuleEvent(String source, long systemTime,
       double simulationTime, DeclarativeModuleEvent.Type type, CommonTree ast)
   {

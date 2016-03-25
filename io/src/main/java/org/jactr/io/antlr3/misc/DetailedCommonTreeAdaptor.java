@@ -25,7 +25,7 @@ import org.jactr.io.parser.IModelParser;
  * We override this to compensate for the fact that createToken(Token oldToken)
  * doesn't snag byte offsets. only copies
  * 
- * @author developer
+ * 
  */
 public class DetailedCommonTreeAdaptor extends CommonTreeAdaptor
 {

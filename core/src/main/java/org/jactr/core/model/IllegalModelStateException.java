@@ -18,7 +18,6 @@ package org.jactr.core.model;
  * threshold if it is not enabled.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class IllegalModelStateException extends IllegalStateException
 {

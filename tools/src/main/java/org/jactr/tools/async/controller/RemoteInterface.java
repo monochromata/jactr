@@ -66,8 +66,6 @@ import org.jactr.tools.async.message.event.state.RuntimeStateEvent;
  * An instrument that permits the remote control of a runtime. The remote
  * interface sets up the connection and networking on the runtime side so that a
  * ShadowController can issue commands and receive run events
- * 
- * @author developer
  */
 public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
     IParameterized
@@ -533,6 +531,8 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
    * safely disconnect asynchronously.. this queues up the disconnect on the
    * background executor, allowing other processing that has already been queued
    * to finish up
+   * 
+   * @param force TODO
    */
   public void disconnectSafe(final boolean force)
   {

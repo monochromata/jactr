@@ -361,6 +361,11 @@ public class JACTRCompiler extends TreeParser
   /**
    * check the slots defined against those that can be defined, optionally
    * taking care of any variable slot names
+   * 
+   * @param slotDefiner TODO
+   * @param validSlotNames TODO
+   * @param referencedSlots TODO
+   * @param definedVariables TODO
    */
   protected void validateSlotNames(String slotDefiner,
       Set<String> validSlotNames, Collection<CommonTree> referencedSlots,

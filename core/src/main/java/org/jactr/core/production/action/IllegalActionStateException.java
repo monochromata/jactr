@@ -17,17 +17,10 @@ package org.jactr.core.production.action;
  * thrown when an IAction screws up
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class IllegalActionStateException extends IllegalStateException
 {
 
-  /**
-   * Constructor for the IllegalActionStateException object
-   * 
-   * @param message
-   *          Description of the Parameter
-   */
   public IllegalActionStateException(String message)
   {
     super(message);

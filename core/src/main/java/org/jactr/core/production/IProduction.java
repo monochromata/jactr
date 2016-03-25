@@ -26,7 +26,6 @@ import org.jactr.core.utils.ICommentable;
  * Description of the Interface
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public interface IProduction extends Comparable<IProduction>, ICommentable,
     IAdaptable
@@ -44,7 +43,6 @@ public interface IProduction extends Comparable<IProduction>, ICommentable,
    * Gets the symbolicProduction attribute of the IProduction object
    * 
    * @return The symbolicProduction value
-   * @since
    */
   public ISymbolicProduction getSymbolicProduction();
 
@@ -52,7 +50,6 @@ public interface IProduction extends Comparable<IProduction>, ICommentable,
    * Gets the subsymbolicProduction attribute of the IProduction object
    * 
    * @return The subsymbolicProduction value
-   * @since
    */
   public ISubsymbolicProduction getSubsymbolicProduction();
 
@@ -60,20 +57,22 @@ public interface IProduction extends Comparable<IProduction>, ICommentable,
    * attempts to instantiate this production given the current state of the
    * model as defined by the collection of buffers. returns an instantiation of
    * this production
+   * 
+   * @param provisionalBindings TODO
+   * @return TODO
+   * @throws CannotInstantiateException TODO
    */
   public Collection<IInstantiation> instantiateAll(Collection<VariableBindings> provisionalBindings) throws CannotInstantiateException;
 
   /**
    * Description of the Method
-   * 
-   * @since
    */
   public void dispose();
 
   /**
    * get the model that this production is associated with
    * 
-   * @return
+   * @return TODO
    */
   public IModel getModel();
 

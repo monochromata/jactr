@@ -32,8 +32,6 @@ import org.jactr.core.module.declarative.basic.chunk.ISubsymbolicChunkFactory;
  * creates (or removes) associative links between this chunk (i) and any chunks
  * it has as slot values (j). 2) it handles the associative links when a chunk
  * is merged. 3) updates the statistics used for Sji calculation on merging
- * 
- * @author developer
  */
 public class ChunkListener extends ChunkListenerAdaptor
 {
@@ -63,7 +61,7 @@ public class ChunkListener extends ChunkListenerAdaptor
    * the listener is removed after encoding, so the master chunk will not have
    * this listener attached
    * 
-   * @param event
+   * @param event TODO
    * @see org.jactr.core.chunk.event.ChunkListenerAdaptor#mergingInto(org.jactr.core.chunk.event.ChunkEvent)
    */
   @Override
@@ -121,11 +119,11 @@ public class ChunkListener extends ChunkListenerAdaptor
    * but if links are created or strengthened unidirectionally, we need both
    * values.
    * 
-   * @param master
-   * @param copy
+   * @param master TODO
+   * @param copy TODO
    * @param absorb
    *          if true, copy's self-link values will override masters
-   * @return
+   * @return TODO
    */
   protected double[] processSelfLinks(IChunk master, IChunk copy, boolean absorb)
   {
@@ -191,14 +189,15 @@ public class ChunkListener extends ChunkListenerAdaptor
   }
 
   /**
-   * @param master
-   * @param copy
+   * @param master TODO
+   * @param copy TODO
    * @param absorbLinks
    *          true if copies links should override master's values. false if
    *          they are to be merged instead
    * @param processInboundLinks
    *          true to process the links where copy and master are the i, false
    *          if they are the j
+   * @param fnicjCorrection TODO
    */
   protected void processLinks(IChunk master, IChunk copy, boolean absorbLinks,
       boolean processInboundLinks, double fnicjCorrection)
@@ -232,7 +231,7 @@ public class ChunkListener extends ChunkListenerAdaptor
 
       Link4 oldLink = (Link4) link;
 
-      /**
+      /*
        * otherChunk is the other side of the link. If we are processing jLinks
        * (i.e., copy is the iChunk), the otherChunk is link.getJChunk();
        */
@@ -256,9 +255,6 @@ public class ChunkListener extends ChunkListenerAdaptor
 
       if (fnicjCorrection > 0)
       {
-        /**
-         * 
-         */
         fNiCj = Math.max(0, fNiCj - fnicjCorrection);
         if (LOGGER.isDebugEnabled())
           LOGGER.debug(String.format("Original FNiCj(%.2f) corrected (%.2f)",
@@ -350,13 +346,13 @@ public class ChunkListener extends ChunkListenerAdaptor
 
   /**
    * Return a single associative link that existing between containingChunk and
-   * referenceChunk. If getOutbound is true, containingChunk is j &
-   * referenceChunk is I. If false, containingChunk is i & reference chunk is j
+   * referenceChunk. If getOutbound is true, containingChunk is j and
+   * referenceChunk is I. If false, containingChunk is i and reference chunk is j
    * 
-   * @param containingChunk
-   * @param referenceChunk
-   * @param getOutbound
-   * @return
+   * @param containingChunk TODO
+   * @param referenceChunk TODO
+   * @param getOutbound TODO
+   * @return TODO
    */
   static public IAssociativeLink getAssociativeLink(IChunk containingChunk,
       IChunk referenceChunk, boolean getOutbound)
@@ -384,8 +380,8 @@ public class ChunkListener extends ChunkListenerAdaptor
    * if a copy of master and master are to be merged, and copy has master's
    * subsymbolics, then master can simply assume the same values and links.
    * 
-   * @param master
-   * @param copy
+   * @param master TODO
+   * @param copy TODO
    */
   protected void copyMergingIntoMaster(IChunk master, IChunk copy)
   {
@@ -396,7 +392,7 @@ public class ChunkListener extends ChunkListenerAdaptor
     ISubsymbolicChunk4 selfSSC = copy.getAdapter(ISubsymbolicChunk4.class);
     ISubsymbolicChunk4 masterSSC = master.getAdapter(ISubsymbolicChunk4.class);
 
-    /**
+    /*
      * Sji stats
      */
     masterSSC.setTimesInContext(selfSSC.getTimesInContext());
@@ -420,8 +416,8 @@ public class ChunkListener extends ChunkListenerAdaptor
    * updated and absorbed into master, while addressing links between master and
    * identical (new).
    * 
-   * @param master
-   * @param identical
+   * @param master TODO
+   * @param identical TODO
    */
   protected void newMergingIntoMaster(IChunk master, IChunk identical)
   {
@@ -433,10 +429,9 @@ public class ChunkListener extends ChunkListenerAdaptor
     ISubsymbolicChunk4 selfSSC = identical.getAdapter(ISubsymbolicChunk4.class);
     ISubsymbolicChunk4 masterSSC = master.getAdapter(ISubsymbolicChunk4.class);
 
-    /**
+    /*
      * Sji stats
      */
-
     masterSSC.setTimesInContext(masterSSC.getTimesInContext()
         + selfSSC.getTimesInContext());
     masterSSC.setTimesNeeded(masterSSC.getTimesNeeded()

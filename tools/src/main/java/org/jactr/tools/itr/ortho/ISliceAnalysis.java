@@ -14,32 +14,36 @@ public interface ISliceAnalysis
 {
   /**
    * associated slice
-   * @return
+   * 
+   * @return TODO
    */
   public ISlice getSlice();
   
   /**
    * the result of the the analysis. If you want to examine different analyses with respect
    * to each other, assign a result and use the {@link ISliceIntegrator}
-   * @return
+   * 
+   * @return TODO
    */
   public Object getResult();
   
   /**
    * add common fit statistics
-   * @param label
-   * @param rmse
-   * @param rsquare
-   * @param n
-   * @param flag
+   * 
+   * @param label TODO
+   * @param rmse TODO
+   * @param rsquare TODO
+   * @param n TODO
+   * @param flag TODO
    */
   public void addFitStatistics(String label, double rmse, double rsquare, long n, boolean flag);
   
   /**
    * general fit statistics
-   * @param label
-   * @param stats
-   * @param flag
+   * 
+   * @param label TODO
+   * @param stats TODO
+   * @param flag TODO
    */
   public void addFitStatistics(String label, Map<String, String> stats, boolean flag);
   
@@ -50,6 +54,8 @@ public interface ISliceAnalysis
   /**
    * where all analysis files should be written this is relative to
    * the working directory of the batch execution
+   * 
+   * @return TODO
    */
   public String getWorkingDirectory();
   
@@ -57,8 +63,9 @@ public interface ISliceAnalysis
    * provide the path to an analysis generated image relative to
    * the working directory.
    * labels must be unique
-   * @param label
-   * @param workingRelativePath
+   * 
+   * @param label TODO
+   * @param workingRelativePath TODO
    */
   public void addImage(String label, String workingRelativePath);
   
@@ -68,8 +75,9 @@ public interface ISliceAnalysis
    * provide the path to an analysis generated file, typically
    * containing additional details
    * labels must be unique
-   * @param label
-   * @param workingRelativePath
+   * 
+   * @param label TODO
+   * @param workingRelativePath TODO
    */
   public void addDetail(String label, String workingRelativePath);
   

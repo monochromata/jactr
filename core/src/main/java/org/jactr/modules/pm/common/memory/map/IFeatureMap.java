@@ -23,7 +23,7 @@ import org.jactr.modules.pm.common.afferent.IAfferentObjectListener;
 import org.jactr.modules.pm.common.memory.IPerceptualMemory;
 
 /**
- * @author developer
+ * 
  */
 public interface IFeatureMap<T> extends IAfferentObjectListener
 {

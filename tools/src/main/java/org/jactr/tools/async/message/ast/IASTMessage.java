@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 import org.antlr.runtime.tree.CommonTree;
 /**
- * @author developer
+ * 
  *
  */
 public interface IASTMessage extends Serializable

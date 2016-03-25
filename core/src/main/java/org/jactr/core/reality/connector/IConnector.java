@@ -18,7 +18,7 @@ import org.commonreality.time.IClock;
 import org.jactr.core.model.IModel;
 
 /**
- * @author developer
+ * 
  */
 public interface IConnector
 {

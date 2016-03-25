@@ -36,7 +36,7 @@ import org.jactr.modules.pm.common.memory.IActivePerceptListener;
 import org.jactr.modules.pm.common.memory.PerceptualSearchResult;
 
 /**
- * @author developer
+ * 
  */
 public class DefaultAuralModule6 extends AbstractAuralModule
 {

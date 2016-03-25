@@ -20,8 +20,8 @@ import org.apache.commons.logging.LogFactory;
  * describes an event from a source (S) that can be caught by a listener (L)
  * 
  * @author harrison
- * @param <S>
- * @param <L>
+ * @param <S> TODO
+ * @param <L> TODO
  */
 public abstract class AbstractACTREvent<S, L> implements IACTREvent<S, L>
 {

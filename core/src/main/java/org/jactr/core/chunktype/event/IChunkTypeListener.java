@@ -24,7 +24,6 @@ import org.jactr.core.event.IParameterListener;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IChunkTypeListener extends EventListener, IParameterListener
 {
@@ -32,7 +31,7 @@ public interface IChunkTypeListener extends EventListener, IParameterListener
   /**
    * chunktype has been encoded by the model
    * 
-   * @param cte
+   * @param cte the event
    */
   public void chunkTypeEncoded(ChunkTypeEvent cte);
 
@@ -40,35 +39,35 @@ public interface IChunkTypeListener extends EventListener, IParameterListener
    * a child chunk type has been added ... this chunktype may not have been
    * encoded yet though..
    * 
-   * @param cte
+   * @param cte the event
    */
   public void childAdded(ChunkTypeEvent cte);
 
   /**
    * a chunk has been added. this chunk will necessarily have been encoded
    * 
-   * @param cte
+   * @param cte the event
    */
   public void chunkAdded(ChunkTypeEvent cte);
 
   /**
    * a slot value has changed
    * 
-   * @param cte
+   * @param cte the event
    */
   public void slotChanged(ChunkTypeEvent cte);
 
   /**
    * a slot was added
    * 
-   * @param cte
+   * @param cte the event
    */
   public void slotAdded(ChunkTypeEvent cte);
 
   /**
    * slot has been removed
    * 
-   * @param cte
+   * @param cte the event
    */
   public void slotRemoved(ChunkTypeEvent cte);
 

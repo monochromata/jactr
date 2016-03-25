@@ -48,7 +48,7 @@ public abstract class AbstractModule extends DefaultAdaptable implements
   }
 
   /**
-   * @param executor
+   * @param executor the executor
    */
   protected void setExecutor(Executor executor)
   {
@@ -58,7 +58,7 @@ public abstract class AbstractModule extends DefaultAdaptable implements
   /**
    * default executor INLINE_EXECUTOR is used
    * 
-   * @return
+   * @return TODO
    */
   public Executor getExecutor()
   {
@@ -91,7 +91,7 @@ public abstract class AbstractModule extends DefaultAdaptable implements
    * called to create any buffers used by this buffer. They will be installed
    * into the model by the install(IModel) call
    * 
-   * @return
+   * @return TODO
    */
   protected Collection<IActivationBuffer> createBuffers()
   {
@@ -109,9 +109,9 @@ public abstract class AbstractModule extends DefaultAdaptable implements
    * return a safe, noncolliding name - calls to this should make sure that the
    * map is readlocked
    * 
-   * @param name
-   * @param mapping
-   * @return
+   * @param name TODO
+   * @param mapping TODO
+   * @return TODO
    */
   protected String getSafeName(String name, Map<String, ?> mapping)
   {
@@ -153,9 +153,9 @@ public abstract class AbstractModule extends DefaultAdaptable implements
   /**
    * create a future task and execute it immediately using the INLINE_EXECUTOR
    * 
-   * @param <T>
-   * @param caller
-   * @return
+   * @param <T> TODO
+   * @param caller TODO
+   * @return TODO
    */
   static public <T> CompletableFuture<T> immediateFuture(Callable<T> caller)
   {
@@ -165,10 +165,10 @@ public abstract class AbstractModule extends DefaultAdaptable implements
   /**
    * create a future task and execute it on the exector
    * 
-   * @param <T>
-   * @param caller
-   * @param executor
-   * @return
+   * @param <T> TODO
+   * @param caller TODO
+   * @param executor TODO
+   * @return TODO
    */
   static public <T> CompletableFuture<T> delayedFuture(Callable<T> caller,
       Executor executor)

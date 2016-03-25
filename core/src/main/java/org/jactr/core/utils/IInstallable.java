@@ -18,7 +18,7 @@ import org.jactr.core.model.IModel;
 /**
  * interface for anything that can be attached to a model before running
  * 
- * @author developer
+ * 
  */
 public interface IInstallable
 {
@@ -29,7 +29,7 @@ public interface IInstallable
    * any chunks,type,buffers,or productions have been added so you should avoid
    * attempting to access them until initialize().
    * 
-   * @param model
+   * @param model the model to install to
    */
   public void install(IModel model);
 
@@ -37,7 +37,7 @@ public interface IInstallable
    * remove the element from this model. this is called after the model
    * terminates
    * 
-   * @param model
+   * @param model the model to uninstall from
    */
   public void uninstall(IModel model);
 }

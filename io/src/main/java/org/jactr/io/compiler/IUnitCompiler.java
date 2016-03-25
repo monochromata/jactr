@@ -22,27 +22,21 @@ import org.antlr.runtime.tree.CommonTree;
  * Basic unit compiler interface. As the compiler walks the AST, it checks its
  * installed {@link IUnitCompiler}s for any that are interested in the current
  * node type (via {@link #getRelevantTypes()}) and routes that AST segment to
- * the unit compiler.</br> </br> Unit compilers need not be thread safe as they
+ * the unit compiler.
+ * 
+ * <p>Unit compilers need not be thread safe as they
  * are instaniated for each compiler, which should only be used by a single
- * thread.
+ * thread.</p>
  */
 public interface IUnitCompiler
 {
 
   /**
-   * return a collection of JACTRBuilder. types that this unit compiler is
+   * @return a collection of JACTRBuilder. types that this unit compiler is
    * interested in
-   * 
-   * @return
    */
   public Collection<Integer> getRelevantTypes();
 
-  /**
-   * @param node
-   * @param warnings
-   * @param errors
-   * @return
-   */
   public void compile(CommonTree node, Collection<Exception> info,
       Collection<Exception> warnings, Collection<Exception> errors);
 

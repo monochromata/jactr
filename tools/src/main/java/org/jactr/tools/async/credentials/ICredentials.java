@@ -15,7 +15,7 @@ package org.jactr.tools.async.credentials;
 
 import java.io.Serializable;
 /**
- * @author developer
+ * 
  *
  */
 public interface ICredentials extends Serializable

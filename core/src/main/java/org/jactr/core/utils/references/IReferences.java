@@ -17,7 +17,7 @@ package org.jactr.core.utils.references;
  * interface used to track the number and times of references of objects in a
  * model
  * 
- * @author developer
+ * 
  */
 public interface IReferences
 {
@@ -37,7 +37,7 @@ public interface IReferences
   /**
    * null parameter version of {@link #getTimes(double[])}
    * 
-   * @return
+   * @return TODO
    */
   default public double[] getTimes()
   {
@@ -50,7 +50,7 @@ public interface IReferences
    * iterating over the results, you should use
    * {@link #getNumberOfRecentReferences()} not array length
    * 
-   * @param referenceTime
+   * @param referenceTime TODO
    * @param container
    *          to store the doubles in or null to create a new one
    * @return the container, or a new one if container wasn't large enough.
@@ -60,8 +60,8 @@ public interface IReferences
   /**
    * null parameter version of {@link #getRelativeTimes(double, double[])}
    * 
-   * @param referenceTime
-   * @return
+   * @param referenceTime TODO
+   * @return TODO
    */
   default public double[] getRelativeTimes(double referenceTime)
   {
@@ -73,14 +73,14 @@ public interface IReferences
    * for instance getTimes() might just track a window of values and not every
    * reference.
    * 
-   * @return
+   * @return TODO
    */
   public long getNumberOfReferences();
 
   /**
    * get the last time there has been a reference
    * 
-   * @return
+   * @return TODO
    */
   public double getLastReferenceTime();
 
@@ -89,14 +89,14 @@ public interface IReferences
   /**
    * add a reference time and increment the reference count
    * 
-   * @param time
+   * @param time TODO
    */
   public void addReferenceTime(double time);
 
   /**
    * remove a reference time and decrement the reference coutn
    * 
-   * @param time
+   * @param time TODO
    */
   public void removeReferenceTime(double time);
 
@@ -113,14 +113,12 @@ public interface IReferences
   
 
   /**
-   * @param references
+   * @param references TODO
    */
   public void setNumberOfReferences(long references);
 
   /**
    * factory for instantiating new references
-   * 
-   * @author developer
    */
   static public class Factory
   {

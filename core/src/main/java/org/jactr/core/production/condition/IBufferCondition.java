@@ -14,7 +14,7 @@
 package org.jactr.core.production.condition;
 
 /**
- * @author developer
+ * 
  *
  */
 public interface IBufferCondition extends ICondition

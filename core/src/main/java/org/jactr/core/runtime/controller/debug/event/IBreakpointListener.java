@@ -15,7 +15,7 @@ package org.jactr.core.runtime.controller.debug.event;
 
 import java.util.EventListener;
 /**
- * @author developer
+ * 
  *
  */
 @FunctionalInterface

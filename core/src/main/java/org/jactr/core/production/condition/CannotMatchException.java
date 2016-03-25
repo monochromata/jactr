@@ -16,12 +16,6 @@ package org.jactr.core.production.condition;
 import org.jactr.core.production.condition.match.GeneralMatchFailure;
 import org.jactr.core.production.condition.match.IMatchFailure;
 
-/**
- * Description of the Class
- * 
- * @author harrison
- * @created April 18, 2003
- */
 public class CannotMatchException extends Exception
 {
 
@@ -47,7 +41,7 @@ public class CannotMatchException extends Exception
   /**
    * provides a more detailed explanation of the failure
    * 
-   * @param failure
+   * @param failure TODO
    */
   public CannotMatchException(IMatchFailure failure)
   {

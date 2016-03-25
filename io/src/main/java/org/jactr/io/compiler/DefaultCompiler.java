@@ -30,7 +30,7 @@ import org.jactr.io.antlr3.compiler.JACTRCompiler;
 import org.jactr.io.parser.CanceledException;
 
 /**
- * @author developer TODO To change the template for this generated type comment
+ *  TODO To change the template for this generated type comment
  *         go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class DefaultCompiler

@@ -21,7 +21,6 @@ import org.jactr.core.utils.IAdaptable;
  * Also manages the name and chunktype
  * 
  * @author harrison
- * @created January 22, 2003
  */
 public interface ISymbolicChunk extends
     org.jactr.core.slot.IUniqueSlotContainer, IAdaptable
@@ -38,7 +37,6 @@ public interface ISymbolicChunk extends
    * symbolic chunk. IChunk.getSymbolicChunk().getParentChunk() == IChunk.
    * 
    * @return The parentChunk value
-   * @since
    */
   public IChunk getParentChunk();
 
@@ -49,7 +47,6 @@ public interface ISymbolicChunk extends
    * collision, a unique name will be munged.
    * 
    * @return The chunkName value
-   * @since
    */
   public String getName();
 
@@ -63,7 +60,6 @@ public interface ISymbolicChunk extends
    * 
    * @param name
    *            The new chunkName value
-   * @since
    */
   public void setName(String name);
 
@@ -71,7 +67,6 @@ public interface ISymbolicChunk extends
    * Returns the IChunkType of this chunk.
    * 
    * @return The chunkType value
-   * @since
    */
   public IChunkType getChunkType();
 
@@ -81,7 +76,6 @@ public interface ISymbolicChunk extends
    * @param ct
    *            Description of Parameter
    * @return The a value
-   * @since
    */
   public boolean isA(IChunkType ct);
 
@@ -91,16 +85,9 @@ public interface ISymbolicChunk extends
    * 
    * @param ct
    *            Description of Parameter
-   * @return The aStrict value
-   * @since
-   * @returns true iff the immediate chunktype is ct
+   * @return true iff the immediate chunktype is ct
    */
   public boolean isAStrict(IChunkType ct);
 
-  /**
-   * Description of the Method
-   * 
-   * @since
-   */
   public void dispose();
 }

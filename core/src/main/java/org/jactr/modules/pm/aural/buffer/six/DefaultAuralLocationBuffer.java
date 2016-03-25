@@ -33,8 +33,6 @@ import org.jactr.modules.pm.common.buffer.AbstractPMActivationBuffer6;
 
 /**
  * Supports clearing unique fields of the audio-event permiting merging.
- * 
- * @author developer
  */
 public class DefaultAuralLocationBuffer extends AbstractPMActivationBuffer6
     implements IAuralLocationBuffer
@@ -51,11 +49,6 @@ public class DefaultAuralLocationBuffer extends AbstractPMActivationBuffer6
 
   protected boolean        _nullUniqueSlots = true;
 
-  /**
-   * @param name
-   * @param model
-   * @param module
-   */
   public DefaultAuralLocationBuffer(IAuralModule module)
   {
     super(IAuralModule.AURAL_LOCATION_BUFFER, module);
@@ -110,9 +103,6 @@ public class DefaultAuralLocationBuffer extends AbstractPMActivationBuffer6
           + " current audio event " + chunk);
   }
 
-  /**
-   * @see org.jactr.modules.pm.common.buffer.AbstractPMActivationBuffer6#isValidChunkType(org.jactr.core.chunktype.IChunkType)
-   */
   @Override
   protected boolean isValidChunkType(IChunkType chunkType)
   {
@@ -190,6 +180,8 @@ public class DefaultAuralLocationBuffer extends AbstractPMActivationBuffer6
   /**
    * overriden so that we can null out the time values for better merge
    * behavior.
+   * 
+   * @param chunkToRemove TODO
    */
   @Override
   protected boolean removeSourceChunkInternal(IChunk chunkToRemove)

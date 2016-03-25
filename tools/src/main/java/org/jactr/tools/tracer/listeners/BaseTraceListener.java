@@ -21,7 +21,7 @@ import org.jactr.tools.tracer.transformer.IEventTransformer;
 import org.jactr.tools.tracer.transformer.ITransformedEvent;
 
 /**
- * @author developer
+ * 
  */
 public abstract class BaseTraceListener implements ITraceListener
 {

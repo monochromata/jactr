@@ -46,7 +46,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * parses the environment.xml file to configure the runtime <code>
+ * parses the environment.xml file to configure the runtime {@code
  *  <environment>
  * 
  *  <!-- iff you want to control reality from here -->
@@ -76,9 +76,9 @@ import org.xml.sax.SAXException;
  *    </attachment>
  *   </attachments>
  *  </environment>
- * </code>
+ * }
  * 
- * @author developer
+ * 
  */
 public class EnvironmentParser
 {
@@ -99,8 +99,8 @@ public class EnvironmentParser
   /**
    * process the environment descriptor.
    * 
-   * @param document
-   * @param modelDescriptors
+   * @param document TODO
+   * @param modelDescriptors TODO
    */
   public void process(Document document, Collection<CommonTree> modelDescriptors)
   {
@@ -129,8 +129,8 @@ public class EnvironmentParser
   /**
    * build all the models
    * 
-   * @param modelDescriptors
-   * @return
+   * @param modelDescriptors TODO
+   * @return TODO
    */
   protected Collection<IModel> buildModels(
       Collection<CommonTree> modelDescriptors)
@@ -159,8 +159,9 @@ public class EnvironmentParser
   /**
    * load the model descriptors based on the document contents and the root url
    * 
-   * @param document
-   * @return
+   * @param document TODO
+   * @param root TODO
+   * @return TODO
    */
   public Collection<CommonTree> getModelDescriptors(Document document, URL root)
   {
@@ -312,9 +313,9 @@ public class EnvironmentParser
   /**
    * handle the controller
    * 
-   * @param env
-   * @param runtime
-   * @return
+   * @param env TODO
+   * @param runtime TODO
+   * @return TODO
    */
   protected IController instantiateController(Document env, ACTRRuntime runtime)
   {
@@ -352,8 +353,8 @@ public class EnvironmentParser
   /**
    * snag the onStart onStop classes and instantiate them
    * 
-   * @param env
-   * @param runtime
+   * @param env TODO
+   * @param runtime TODO
    */
   protected void instantiateOnStartStop(Document env, ACTRRuntime runtime)
   {

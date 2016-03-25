@@ -19,7 +19,7 @@ import java.util.concurrent.Executor;
 import org.jactr.core.model.IModel;
 import org.jactr.tools.tracer.ITraceSink;
 /**
- * @author developer
+ * 
  *
  */
 public interface ITraceListener extends EventListener

@@ -40,7 +40,8 @@ public class NotifyingSlot extends DefaultMutableSlot
   }
 
   /**
-   * @param slot
+   * @param slot TODO
+   * @param container TODO
    */
   public NotifyingSlot(ISlot slot, INotifyingSlotContainer container)
   {

@@ -107,14 +107,14 @@ public class ASTResolver
    * header (fullResoltuion), or to filter out content when generating a full
    * dump
    * 
-   * @param model
+   * @param model TODO
    * @param fullResolution
-   *          if false, just the model & parameters is generated. filters are
+   *          if false, just the model and parameters is generated. filters are
    *          ignored.
-   * @param productionFilter
-   * @param chunkTypeFilter
-   * @param chunkFilter
-   * @return
+   * @param productionFilter TODO
+   * @param chunkTypeFilter TODO
+   * @param chunkFilter TODO
+   * @return TODO
    */
   static public CommonTree toAST(IModel model, boolean fullResolution,
       Predicate<IProduction> productionFilter,
@@ -124,7 +124,7 @@ public class ASTResolver
     if (chunkTypeFilter == null) chunkTypeFilter = c -> true;
     if (chunkFilter == null) chunkFilter = c -> true;
 
-    /**
+    /*
      * lock so that we are the only one right now
      */
     ReadWriteLock lock = model.getLock();
@@ -259,9 +259,9 @@ public class ASTResolver
   /**
    * create an AST description of the model and optionally, all its children
    * 
-   * @param model
-   * @param fullResolution
-   * @return
+   * @param model TODO
+   * @param fullResolution TODO
+   * @return TODO
    */
   static public CommonTree toAST(IModel model, boolean fullResolution)
   {
@@ -272,8 +272,11 @@ public class ASTResolver
    * return a list of all the commonTrees for this chunktype and its parents
    * sorted in dependency order, with chunkType's commonTree last
    * 
-   * @param chunkType
-   * @return
+   * @param chunkType TODO
+   * @param alreadyConverted TODO
+   * @param chunkTypeFilter TODO
+   * @param chunkFilter TODO
+   * @return TODO
    */
   @SuppressWarnings("unchecked")
   static protected List<CommonTree> toOrderedAST(IChunkType chunkType,
@@ -311,8 +314,8 @@ public class ASTResolver
   /**
    * return the AST describing this production
    * 
-   * @param production
-   * @return
+   * @param production TODO
+   * @return TODO
    */
   static public CommonTree toAST(IProduction production)
   {
@@ -334,8 +337,9 @@ public class ASTResolver
   /**
    * return the AST describing this chunk
    * 
-   * @param chunk
-   * @return
+   * @param chunk TODO
+   * @param skipParameters TODO
+   * @return TODO
    */
   static public CommonTree toAST(IChunk chunk, boolean skipParameters)
   {
@@ -370,9 +374,9 @@ public class ASTResolver
    * return the AST describing the chunktype and optionally all it's immediate
    * chunks
    * 
-   * @param chunkType
-   * @param fullResolution
-   * @return
+   * @param chunkType TODO
+   * @param chunkFilter TODO
+   * @return TODO
    */
   static public CommonTree toAST(IChunkType chunkType,
       Predicate<IChunk> chunkFilter)
@@ -413,8 +417,8 @@ public class ASTResolver
   /**
    * return the AST describing this buffer
    * 
-   * @param buffer
-   * @return
+   * @param buffer TODO
+   * @return TODO
    */
   static public CommonTree toAST(IActivationBuffer buffer)
   {
@@ -454,8 +458,8 @@ public class ASTResolver
   /**
    * return the AST describing this extension
    * 
-   * @param extension
-   * @return
+   * @param extension TODO
+   * @return TODO
    */
   static public CommonTree toAST(IExtension extension)
   {
@@ -646,10 +650,6 @@ public class ASTResolver
     return actionNode;
   }
 
-  /**
-   * @param desc
-   * @param sc
-   */
   static public void setSlots(CommonTree desc, ISlotContainer sc)
   {
     if (desc == null) return;
@@ -753,10 +753,6 @@ public class ASTResolver
     return sd;
   }
 
-  /**
-   * @param actrDesc
-   * @param parameterized
-   */
   static protected void setParameters(CommonTree parameters,
       IParameterized parameterized)
   {

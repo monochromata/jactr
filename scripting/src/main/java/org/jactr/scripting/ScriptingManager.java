@@ -71,7 +71,10 @@ public class ScriptingManager
    * create a new instance of the script support class. A new instance is used
    * for every invokation of scriptable actions/conditions
    * 
-   * @return
+   * @param factory TODO
+   * @param model TODO
+   * @param bindings TODO
+   * @return TODO
    */
   static public ScriptSupport newScriptSupport(IScriptableFactory factory,
       IModel model, VariableBindings bindings)
@@ -93,9 +96,10 @@ public class ScriptingManager
    * called by actual script execution code before execution, but after
    * ScriptSupport has been installed
    * 
-   * @param factory
-   * @param model
-   * @param support
+   * @param factory TODO
+   * @param model TODO
+   * @param support TODO
+   * @param scope TODO
    */
   static public void configureScripting(IScriptableFactory factory,
       IModel model, ScriptSupport support, Object scope)

@@ -38,6 +38,7 @@ public class DefaultMotorModule6 extends AbstractMotorModule
   /**
    * create the {@link IMotorActivationBuffer}
    * 
+   * @return TODO
    * @see org.jactr.core.module.AbstractModule#createBuffers()
    */
   protected Collection<IActivationBuffer> createBuffers()
@@ -46,17 +47,14 @@ public class DefaultMotorModule6 extends AbstractMotorModule
     return Collections.singleton((IActivationBuffer) _buffer);
   }
 
-  /**
-   * @see IMotorModule#getBuffer()
-   */
   public IMotorActivationBuffer getBuffer()
   {
     return _buffer;
   }
 
   /**
-   * initialize by installing the {@link IEfferentObjectTranslator},
-   * {@link IEfferentCommandTranslator}, the preparation and processing
+   * initialize by installing the (TODO: resolve reference: IEfferentObjectTranslator),
+   * (TODO: resolve reference: IEfferentCommandTranslator), the preparation and processing
    * {@link IMotorTimeEquation}s
    * 
    * @see org.jactr.modules.pm.motor.AbstractMotorModule#initialize()

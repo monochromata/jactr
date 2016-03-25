@@ -31,10 +31,10 @@ public interface IConditionScript
   /**
    * clone a copy of this condition for use in binding.
    * 
-   * @param model
-   * @param variableBindings
-   * @return
-   * @throws CannotMatchException
+   * @param model TODO
+   * @param variableBindings TODO
+   * @return TODO
+   * @throws CannotMatchException TODO
    */
   public IConditionScript clone(IModel model,
       VariableBindings variableBindings) throws CannotMatchException;
@@ -42,13 +42,14 @@ public interface IConditionScript
   /**
    * iteratively bind this condition.
    * 
-   * @param model
-   * @param variableBindings
+   * @param scriptSupport TODO
+   * @param model TODO
+   * @param variableBindings TODO
    * @param isIterative
    *          false if this is the final call. If so, any unresolved bindings
    *          should result in a CannotMatchException
    * @return the number of variables still unresolved
-   * @throws CannotMatchException
+   * @throws CannotMatchException TODO
    */
   public int bind(ScriptSupport scriptSupport, IModel model,
       VariableBindings variableBindings, boolean isIterative)

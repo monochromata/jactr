@@ -34,9 +34,9 @@ public interface IAsynchronousModule extends IModule
    * this call and make their module request. Upon completion of the request,
    * the block is aborted.
    * 
-   * @param startTime
-   * @param blockAtTime
-   * @return
+   * @param startTime TODO
+   * @param blockAtTime TODO
+   * @return TODO
    */
   public BlockingTimedEvent synchronizedTimedEvent(double startTime,
       double blockAtTime);

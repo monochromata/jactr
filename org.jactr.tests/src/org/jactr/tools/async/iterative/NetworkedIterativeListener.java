@@ -22,7 +22,7 @@ import org.jactr.entry.iterative.IterativeMain;
 import org.jactr.tools.async.iterative.tracker.IterativeRunTracker;
 
 /**
- * @author developer
+ * 
  */
 public class NetworkedIterativeListener extends TestCase
 {

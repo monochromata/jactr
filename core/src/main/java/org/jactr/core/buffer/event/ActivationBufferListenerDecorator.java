@@ -16,7 +16,7 @@ package org.jactr.core.buffer.event;
 import org.jactr.core.event.IParameterEvent;
 
 /**
- * @author developer
+ * 
  */
 public class ActivationBufferListenerDecorator implements
     IActivationBufferListener

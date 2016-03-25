@@ -19,7 +19,7 @@ import org.jactr.modules.pm.buffer.IPerceptualBuffer;
 
 /**
  * visual location buffer
- * @author developer
+ * 
  *
  */
 public interface IVisualLocationBuffer extends IPerceptualBuffer

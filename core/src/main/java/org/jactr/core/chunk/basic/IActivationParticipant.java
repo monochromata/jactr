@@ -20,7 +20,7 @@ public interface IActivationParticipant
   /**
    * simple named identifier for logging purposes
    * 
-   * @return
+   * @return TODO
    */
   public String getName();
 
@@ -29,9 +29,9 @@ public interface IActivationParticipant
    * set the appropriate internal member variable. The chunk's write lock will
    * have already been acquired.
    * 
-   * @param chunk
-   * @param model
-   * @return
+   * @param chunk TODO
+   * @param model TODO
+   * @return TODO
    */
   public double computeAndSetActivation(IChunk chunk, IModel model);
 }

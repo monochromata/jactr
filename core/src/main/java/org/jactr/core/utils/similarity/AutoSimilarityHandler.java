@@ -31,7 +31,6 @@ import org.jactr.core.slot.ISlot;
  * scaled by maxDiff/maxSim 5. if they are strings.. well, screw them
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class AutoSimilarityHandler implements
     SimilarityHandler

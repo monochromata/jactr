@@ -40,7 +40,7 @@ public class NotifyingSlotContainer extends UniqueSlotContainer implements
    * if you want to use this class as a delegate for another class, you can
    * retarget the source of the events to use this container
    * 
-   * @param container
+   * @param container the delegate
    */
   public void setDelegateContainer(INotifyingSlotContainer container)
   {

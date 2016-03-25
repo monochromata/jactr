@@ -30,7 +30,6 @@ import org.jactr.scripting.ScriptingManager;
  * bindings) { return {true | false}; }
  * 
  * @author harrison
- * @created April 18, 2003
  */
 
 public class ScriptableCondition implements ICondition
@@ -43,9 +42,6 @@ public class ScriptableCondition implements ICondition
 
   private ScriptSupport          _scriptableSupport;
 
-  /**
-   * Constructor for the ScriptableCondition object
-   */
   public ScriptableCondition(IConditionScript script)
   {
     _conditionScript = script;

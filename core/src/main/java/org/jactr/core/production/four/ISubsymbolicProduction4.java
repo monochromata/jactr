@@ -96,82 +96,109 @@ public interface ISubsymbolicProduction4 extends ISubsymbolicProduction
 
   /**
    * what production cycle was this production created during
+   * 
+   * @return TODO
    */
   public int getCreationCycle();
 
   /**
    * what production cycle was this production created during
+   * 
+   * @param i TODO
    */
   public void setCreationCycle(int i);
 
   /**
    * at what times did this production's firing result in a success
+   * 
+   * @return TODO
    */
   public IReferences getSuccesses();
 
   /**
    * at what times did this production's firing result in a failure
+   * 
+   * @return TODO
    */
   public IReferences getFailures();
 
-  /**
-   * 
-   */
   public IReferences getEfforts();
 
   /**
    * the number of prior successes, (sans actual access times, often inherited
    * from parents)
+   * 
+   * @return TODO
    */
   public int getPriorSuccesses();
 
   /**
    * the number of prior failures
+   * 
+   * @return TODO
    */
   public int getPriorFailures();
 
   /**
    * the number of prior attempts
+   * 
+   * @return TODO
    */
   public double getPriorEfforts();
 
   /**
    * Sets the priorSuccesses
+   * 
+   * @param successes TODO
    */
   public void setPriorSuccesses(int successes);
 
   /**
    * Sets the priorFailures
+   * 
+   * @param failures TODO
    */
   public void setPriorFailures(int failures);
 
   /**
    * Sets the priorEfforts
+   * 
+   * @param efforts TODO
    */
   public void setPriorEfforts(double efforts);
 
   /**
    * compute and return the current expected gain based on P, G, and C
+   * 
+   * @return TODO
    */
   public double getExpectedGain();
 
   /**
    * compute the probability of success
+   * 
+   * @return TODO
    */
   public double getP();
 
   /**
    * get the cost of firing the production
+   * 
+   * @return TODO
    */
   public double getC();
 
   /**
    * set the probability of success
+   * 
+   * @param p TODO
    */
   public void setP(double p);
 
   /**
    * set the cost
+   * 
+   * @param c TODO
    */
   public void setC(double c);
 }

@@ -20,15 +20,18 @@ public interface IAsynchronousModuleDelegate<M extends IAsynchronousModule, R>
 {
 
   /**
-   * get the module this is installed into
-   * @return
+   * @return get the module this is installed into
    */
   public M getModule();
   
   /**
    * everything is based on a {@link ChunkPattern}. This will start the
    * processing and return some result, usually an {@link IChunk}
-   * @param request
+   * 
+   * @param request TODO
+   * @param processTime TODO
+   * @param parameters TODO
+   * @return TODO
    */
   public Future<R> process(IRequest request, double processTime, Object ... parameters);
 }

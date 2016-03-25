@@ -7,9 +7,9 @@ import org.jactr.core.buffer.IActivationBuffer;
 import org.jactr.core.module.IModule;
 
 /**
- * stub interface for Taatgen & van Rijn's temporal module
+ * stub interface for Taatgen and van Rijn's temporal module
+ * 
  * @author harrison
- *
  */
 public interface ITemporalModule extends IModule
 {
@@ -17,8 +17,7 @@ public interface ITemporalModule extends IModule
   static public final String TEMPORAL_LOG = "TEMPORAL";
   
   /**
-   * return the buffer that contains the time chunk
-   * @return
+   * @return the buffer that contains the time chunk
    */
   public IActivationBuffer getBuffer();
   
@@ -30,12 +29,13 @@ public interface ITemporalModule extends IModule
   
   /**
    * start a timer by adding a time chunk to the buffer
+   * 
+   * @param initialTicks TODO
    */
   public void startTimer(int initialTicks);
   
   /**
-   * return the current # of ticks.
-   * @return
+   * @return the current # of ticks.
    */
   public long getTicks();
 }

@@ -24,7 +24,7 @@ import org.jactr.modules.pm.aural.six.DefaultAuralModule6;
 import org.jactr.modules.pm.common.memory.IPerceptualMemory;
 
 /**
- * @author developer
+ * 
  */
 public class AuralModuleParticipant extends BasicASTParticipant
 {

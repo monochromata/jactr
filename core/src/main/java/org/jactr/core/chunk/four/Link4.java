@@ -31,13 +31,12 @@ import org.jactr.core.utils.parameter.ParameterHandler;
  * From Chunkj to Chunki when Chunkj is in the goal buffer and Chunki has been
  * positively matched within any other buffer
  * 
- * @note : this is a point of divergence from ACT-R 5.0. 5.0's associative link
+ * <p>NOTE: this is a point of divergence from ACT-R 5.0. 5.0's associative link
  *       contract is less than specific. In 4.0 condition 2) is different in
  *       that it would only be true for the retrieval buffer. Additionally, 5.0
  *       is attempting to move to an entirely similarity based system. We are
- *       still waiting for final word as to how this will be handled.
+ *       still waiting for final word as to how this will be handled.</p>
  * @author harrison
- * @created April 18, 2003
  */
 public class Link4 extends AbstractAssociativeLink
 {
@@ -73,6 +72,9 @@ public class Link4 extends AbstractAssociativeLink
 
   /**
    * The j chunk should contain the I chunk as a slot value.
+   * 
+   * @param j TODO
+   * @param i TODO
    */
   public Link4(IChunk j, IChunk i)
   {
@@ -228,8 +230,6 @@ public class Link4 extends AbstractAssociativeLink
 
   /**
    * increment the count number of links this Link represents
-   * 
-   * @returns the new count
    */
   public void increment()
   {
@@ -240,8 +240,7 @@ public class Link4 extends AbstractAssociativeLink
   /**
    * decrement the count number of links this Link represents.
    * 
-   * @return Description of the Return Value
-   * @returns the new count.
+   * @return the new count.
    */
   public int decrement()
   {

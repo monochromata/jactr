@@ -19,7 +19,7 @@ import org.jactr.tools.async.message.BaseMessage;
 import org.jactr.tools.async.message.command.ICommand;
 
 /**
- * @author developer
+ * 
  */
 public class LogoutCommand extends BaseMessage implements ICommand
 {

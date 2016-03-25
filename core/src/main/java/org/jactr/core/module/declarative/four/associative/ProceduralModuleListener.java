@@ -40,7 +40,7 @@ import org.jactr.core.slot.ISlot;
  * fire, and productionFired() to call the various parameter update methods on
  * the chunks
  * 
- * @author developer
+ * 
  */
 public class ProceduralModuleListener extends ProceduralModuleListenerAdaptor
 {

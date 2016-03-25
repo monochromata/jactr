@@ -724,17 +724,11 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
     setActivation(total);
   }
 
-  // abstract protected double computeBaseLevelActivation();
-
   /**
    * return the spreading activation value
    * 
-   * @return
+   * @return TODO
    */
-  // abstract protected double computeSpreadingActivation();
-
-  // abstract protected double computeRandomActivation();
-
   public IChunk getParentChunk()
   {
     return _parentChunk;

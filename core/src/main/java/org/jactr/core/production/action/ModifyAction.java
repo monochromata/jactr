@@ -38,7 +38,6 @@ import org.jactr.core.utils.StringUtilities;
  * there is no chunk in the buffer, an IllegalActionStateException is thrown.
  * 
  * @author harrison
- * @created January 22, 2003
  */
 public class ModifyAction extends DefaultAction implements IBufferAction,
     org.jactr.core.slot.ISlotContainer
@@ -51,8 +50,6 @@ public class ModifyAction extends DefaultAction implements IBufferAction,
 
   /**
    * name of the buffer that is to have its contents modified
-   * 
-   * @since
    */
   private String                   _bufferName;
 
@@ -66,7 +63,6 @@ public class ModifyAction extends DefaultAction implements IBufferAction,
    * 
    * @param bufferName
    *          Description of Parameter
-   * @since
    */
   @SuppressWarnings("unchecked")
   public ModifyAction(String bufferName)
@@ -74,11 +70,6 @@ public class ModifyAction extends DefaultAction implements IBufferAction,
     this(bufferName, Collections.EMPTY_LIST);
   }
 
-  /**
-   * Constructor for the ModifyAction object
-   * 
-   * @since
-   */
   public ModifyAction()
   {
     this(IActivationBuffer.GOAL);
@@ -92,11 +83,6 @@ public class ModifyAction extends DefaultAction implements IBufferAction,
       addSlot(slot);
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @since
-   */
   @Override
   public void dispose()
   {
@@ -105,11 +91,6 @@ public class ModifyAction extends DefaultAction implements IBufferAction,
     _slots = null;
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @return Description of the Return Value
-   */
   public boolean canModify()
   {
     return true;
@@ -145,6 +126,8 @@ public class ModifyAction extends DefaultAction implements IBufferAction,
 
   /**
    * returns actual backing collection
+   * 
+   * @return TODO
    */
   protected Collection<IMutableSlot> getSlotsInternal()
   {
@@ -181,8 +164,6 @@ public class ModifyAction extends DefaultAction implements IBufferAction,
   /**
    * fire this modify action this will actually post a timed event to the timed
    * event queue that will do the work..
-   * 
-   * @since
    */
   @Override
   public double fire(IInstantiation instantiation, double firingTime)

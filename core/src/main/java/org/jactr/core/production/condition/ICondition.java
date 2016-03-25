@@ -24,7 +24,6 @@ import org.jactr.core.production.VariableBindings;
  * resolution)
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ICondition
 {
@@ -39,8 +38,8 @@ public interface ICondition
    * instantiation phase. We pass the current bindings so that the condition can
    * do an early rejection if possible.
    * 
-   * @param model
-   * @param variableBindings
+   * @param model TODO
+   * @param variableBindings TODO
    * @return a writable copy of the condition that will be bound
    * @throws CannotMatchException
    *             if there is no way this condition can be matched
@@ -55,12 +54,17 @@ public interface ICondition
    * it needs in order to be matched. If at any point the condition determines
    * that it cannot be matched, the exception is to be thrown. Similarly, if
    * isIterative is false, and there are unresolved bindings, the exception
-   * should be thrown. <br>
-   * Otherwise, the number of unresolved bindings is returned which allows the
-   * instantiation calculation determine if another resolution round is
-   * required.
+   * should be thrown.
    * 
+   * <p>Otherwise, the number of unresolved bindings is returned which allows the
+   * instantiation calculation determine if another resolution round is
+   * required.</p>
+   * 
+   * @param model TODO
+   * @param variableBindings TODO
+   * @param isIterative TODO
    * @return number of unresolved variables
+   * @throws CannotMatchException TODO
    */
   public int bind(IModel model, VariableBindings variableBindings,
       boolean isIterative) throws CannotMatchException;

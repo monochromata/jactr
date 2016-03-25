@@ -29,7 +29,7 @@ import org.jactr.modules.pm.visual.buffer.IVisualLocationBuffer;
 /**
  * reset the visual system - merely calls IVisualModule.reset()
  * 
- * @author developer
+ * 
  */
 public class ClearRequestDelegate extends AbstractRequestDelegate
 {

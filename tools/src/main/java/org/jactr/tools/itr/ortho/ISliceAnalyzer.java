@@ -16,8 +16,9 @@ public interface ISliceAnalyzer
    * is entirely modeler dependent, however it should likely be
    * serializable so that the results can be collected and transmitted
    * back when this finally supports distributed execution
-   * @param slice
-   * @return
+   * 
+   * @param sliceAnalysis TODO
+   * @return TODO
    */
   public Object analyze(ISliceAnalysis sliceAnalysis);
 }

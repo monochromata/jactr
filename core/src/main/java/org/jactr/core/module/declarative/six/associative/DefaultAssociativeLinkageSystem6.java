@@ -45,7 +45,9 @@ public class DefaultAssociativeLinkageSystem6 extends
   /**
    * we use the production firing to trigger the learning
    * 
-   * @return
+   * @param learningModule TODO
+   * @param executor TODO
+   * @return TODO
    */
   protected IProceduralModuleListener createProceduralListener(
       IDeclarativeLearningModule4 learningModule, Executor executor)

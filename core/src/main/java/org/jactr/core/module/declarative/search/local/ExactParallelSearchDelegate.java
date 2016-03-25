@@ -72,13 +72,6 @@ public class ExactParallelSearchDelegate implements ISearchDelegate
     return findNew(pattern, sortRule, filter, searchSystem);
   }
 
-  /**
-   * @param pattern
-   * @param sortRule
-   * @param filter
-   * @param searchSystem
-   * @return
-   */
   public SortedSet<IChunk> findNew(final ChunkTypeRequest pattern,
       final Comparator<IChunk> sortRule, final IChunkFilter filter,
       final DefaultSearchSystem searchSystem)
@@ -193,9 +186,10 @@ public class ExactParallelSearchDelegate implements ISearchDelegate
    * perform set logic to all the slot search results, recycling interim
    * collections
    * 
-   * @param slotSearchResults
-   * @param searchSystem
-   * @return
+   * @param slotSearchResults TODO
+   * @param chunkFilter TODO
+   * @param searchSystem TODO
+   * @return TODO
    */
   protected SortedSet<IChunk> combineResults(
       Collection<Collection<IChunk>> slotSearchResults,
@@ -260,9 +254,10 @@ public class ExactParallelSearchDelegate implements ISearchDelegate
    * creates a filtered copy of the candidates. We must create a new copy
    * because the candidate set is likely an optimized, unmodifiable collection.
    * 
-   * @param candidates
-   * @param chunkFilter
-   * @return
+   * @param candidates TODO
+   * @param slot TODO
+   * @param primaryFilter TODO
+   * @return TODO
    */
   protected Collection<IChunk> filterSlotSearchResults(
       Collection<IChunk> candidates, ISlot slot, IChunkFilter primaryFilter)
@@ -317,9 +312,11 @@ public class ExactParallelSearchDelegate implements ISearchDelegate
    * there will only one not slot and the rest converted. If there is any
    * non-not slot, all the nots can be converted.
    * 
-   * @param chunkType
-   * @param originalSlots
-   * @return
+   * @param chunkType TODO
+   * @param originalSlots TODO
+   * @param container TODO
+   * @param searchSystem TODO
+   * @return TODO
    */
   protected IChunkFilter selectSlotsToSearch(IChunkType chunkType,
       Collection<? extends ISlot> originalSlots, List<ISlot> container,

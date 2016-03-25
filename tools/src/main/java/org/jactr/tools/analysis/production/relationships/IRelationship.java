@@ -8,24 +8,21 @@ import org.jactr.tools.analysis.production.endstates.BufferEndState;
 
 /**
  * describes how two productions are related to each other.
+ * 
  * @author harrison
- *
  */
 public interface IRelationship
 {
 
   /**
-   * the base production the {@link #getTailProduction()} is compared to
-   * @return
+   * @return the base production the {@link #getTailProduction()} is compared to
    */
   public CommonTree getHeadProduction();
   
   /**
-   * the production that is being compared to {@link #getHeadProduction()}
-   * @return
+   * @return the production that is being compared to {@link #getHeadProduction()}
    */
   public CommonTree getTailProduction();
-  
   
   public double getScore();
   

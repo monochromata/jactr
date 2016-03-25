@@ -63,11 +63,12 @@ public class BufferEndStates
   }
 
   /**
-   * return the map of asts for all the default conditions (query & match) and 
+   * return the map of asts for all the default conditions (query and match) and 
    * actions (add, remove, modify) so that they need not be calculated every time
    * by every buffer state computer
-   * @param type
-   * @return
+   * 
+   * @param type TODO
+   * @return TODO
    */
   public Map<String, CommonTree> getMapOfTrees(int type)
   {

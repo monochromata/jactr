@@ -16,29 +16,29 @@ package org.jactr.core.buffer;
 import org.jactr.core.production.request.IRequest;
 
 /**
- * Marker interface for buffers that can accept {@link IRequest}s that will
- * then be forwarded to the owning module for processing.
+ * Marker interface for buffers that can accept {@link IRequest}s that will then
+ * be forwarded to the owning module for processing.
  * 
  * @author harrison
- * @created April 18, 2003
  */
-public interface IRequestableBuffer extends IActivationBuffer
-{
+public interface IRequestableBuffer extends IActivationBuffer {
 
-  /**
-   * return true if this buffer would accept this request
-   * @param request
-   * @return
-   */
-  public boolean willAccept(IRequest request);
-  
-  /**
-   * Make a request of the module. Returns true if the request was accepted,
-   * false if not.
-   * 
-   * @throws IllegalArgumentException
-   *             if the request is accepted but invalid
-   */
-  public boolean request(IRequest source, double requestTime) throws IllegalArgumentException;
+	/**
+	 * @param request
+	 *            the request
+	 * @return true if this buffer would accept this request
+	 */
+	public boolean willAccept(IRequest request);
+
+	/**
+	 * Make a request of the module.
+	 * 
+	 * @param source the request
+	 * @param requestTime TODO
+	 * @return true if the request was accepted, false if not.
+	 * @throws IllegalArgumentException
+	 *             if the request is accepted but invalid
+	 */
+	public boolean request(IRequest source, double requestTime) throws IllegalArgumentException;
 
 }

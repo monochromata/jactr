@@ -15,27 +15,22 @@ public interface ISubsymbolicProduction6 extends ISubsymbolicProduction
   static public final String REWARD_PARAM           = "Reward";
 
   /**
-   * return the computed expected utility
-   * @return
+   * @return the computed expected utility
    */
   public double getExpectedUtility();
   
   public void setExpectedUtility(double utility);
 
   /**
-   * return the predefined utility of the production
-   * 
-   * @return
+   * @return the predefined utility of the production
    */
   public double getUtility();
 
   public void setUtility(double utility);
 
   /**
-   * return the reward value associated with this production or Double.NaN if
+   * @return the reward value associated with this production or Double.NaN if
    * there is no reward explicitly defined for this production
-   * 
-   * @return
    */
   public double getReward();
 

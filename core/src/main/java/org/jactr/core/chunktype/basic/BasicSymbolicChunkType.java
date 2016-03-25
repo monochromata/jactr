@@ -37,7 +37,6 @@ import org.jactr.core.utils.collections.ChunkNameComparator;
  * be added after encoding
  * 
  * @author harrison
- * @created January 22, 2003
  */
 public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
     IRemovableSymbolicChunkType
@@ -58,9 +57,7 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
   /**
    * This refers to the IChunkType object that this is the symbolic portion of.
    * This is not to be confused with the supertype chunktype which is the
-   * IChunkType that this _parentChunkType was derived from..
-   * 
-   * @since
+   * IChunkType that this _parentChunkType was derived from.
    */
   protected IChunkType               _parentChunkType;
 
@@ -275,6 +272,8 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
   }
 
   /**
+   * @param s the slot
+   * @return TODO
    */
   public boolean hasSlot(ISlot s)
   {
@@ -283,6 +282,8 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
 
   /**
    * Yes, you can modify the slots (add/remove) but off if not encoded
+   * 
+   * @return TODO
    */
   public boolean canModify()
   {
@@ -317,7 +318,6 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
    * 
    * @param s
    *          The feature to be added to the ISlot attribute
-   * @since
    */
   @Override
   public void addSlot(ISlot s)
@@ -350,7 +350,6 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
    * 
    * @param s
    *          Description of Parameter
-   * @since
    */
   @Override
   public void removeSlot(ISlot s)
@@ -408,6 +407,8 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
   /**
    * remove this chunk from the chunktype's list of encoded chunks. No event is
    * fired.
+   * 
+   * @param chunk the chunk to be removed
    */
   public void removeChunk(IChunk chunk)
   {
@@ -426,6 +427,8 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
 
   /**
    * noop for now
+   * 
+   * @param chunkType the child chunk type
    */
   public void removeChild(IChunkType chunkType)
   {
@@ -436,6 +439,8 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
 
   /**
    * Noop for now.
+   * 
+   * @param chunkType the parent chunk type
    */
   public void removeParent(IChunkType chunkType)
   {

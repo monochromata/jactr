@@ -20,7 +20,6 @@ import java.util.Collection;
  * file) data - Chunks permit this for internal bookkeeping
  * 
  * @author harrison
- * @created December 6, 2002
  */
 public interface IMetaContainer
 {
@@ -31,7 +30,6 @@ public interface IMetaContainer
    * @param key
    *            Description of Parameter
    * @return The MetaData value
-   * @since
    */
   public Object getMetaData(String key);
 
@@ -39,17 +37,14 @@ public interface IMetaContainer
    * Sets the MetaData attribute of the MetaContainer object
    * 
    * @param key
-   *            The new MetaData value
+   *            The new MetaData value's key
    * @param value
    *            The new MetaData value
-   * @since
    */
   public void setMetaData(String key, Object value);
 
   /**
-   * return all the keys
-   * 
-   * @return
+   * @return all the keys
    */
   public Collection<String> getMetaDataKeys();
 }

@@ -56,11 +56,11 @@ public abstract class AbstractInstantiation extends AbstractProduction
   // latency
 
   /**
-   * @param parent
-   * @param boundConditions
+   * @param parent TODO
+   * @param boundConditions TODO
    * @param variableBindings
    *          will be copied locally.
-   * @throws CannotInstantiateException
+   * @throws CannotInstantiateException TODO
    */
   public AbstractInstantiation(AbstractProduction parent,
       Collection<ICondition> boundConditions,
@@ -218,6 +218,8 @@ public abstract class AbstractInstantiation extends AbstractProduction
 
   /**
    * Notify the buffer that the bound chunk has been accessed(matched)
+   * 
+   * @param now TODO
    */
   protected void notifyBuffers(double now)
   {

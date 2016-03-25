@@ -19,7 +19,6 @@ package org.jactr.core.queue;
  * cycle of the model run.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ITimedEvent
 {
@@ -44,6 +43,8 @@ public interface ITimedEvent
    * model's thread, and so unless someone has violated the accessibility
    * contract, no other thread should be monkeying around with the model's
    * internals
+   * 
+   * @param currentTime TODO
    */
   public void fire(double currentTime);
 
@@ -57,7 +58,7 @@ public interface ITimedEvent
   /**
    * has this been aborted? aborted events will not be fired
    * 
-   * @return
+   * @return TODO
    */
   public boolean hasAborted();
   

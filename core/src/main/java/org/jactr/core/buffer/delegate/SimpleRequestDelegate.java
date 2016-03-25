@@ -10,9 +10,9 @@ import org.jactr.core.production.request.ChunkTypeRequest;
 import org.jactr.core.production.request.IRequest;
 
 /**
- * a simple request delegate that just fires and forgets. <br/>
- * <br/>
- * This is often used when simply wrapping an API call.
+ * a simple request delegate that just fires and forgets.
+ * 
+ * <p>This is often used when simply wrapping an API call.</p>
  * 
  * @author harrison
  */

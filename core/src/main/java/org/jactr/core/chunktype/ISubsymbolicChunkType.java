@@ -21,7 +21,6 @@ import org.jactr.core.utils.parameter.IParameterized;
  * yet aware of any need for a subsymbolic chunktype
  * 
  * @author harrison
- * @created March 17, 2003
  */
 public interface ISubsymbolicChunkType extends IParameterized, IAdaptable
 {

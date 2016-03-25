@@ -38,7 +38,7 @@ public interface IMarker
   /**
    * flags this marker as starting and ending at the same time.
    * 
-   * @param time
+   * @param time TODO
    */
   public void instantanious(double time);
 }

@@ -25,7 +25,6 @@ import org.jactr.core.production.request.ChunkTypeRequest;
  * Competitive retrieval time equation from ACT-R 5.0
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class CompetitiveRetrievalTimeEquation implements IRetrievalTimeEquation
 {
@@ -39,15 +38,6 @@ public class CompetitiveRetrievalTimeEquation implements IRetrievalTimeEquation
     _retrievalModule = module;
   }
   
-  /**
-   * Description of the Method
-   * 
-   * @param model
-   *          Description of the Parameter
-   * @param chunk
-   *          Description of the Parameter
-   * @return Description of the Return Value
-   */
   public double computeRetrievalTime(IChunk chunk)
   {
     double threshold = _retrievalModule.getRetrievalThreshold();

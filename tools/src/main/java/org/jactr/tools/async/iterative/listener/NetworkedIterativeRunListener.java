@@ -30,7 +30,7 @@ import org.jactr.tools.deadlock.DeadLockDetector;
 import org.jactr.tools.deadlock.IDeadLockListener;
 
 /**
- * @author developer
+ * 
  */
 public class NetworkedIterativeRunListener extends NetworkedEndpoint implements
     IIterativeRunListener, IParameterized

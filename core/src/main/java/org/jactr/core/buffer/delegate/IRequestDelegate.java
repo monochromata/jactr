@@ -18,8 +18,6 @@ import org.jactr.core.production.request.IRequest;
 
 /**
  * Delegate for request processing.
- * @author developer
- *
  */
 public interface IRequestDelegate
 {
@@ -27,12 +25,17 @@ public interface IRequestDelegate
     
   /**
    * do the module specific processing
-   * @param request
-   * @param buffer
+   * @param request TODO
+   * @param buffer TODO
+   * @param requestTime TODO
    * @return true if this was successful (will propogate the buffer event)
    */
   public boolean request(IRequest request, IActivationBuffer buffer, double requestTime);
   
+  /**
+   * @param request TODO
+   * @return TODO
+   */
   public boolean willAccept(IRequest request);
   
   /**

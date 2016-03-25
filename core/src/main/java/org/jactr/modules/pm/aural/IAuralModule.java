@@ -26,7 +26,7 @@ import org.jactr.modules.pm.aural.event.IAuralModuleListener;
 import org.jactr.modules.pm.aural.memory.IAuralMemory;
 
 /**
- * @author developer
+ * 
  */
 public interface IAuralModule extends IPerceptualMemoryModule
 {

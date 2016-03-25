@@ -58,19 +58,11 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
     _chunkData = new ChunkData(model);
   }
 
-  /**
-   * @return
-   * @see org.jactr.core.chunk.IChunk#getModel()
-   */
   public IModel getModel()
   {
     return _chunkData.getModel();
   }
 
-  /**
-   * @param chunkEvent
-   * @see org.jactr.core.chunk.IChunk#dispatch(org.jactr.core.chunk.event.ChunkEvent)
-   */
   public void dispatch(ChunkEvent chunkEvent)
   {
     if (hasBeenDisposed())
@@ -80,10 +72,6 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
       _chunkData.getChunkDispatcher().fire(chunkEvent);
   }
 
-  /**
-   * @param pEvent
-   * @see org.jactr.core.chunk.IChunk#dispatch(org.jactr.core.event.ParameterEvent)
-   */
   public void dispatch(ParameterEvent pEvent)
   {
     if (hasBeenDisposed())
@@ -96,7 +84,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.chunk.IChunk#hasParameterListeners()
    */
   public boolean hasParameterListeners()
@@ -107,7 +95,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.chunk.IChunk#hasListeners()
    */
   public boolean hasListeners()
@@ -118,8 +106,8 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param cl
-   * @param executor
+   * @param cl TODO
+   * @param executor TODO
    * @see org.jactr.core.chunk.IChunk#addListener(org.jactr.core.chunk.event.IChunkListener,
    *      java.util.concurrent.Executor)
    */
@@ -131,8 +119,8 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param pl
-   * @param executor
+   * @param pl TODO
+   * @param executor TODO
    * @see org.jactr.core.chunk.IChunk#addListener(org.jactr.core.event.IParameterListener,
    *      java.util.concurrent.Executor)
    */
@@ -144,7 +132,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param cl
+   * @param cl TODO
    * @see org.jactr.core.chunk.IChunk#removeListener(org.jactr.core.chunk.event.IChunkListener)
    */
   public void removeListener(IChunkListener cl)
@@ -155,7 +143,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param pl
+   * @param pl TODO
    * @see org.jactr.core.chunk.IChunk#removeListener(org.jactr.core.event.IParameterListener)
    */
   public void removeListener(IParameterListener pl)
@@ -189,7 +177,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
    * That needs to be handled by the DM so that the original sub/symbolic
    * contents can be disposed of properly
    * 
-   * @param masterChunk
+   * @param masterChunk TODO
    */
   public void mergeInto(IChunk masterChunk)
   {
@@ -237,8 +225,8 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param comparison
-   * @return
+   * @param comparison TODO
+   * @return TODO
    * @see java.lang.Comparable#compareTo(java.lang.Object)
    */
   public int compareTo(IChunk comparison)
@@ -247,9 +235,6 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
         comparison.getSymbolicChunk().getName());
   }
 
-  /**
-   * @see org.jactr.core.chunk.IChunk#dispose()
-   */
   public void dispose()
   {
 
@@ -273,7 +258,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.chunk.IChunk#hasBeenDisposed()
    */
   public boolean hasBeenDisposed()
@@ -284,6 +269,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
+   * @param when TODO
    * @see org.jactr.core.chunk.IChunk#encode(double)
    */
   public void encode(double when)
@@ -320,7 +306,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.chunk.IChunk#isEncoded()
    */
   public boolean isEncoded()
@@ -331,8 +317,8 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param ct
-   * @return
+   * @param ct TODO
+   * @return TODO
    * @see org.jactr.core.chunk.IChunk#isA(org.jactr.core.chunktype.IChunkType)
    */
   public boolean isA(IChunkType ct)
@@ -343,8 +329,8 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param ct
-   * @return
+   * @param ct TODO
+   * @return TODO
    * @see org.jactr.core.chunk.IChunk#isAStrict(org.jactr.core.chunktype.IChunkType)
    */
   public boolean isAStrict(IChunkType ct)
@@ -355,7 +341,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param comment
+   * @param comment TODO
    * @see org.jactr.core.utils.ICommentable#setComment(java.lang.String)
    */
   public void setComment(String comment)
@@ -366,7 +352,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.utils.ICommentable#getComment()
    */
   public String getComment()
@@ -377,8 +363,8 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param key
-   * @return
+   * @param key TODO
+   * @return TODO
    * @see org.jactr.core.utils.IMetaContainer#getMetaData(java.lang.String)
    */
   public Object getMetaData(String key)
@@ -389,8 +375,8 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   }
 
   /**
-   * @param key
-   * @param value
+   * @param key TODO
+   * @param value TODO
    * @see org.jactr.core.utils.IMetaContainer#setMetaData(java.lang.String,
    *      java.lang.Object)
    */
@@ -414,7 +400,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   }
 
   /**
-   * @return
+   * @return TODO
    * @see org.jactr.core.utils.IMetaContainer#getMetaDataKeys()
    */
   public Collection<String> getMetaDataKeys()
@@ -438,7 +424,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.chunk.IChunk#isMutable()
    */
   public boolean isMutable()
@@ -449,7 +435,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
   /**
    * note : non-locking
    * 
-   * @param isMutable
+   * @param isMutable TODO
    * @see org.jactr.core.chunk.IChunk#setMutable(boolean)
    */
   public void setMutable(boolean isMutable)
@@ -459,9 +445,6 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
     _chunkData.setMutable(isMutable);
   }
 
-  /**
-   * @see org.jactr.core.chunk.IChunk#equalsSymbolic(org.jactr.core.chunk.IChunk)
-   */
   public boolean equalsSymbolic(IChunk chunk)
   {
     if (hasBeenDisposed())
@@ -499,19 +482,11 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
     }
   }
 
-  /**
-   * @return
-   * @see org.jactr.core.chunk.IChunk#getReadLock()
-   */
   final public Lock getReadLock()
   {
     return _chunkData.readLock();
   }
 
-  /**
-   * @return
-   * @see org.jactr.core.chunk.IChunk#getWriteLock()
-   */
   final public Lock getWriteLock()
   {
     return _chunkData.writeLock();

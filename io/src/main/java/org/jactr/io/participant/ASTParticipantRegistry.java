@@ -44,7 +44,7 @@ import org.jactr.modules.pm.vocal.six.DefaultVocalModule6;
 /**
  * Central point for finding IASTParticipants for a given class
  * 
- * @author developer
+ * 
  */
 public class ASTParticipantRegistry
 {

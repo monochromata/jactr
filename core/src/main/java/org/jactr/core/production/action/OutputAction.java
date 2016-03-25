@@ -30,12 +30,8 @@ import org.jactr.core.queue.timedevents.AbstractTimedEvent;
  * the model. The output is directed to the ModelLogEvent.OUTPUT log. a general
  * output action, equivalent to !output! in ACT-R proper Output is of the form
  * "This is test, and this is a =variable"
- */
-/**
- * Description of the Class
  * 
  * @author harrison
- * @created February 11, 2003
  */
 public class OutputAction extends DefaultAction
 {
@@ -43,14 +39,8 @@ public class OutputAction extends DefaultAction
   private static transient Log LOGGER = LogFactory.getLog(OutputAction.class
                                           .getName());
 
-  /**
-   * Description of the Field
-   */
   public String                _outputTemplate;
 
-  /**
-   * Constructor for the OutputAction object
-   */
   public OutputAction()
   {
     this("");
@@ -166,6 +156,7 @@ public class OutputAction extends DefaultAction
   /**
    * Description of the Method
    * 
+   * @param template TODO
    * @param variableBindings
    *            Description of the Parameter
    * @return Description of the Return Value

@@ -39,12 +39,13 @@ import org.jactr.tools.tracer.transformer.buffer.BulkBufferEvent;
 /**
  * buffer tracer that monitors the buffers and contents for any changes. The AST
  * for each (dirty) buffer is sent out at conflict resolution and after the
- * cycle has elapsed. <br/>
- * As currently implemented, we mark buffers as dirty inline, but then flush
+ * cycle has elapsed.
+ * 
+ * <p>As currently implemented, we mark buffers as dirty inline, but then flush
  * them on the background thread. This opens the possibility to mismatches due
  * to a late flush. It would probably be better to mark them inline, package
  * them inline, but dispatch the message on the background thread (hopefully
- * ensurely in order receipt)
+ * ensurely in order receipt)</p>
  * 
  * @author harrison
  */

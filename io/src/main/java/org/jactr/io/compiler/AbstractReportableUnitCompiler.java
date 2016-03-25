@@ -19,9 +19,10 @@ import org.jactr.io.compiler.IReportableUnitCompiler.Level;
 /**
  * basic abstract {@link IReportableUnitCompiler}. Clients should extend and implement {@link #compile(CommonTree)}
  * from which you will call {@link #report(String, CommonTree)} with any messages. The actual message
- * and its reporting back to the {@link DefaultCompiler} will be handled based on {@link Level}.</br>
- * </br>
- * This class is not thread safe.
+ * and its reporting back to the {@link DefaultCompiler} will be handled based on {@link Level}.
+ * 
+ * <p>This class is not thread safe.</p>
+ * 
  * @author harrison
  *
  */
@@ -115,7 +116,7 @@ public abstract class AbstractReportableUnitCompiler implements
    * done via {@link #report(String, CommonTree)}, which will format the appropriate
    * message and store it in the correct collection.
    * 
-   * @param node
+   * @param node TODO
    */
   abstract protected void compile(CommonTree node);
 

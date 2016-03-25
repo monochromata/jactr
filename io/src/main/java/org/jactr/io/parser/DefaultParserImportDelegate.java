@@ -29,9 +29,6 @@ import org.jactr.io.participant.IASTParticipant;
 import org.jactr.io.participant.impl.BasicASTInjector;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
-/**
- * @author developer
- */
 public class DefaultParserImportDelegate implements IParserImportDelegate
 {
 
@@ -40,10 +37,6 @@ public class DefaultParserImportDelegate implements IParserImportDelegate
 
   private Set<URL>                   _importSources = new HashSet<URL>();
 
-  /**
-   * @see org.jactr.io.parser.IParserImportDelegate#importInto(org.antlr.runtime.tree.CommonTree,
-   *      java.lang.String)
-   */
   public CommonTree importModuleInto(CommonTree modelDescriptor,
       String moduleClassName, boolean importContents) throws Exception
   {
@@ -113,8 +106,8 @@ public class DefaultParserImportDelegate implements IParserImportDelegate
   /**
    * return the IASTParticipant installed for this classname, if any
    * 
-   * @param moduleClassName
-   * @return
+   * @param moduleClassName TODO
+   * @return TODO
    */
   protected IASTParticipant getASTParticipant(String moduleClassName)
   {
@@ -134,10 +127,6 @@ public class DefaultParserImportDelegate implements IParserImportDelegate
     return true;
   }
 
-  /**
-   * @see org.jactr.io.parser.IParserImportDelegate#importInto(org.antlr.runtime.tree.CommonTree,
-   *      java.net.URL)
-   */
   public void importInto(CommonTree modelDescriptor, URL url,
       boolean importBuffers)
   {
@@ -152,9 +141,9 @@ public class DefaultParserImportDelegate implements IParserImportDelegate
   /**
    * checks classpath, absolute url, or relative url to base
    * 
-   * @param url
-   * @param baseURL
-   * @return
+   * @param url TODO
+   * @param baseURL TODO
+   * @return TODO
    * @see org.jactr.io.parser.IParserImportDelegate#resolveURL(java.lang.String,
    *      java.net.URL)
    */

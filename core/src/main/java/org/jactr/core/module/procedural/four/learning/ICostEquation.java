@@ -20,7 +20,6 @@ import org.jactr.core.production.IProduction;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ICostEquation
 {

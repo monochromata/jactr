@@ -40,7 +40,7 @@ import org.jactr.io.resolver.ASTResolver;
  * A simple instrument that saves the state of the model before it starts and
  * after it stops.
  * 
- * @author developer
+ * 
  */
 public class ModelRecorder implements IInstrument, IParameterized
 {

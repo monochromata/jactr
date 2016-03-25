@@ -17,7 +17,7 @@ import org.jactr.core.module.IModule;
 
 
 /**
- * @author developer
+ * 
  */
 public interface IProceduralLearningModule extends IModule
 {

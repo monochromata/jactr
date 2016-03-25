@@ -67,8 +67,8 @@ public class ActivationBufferEvent extends
   /**
    * for SOURCE_CLEARED
    * 
-   * @param buffer
-   * @param clearedChunks
+   * @param buffer TODO
+   * @param clearedChunks TODO
    */
   public ActivationBufferEvent(IActivationBuffer buffer,
       Collection<IChunk> clearedChunks)
@@ -78,11 +78,11 @@ public class ActivationBufferEvent extends
   }
 
   /**
-   * for SOURCE_ADDED & REMOVED
+   * for SOURCE_ADDED and REMOVED
    * 
-   * @param buffer
-   * @param type
-   * @param sourceChunk
+   * @param buffer TODO
+   * @param type TODO
+   * @param sourceChunk TODO
    */
   public ActivationBufferEvent(IActivationBuffer buffer, Type type,
       IChunk sourceChunk)
@@ -91,6 +91,10 @@ public class ActivationBufferEvent extends
     _sourceChunks = Collections.unmodifiableCollection(Collections.singleton(sourceChunk));
   }
 
+  /**
+   * @param buffer TODO
+   * @param request TODO
+   */
   public ActivationBufferEvent(IActivationBuffer buffer, IRequest request)
   {
     this(buffer, Type.REQUEST_ACCEPTED);
@@ -99,6 +103,12 @@ public class ActivationBufferEvent extends
 
   /**
    * for PARAMETER_CHANGED or STATUS_SLOT_CHANGED
+   * 
+   * @param buffer TODO
+   * @param type TODO
+   * @param name TODO
+   * @param oldValue TODO
+   * @param newValue TODO
    */
   public ActivationBufferEvent(IActivationBuffer buffer, Type type,
       String name, Object oldValue, Object newValue)
@@ -109,16 +119,25 @@ public class ActivationBufferEvent extends
     _newValue = newValue;
   }
 
+  /**
+   * @return TODO
+   */
   public Type getType()
   {
     return _type;
   }
 
+  /**
+   * @return TODO
+   */
   public Collection<IChunk> getSourceChunks()
   {
     return _sourceChunks;
   }
 
+  /**
+   * @return TODO
+   */
   public IRequest getRequest()
   {
     return _request;

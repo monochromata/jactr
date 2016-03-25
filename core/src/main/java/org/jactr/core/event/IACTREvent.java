@@ -13,42 +13,37 @@
  */
 package org.jactr.core.event;
 
-
 /**
  * root of all events
- * 
- * @author developer
  */
-public interface IACTREvent<S, L>
-{
+public interface IACTREvent<S, L> {
 
-  /**
-   * The source of the event
-   * 
-   * @return the originating object
-   */
-  public S getSource();
+	/**
+	 * The source of the event
+	 * 
+	 * @return the originating object
+	 */
+	public S getSource();
 
-  /**
-   * dispatch this event to a listener on the provided executor
-   * 
-   * @param listener
-   * @param executor,
-   *            if null will dispatch inline
-   */
-  public void fire(L listener);
+	/**
+	 * dispatch this event to a listener on the provided executor
+	 * 
+	 * @param listener
+	 *            the listener to dispatch to
+	 */
+	public void fire(L listener);
 
-  /**
-   * the time this event occured based on the system clock
-   * 
-   * @return
-   */
-  public long getSystemTime();
+	/**
+	 * the time this event occured based on the system clock
+	 * 
+	 * @return the system time
+	 */
+	public long getSystemTime();
 
-  /**
-   * the time this event occured based on the simulation clock
-   * 
-   * @return
-   */
-  public double getSimulationTime();
+	/**
+	 * the time this event occured based on the simulation clock
+	 * 
+	 * @return the simulated time
+	 */
+	public double getSimulationTime();
 }

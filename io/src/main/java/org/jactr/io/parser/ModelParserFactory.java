@@ -23,8 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author harrison To change the template for this generated type comment go to
- *         Window>Preferences>Java>Code Generation>Code and Comments
+ * @author harrison
  */
 public class ModelParserFactory
 {
@@ -41,9 +40,6 @@ public class ModelParserFactory
     addParser("jactr", org.jactr.io.antlr3.parser.xml.JACTRModelParser.class);
   }
 
-  /**
-   * @param mp
-   */
   static public void addParser(String extension,
       Class< ? extends IModelParser> parserClass)
   {
@@ -55,9 +51,6 @@ public class ModelParserFactory
     _parsers.put(extension.toLowerCase(), parserClass);
   }
 
-  /**
-   * @return
-   */
   static public Collection<String> getValidExtensions()
   {
     if (LOGGER.isDebugEnabled())
@@ -68,8 +61,8 @@ public class ModelParserFactory
   /**
    * instantiate a new parser for this extension
    * 
-   * @param extension
-   * @return
+   * @param extension TODO
+   * @return TODO
    */
   static public IModelParser instantiateParser(String extension)
   {
@@ -97,10 +90,6 @@ public class ModelParserFactory
     return null;
   }
 
-  /**
-   * @param url
-   * @return
-   */
   static public IModelParser getModelParser(URL url) throws IOException
   {
     String fileName = url.getFile().toLowerCase();

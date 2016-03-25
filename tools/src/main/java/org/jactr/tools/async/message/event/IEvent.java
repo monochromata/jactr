@@ -19,7 +19,7 @@ import org.jactr.tools.async.message.IMessage;
 
 
 /**
- * @author developer
+ * 
  */
 public interface IEvent extends IMessage, Serializable
 {

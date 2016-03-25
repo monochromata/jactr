@@ -1,5 +1,6 @@
 package org.jactr.core.slot;
 
+
 /*
  * default logging
  */
@@ -18,28 +19,33 @@ import org.apache.commons.logging.LogFactory;
  * {@link #lt(Object)}, {@link #lte(Object)}, {@link #notEq(Object)} for
  * conditionals, {@link #eq(Object)} for basic slot, {@link #and(ISlot, ISlot)},
  * {@link #or(ISlot, ISlot)}, {@link #not(ISlot)} for logical) and invoke
- * {@link #build()}. <br/>
- * There are no safe guards to verify that incorrect conditionals are not called
- * for the particular flavor of slot being generated. <br/>
- * builders for a given type can be recycled to generate more of that type
+ * {@link #build()}.
+ * 
+ * <p>There are no safe guards to verify that incorrect conditionals are not called
+ * for the particular flavor of slot being generated. </p>
+ * 
+ * <p>builders for a given type can be recycled to generate more of that type
  * without generating additional garbage by calling {@link #reset()}. But be
- * sure to call {@link #slotName(String)} before use.<br/>
- * <code>
+ * sure to call {@link #slotName(String)} before use.</p>
+ * 
+ * {@code
  *  SlotBuilder<ISlot> sBuilder = SlotBuilder.slot("s1");
  *  ISlot slot1 = sBuilder.eq(value1).build();
  *  ISlot slot2 = sBuilder.reset().slotName("s2").eq(value2).build();
- * </code> <br/>
- * But if you are attentive and aware of the internal states, the builder can be
- * reused. <br/>
- * <code>
+ * }
+ * 
+ * <p>But if you are attentive and aware of the internal states, the builder can be
+ * reused.</p>
+ * 
+ * {@code
  *  SlotBuilder<IConditionalSlot> sBuilder = SlotBuilder.conditionalSlot("when");
  *  IConditionalSlot past = sBuilder.lte(referenceTime).build();
  *  IConditionalSlot future = sBuilder.gte(referenceTime).build();
  *  //both have the same slot name and reference times
- * </code>
+ * }
  * 
  * @author harrison
- * @param <T>
+ * @param <T> TODO
  */
 public class SlotBuilder<T>
 {
@@ -87,8 +93,7 @@ public class SlotBuilder<T>
   /**
    * reset the builder.
    * 
-   * @param slotName
-   * @return
+   * @return TODO
    */
   public SlotBuilder<T> reset()
   {
@@ -104,7 +109,8 @@ public class SlotBuilder<T>
    *  IConditionalSlot slot = SlotBuilder.conditionalSlot("slot1").lte(100.0).build();
    * </code>
    * 
-   * @return
+   * @param slotName TODO
+   * @return TODO
    */
   static public SlotBuilder<IConditionalSlot> conditionalSlot(String slotName)
   {
@@ -119,14 +125,14 @@ public class SlotBuilder<T>
   }
 
   /**
-   * start builder chain for logical slot <code>
+   * start builder chain for logical slot {@code
    *  SlotBuilder<ILogicalSlot> sBuilder = SlotBuilder.logicalSlot();
    *  ILogicalSlot notSlot = sBuilder.reset(null).not(oSlot).build();
    *  ILogicalSlot andSlot = sBuilder.reset(null).and(slot1, slot2).build();
    *  ILogicalSlot orSlotNested = sBuilder.reset(null).or(notSlot, andSlot).build();
-   * </code>
+   * }
    * 
-   * @return
+   * @return TODO
    */
   static public SlotBuilder<ILogicalSlot> logicalSlot()
   {
@@ -140,11 +146,12 @@ public class SlotBuilder<T>
   }
 
   /**
-   * start builder chain for mutable slot <code>
+   * start builder chain for mutable slot {@code
    *  IMutableSlot slot = SlotBuilder.mutableSlot("slot1").eq(value).build();
-   * </code>
+   * }
    * 
-   * @return
+   * @param slotName TODO
+   * @return TODO
    */
   static public SlotBuilder<IMutableSlot> mutableSlot(String slotName)
   {
@@ -158,11 +165,12 @@ public class SlotBuilder<T>
   }
 
   /**
-   * start builder chain for general equality slot <code>
+   * start builder chain for general equality slot {@code
    *  ISlot slot = SlotBuilder.slot("slot1").eq(value).build();
-   * </code>
-   * 
-   * @return
+   * }
+   *
+   * @param slotName TODO
+   * @return TODO
    */
   static public SlotBuilder<ISlot> slot(String slotName)
   {
@@ -183,8 +191,8 @@ public class SlotBuilder<T>
   /**
    * specify slotName
    * 
-   * @param slotName
-   * @return
+   * @param slotName TODO
+   * @return TODO
    */
   public SlotBuilder<T> slotName(String slotName)
   {
@@ -200,11 +208,11 @@ public class SlotBuilder<T>
   }
 
   /**
-   * Conditional equality to value. <br/>
+   * Conditional equality to value.
    * for conditional, mutable, or simple slots.
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public SlotBuilder<T> eq(Object value)
   {
@@ -212,11 +220,11 @@ public class SlotBuilder<T>
   }
 
   /**
-   * Conditional greater than value. <br/>
+   * Conditional greater than value.
    * for conditional slots.
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public SlotBuilder<T> gt(Object value)
   {
@@ -224,11 +232,11 @@ public class SlotBuilder<T>
   }
 
   /**
-   * Conditional greater than/equals value. <br/>
+   * Conditional greater than/equals value.
    * for conditional slots.
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public SlotBuilder<T> gte(Object value)
   {
@@ -236,11 +244,11 @@ public class SlotBuilder<T>
   }
 
   /**
-   * Conditional less than value. <br/>
+   * Conditional less than value.
    * for conditional slots.
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public SlotBuilder<T> lt(Object value)
   {
@@ -248,11 +256,11 @@ public class SlotBuilder<T>
   }
 
   /**
-   * Conditional less than/equals value. <br/>
+   * Conditional less than/equals value.
    * for conditional slots.
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public SlotBuilder<T> lte(Object value)
   {
@@ -260,11 +268,11 @@ public class SlotBuilder<T>
   }
 
   /**
-   * not equals (but not logical negation {@link #not(ISlot)} <br/>
+   * not equals (but not logical negation {@link #not(ISlot)}
    * for conditional slots.
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public SlotBuilder<T> notEq(Object value)
   {
@@ -281,8 +289,8 @@ public class SlotBuilder<T>
   /**
    * logical not
    * 
-   * @param slot
-   * @return
+   * @param slot TODO
+   * @return TODO
    */
   public SlotBuilder<T> not(ISlot slot)
   {
@@ -292,9 +300,9 @@ public class SlotBuilder<T>
   /**
    * logical and
    * 
-   * @param slot1
-   * @param slot2
-   * @return
+   * @param slot1 TODO
+   * @param slot2 TODO
+   * @return TODO
    */
   public SlotBuilder<T> and(ISlot slot1, ISlot slot2)
   {
@@ -304,9 +312,9 @@ public class SlotBuilder<T>
   /**
    * logical or
    * 
-   * @param slot1
-   * @param slot2
-   * @return
+   * @param slot1 TODO
+   * @param slot2 TODO
+   * @return TODO
    */
   public SlotBuilder<T> or(ISlot slot1, ISlot slot2)
   {

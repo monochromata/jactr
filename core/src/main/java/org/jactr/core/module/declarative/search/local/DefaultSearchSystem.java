@@ -67,18 +67,21 @@ import org.jactr.core.utils.collections.SkipListSetFactory;
 /**
  * basic, but memory intensive inverted index of encoded chunks and their
  * values. At the top level we store a map, keyed on chunkType.slotName, that
- * contains a collection of ITypeValueMap<?, Chunk>'s. These are maps for each
+ * contains a collection of {@code ITypeValueMap<?, Chunk>}'s. These are maps for each
  * unique <i>Type</i> of information that can be stored (currently: null,
  * string, boolean, number, chunk, chunktype, production, buffer). These
  * <i>typed</i> value maps contains, for each unique value encountered, a
  * collection of chunks that reference the value. Some value maps are sorted
- * (string, number, boolean) the rest are not. <br/>
- * The various search commands perform boolean set operations based on the
- * contents of a particular value map.<br/>
- * The chunkType.slotName key on indexing generates unique keys for all of a
+ * (string, number, boolean) the rest are not.
+ * 
+ * <p>The various search commands perform boolean set operations based on the
+ * contents of a particular value map.</p>
+ * 
+ * <p>The chunkType.slotName key on indexing generates unique keys for all of a
  * chunk's parent types, including the special (*). On the query side, we just
- * generate the key for the request's unique chunktype (or * if null). <br/>
- * Current optimizations include:
+ * generate the key for the request's unique chunktype (or * if null). </p>
+ * 
+ * <p>Current optimizations include:</p>
  * <ul>
  * <li>individual slot queries are sorted before execution, allowing minimum
  * candidate set traversals</li>
@@ -87,8 +90,8 @@ import org.jactr.core.utils.collections.SkipListSetFactory;
  * <li>sorting, filtering, and type verification are implemented as a single
  * candidate iteration</li>
  * </ul>
- * <br/>
- * Current performance characteristics:
+ * 
+ * <p>Current performance characteristics:</p>
  * <ul>
  * <li>merge check searches : near constant runtime for primary case (unique
  * chunk), otherwise it is a function, f(#slots, averageFan)</li>
@@ -100,7 +103,6 @@ import org.jactr.core.utils.collections.SkipListSetFactory;
  * <li>search time is <i>weakly</i> associated with the number of chunks of the
  * queried type (log(N))</li>
  * </ul>
- * <br/>
  */
 public class DefaultSearchSystem implements ISearchSystem
 {
@@ -240,8 +242,8 @@ public class DefaultSearchSystem implements ISearchSystem
    * old test code for threaded search, migrated to
    * {@link ExactParallelSearchDelegate}
    * 
-   * @param pattern
-   * @return
+   * @param pattern TODO
+   * @return TODO
    */
   @Deprecated
   protected Collection<IChunk> findExactPooledThreads(ChunkTypeRequest pattern)
@@ -322,9 +324,10 @@ public class DefaultSearchSystem implements ISearchSystem
    * sort the slots by the guessed size of the result set. This is only used by
    * findExact. We also convert not's into filters instead whereever possible
    * 
-   * @param chunkType
-   * @param originalSlots
-   * @return
+   * @param chunkType TODO
+   * @param originalSlots TODO
+   * @param container TODO
+   * @return TODO
    */
   @Deprecated
   protected IChunkFilter sortPattern(IChunkType chunkType,
@@ -382,9 +385,9 @@ public class DefaultSearchSystem implements ISearchSystem
    * {@link ExactSingleThreadedSearchDelegate#sortPatternOriginal(IChunkType, Collection, DefaultSearchSystem)}
    * sort the slots by the guessed size of the result set.
    * 
-   * @param chunkType
-   * @param slots
-   * @return
+   * @param chunkType TODO
+   * @param slots TODO
+   * @return TODO
    */
   @Deprecated
   protected List<ISlot> sortPatternOriginal(IChunkType chunkType,
@@ -405,10 +408,10 @@ public class DefaultSearchSystem implements ISearchSystem
    * old single threaded search. moved to
    * {@link ExactSingleThreadedSearchDelegate}
    * 
-   * @param pattern
-   * @param sortRule
-   * @param filter
-   * @return
+   * @param pattern TODO
+   * @param sortRule TODO
+   * @param filter TODO
+   * @return TODO
    */
   @Deprecated
   protected SortedSet<IChunk> findExactSingleThreaded(ChunkTypeRequest pattern,
@@ -524,10 +527,10 @@ public class DefaultSearchSystem implements ISearchSystem
   /**
    * moved to {@link PartialSingleThreadedSearchDelegate} default fuzzy search.
    * 
-   * @param pattern
-   * @param sortRule
-   * @param filter
-   * @return
+   * @param pattern TODO
+   * @param sortRule TODO
+   * @param filter TODO
+   * @return TODO
    */
   @Deprecated
   protected SortedSet<IChunk> findFuzzyInternal(ChunkTypeRequest pattern,
@@ -657,9 +660,10 @@ public class DefaultSearchSystem implements ISearchSystem
   /**
    * current candidates is required in the case of NOT conditions
    * 
-   * @param slot
-   * @param candidates
-   * @return
+   * @param type TODO
+   * @param slot TODO
+   * @param candidates TODO
+   * @return TODO
    */
   protected Collection<IChunk> find(IChunkType type, ISlot slot,
       Set<IChunk> candidates)
@@ -767,8 +771,8 @@ public class DefaultSearchSystem implements ISearchSystem
    * wrappers for the set logic so that we can easily clean up of the temporary
    * collections. Specifically, recycling the candidates collection if possible.
    * 
-   * @param rtnSet
-   * @param candidates
+   * @param rtnSet TODO
+   * @param candidates TODO
    */
   protected void cleanAddAll(Collection<IChunk> rtnSet,
       Collection<IChunk> candidates)
@@ -785,8 +789,8 @@ public class DefaultSearchSystem implements ISearchSystem
   /**
    * retain all and recycle the candidates
    * 
-   * @param rtnSet
-   * @param candidates
+   * @param rtnSet TODO
+   * @param candidates TODO
    */
   protected void cleanRetainAll(Collection<IChunk> rtnSet,
       Collection<IChunk> candidates)
@@ -798,8 +802,8 @@ public class DefaultSearchSystem implements ISearchSystem
   /**
    * removeall from rtnSet and recycle candidates
    * 
-   * @param rtnSet
-   * @param candidates
+   * @param rtnSet TODO
+   * @param candidates TODO
    */
   protected void cleanRemoveAll(Collection<IChunk> rtnSet,
       Collection<IChunk> candidates)
@@ -1078,9 +1082,10 @@ public class DefaultSearchSystem implements ISearchSystem
    * lock will be acquired and if no map exists, it will be created based on the
    * value passed
    * 
-   * @param typeSlotNameIndexKey
-   * @param create
-   * @return
+   * @param typeSlotNameIndexKey TODO
+   * @param value TODO
+   * @param create TODO
+   * @return TODO
    */
   protected ITypeValueMap<?, IChunk> getSlotNameTypeValueMap(
       String typeSlotNameIndexKey, Object value, boolean create)
@@ -1169,19 +1174,4 @@ public class DefaultSearchSystem implements ISearchSystem
     return typeValueMap;
   }
 
-  // public void addListener(ISearchListener listener, Executor executor)
-  // {
-  // _eventDispatcher.addListener(listener, executor);
-  // }
-  //
-  //
-  // public void removeListener(ISearchListener listener)
-  // {
-  // _eventDispatcher.removeListener(listener);
-  // }
-  //
-  // public boolean hasListeners()
-  // {
-  // return _eventDispatcher.hasListeners();
-  // }
 }

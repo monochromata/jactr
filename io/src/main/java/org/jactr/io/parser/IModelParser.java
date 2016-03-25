@@ -19,8 +19,7 @@ import java.util.Collection;
 import org.antlr.runtime.tree.CommonTree;
 
 /**
- * @author harrison To change the template for this generated type comment go to
- *         Window>Preferences>Java>Code Generation>Code and Comments
+ * @author harrison
  */
 public interface IModelParser
 {
@@ -30,15 +29,16 @@ public interface IModelParser
   /**
    * called by the ModelParserFactory
    * 
-   * @param url
+   * @param url TODO
+   * @throws IOException TODO
    */
   public void setInput(URL url) throws IOException;
 
   /**
    * this parser will handle pure string input
    * 
-   * @param content
-   * @throws IOException
+   * @param content TODO
+   * @throws IOException TODO
    */
   public void setInput(String content) throws IOException;
 
@@ -52,7 +52,7 @@ public interface IModelParser
   /**
    * get all the lexing/parsing exceptions
    * 
-   * @return
+   * @return TODO
    */
   public Collection<Exception> getParseErrors();
 
@@ -61,7 +61,7 @@ public interface IModelParser
   /**
    * return the common AST document tree. this can only be called after parse()
    * 
-   * @return
+   * @return TODO
    */
   public CommonTree getDocumentTree();
 

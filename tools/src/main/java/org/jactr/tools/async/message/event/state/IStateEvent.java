@@ -16,7 +16,7 @@ package org.jactr.tools.async.message.event.state;
 import java.io.Serializable;
 import org.jactr.tools.async.message.event.IEvent;
 /**
- * @author developer
+ * 
  *
  */
 public interface IStateEvent extends IEvent, Serializable

@@ -39,29 +39,16 @@ public abstract class DefaultAction implements IAction
   private static transient Log LOGGER = LogFactory.getLog(DefaultAction.class
                                           .getName());
 
-  /**
-   * Constructor for the DefaultAction object
-   */
   public DefaultAction()
   {
     // NoOp, but all Actions must have a zero param constructor
   }
 
-  /**
-   * Description of the Method
-   */
   public void dispose()
   {
     // NoOp for now
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @param instantiation
-   *          Description of the Parameter
-   * @return Description of the Return Value
-   */
   public abstract double fire(IInstantiation instantiation, double firingTime);
 
   /**
@@ -133,7 +120,7 @@ public abstract class DefaultAction implements IAction
    * updates chunk's slots with these slots. If any slots is still a variable,
    * IllegalActionStateException is thrown
    * 
-   * @param chunk
+   * @param chunk TODO
    * @param slots
    *          slots that should be set in chunk
    */

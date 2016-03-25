@@ -77,8 +77,8 @@ public class SimilarityParameterHandler extends ParameterHandler<Object[]>
   /**
    * object[] values had better be link[]
    * 
-   * @param values
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public String toString(Object[] value)
   {

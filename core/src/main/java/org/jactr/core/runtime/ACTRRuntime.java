@@ -59,7 +59,7 @@ public class ACTRRuntime
   /**
    * return the ACTRRuntime singleton
    * 
-   * @return
+   * @return The ACTRRuntime singleton
    */
   static public ACTRRuntime getRuntime()
   {
@@ -84,7 +84,7 @@ public class ACTRRuntime
    * subdirectory per iteration to ensure no overwrites. Instruments can always
    * write to working directory without worry.
    * 
-   * @return
+   * @return the working directory
    */
   public File getWorkingDirectory()
   {
@@ -114,7 +114,7 @@ public class ACTRRuntime
   /**
    * will call IController.attach()
    * 
-   * @param controller
+   * @param controller the new controller
    */
   public void setController(IController controller)
   {
@@ -149,7 +149,7 @@ public class ACTRRuntime
    * 
    * @param model
    *            if null will always return the default shared clock
-   * @return
+   * @return the clock
    */
   public IClock getClock(IModel model)
   {
@@ -163,7 +163,7 @@ public class ACTRRuntime
    * ensure that if the model is suspended that all events are delivered
    * appropriately
    * 
-   * @param model
+   * @param model the model to add
    */
   public void addModel(IModel model)
   {
@@ -180,7 +180,7 @@ public class ACTRRuntime
    * remove this model, assuming that it is not running. If it is, a runtime
    * excepiton will be thrown
    * 
-   * @param model
+   * @param model the model to remove
    */
   public void removeModel(IModel model)
   {
@@ -206,7 +206,7 @@ public class ACTRRuntime
   /**
    * return all the models associated with the runtime
    * 
-   * @return
+   * @return the models
    */
   public Collection<IModel> getModels()
   {
@@ -216,7 +216,7 @@ public class ACTRRuntime
   /**
    * runnable to be executed after the runtime is started by the controller
    * 
-   * @param onStart
+   * @param onStart the runnable to execute
    */
   public void setOnStart(Runnable onStart)
   {
@@ -231,6 +231,8 @@ public class ACTRRuntime
   /**
    * runnable to be executed after the runtime has stopped. ie. all models
    * terminated
+   * 
+   * @param onStop the runnable to execute
    */
   public void setOnStop(Runnable onStop)
   {
@@ -240,7 +242,7 @@ public class ACTRRuntime
   /**
    * called by controller
    * 
-   * @return
+   * @return the runnable to execute on stop
    */
   public Runnable getOnStop()
   {
@@ -248,7 +250,7 @@ public class ACTRRuntime
   }
 
   /**
-   * @param applicationData
+   * @param applicationData the application data
    */
   public void setApplicationData(Object applicationData)
   {

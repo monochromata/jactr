@@ -24,7 +24,7 @@ import org.jactr.io.antlr3.serialization.Serializer;
 import org.jactr.io.writer.IModelWriter;
 
 /**
- * @author developer
+ * 
  */
 public class BinaryModelWriter implements IModelWriter
 {

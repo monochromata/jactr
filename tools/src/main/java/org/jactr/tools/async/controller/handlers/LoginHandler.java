@@ -25,7 +25,7 @@ import org.jactr.tools.async.message.command.login.LoginCommand;
  * Login handler, this is largely historic, but can be augmented later to add
  * multiple listeners
  * 
- * @author developer
+ * 
  */
 public class LoginHandler implements IMessageHandler<LoginCommand>
 {

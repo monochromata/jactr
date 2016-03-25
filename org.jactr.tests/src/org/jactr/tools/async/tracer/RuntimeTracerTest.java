@@ -20,7 +20,7 @@ import org.jactr.tools.async.MINATest;
 import org.jactr.tools.tracer.RuntimeTracer;
 
 /**
- * @author developer
+ * 
  */
 public class RuntimeTracerTest extends MINATest
 {

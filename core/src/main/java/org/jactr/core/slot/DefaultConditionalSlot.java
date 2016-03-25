@@ -19,8 +19,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author harrison TODO To change the template for this generated type comment
- *         go to Window - Preferences - Java - Code Style - Code Templates
+ * @author harrison
  */
 public class DefaultConditionalSlot extends DefaultMutableSlot implements
     IConditionalSlot
@@ -38,8 +37,8 @@ public class DefaultConditionalSlot extends DefaultMutableSlot implements
   private int                        _condition = EQUALS;
 
   /**
-   * @param name
-   * @param value
+   * @param name TODO
+   * @param value TODO
    */
   public DefaultConditionalSlot(String name, Object value)
   {

@@ -38,10 +38,11 @@ public interface IRequest extends Cloneable
    * If the request determines that it cannot match at anytime, it should throw
    * the cannot match exception.
    * 
-   * @param bindings
-   * @param iterativeCall
-   * @return number of unresolved variables in this request
-   * @throws CannotMatchException
+   * @param model TODO
+   * @param bindings TODO
+   * @param iterativeCall TODO
+   * @return number of unresolved variables in this request TODO
+   * @throws CannotMatchException TODO
    */
   public int bind(IModel model, VariableBindings bindings, boolean iterativeCall) throws CannotMatchException;
   

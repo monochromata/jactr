@@ -49,8 +49,6 @@ import org.jactr.tools.tracer.sinks.ChainedSink;
  * tracer that can listen and record the actions of all running models. At the
  * start of the run (via ACTRRuntimeEvent.STARTED), the runtime tracer snags the
  * current controller, which must be NetworkedIOHandler
- * 
- * @author developer
  */
 public class RuntimeTracer implements IInstrument, IParameterized
 {
@@ -174,7 +172,7 @@ public class RuntimeTracer implements IInstrument, IParameterized
   /**
    * where should we send all the transformed events to?
    * 
-   * @param sink
+   * @param sink TODO
    */
   public void setTraceSink(ITraceSink sink)
   {
@@ -273,9 +271,6 @@ public class RuntimeTracer implements IInstrument, IParameterized
       }, getExecutor());
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getParameter(java.lang.String)
-   */
   public String getParameter(String key)
   {
     if (LOGGER.isWarnEnabled())
@@ -283,9 +278,6 @@ public class RuntimeTracer implements IInstrument, IParameterized
     return null;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getPossibleParameters()
-   */
   public Collection<String> getPossibleParameters()
   {
     ArrayList<String> rtn = new ArrayList<String>();
@@ -294,18 +286,11 @@ public class RuntimeTracer implements IInstrument, IParameterized
     return rtn;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getSetableParameters()
-   */
   public Collection<String> getSetableParameters()
   {
     return getPossibleParameters();
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#setParameter(java.lang.String,
-   *      java.lang.String)
-   */
   public void setParameter(String key, String value)
   {
     if (EXECUTOR_PARAM.equalsIgnoreCase(key))

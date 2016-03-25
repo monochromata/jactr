@@ -22,7 +22,7 @@ import org.jactr.io.resolver.ASTResolver;
 import org.jactr.tools.tracer.transformer.IEventTransformer;
 import org.jactr.tools.tracer.transformer.ITransformedEvent;
 /**
- * @author developer
+ * 
  *
  */
 public class ModelEventTransformer implements IEventTransformer

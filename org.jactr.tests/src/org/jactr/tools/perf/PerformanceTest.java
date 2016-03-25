@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.entry.iterative.IterativeMain;
 
 /**
- * @author developer
+ * 
  */
 public class PerformanceTest extends TestCase
 {

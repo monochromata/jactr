@@ -20,7 +20,7 @@ import org.commonreality.net.session.ISessionInfo;
 import org.jactr.tools.async.message.IMessage;
 
 /**
- * @author developer
+ * 
  */
 public class UnknownMessageHandler implements IMessageHandler<IMessage>
 {

@@ -52,7 +52,7 @@ public class ChunkTypeRequest extends SlotBasedRequest
    * create a request that directly mirrors this chunk. All of its slots are
    * turned directly into equality conditions.
    * 
-   * @param chunk
+   * @param chunk TODO
    */
   public ChunkTypeRequest(IChunk chunk)
   {
@@ -74,11 +74,12 @@ public class ChunkTypeRequest extends SlotBasedRequest
   /**
    * same idea as {@link IRequest#bind(IModel, VariableBindings, boolean)}
    * 
-   * @param testChunk
-   * @param model
-   * @param bindings
-   * @return
-   * @throws CannotMatchException
+   * @param testChunk TODO
+   * @param model TODO
+   * @param bindings TODO
+   * @param iterativeCall TODO
+   * @return TODO
+   * @throws CannotMatchException TODO
    */
   public int bind(IChunk testChunk, IModel model, VariableBindings bindings,
       boolean iterativeCall) throws CannotMatchException
@@ -97,7 +98,7 @@ public class ChunkTypeRequest extends SlotBasedRequest
   /**
    * NOTE: this is hideous inefficient
    * 
-   * @return
+   * @return TODO
    * @see java.lang.Object#toString()
    */
   @Override

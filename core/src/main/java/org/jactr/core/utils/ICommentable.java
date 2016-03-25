@@ -17,7 +17,6 @@ package org.jactr.core.utils;
  * The Commentable interface is used to attach comments to arbitrary objects
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ICommentable
 {

@@ -84,7 +84,7 @@ public class DefaultAssociativeLinkageSystem implements
    * written to attach the linker's listener to chunks that are created. See
    * {@link DeclarativeModuleListener}
    * 
-   * @return
+   * @return TODO
    */
   public IChunkListener getChunkListener()
   {

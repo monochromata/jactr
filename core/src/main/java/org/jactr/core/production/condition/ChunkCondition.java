@@ -47,7 +47,9 @@ public class ChunkCondition extends ChunkTypeCondition
   }
 
   /**
-   * @param bufferName
+   * @param bufferName TODO
+   * @param chunk TODO
+   * @param slots TODO
    */
   public ChunkCondition(String bufferName, IChunk chunk,
       Collection<? extends ISlot> slots)
@@ -56,9 +58,6 @@ public class ChunkCondition extends ChunkTypeCondition
     _chunk = chunk;
   }
 
-  /**
-   * @see org.jactr.core.utils.Duplicateable#duplicate()
-   */
   public IChunk getChunk()
   {
     return _chunk;

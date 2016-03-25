@@ -28,9 +28,9 @@ import org.jactr.tools.misc.ModelsLock;
  * The wonder of asynchronous messaging is that you don't have to wait, giving
  * the runtime greater throughput. Unfortunately, it can get too fast - drowning
  * the other side. This allows us to specify the frequency of synchronizations.
- * If we could detect load, it'd be even better.. <br/>
+ * If we could detect load, it'd be even better..
  * 
- * @bug we should time out for waiting for the synchronization reply.
+ * <p>TODO: BUG: we should time out for waiting for the synchronization reply.</p>
  * @author harrison
  */
 public class SynchronizationManager implements IInstrument, IParameterized

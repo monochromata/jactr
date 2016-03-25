@@ -16,7 +16,7 @@ package org.jactr.core.event;
 import org.jactr.core.utils.parameter.IParameterized;
 
 /**
- * @author developer
+ * 
  */
 public class ParameterEvent extends
     AbstractACTREvent<IParameterized, IParameterListener> implements

@@ -19,7 +19,7 @@ import org.jactr.core.chunk.IChunk;
 /**
  * return the amount of time that it will take to encode a visual chunk
  * 
- * @author developer
+ * 
  *
  */
 public interface IVisualEncodingTimeEquation

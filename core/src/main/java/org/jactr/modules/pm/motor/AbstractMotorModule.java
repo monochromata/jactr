@@ -47,7 +47,7 @@ import org.jactr.modules.pm.motor.managers.MuscleStateManager;
 
 /**
  * abstract motor module that handles just about everything one needs. It uses a
- * combination of the default {@link MotorManager} (which handles all the logic
+ * combination of the default (TODO: resolve reference: @link MotorManager) (which handles all the logic
  * of communicating with common reality, as well as the movement lifecylce), the
  * {@link DefaultCommandTranslator} to route {@link ChunkPattern} movement
  * requests to specific {@link ICommandTranslatorDelegate}s, and uses
@@ -57,7 +57,7 @@ import org.jactr.modules.pm.motor.managers.MuscleStateManager;
  * The {@link ICommandTranslatorDelegate}s map {@link ChunkPattern}s and Strings
  * to specific muscles, as defined by {@link IEfferentObject}s, as well as
  * translating the {@link ChunkPattern}s into precise {@link IEfferentCommand}s
- * which will be passed to common reality by the {@link MotorManager}. There
+ * which will be passed to common reality by the (TODO: resolve reference: @link MotorManager). There
  * should be a unique {@link ICommandTranslatorDelegate} for each and every
  * movement chunktype defined. <br>
  * <br>
@@ -220,9 +220,6 @@ public abstract class AbstractMotorModule extends AbstractPerceptualModule
     _compoundCommandChunkType = getNamedChunkType(COMPOUND_MOTOR_COMMAND_CHUNK_TYPE);
   }
 
-  /**
-   * @return
-   */
   public boolean isMuscleParallelismEnabled()
   {
     return _enableMuscleParallelism;

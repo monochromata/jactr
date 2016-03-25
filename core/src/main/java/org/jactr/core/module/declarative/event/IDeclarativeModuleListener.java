@@ -22,19 +22,22 @@ public interface IDeclarativeModuleListener extends EventListener, IParameterLis
   
   /**
    * called when a chunktype is created, but not necessarily fully defined
-   * @param dme
+   * 
+   * @param dme the event
    */
   public void chunkTypeCreated(DeclarativeModuleEvent dme);
   
   /**
    * called when a chunk type is added to the model
-   * @param dme
+   * 
+   * @param dme the event
    */
   public void chunkTypeAdded(DeclarativeModuleEvent dme);
   
   /**
    * called when two chunktypes are merged
-   * @param dme
+   * 
+   * @param dme the event
    */
   public void chunkTypesMerged(DeclarativeModuleEvent dme);
   
@@ -47,7 +50,6 @@ public interface IDeclarativeModuleListener extends EventListener, IParameterLis
   public void chunkDisposed(DeclarativeModuleEvent dme);
   
   public void chunkTypeDisposed(DeclarativeModuleEvent dme);
-  
   
 }
 

@@ -21,15 +21,10 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.buffer.event.ActivationBufferEvent;
 import org.jactr.tools.tracer.transformer.AbstractTransformedEvent;
 
-/**
- * @author developer
- */
 public class TransformedBufferEvent extends AbstractTransformedEvent implements
     Serializable
 {
-  /**
-   * 
-   */
+
   private static final long          serialVersionUID = 7632092643096725720L;
 
   /**
@@ -40,12 +35,6 @@ public class TransformedBufferEvent extends AbstractTransformedEvent implements
 
   private ActivationBufferEvent.Type _type;
 
-  /**
-   * @param source
-   * @param systemTime
-   * @param simulationTime
-   * @param ast
-   */
   public TransformedBufferEvent(String modelName, String source,
       long systemTime, double simulationTime, ActivationBufferEvent.Type type,
       CommonTree ast)
@@ -63,7 +52,7 @@ public class TransformedBufferEvent extends AbstractTransformedEvent implements
   /**
    * if type is null, this is the signal that conflict resolution has occured
    * 
-   * @return
+   * @return TODO
    */
   public boolean isAtConflictResolution()
   {

@@ -43,7 +43,7 @@ public class SlotListener implements ISlotContainerListener
    * return true if there are no registered invalidators. This is used to signal
    * when we can detach.
    * 
-   * @return
+   * @return TODO
    */
   public boolean isEmpty()
   {

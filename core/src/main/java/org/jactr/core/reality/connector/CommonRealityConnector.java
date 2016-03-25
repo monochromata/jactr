@@ -30,7 +30,7 @@ import org.jactr.core.model.IModel;
 import org.jactr.core.reality.ACTRAgent;
 
 /**
- * @author developer
+ * 
  */
 public class CommonRealityConnector implements IConnector
 {
@@ -251,9 +251,6 @@ public class CommonRealityConnector implements IConnector
     }
   }
 
-  /**
-   * @see org.jactr.core.reality.connector.IConnector#getAgentInterface(org.jactr.core.model.IModel)
-   */
   public IAgent getAgent(IModel model)
   {
     if (model == null) return null;

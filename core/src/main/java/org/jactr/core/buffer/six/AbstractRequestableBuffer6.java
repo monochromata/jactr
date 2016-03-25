@@ -73,9 +73,10 @@ public abstract class AbstractRequestableBuffer6 extends AbstractActivationBuffe
   
   /**
    * actually do the work of the request. this is called within the write lock
-   * @param request
-   * @return
-   * @throws IllegalArgumentException
+   * @param request TODO
+   * @param requestTime TODO
+   * @return TODO
+   * @throws IllegalArgumentException TODO
    */
   abstract protected boolean requestInternal(IRequest request, double requestTime) throws IllegalArgumentException;
 }

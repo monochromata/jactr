@@ -13,15 +13,11 @@
 package org.jactr.core.extensions;
 
 /**
- * @author harrison To change the template for this generated type comment go to
- *         Window - Preferences - Java - Code Generation - Code and Comments
+ * @author harrison
  */
 public class IllegalExtensionStateException extends RuntimeException
 {
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = -6858208188175237358L;
 
   public IllegalExtensionStateException(String message)
@@ -29,10 +25,6 @@ public class IllegalExtensionStateException extends RuntimeException
     super(message);
   }
 
-  /**
-   * @param message
-   * @param e
-   */
   public IllegalExtensionStateException(String message, Exception e)
   {
     super(message, e);

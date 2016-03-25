@@ -33,8 +33,9 @@ public abstract class DefaultSlotAction extends DefaultAction implements
    * called from the bind method. This will duplicate the tempalte's slots and
    * then bind the variables
    * 
-   * @param variableBindings
-   * @param slots
+   * @param variableBindings TODO
+   * @param slots TODO
+   * @throws CannotInstantiateException TODO
    */
   protected DefaultSlotAction(VariableBindings variableBindings,
       Collection<? extends ISlot> slots) throws CannotInstantiateException
@@ -83,8 +84,8 @@ public abstract class DefaultSlotAction extends DefaultAction implements
   /**
    * makes sure the named slots are available and not null.
    * 
-   * @param slotNames
-   * @throws CannotInstantiateException
+   * @param slotNames TODO
+   * @throws CannotInstantiateException TODO
    */
   protected void checkForRequiredSlots(String... slotNames)
       throws CannotInstantiateException

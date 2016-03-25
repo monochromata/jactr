@@ -28,7 +28,7 @@ import org.jactr.core.utils.IInstallable;
  * intensive processes - hold these off for install() and initialize(), or by
  * listening the the model start event.
  * 
- * @author developer
+ * 
  */
 public interface IModule extends IInstallable, IInitializable, IAdaptable
 {
@@ -54,14 +54,12 @@ public interface IModule extends IInstallable, IInitializable, IAdaptable
   public void initialize();
 
   /**
-   * the name of the module
-   * 
-   * @return
+   * @return the name of the module
    */
   public String getName();
 
   /**
-   * return the model this module is installed into
+   * @return the model this module is installed into
    */
   public IModel getModel();
 

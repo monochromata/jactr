@@ -14,8 +14,7 @@
 package org.jactr.core.slot;
 
 /**
- * @author harrison TODO To change the template for this generated type comment
- *         go to Window - Preferences - Java - Code Style - Code Templates
+ * @author harrison
  */
 public interface IConditionalSlot extends IMutableSlot
 {
@@ -41,8 +40,8 @@ public interface IConditionalSlot extends IMutableSlot
    * test the value to see if it satisfies the condition specified by this
    * conditional slot
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   public boolean matchesCondition(Object value);
 

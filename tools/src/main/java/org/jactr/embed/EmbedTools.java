@@ -32,9 +32,9 @@ public class EmbedTools
    * executes until this point and time.{@link DebugController#resume()} must be
    * called afterwards.
    * 
-   * @param controller
-   * @param when
-   * @return
+   * @param controller TODO
+   * @param when TODO
+   * @return TODO
    */
   static public CompletableFuture<Double> runUntil(DebugController controller,
       double when)
@@ -51,9 +51,9 @@ public class EmbedTools
    * executes until this point in cycles.{@link DebugController#resume()} must
    * be called afterwards.
    * 
-   * @param controller
-   * @param cycle
-   * @return
+   * @param controller TODO
+   * @param cycle TODO
+   * @return TODO
    */
   static public CompletableFuture<Long> runUntil(DebugController controller,
       long cycle)
@@ -70,8 +70,8 @@ public class EmbedTools
    * run a single cycle. In this instance, the controller must be suspended or
    * not even started in order to work correctly.
    * 
-   * @param controller
-   * @return
+   * @param controller TODO
+   * @return TODO
    */
   static public CompletableFuture<Long> runOneCycle(DebugController controller)
   {
@@ -84,7 +84,7 @@ public class EmbedTools
   }
 
   /**
-   * @param controller
+   * @param controller TODO
    * @param hasReached
    *          uses breakpoint and triggerEvent value to determine if breakpoint
    *          was reached
@@ -92,8 +92,9 @@ public class EmbedTools
    *          this is the value that is sent on completion of the future
    * @param triggerEvent
    *          the value that is used in breakpoint tests
-   * @param type
-   * @return
+   * @param type TODO
+   * @param <T> TODO
+   * @return TODO
    */
   static protected <T> CompletableFuture<T> runUntil(
       DebugController controller, BiPredicate<BreakpointEvent, T> hasReached,
@@ -160,7 +161,7 @@ public class EmbedTools
           controller.removeListener(listener);
       });
 
-    /**
+    /*
      * make sure that we are running
      */
     if (!controller.isRunning())

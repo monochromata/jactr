@@ -37,7 +37,7 @@ import org.jactr.modules.pm.visual.buffer.processor.SetDefaultSearchRequestDeleg
 import org.jactr.modules.pm.visual.buffer.processor.StartTrackingRequestDelegate;
 
 /**
- * @author developer
+ * 
  */
 public class DefaultVisualActivationBuffer6 extends AbstractPMActivationBuffer6
     implements IVisualActivationBuffer,ICompilableBuffer

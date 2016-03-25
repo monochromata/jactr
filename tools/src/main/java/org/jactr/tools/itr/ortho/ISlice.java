@@ -17,7 +17,7 @@ public interface ISlice
   /**
    * unique id of the slice, this is typically the slice number
    * 
-   * @return
+   * @return TODO
    */
   public long getId();
 
@@ -25,30 +25,26 @@ public interface ISlice
    * the parameter values associated with the manipulated parameter names.
    * The values in the map are typically just strings
    * 
-   * @return
+   * @return TODO
    */
   public Map<String, Object> getParameterValues();
   
   /**
-   * return the first iteration index included in this
+   * @return the first iteration index included in this
    * slice
-   * @return
    */
   public long getFirstIteration();
   
   /**
-   * return the last iteration index included in this slice
-   * @return
+   * @return the last iteration index included in this slice
    */
   public long getLastIteration();
   
   /**
-   * return the working directoryies of each run relative to 
+   * @return return the working directoryies of each run relative to 
    * user.dir
-   * @return
    */
   public Collection<String> getWorkingDirectories();
-  
   
   public Object getProperty(String property);
 }

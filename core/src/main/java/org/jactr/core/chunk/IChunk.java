@@ -32,7 +32,6 @@ import org.jactr.core.utils.IMetaContainer;
  * is also the point of access for all event notification.
  * 
  * @author harrison
- * @created December 6, 2002
  */
 
 public interface IChunk extends Comparable<IChunk>, ICommentable,
@@ -41,39 +40,45 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
 
   /**
    * add a chunk listener that will be notified with this executor
-   * @param cl
-   * @param executor
+   * 
+   * @param cl TODO
+   * @param executor TODO
    */
   public void addListener(IChunkListener cl, Executor executor);
 
   /**
    * add a parameter listener that will be notified with this executor
-   * @param pl
-   * @param executor
+   * 
+   * @param pl TODO
+   * @param executor TODO
    */
   public void addListener(IParameterListener pl, Executor executor);
 
   /**
    * remove said listener
-   * @param cl
+   * 
+   * @param cl TODO
    */
   public void removeListener(IChunkListener cl);
 
   /**
    * remove said listener
-   * @param pl
+   * 
+   * @param pl TODO
    */
   public void removeListener(IParameterListener pl);
 
   /**
    * are there listeners attached?
-   * @return
+   * 
+   * @return TODO
    */
   public boolean hasListeners();
 
   /**
    * are there parameter listeners?
-   * @return
+   * 
+   * @return TODO
    */
   public boolean hasParameterListeners();
 
@@ -81,19 +86,22 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
    * dispatch an event. this is public so that ISymbolicChunk and
    * ISubsymbolicChunk can access it and is not intended to be
    * called by those outside the chunk domain
-   * @param chunkEvent
+   * 
+   * @param chunkEvent TODO
    */
   public void dispatch(ChunkEvent chunkEvent);
 
   /**
    * dispatch parameter event
-   * @param parameterEvent
+   * 
+   * @param parameterEvent TODO
    */
   public void dispatch(ParameterEvent parameterEvent);
 
   /**
    * return the subsymbolic portion of the chunk
-   * @return
+   * 
+   * @return TODO
    */
   public ISubsymbolicChunk getSubsymbolicChunk();
 
@@ -101,12 +109,12 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
    * return the symbolic component of the chunk
    * 
    * @return The ISymbolicChunk value
-   * @since
    */
   public ISymbolicChunk getSymbolicChunk();
 
   /**
    * flag that this chunk has been encoded
+   * 
    * @param when TODO
    */
   public void encode(double when);
@@ -114,7 +122,7 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
   /**
    * has this chunk been encoded?
    * 
-   * @return
+   * @return TODO
    */
   public boolean isEncoded();
 
@@ -122,8 +130,6 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
    * called when one is sure that this chunk will NEVER be used. This
    * should only be called by the {@link IDeclarativeModule}. To dispose
    * of a chunk, use {@link IDeclarativeModule#dispose(IChunk)} instead
-   * 
-   * @since
    */
   public void dispose();
 
@@ -134,13 +140,17 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
 
   /**
    * is this chunk this type (checks all ancestors)
-   * @param ct
-   * @return
+   * 
+   * @param ct TODO
+   * @return TODO
    */
   public boolean isA(IChunkType ct);
 
   /**
    * is this chunk's immediate type this
+   * 
+   * @param ct TODO
+   * @return TODO
    */
   public boolean isAStrict(IChunkType ct);
 
@@ -149,13 +159,14 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
    * visual-location chunks). These chunks are not searchable by the declarative
    * memory system
    * 
-   * @return
+   * @return TODO
    */
   public boolean isMutable();
 
   /**
    * set that this chunk should be considered mutable
-   * @param isMutable
+   * 
+   * @param isMutable TODO
    */
   public void setMutable(boolean isMutable);
 
@@ -163,7 +174,7 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
    * get the model that is responsible for this chunk, note: the chunk may not
    * have been encoded yet
    * 
-   * @return
+   * @return TODO
    */
   public IModel getModel();
 
@@ -192,7 +203,7 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
    * You should also <b>not</b> save references to the lock, as merging
    * may change the lock, rendering saved references invalid.
    * 
-   * @return
+   * @return TODO
    */
   public Lock getReadLock();
   
@@ -210,7 +221,8 @@ public interface IChunk extends Comparable<IChunk>, ICommentable,
    * <br>
    * You should also <b>not</b> save references to the lock, as merging
    * may change the lock, rendering saved references invalid.
-   * @return
+   * 
+   * @return TODO
    */
   public Lock getWriteLock();
 }

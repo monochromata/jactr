@@ -22,7 +22,7 @@ import org.jactr.core.runtime.controller.IController;
 import org.jactr.tools.async.message.command.state.RuntimeStateCommand;
 
 /**
- * @author developer
+ * 
  */
 public class RuntimeStateHandler implements
     IMessageHandler<RuntimeStateCommand>

@@ -34,7 +34,7 @@ import org.jactr.entry.iterative.IIterativeRunListener;
 import org.jactr.entry.iterative.TerminateIterativeRunException;
 
 /**
- * @author developer
+ * 
  */
 public class RealTimeFactorPerformanceListener implements
     IIterativeRunListener, IParameterized

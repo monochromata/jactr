@@ -33,7 +33,7 @@ import org.jactr.core.module.declarative.six.DefaultDeclarativeModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class DeclarativeModuleParticipant extends BasicASTParticipant
 {

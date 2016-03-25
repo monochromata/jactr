@@ -18,26 +18,13 @@ import java.io.Serializable;
 import org.antlr.runtime.tree.CommonTree;
 import org.jactr.core.module.procedural.event.ProceduralModuleEvent;
 import org.jactr.tools.tracer.transformer.AbstractTransformedEvent;
-/**
- * @author developer
- *
- */
+
 public class TransformedProceduralEvent extends AbstractTransformedEvent implements Serializable
 {
-  
-  
-  /**
-   * 
-   */
+
   private static final long serialVersionUID = -5862795028052594101L;
   private ProceduralModuleEvent.Type _type;
   
-  /**
-   * @param source
-   * @param systemTime
-   * @param simulationTime
-   * @param ast
-   */
   public TransformedProceduralEvent(String modelName, long systemTime, double simulationTime, ProceduralModuleEvent.Type type, CommonTree ast)
   {
     super(modelName, modelName, systemTime, simulationTime, ast);

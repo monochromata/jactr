@@ -17,7 +17,7 @@ import org.commonreality.object.IAfferentObject;
 import org.commonreality.object.delta.IObjectDelta;
 
 /**
- * @author developer
+ * 
  */
 public interface IAfferentObjectListener
 {

@@ -26,7 +26,7 @@ import org.jactr.modules.pm.motor.IMotorModule;
 /**
  * reset the motor system - merely calls IMotorModule.reset()
  * 
- * @author developer
+ * 
  */
 public class MotorClearRequestDelegate extends SimpleRequestDelegate
 {

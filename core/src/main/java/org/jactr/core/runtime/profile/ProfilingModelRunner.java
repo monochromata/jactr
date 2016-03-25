@@ -23,8 +23,6 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.DefaultModelRunner;
 /**
  * tracks various performance metrics
- * @author developer
- *
  */
 public class ProfilingModelRunner extends DefaultModelRunner
 {
@@ -53,9 +51,11 @@ public class ProfilingModelRunner extends DefaultModelRunner
   private double _totalSimulatedTime = 0;
   
   /**
-   * @param service
-   * @param model
-   * @param cycleRunner
+   * Create a new ProfilingModelRunner
+   * 
+   * @param service the executor service to use
+   * @param model the model to profile
+   * @param cycleRunner the cycle runner
    */
   public ProfilingModelRunner(ExecutorService service, IModel model, ICycleProcessor cycleRunner)
   {
@@ -133,7 +133,7 @@ public class ProfilingModelRunner extends DefaultModelRunner
   
   /**
    * comprised of both actual processing time and waiting time
-   * @return
+   * @return total cycle time in seconds
    */
   public double getTotalCycleTime()
   {
@@ -142,7 +142,7 @@ public class ProfilingModelRunner extends DefaultModelRunner
   
   /**
    * return just the time spent in cycle()
-   * @return
+   * @return actual cycle time ins seconds
    */
   public double getActualCycleTime()
   {
@@ -151,7 +151,7 @@ public class ProfilingModelRunner extends DefaultModelRunner
   
   /**
    * return just the time spent waiting for the clock
-   * @return
+   * @return waiting time in seconds
    */
   public double getActualWaitTime()
   {

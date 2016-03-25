@@ -25,36 +25,35 @@ public interface ISlot extends Cloneable
 
   /**
    * the name of the slot
-   * @return
+   * 
+   * @return TODO
    */
   public String getName();
 
   /**
    * slots may contain variables, which are currently hardcoded
    * as strings starting with '='
-   * @return
-   * @see
+   * 
+   * @return TODO
    */
   @Deprecated
   public boolean isVariable();
   
   /**
    * does the value of the slot represent an unresolved variable?
-   * @return
+   * 
+   * @return TODO
    */
   public boolean isVariableValue();
   
   /**
    * return the value of the slot. if the slot is a variable, this
    * returns the string name of the variable
+   * 
    * @return may be null
    */
   public Object getValue();
 
-
-  /**
-   * 
-   */
   public boolean equalValues(Object value);
   
   public ISlot clone();

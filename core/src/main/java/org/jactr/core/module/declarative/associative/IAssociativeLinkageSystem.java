@@ -30,9 +30,10 @@ public interface IAssociativeLinkageSystem extends IInstallable
   
   /**
    * create a new associative link spreading activation from j to i
-   * @param iChunk
-   * @param jChunk
-   * @return
+   * 
+   * @param iChunk TODO
+   * @param jChunk TODO
+   * @return TODO
    */
   public IAssociativeLink createLink(IChunk iChunk, IChunk jChunk);
   
@@ -41,8 +42,10 @@ public interface IAssociativeLinkageSystem extends IInstallable
    * copy all the specified links from source, replacing all occurrences of
    * source with destination, and added to destination.
    * 
-   * @param source
-   * @param destination
+   * @param source TODO
+   * @param destination TODO
+   * @param copyInboundLinks TODO
+   * @param copyOutboundLinks TODO
    */
   public void copyAndRemapLinks(IChunk source, IChunk destination,
       boolean copyInboundLinks, boolean copyOutboundLinks);
@@ -51,7 +54,8 @@ public interface IAssociativeLinkageSystem extends IInstallable
 
   /**
    * @deprecated use {@link #getParameterProcessor(IChunk)} instead
-   * @return
+   * 
+   * @return TODO
    */
   @Deprecated
   public LinkParameterHandler getParameterHandler();
@@ -62,7 +66,7 @@ public interface IAssociativeLinkageSystem extends IInstallable
   /**
    * this chunk will be disposed, clean up its links correctly.
    * 
-   * @param chunk
+   * @param chunk TODO
    */
   public void chunkWillBeDisposed(IChunk chunk);
 
@@ -70,7 +74,7 @@ public interface IAssociativeLinkageSystem extends IInstallable
    * add the link to the appropriate containers within the chunks. This is the
    * only "right" way to add a link to a chunk.
    * 
-   * @param link
+   * @param link TODO
    */
   public void addLink(IAssociativeLink link);
 
@@ -78,7 +82,7 @@ public interface IAssociativeLinkageSystem extends IInstallable
    * remove the link from the appropriate contains within the chunk. This is the
    * only "right" way to remove a link to a chunk.
    * 
-   * @param link
+   * @param link TODO
    */
   public void removeLink(IAssociativeLink link);
 }

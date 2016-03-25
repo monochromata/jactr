@@ -19,7 +19,6 @@ import java.util.EventListener;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IChunkListener extends EventListener
 {
@@ -27,7 +26,7 @@ public interface IChunkListener extends EventListener
   /**
    * when the chunk is accessed
    * 
-   * @param event
+   * @param event TODO
    */
   public void chunkAccessed(ChunkEvent event);
 
@@ -41,7 +40,7 @@ public interface IChunkListener extends EventListener
    * {@link ChunkEvent#getChunk()} is about to be merged into
    * {@link ChunkEvent#getSource()}
    * 
-   * @param event
+   * @param event TODO
    */
   public void mergingWith(ChunkEvent event);
 
@@ -49,7 +48,7 @@ public interface IChunkListener extends EventListener
    * {@link ChunkEvent#getSource()} is about to be merged into
    * {@link ChunkEvent#getChunk()}
    * 
-   * @param event
+   * @param event TODO
    */
   public void mergingInto(ChunkEvent event);
 }

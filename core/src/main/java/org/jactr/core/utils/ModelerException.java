@@ -18,33 +18,23 @@ package org.jactr.core.utils;
  * modeling error and not a problem with the system.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class ModelerException extends RuntimeException
 {
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = 1744724588879032451L;
 
   /**
-   * @param message
-   * @param explanation
+   * @param message TODO
+   * @param explanation TODO
    */
   public ModelerException(String message, String explanation)
   {
     this(message, null, explanation);
   }
 
-  /**
-   * Description of the Field
-   */
   protected Exception _exception;
 
-  /**
-   * Description of the Field
-   */
   protected String    _explanation;
 
   /**

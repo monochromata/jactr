@@ -38,7 +38,8 @@ public interface IRandomModule extends IModule
   /**
    * sets the seed for the time randomizer which will randomize
    * the requested time across the equal distribution [time*((randomizer-1)/randomizer), time*((randomizer+1)/randomizer))
-   * @param randomizer
+   * 
+   * @param randomizer TODO
    */
   public void setTimeRandomizer(double randomizer);
   

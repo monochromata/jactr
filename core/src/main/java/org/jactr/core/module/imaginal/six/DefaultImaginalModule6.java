@@ -31,8 +31,8 @@ import org.jactr.core.utils.parameter.ParameterHandler;
  * It provides the imaginal buffer, and has parameters to manipulate the amount
  * of time add and modify requests take.
  * 
- * @see http://jactr.org/node/135
- * @author developer
+ * <p><a href="http://jactr.org/node/135">http://jactr.org/node/135</a></p>
+ * 
  */
 public class DefaultImaginalModule6 extends AbstractModule implements
     IImaginalModule, IParameterized

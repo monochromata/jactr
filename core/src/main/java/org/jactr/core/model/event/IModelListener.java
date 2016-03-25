@@ -19,7 +19,6 @@ import java.util.EventListener;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 11, 2003
  */
 public interface IModelListener extends EventListener
 {
@@ -28,42 +27,42 @@ public interface IModelListener extends EventListener
    * called when the model has been connected to the runtime and possibly
    * CommonReality
    * 
-   * @param me
+   * @param me the model event
    */
   public void modelConnected(ModelEvent me);
 
   /**
    * called on disconnect
    * 
-   * @param me
+   * @param me the model event
    */
   public void modelDisconnected(ModelEvent me);
 
   /**
    * called after a module has been installed
    * 
-   * @param me
+   * @param me the model event
    */
   public void moduleInstalled(ModelEvent me);
 
   /**
    * called after an extension has been installed
    * 
-   * @param me
+   * @param me the model event
    */
   public void extensionInstalled(ModelEvent me);
 
   /**
    * called after an instrument has been installed
    * 
-   * @param me
+   * @param me the model event
    */
   public void instrumentInstalled(ModelEvent me);
 
   /**
    * called after a buffer has been installed
    * 
-   * @param me
+   * @param me the model event
    */
   public void bufferInstalled(ModelEvent me);
 
@@ -71,7 +70,7 @@ public interface IModelListener extends EventListener
    * called after the model has been initialized - i.e. all the chunks and
    * related content have been added and the model is in a runnable state
    * 
-   * @param me
+   * @param me the model event
    */
   public void modelInitialized(ModelEvent me);
 
@@ -79,7 +78,7 @@ public interface IModelListener extends EventListener
    * called once the model has started its execution. this is called shortly
    * after modelConnected
    * 
-   * @param me
+   * @param me the model event
    */
   public void modelStarted(ModelEvent me);
 
@@ -87,14 +86,14 @@ public interface IModelListener extends EventListener
    * called when the model enters a suspended state due to a break point or
    * explicitly forced by the controller
    * 
-   * @param me
+   * @param me the model event
    */
   public void modelSuspended(ModelEvent me);
 
   /**
    * called when the model resumes
    * 
-   * @param me
+   * @param me the model event
    */
   public void modelResumed(ModelEvent me);
 
@@ -102,7 +101,7 @@ public interface IModelListener extends EventListener
    * called when the model's execution has completed. this is always the second
    * to last event. disconnected is the final one
    * 
-   * @param me
+   * @param me the model event
    */
   public void modelStopped(ModelEvent me);
 
@@ -110,21 +109,21 @@ public interface IModelListener extends EventListener
    * called in an exception occurs during the normal run. after firing this
    * event, modelStopped will be called
    * 
-   * @param me
+   * @param me the model event
    */
   public void exceptionThrown(ModelEvent me);
 
   /**
    * called at the start of each cycle.
    * 
-   * @param me
+   * @param me the model event
    */
   public void cycleStarted(ModelEvent me);
 
   /**
    * called at the end of each cycle.
    * 
-   * @param me
+   * @param me the model event
    */
   public void cycleStopped(ModelEvent me);
 }

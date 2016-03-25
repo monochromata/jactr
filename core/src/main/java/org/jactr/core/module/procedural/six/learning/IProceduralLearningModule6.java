@@ -20,7 +20,7 @@ import org.jactr.core.module.procedural.five.learning.IProceduralLearningModule5
 import org.jactr.core.module.procedural.six.learning.event.IProceduralLearningModule6Listener;
 
 /**
- * @author developer
+ * 
  */
 public interface IProceduralLearningModule6 extends IProceduralLearningModule5,
     IProceduralLearningModule

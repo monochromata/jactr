@@ -23,7 +23,7 @@ import org.jactr.core.module.random.six.DefaultRandomModule;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class RandomModuleParticipant extends BasicASTParticipant
 {

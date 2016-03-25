@@ -14,15 +14,14 @@
 package org.jactr.core.slot;
 
 /**
- * @author harrison TODO To change the template for this generated type comment
- *         go to Window - Preferences - Java - Code Style - Code Templates
+ * @author harrison
  */
 public class DefaultMutableSlot extends BasicSlot implements IMutableSlot
 {
 
   /**
-   * @param name
-   * @param value
+   * @param name TODO
+   * @param value TODO
    */
   public DefaultMutableSlot(String name, Object value)
   {

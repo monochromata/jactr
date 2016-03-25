@@ -156,7 +156,7 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
   /**
    * returns true if the gate is closed, but not necessarily if everyone is.
    * 
-   * @return
+   * @return TODO
    */
   public boolean isClosed()
   {
@@ -203,7 +203,7 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
    * just call {@link Future#get()}. The return boolean will be true, unless
    * there are no models. i.e., If no models are running, it will return false.
    * 
-   * @return
+   * @return TODO
    */
   public CompletableFuture<Boolean> close()
   {
@@ -224,7 +224,7 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
   /**
    * release the models.
    * 
-   * @return
+   * @return TODO
    */
   public CompletableFuture<Boolean> open()
   {
@@ -263,7 +263,7 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
   /**
    * do the blocking.
    * 
-   * @param model
+   * @param model TODO
    */
   protected void checkAndBlock(IModel model)
   {

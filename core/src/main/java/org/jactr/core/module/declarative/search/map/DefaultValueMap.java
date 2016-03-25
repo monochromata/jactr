@@ -69,7 +69,7 @@ public class DefaultValueMap<V, I> implements IValueMap<V, I>
   /**
    * override to provide a sorted map
    * 
-   * @return
+   * @return TODO
    */
   protected Map<V, Collection<I>> instantiateCoreMap()
   {
@@ -81,6 +81,9 @@ public class DefaultValueMap<V, I> implements IValueMap<V, I>
 
   /**
    * override to change the underlying collection currently HashSet
+   * 
+   * @param forValue TODO
+   * @return TODO
    */
   protected Collection<I> instantiateCoreCollection(V forValue)
   {

@@ -10,7 +10,8 @@ public interface IProceduralLearningModule6Listener extends EventListener
 
   /**
    * a reward has been signalled
-   * @param event
+   * 
+   * @param event TODO
    */
   public void rewarded(ProceduralLearningEvent event);
 
@@ -19,7 +20,7 @@ public interface IProceduralLearningModule6Listener extends EventListener
   /**
    * called after all the rewards have been processed
    * 
-   * @param event
+   * @param event TODO
    */
   public void stopReward(ProceduralLearningEvent event);
 }

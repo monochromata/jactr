@@ -40,7 +40,7 @@ import org.jactr.core.utils.Diagnostics;
  * basic model runner, handles all events except disconnected which will be
  * handled by the controller
  * 
- * @author developer
+ * 
  */
 public class DefaultModelRunner implements Runnable
 {
@@ -164,7 +164,8 @@ public class DefaultModelRunner implements Runnable
   /**
    * run a single cycle of the model
    * 
-   * @return
+   * @param eventsHaveFired TODO
+   * @return the time after the cycle
    */
   protected double cycle(boolean eventsHaveFired)
   {
@@ -175,8 +176,10 @@ public class DefaultModelRunner implements Runnable
   /**
    * wait for the clock to reach this time
    * 
-   * @param waitForTime
-   * @throws InterruptedException
+   * @param waitForTime the time to be reached
+   * @return the new time after waiting
+   * @throws InterruptedException if waiting is interrupted
+   * @throws ExecutionException if executing the wait fails
    */
   protected double waitForClock(double waitForTime)
       throws InterruptedException, ExecutionException
@@ -241,6 +244,8 @@ public class DefaultModelRunner implements Runnable
 
   /**
    * called after waitForClock returns
+   * 
+   * @param currentSimulatedTime The current simulated time
    */
   protected void postClock(double currentSimulatedTime)
   {
@@ -249,6 +254,8 @@ public class DefaultModelRunner implements Runnable
 
   /**
    * called before each cycle starts
+   * 
+   * @param currentSimulatedTime The current simulated time
    */
   protected void preCycle(double currentSimulatedTime)
   {
@@ -257,6 +264,8 @@ public class DefaultModelRunner implements Runnable
 
   /**
    * called after each cycle
+   * 
+   * @param nextTime the next time
    */
   protected void postCycle(double nextTime)
   {
@@ -265,8 +274,6 @@ public class DefaultModelRunner implements Runnable
 
   /**
    * run the model in loop
-   * 
-   * @param clock
    */
   protected void runModelLoop()
   {

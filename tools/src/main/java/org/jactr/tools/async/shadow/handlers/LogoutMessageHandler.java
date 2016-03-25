@@ -24,7 +24,7 @@ import org.jactr.tools.async.message.command.login.LogoutCommand;
  * sends the logout command to the shadow controller who just echoes it back.
  * when the remote interface receives the logout reply it actually disconnects
  * 
- * @author developer
+ * 
  */
 public class LogoutMessageHandler implements IMessageHandler<LogoutCommand>
 {

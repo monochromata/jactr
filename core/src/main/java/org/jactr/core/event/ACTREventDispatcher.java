@@ -29,7 +29,7 @@ import org.jactr.core.concurrent.ExecutorServices;
  * class that handles the nitty gritty of tracking listeners, executors, and
  * propogating that the firing events correctly
  * 
- * @author developer
+ * 
  */
 public class ACTREventDispatcher<S, L>
 {
@@ -179,7 +179,7 @@ public class ACTREventDispatcher<S, L>
   }
 
   /**
-   * @return
+   * @return TODO
    */
   synchronized public Collection<L> getListeners()
   {

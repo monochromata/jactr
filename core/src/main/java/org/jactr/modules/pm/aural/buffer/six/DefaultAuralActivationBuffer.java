@@ -27,9 +27,6 @@ import org.jactr.modules.pm.aural.buffer.processor.AttendToRequestDelegate;
 import org.jactr.modules.pm.aural.buffer.processor.ClearRequestDelegate;
 import org.jactr.modules.pm.common.buffer.AbstractPMActivationBuffer6;
 
-/**
- * @author developer
- */
 public class DefaultAuralActivationBuffer extends AbstractPMActivationBuffer6
     implements IAuralActivationBuffer
 {
@@ -41,11 +38,6 @@ public class DefaultAuralActivationBuffer extends AbstractPMActivationBuffer6
 
   private IAuralLocationBuffer _locationBuffer;
 
-  /**
-   * @param name
-   * @param model
-   * @param module
-   */
   public DefaultAuralActivationBuffer(IAuralModule module,
       IAuralLocationBuffer locationBuffer)
   {
@@ -100,9 +92,6 @@ public class DefaultAuralActivationBuffer extends AbstractPMActivationBuffer6
           chunk);
   }
 
-  /**
-   * @see org.jactr.modules.pm.common.buffer.AbstractPMActivationBuffer6#isValidChunkType(org.jactr.core.chunktype.IChunkType)
-   */
   @Override
   protected boolean isValidChunkType(IChunkType chunkType)
   {

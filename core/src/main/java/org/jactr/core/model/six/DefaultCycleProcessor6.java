@@ -35,7 +35,7 @@ import org.jactr.core.runtime.ACTRRuntime;
 /**
  * default cycle control for the model
  * 
- * @author developer
+ * 
  */
 public class DefaultCycleProcessor6 implements ICycleProcessor
 {
@@ -151,9 +151,13 @@ public class DefaultCycleProcessor6 implements ICycleProcessor
 
   /**
    * using the current state, guestimate as to the how long this cycle will run
-   * assuming that no production actually fired <br/>
+   * assuming that no production actually fired
    * 
-   * @return
+   * @param now TODO
+   * @param productionFiringTime TODO
+   * @param model TODO
+   * @param eventsHaveFired TODO
+   * @return TODO
    */
   protected double calculateNextWaitTime(double now,
       double productionFiringTime, BasicModel model, boolean eventsHaveFired)
@@ -277,8 +281,12 @@ else if (model.isCycleSkippingEnabled())
    * select the best production. Request it to be fired, and eventually return
    * the result.
    * 
+   * @param model TODO
+   * @param currentTime TODO
    * @return firing time or -inf if no production can fire yet, NaN if conflict
    *         resolution ran but nothing was fired
+   * @throws InterruptedException TODO
+   * @throws ExecutionException TODO
    */
   protected double evaluateAndFireProduction(BasicModel model,
       double currentTime) throws InterruptedException, ExecutionException

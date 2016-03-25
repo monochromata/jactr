@@ -15,7 +15,7 @@ package org.jactr.core.model.event;
 
 
 /**
- * @author developer
+ * 
  */
 public class DecoratedModelListener implements IModelListener
 {

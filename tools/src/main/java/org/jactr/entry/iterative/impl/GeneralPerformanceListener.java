@@ -30,7 +30,7 @@ import org.jactr.entry.iterative.IIterativeRunListener;
 import org.jactr.entry.iterative.TerminateIterativeRunException;
 
 /**
- * @author developer
+ * 
  */
 public class GeneralPerformanceListener implements IIterativeRunListener,
     IParameterized

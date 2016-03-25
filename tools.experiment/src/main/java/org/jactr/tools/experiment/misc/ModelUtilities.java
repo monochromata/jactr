@@ -23,10 +23,10 @@ public class ModelUtilities
   /**
    * reward/punish the model using {@link #executeLater(IModel, Runnable)}
    * 
-   * @param model
-   * @param reward
-   * @return
-   * @throws IllegalStateException
+   * @param model TODO
+   * @param reward TODO
+   * @return TODO
+   * @throws IllegalStateException TODO
    */
   static public Future<Boolean> reward(final IModel model, final double reward)
       throws IllegalStateException
@@ -54,8 +54,9 @@ public class ModelUtilities
    * will execute the runnable on the model thread at the earliest possible
    * moment
    * 
-   * @param model
-   * @param runnable
+   * @param model TODO
+   * @param onFire TODO
+   * @param onAbort TODO
    * @return future boolean if the runnable was fired (false if aborted)
    * @throws IllegalStateException
    *           if the model is not running

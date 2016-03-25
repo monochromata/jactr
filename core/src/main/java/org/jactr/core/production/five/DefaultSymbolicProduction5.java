@@ -28,7 +28,6 @@ import org.jactr.core.production.four.ISymbolicProduction4;
  * Description of the Class
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public class DefaultSymbolicProduction5 extends BasicSymbolicProduction
     implements ISymbolicProduction4
@@ -38,18 +37,8 @@ public class DefaultSymbolicProduction5 extends BasicSymbolicProduction
                                                .getLog(DefaultSymbolicProduction5.class
                                                    .getName());
 
-  /**
-   * Description of the Field
-   * 
-   * @since
-   */
   public boolean               _successful = true;
 
-  /**
-   * Description of the Field
-   * 
-   * @since
-   */
   public boolean               _failure;
 
   public DefaultSymbolicProduction5(AbstractProduction prod, IModel parentModel)

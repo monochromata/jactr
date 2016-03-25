@@ -88,7 +88,7 @@ public abstract class AbstractPerceptualModule extends
    * set the symbol grounder for this module and, if it can, set it for all the
    * other installed perceptual modules
    * 
-   * @param grounder
+   * @param grounder TODO
    */
   public void setSymbolGrounder(ISymbolGrounder grounder)
   {
@@ -162,7 +162,7 @@ public abstract class AbstractPerceptualModule extends
    * return the executor that should shared by all common reality listeners.
    * this call is only valid after common reality has been connected
    * 
-   * @return
+   * @return TODO
    */
   public Executor getCommonRealityExecutor()
   {
@@ -172,7 +172,7 @@ public abstract class AbstractPerceptualModule extends
   /**
    * get or create the shared executor for this model.
    * 
-   * @return
+   * @return TODO
    */
   protected ExecutorService getPerceptualExecutor()
   {
@@ -208,8 +208,8 @@ public abstract class AbstractPerceptualModule extends
   /**
    * utility to snag a named chunk from DM
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   protected IChunk getNamedChunk(String name)
   {

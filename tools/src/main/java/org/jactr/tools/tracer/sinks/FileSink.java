@@ -27,7 +27,7 @@ import org.jactr.tools.tracer.ITraceSink;
 import org.jactr.tools.tracer.transformer.ITransformedEvent;
 
 /**
- * @author developer
+ * 
  */
 public class FileSink implements ITraceSink
 {

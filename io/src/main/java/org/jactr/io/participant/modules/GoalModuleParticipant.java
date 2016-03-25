@@ -17,7 +17,7 @@ import org.jactr.core.module.goal.six.DefaultGoalModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class GoalModuleParticipant extends BasicASTParticipant
 {

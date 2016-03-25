@@ -22,8 +22,6 @@ import org.antlr.runtime.tree.CommonTree;
  * interface for code that takes an AST model description and produces valid
  * source code in some language. implementors must be completely thread safe -
  * no internal variables
- * 
- * @author developer
  */
 public interface ICodeGenerator
 {
@@ -31,10 +29,10 @@ public interface ICodeGenerator
    * generate code for the following types: MODEL, BUFFER, EXTENSION, MODULE
    * PRODUCTION, CHUNK_TYPE, CHUNK, SLOTS, PARAMETER, CHECK_CONDITION
    * 
-   * @param root
+   * @param root TODO
    * @param shouldTrim
    *          assumes model
-   * @return
+   * @return TODO
    */
   public Collection<StringBuilder> generate(CommonTree root, boolean shouldTrim);
 

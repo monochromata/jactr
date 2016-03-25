@@ -20,36 +20,35 @@ import org.jactr.core.queue.timedevents.IBufferBasedTimedEvent;
  * {@link #startRequest(IRequest, IActivationBuffer, double)} and
  * {@link #finishRequest(IRequest, IActivationBuffer, Object)}. This makes it
  * easier to implement asynchronous requests that start a computation and then
- * later harvest the results.<br/>
- * <br/>
- * To make derived classes asynchronous, merely override
+ * later harvest the results.
+ * 
+ * <p>To make derived classes asynchronous, merely override
  * {@link #isAsynchronous()} to return true, and use
  * {@link #computeCompletionTime(double, IRequest, IActivationBuffer)} to return
  * when the system should call
- * {@link #finishRequest(IRequest, IActivationBuffer, Object)}.<br/>
- * <br/>
- * If {@link #finishRequest(IRequest, IActivationBuffer, Object)} requires some
+ * {@link #finishRequest(IRequest, IActivationBuffer, Object)}.</p>
+ * 
+ * <p>If {@link #finishRequest(IRequest, IActivationBuffer, Object)} requires some
  * value from {@link #startRequest(IRequest, IActivationBuffer, double)} they
- * both have an object that can be passed from one to the other.<br/>
- * <br/>
- * The asynchrony is implemented by calling
+ * both have an object that can be passed from one to the other.</p>
+ * 
+ * <p>The asynchrony is implemented by calling
  * {@link #startRequest(IRequest, IActivationBuffer, double)} and then queueing
  * up a {@link ITimedEvent} that will fire at
  * {@link #computeCompletionTime(double, IRequest, IActivationBuffer)} which
- * will then call {@link #finishRequest(IRequest, IActivationBuffer, Object)}. <br/>
- * <br/>
- * You can also configure the delegate to use blocking timed events to ensure
+ * will then call {@link #finishRequest(IRequest, IActivationBuffer, Object)}.</p>
+ * 
+ * <p>You can also configure the delegate to use blocking timed events to ensure
  * that the model clock does not advance beyond the harvest time (instead of
  * relying upon some blocking mechanism in
  * {@link #finishRequest(IRequest, IActivationBuffer, Object)}. However, if you
  * do enable blocking timed events ({@link #setUseBlockingTimedEvents(boolean)}
  * ), you must be sure that you call {@link #release()} in response to some
- * event, otherwise the model will deadlock.<br/>
- * <br/>
- * <br/>
- * This is for requested that are delayed in time (beyond the current cycle),
+ * event, otherwise the model will deadlock.</p>
+ * 
+ * <p>This is for requested that are delayed in time (beyond the current cycle),
  * such as visual requests. As opposed to buffers that accept new chunk
- * insertions directly and immediately (like goal).
+ * insertions directly and immediately (like goal).</p>
  * 
  * @author harrison
  */
@@ -106,10 +105,10 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * called the be sure the request is valid. If the request is valid but can't
    * be accepted, return false. If the request is invalid, throw an exception
    * 
-   * @param request
+   * @param request TODO
    * @param buffer
    *          TODO
-   * @return
+   * @return TODO
    */
   abstract protected boolean isValid(IRequest request, IActivationBuffer buffer)
       throws IllegalArgumentException;
@@ -121,10 +120,11 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * fired at
    * {@link #computeCompletionTime(double, IRequest, IActivationBuffer)}
    * 
-   * @param request
-   * @param buffer
+   * @param request TODO
+   * @param buffer TODO
    * @param requestTime
    *          TODO
+   * @return TODO
    */
   abstract protected Object startRequest(IRequest request,
       IActivationBuffer buffer, double requestTime);
@@ -132,9 +132,9 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
   /**
    * finish the request
    * 
-   * @param request
-   * @param buffer
-   * @param startValue
+   * @param request TODO
+   * @param buffer TODO
+   * @param startValue TODO
    */
   abstract protected void finishRequest(IRequest request,
       IActivationBuffer buffer, Object startValue);
@@ -142,9 +142,9 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
   /**
    * called if the timedevent is aborted
    * 
-   * @param request
-   * @param buffer
-   * @param startValue
+   * @param request TODO
+   * @param buffer TODO
+   * @param startValue TODO
    */
   protected void abortRequest(IRequest request, IActivationBuffer buffer,
       Object startValue)
@@ -173,7 +173,7 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * override
    * {@link #computeCompletionTime(double, IRequest, IActivationBuffer)} as well
    * 
-   * @return
+   * @return TODO
    */
   final public boolean isAsynchronous()
   {
@@ -184,11 +184,11 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * default impl returns now +
    * {@link IProceduralModule#getDefaultProductionFiringTime()}
    * 
-   * @param now
-   * @param request
+   * @param startTime TODO
+   * @param request TODO
    * @param buffer
    *          TODO
-   * @return
+   * @return TODO
    */
   protected double computeCompletionTime(double startTime, IRequest request,
       IActivationBuffer buffer)
@@ -204,8 +204,8 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * free to change the request in anyway. This impl merely passes the request
    * through unchanged.
    * 
-   * @param request
-   * @return
+   * @param request TODO
+   * @return TODO
    */
   protected IRequest expandRequest(IRequest request)
   {
@@ -220,11 +220,10 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * that will handle
    * {@link #finishRequest(IRequest, IActivationBuffer, Object)}
    * 
-   * @param request
-   * @param buffer
-   * @return
-   * @see org.jactr.core.buffer.delegate.IRequestDelegate#request(org.jactr.core.production.request.IRequest,
-   *      org.jactr.core.buffer.IActivationBuffer)
+   * @param request TODO
+   * @param buffer TODO
+   * @return TODO
+   * @see org.jactr.core.buffer.delegate.IRequestDelegate#request(IRequest, IActivationBuffer, double)
    */
   final public boolean request(IRequest request, IActivationBuffer buffer,
       double requestTime)
@@ -270,10 +269,10 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * called just before
    * {@link #startRequest(IRequest, IActivationBuffer, double)} is called
    * 
-   * @param request
-   * @param buffer
-   * @param startTime
-   * @param finishTime
+   * @param request TODO
+   * @param buffer TODO
+   * @param startTime TODO
+   * @param finishTime TODO
    */
   protected void preStart(IRequest request, IActivationBuffer buffer,
       double startTime, double finishTime)
@@ -305,12 +304,12 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * creates the timed event that will fire the finish method. If you want more
    * control, override this method
    * 
-   * @param start
-   * @param finish
-   * @param request
-   * @param buffer
-   * @param startValue
-   * @return
+   * @param start TODO
+   * @param finish TODO
+   * @param request TODO
+   * @param buffer TODO
+   * @param startValue TODO
+   * @return TODO
    */
   protected ITimedEvent createFinishTimedEvent(double start, double finish,
       IRequest request, IActivationBuffer buffer, Object startValue)
@@ -323,7 +322,7 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * returns the last timed event queued. This will only be changed after each
    * request is called. it will not be nulled out after the event has fired
    * 
-   * @return
+   * @return TODO
    */
   protected ITimedEvent getCurrentTimedEvent()
   {
@@ -344,8 +343,8 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * utility method to test the state, only works if this buffer extends
    * {@link IStatusBuffer}
    * 
-   * @param buffer
-   * @return
+   * @param buffer TODO
+   * @return TODO
    */
   protected boolean isBusy(IActivationBuffer buffer)
   {
@@ -356,7 +355,7 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * utility method, only works if buffer extends
    * {@link AbstractActivationBuffer6}
    * 
-   * @param buffer
+   * @param buffer TODO
    */
   protected void setBusy(IActivationBuffer buffer)
   {
@@ -368,7 +367,7 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * utility method, only works if buffer extends
    * {@link AbstractActivationBuffer6}
    * 
-   * @param buffer
+   * @param buffer TODO
    */
   protected void setFree(IActivationBuffer buffer)
   {
@@ -381,7 +380,7 @@ public abstract class AsynchronousRequestDelegate implements IRequestDelegate
    * utility method, only works if buffer extends
    * {@link AbstractActivationBuffer6}
    * 
-   * @param buffer
+   * @param buffer TODO
    */
   protected void setError(IActivationBuffer buffer)
   {

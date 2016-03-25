@@ -252,6 +252,8 @@ public class DefaultController implements IController
   /**
    * provides access to suspension mechanism. this is here so that extenders can
    * use the suspend mechanism in the debug controller
+   * 
+   * @param model the model to suspend
    */
   protected void suspendLocally(IModel model)
   {

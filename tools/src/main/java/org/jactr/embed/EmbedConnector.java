@@ -39,9 +39,6 @@ public class EmbedConnector extends LocalConnector
     super(useIndependentClocks);
   }
 
-  /**
-   * @see org.jactr.core.reality.connector.IConnector#connect(org.jactr.core.model.IModel)
-   */
   @Override
   public void connect(IModel model)
   {
@@ -68,9 +65,6 @@ public class EmbedConnector extends LocalConnector
 
   }
 
-  /**
-   * @see org.jactr.core.reality.connector.IConnector#disconnect(org.jactr.core.model.IModel)
-   */
   @Override
   public void disconnect(IModel model)
   {
@@ -99,18 +93,12 @@ public class EmbedConnector extends LocalConnector
     return getAgent(model) != null;
   }
 
-  /**
-   * @see org.jactr.core.reality.connector.IConnector#getAgentInterface(org.jactr.core.model.IModel)
-   */
   @Override
   public IAgent getAgent(IModel model)
   {
     return (IAgent) model.getMetaData(EMBED_AGENT_KEY);
   }
 
-  /**
-   * @see org.jactr.core.reality.connector.IConnector#isRunning()
-   */
   @Override
   public boolean isRunning()
   {
@@ -143,9 +131,6 @@ public class EmbedConnector extends LocalConnector
     }
   }
 
-  /**
-   * @see org.jactr.core.reality.connector.IConnector#stop()
-   */
   @Override
   public void stop()
   {

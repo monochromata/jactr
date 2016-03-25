@@ -120,8 +120,8 @@ public class AttendToRequestDelegate extends AbstractRequestDelegate
    * returns a visual-location contained in the slot with the name matching the
    * constructor supplied name
    * 
-   * @param request
-   * @return
+   * @param request TODO
+   * @return TODO
    */
   protected IChunk getVisualLocation(IRequest request)
   {
@@ -157,10 +157,10 @@ public class AttendToRequestDelegate extends AbstractRequestDelegate
    * make sure the requst is properly formatted and that the visual system is
    * free
    * 
-   * @param request
-   * @param buffer
-   * @return
-   * @throws IllegalArgumentException
+   * @param request TODO
+   * @param buffer TODO
+   * @return TODO
+   * @throws IllegalArgumentException TODO
    * @see org.jactr.core.buffer.delegate.AsynchronousRequestDelegate#isValid(org.jactr.core.production.request.IRequest,
    *      org.jactr.core.buffer.IActivationBuffer)
    */
@@ -254,12 +254,13 @@ public class AttendToRequestDelegate extends AbstractRequestDelegate
   //
   /**
    * start the encoding request. first we remove the current contents, then
-   * request the encoding. we return a Future<IChunk> for the finishRequest
+   * request the encoding. we return a {@code Future<IChunk>} for the finishRequest
    * method, allowing this to be processed asynchronously
    * 
-   * @param request
-   * @param buffer
-   * @return
+   * @param request TODO
+   * @param buffer TODO
+   * @param requestTime TODO
+   * @return TODO
    * @see org.jactr.core.buffer.delegate.AsynchronousRequestDelegate#startRequest(org.jactr.core.production.request.IRequest,
    *      org.jactr.core.buffer.IActivationBuffer, double)
    */
@@ -293,9 +294,9 @@ public class AttendToRequestDelegate extends AbstractRequestDelegate
   /**
    * abort the request and reset to free
    * 
-   * @param request
-   * @param buffer
-   * @param startValue
+   * @param request TODO
+   * @param buffer TODO
+   * @param startValue TODO
    * @see org.jactr.core.buffer.delegate.AsynchronousRequestDelegate#abortRequest(org.jactr.core.production.request.IRequest,
    *      org.jactr.core.buffer.IActivationBuffer, java.lang.Object)
    */
@@ -318,9 +319,9 @@ public class AttendToRequestDelegate extends AbstractRequestDelegate
    * handles the completion of the encoding, but we then need to post an
    * additional event to deal with making the encoded chunk available
    * 
-   * @param request
-   * @param buffer
-   * @param startValue
+   * @param request TODO
+   * @param buffer TODO
+   * @param startValue TODO
    * @see org.jactr.core.buffer.delegate.AsynchronousRequestDelegate#finishRequest(org.jactr.core.production.request.IRequest,
    *      org.jactr.core.buffer.IActivationBuffer, java.lang.Object)
    */
@@ -393,10 +394,10 @@ public class AttendToRequestDelegate extends AbstractRequestDelegate
   /**
    * called when the actual harvest is to occur
    * 
-   * @param request
-   * @param visualChunk
-   * @param errorChunk
-   * @param freeChunk
+   * @param request TODO
+   * @param visualChunk TODO
+   * @param errorChunk TODO
+   * @param freeChunk TODO
    */
   private void harvest(ChunkTypeRequest request, IChunk visualChunk,
       IChunk errorChunk, IChunk freeChunk)

@@ -12,7 +12,8 @@ public interface IVariableNameSlot extends ISlot
 
   /**
    * does this slot's name correspond to an unresolved variable
-   * @return
+   * 
+   * @return TODO
    */
   public boolean isVariableName();
 }

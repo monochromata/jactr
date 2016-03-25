@@ -14,7 +14,7 @@
 package org.jactr.core.utils;
 
 /**
- * @author developer
+ * 
  */
 public interface IDisposable
 {

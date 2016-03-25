@@ -96,9 +96,6 @@ public class BasicBuffer6 extends AbstractActivationBuffer6
     return _sourceChunk;
   }
 
-  /**
-   * @see org.jactr.core.buffer.AbstractActivationBuffer#getSourceChunksInternal()
-   */
   @Override
   protected Collection<IChunk> getSourceChunksInternal(
       Collection<IChunk> container)

@@ -46,9 +46,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/**
- * @author developer
- */
 public class IterativeMain
 {
   /**
@@ -87,8 +84,11 @@ public class IterativeMain
   /**
    * load the environment file from url
    * 
-   * @param url
-   * @return
+   * @param url TODO
+   * @return TODO
+   * @throws IOException TODO
+   * @throws SAXException TODO
+   * @throws ParserConfigurationException TODO
    */
   public Document loadEnvironment(URL url) throws IOException, SAXException,
       ParserConfigurationException
@@ -399,12 +399,6 @@ public class IterativeMain
     }
   }
 
-  /**
-   * @param url
-   * @param listener
-   * @param iterations
-   * @throws Exception
-   */
   public void run(URL url)
   {
     Collection<IIterativeRunListener> listeners = Collections.EMPTY_LIST;

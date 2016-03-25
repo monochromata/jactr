@@ -25,32 +25,14 @@ import org.jactr.core.production.VariableBindings;
  * accessible for subsequent Actions to utilize.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 
 public class BindAction extends DefaultAction
 {
 
-  
-
-  /**
-   * Description of the Field
-   */
   public String                _variableName;
-
-  /**
-   * Description of the Field
-   */
   public Object                _object;
 
-  /**
-   * Constructor for the BindAction object
-   * 
-   * @param variableName
-   *            Description of the Parameter
-   * @param someValue
-   *            Description of the Parameter
-   */
   public BindAction(String variableName, Object someValue)
   {
     setVariableName(variableName);
@@ -69,51 +51,26 @@ public class BindAction extends DefaultAction
     return copy;
   }
 
-  /**
-   * Gets the variableName attribute of the BindAction object
-   * 
-   * @return The variableName value
-   */
   public String getVariableName()
   {
     return _variableName;
   }
 
-  /**
-   * Sets the variableName attribute of the BindAction object
-   * 
-   * @param name
-   *            The new variableName value
-   */
   public void setVariableName(String name)
   {
     _variableName = name;
   }
 
-  /**
-   * Gets the object attribute of the BindAction object
-   * 
-   * @return The object value
-   */
   public Object getObject()
   {
     return _object;
   }
 
-  /**
-   * Sets the object attribute of the BindAction object
-   * 
-   * @param ob
-   *            The new object value
-   */
   public void setObject(Object ob)
   {
     _object = ob;
   }
 
-  /**
-   * 
-   */
   @Override
   public double fire(IInstantiation instantiation, double firingTime)
   {

@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.tools.async.message.ast.BaseASTMessage;
 /**
- * @author developer
+ * 
  *
  */
 public class AbstractTransformedEvent extends BaseASTMessage implements

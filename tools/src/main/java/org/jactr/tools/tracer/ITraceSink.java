@@ -17,7 +17,7 @@ import org.jactr.tools.tracer.transformer.ITransformedEvent;
 
 /**
  * 
- * @author developer
+ * 
  *
  */
 public interface ITraceSink

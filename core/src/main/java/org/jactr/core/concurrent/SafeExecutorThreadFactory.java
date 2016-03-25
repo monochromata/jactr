@@ -16,7 +16,7 @@ package org.jactr.core.concurrent;
 import java.util.concurrent.ThreadFactory;
 
 /**
- * @author developer
+ * 
  */
 public class SafeExecutorThreadFactory implements ThreadFactory
 {

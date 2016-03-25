@@ -54,7 +54,7 @@ import org.jactr.modules.pm.visual.six.DefaultSearchTimeEquation;
  * abstract impl that address most of the trivial details. Clients must provide
  * and configure the actual IVisualMemory used.
  * 
- * @see http://jactr.org/node/137
+ * <p><a href="http://jactr.org/node/137">http://jactr.org/node/137</a></p>
  * @author harrison
  */
 public abstract class AbstractVisualModule extends AbstractPerceptualModule
@@ -201,7 +201,8 @@ public abstract class AbstractVisualModule extends AbstractPerceptualModule
    * called during install process since models rely on only one status buffer,
    * the visual location buffer should use the visual activation buffer.
    * 
-   * @return
+   * @param buffer TODO
+   * @return TODO
    */
   abstract protected IVisualLocationBuffer createVisualLocationBuffer(
       IVisualActivationBuffer buffer);
@@ -209,7 +210,7 @@ public abstract class AbstractVisualModule extends AbstractPerceptualModule
   /**
    * called during install process
    * 
-   * @return
+   * @return TODO
    */
   abstract protected IVisualActivationBuffer createVisualActivationBuffer();
 

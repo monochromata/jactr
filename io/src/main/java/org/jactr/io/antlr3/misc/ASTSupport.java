@@ -33,14 +33,13 @@ import org.jactr.io.antlr3.builder.JACTRBuilder;
 
 /**
  * create the tree components used to describe various elements of the model
+ * {@code
  * Tree modelTree = support.createModelTree();
  * support.setName(modelTree,"modelName"); support.addParameter(modelTree,
  * parameterName, parameterValueString); Tree chunkType =
  * support.createChunkTypeTree(); support.setName(chunkType,"chunkTypeName");
- * modelTree
- * .getFirstChildWithType(JACTRBuilder.DECLARATIVE_MEMORY).addChild(chunkType);
- * 
- * @author developer
+ * modelTree.getFirstChildWithType(JACTRBuilder.DECLARATIVE_MEMORY).addChild(chunkType);
+ * }
  */
 public class ASTSupport
 {
@@ -65,7 +64,8 @@ public class ASTSupport
    * construct an empty tree that describes a model ^(MODEL NAME BUFFERS LIBRARY
    * PARAMETERS)
    * 
-   * @return
+   * @param modelName TODO
+   * @return TODO
    */
   public CommonTree createModelTree(String modelName)
   {
@@ -101,7 +101,7 @@ public class ASTSupport
   /**
    * ^(LIBRARY DECLARATIVE_MEMORY PROCEDURAL_MEMORY)
    * 
-   * @return
+   * @return TODO
    */
   protected CommonTree createLibraryTree()
   {
@@ -116,7 +116,8 @@ public class ASTSupport
   /**
    * ^(BUFFER NAME CHUNKS PARAMETERS)
    * 
-   * @return
+   * @param bufferName TODO
+   * @return TODO
    */
   public CommonTree createBufferTree(String bufferName)
   {
@@ -130,7 +131,9 @@ public class ASTSupport
   /**
    * ^(CHUNK_TYTPE NAME PARENTS SLOTS CHUNKS PARAMETERS)
    * 
-   * @return
+   * @param chunkTypeName TODO
+   * @param parentChunkTypeNames TODO
+   * @return TODO
    */
   public CommonTree createChunkTypeTree(String chunkTypeName,
       Collection<String> parentChunkTypeNames)
@@ -156,7 +159,9 @@ public class ASTSupport
   /**
    * ^(CHUNK NAME PARENT SLOTS PARAMETERS)
    * 
-   * @return
+   * @param chunkName TODO
+   * @param chunkTypeName TODO
+   * @return TODO
    */
   public CommonTree createChunkTree(String chunkName, String chunkTypeName)
   {
@@ -171,14 +176,16 @@ public class ASTSupport
 
   /**
    * creates a symbolic copy (i.e., no parameters) of the specified chunk. To
-   * correctly add it to the model AST, the returned tree must: <br/>
-   * 1) have its name changed to a unique identifier <br/>
-   * 2) be added as a child of the chunktype AST's CHUNKS subtree. <br/>
+   * correctly add it to the model AST, the returned tree must:
+   * <ol>
+   * <li> have its name changed to a unique identifier</li>
+   * <li>be added as a child of the chunktype AST's CHUNKS subtree.</li>
+   * </ol>
    * If this is to be inserted into a buffer, it must also be added to that
    * buffer's CHUNKS subtree.
    * 
-   * @param chunk
-   * @return
+   * @param chunk TODO
+   * @return TODO
    */
   public CommonTree copyChunkTree(CommonTree chunk)
   {
@@ -201,7 +208,8 @@ public class ASTSupport
   /**
    * ^(PRODUCTION NAME CONDITIONS ACTIONS PARAMETERS)
    * 
-   * @return
+   * @param productionName TODO
+   * @return TODO
    */
   public CommonTree createProductionTree(String productionName)
   {
@@ -221,9 +229,10 @@ public class ASTSupport
    * either ientifier or a variable supplied ^(MATCH_CONDITON NAME
    * (IDENTIFIER|VARIBALE) SLOTS)
    * 
-   * @throws illegal
-   *           arugment if content is null or not IDENTIFIER or VARIABLE
-   * @return
+   * @param bufferName TODO
+   * @param content TODO
+   * @throws IllegalArgumentException if content is null or not IDENTIFIER or VARIABLE
+   * @return TODO
    */
   public CommonTree createMatchTree(String bufferName, CommonTree content)
   {
@@ -247,7 +256,8 @@ public class ASTSupport
   /**
    * ^(QUERY NAME SLOTS)
    * 
-   * @return
+   * @param bufferName TODO
+   * @return TODO
    */
   public CommonTree createQueryTree(String bufferName)
   {
@@ -277,12 +287,11 @@ public class ASTSupport
   }
 
   /**
-   * @param bufferName
+   * @param bufferName TODO
    * @param content
    *          must not be null
-   * @throws illegal
-   *           argument exception if content is null
-   * @return
+   * @throws IllegalArgumentException exception if content is null
+   * @return TODO
    */
   public CommonTree createAddTree(String bufferName, CommonTree content)
   {
@@ -318,10 +327,10 @@ public class ASTSupport
   }
 
   /**
-   * @param bufferName
+   * @param bufferName TODO
    * @param content
    *          can be null
-   * @return
+   * @return TODO
    */
   public CommonTree createRemoveTree(String bufferName, CommonTree content)
   {
@@ -340,7 +349,8 @@ public class ASTSupport
   /**
    * ^(MODIFY_ACTION NAME SLOTS)
    * 
-   * @return
+   * @param bufferName TODO
+   * @return TODO
    */
   public CommonTree createModifyTree(String bufferName)
   {
@@ -378,9 +388,9 @@ public class ASTSupport
   /**
    * create a node with type and teext
    * 
-   * @param type
-   * @param text
-   * @return
+   * @param type TODO
+   * @param text TODO
+   * @return TODO
    */
   public CommonTree create(int type, String text)
   {
@@ -402,8 +412,8 @@ public class ASTSupport
   /**
    * return an IDENTIFIER wrapping the object
    * 
-   * @param obj
-   * @return
+   * @param obj TODO
+   * @return TODO
    */
   public CommonTree identifier(Object obj)
   {
@@ -415,8 +425,8 @@ public class ASTSupport
   /**
    * return a STRING wrapping the object
    * 
-   * @param obj
-   * @return
+   * @param obj TODO
+   * @return TODO
    */
   public CommonTree string(Object obj)
   {
@@ -427,8 +437,8 @@ public class ASTSupport
   /**
    * return a NUMBER wrapping this one ^(NUMBER)
    * 
-   * @param num
-   * @return
+   * @param num TODO
+   * @return TODO
    */
   public CommonTree number(Number num)
   {
@@ -533,9 +543,9 @@ public class ASTSupport
   /**
    * set the name node of this tree element
    * 
-   * @param tree
-   * @param name
-   * @throws illegalargumentexception
+   * @param tree TODO
+   * @param name TODO
+   * @throws IllegalArgumentException
    *           if tree doesn't have a name node
    */
   public void setName(CommonTree tree, String name)
@@ -558,11 +568,11 @@ public class ASTSupport
   /**
    * add a parameter node to the parameters child of this tree
    * 
-   * @param tree
-   * @param parameterName
-   * @param parameterValue
-   * @throws illegalarugmentexception
+   * @param parameterName TODO
+   * @param parameterValue TODO
+   * @throws IllegalArgumentException
    *           if tree does not have a PARAMETERS node
+   * @return TODO
    */
   public CommonTree createParameter(String parameterName, String parameterValue)
   {
@@ -577,10 +587,10 @@ public class ASTSupport
   /**
    * create a slot and add it to the slots node
    * 
-   * @param tree
-   * @param slotName
-   * @param condition
-   * @param content
+   * @param tree TODO
+   * @param slotName TODO
+   * @param condition TODO
+   * @param content TODO
    */
   public void addSlot(CommonTree tree, String slotName, int condition,
       CommonTree content)
@@ -657,8 +667,8 @@ public class ASTSupport
    * copy the parameter nodes from src to dest, overwriting those that already
    * exist
    * 
-   * @param srcParametersContainer
-   * @param destParametersContainer
+   * @param srcParametersContainer TODO
+   * @param destParametersContainer TODO
    */
   static public void setParameters(CommonTree srcParametersContainer,
       CommonTree destParametersContainer)
@@ -776,9 +786,9 @@ public class ASTSupport
    * also have a name subchild. Take that name, store the node under the lower
    * cased name.
    * 
-   * @param root
-   * @param treeType
-   * @return
+   * @param root TODO
+   * @param treeType TODO
+   * @return TODO
    */
   static public Map<String, CommonTree> getMapOfTrees(CommonTree root,
       int treeType)
@@ -823,9 +833,9 @@ public class ASTSupport
   }
 
   /**
-   * @param tree
-   * @param parameterName
-   * @param parameterValue
+   * @param tree TODO
+   * @param parameterName TODO
+   * @param parameterValue TODO
    * @param overwrite
    *          should we overwrite parameters if they already exist?
    */
@@ -910,8 +920,8 @@ public class ASTSupport
   /**
    * steal the location information
    * 
-   * @param source
-   * @param dest
+   * @param source TODO
+   * @param dest TODO
    */
   static public void stealLocation(CommonTree source, CommonTree dest)
   {

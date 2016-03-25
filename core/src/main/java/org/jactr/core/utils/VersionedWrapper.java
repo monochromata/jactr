@@ -15,9 +15,12 @@ public interface VersionedWrapper<T>
   /**
    * returns string array, to support major.minor.revision, etc.
    * 
-   * @return
+   * @return TODO
    */
   public String[] getVersion();
 
+  /**
+   * @return TODO
+   */
   public T getSource();
 }

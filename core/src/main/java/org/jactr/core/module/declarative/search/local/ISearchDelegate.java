@@ -24,13 +24,13 @@ public interface ISearchDelegate
   /**
    * search for something that matches the pattern, filtering out, and sorted
    * 
-   * @param pattern
+   * @param pattern TODO
    * @param sortRule
    *          sort by this comparator
    * @param filter
    *          exclude chunks that don't pass this
-   * @param searchSystem
-   * @return
+   * @param searchSystem TODO
+   * @return TODO
    */
   public SortedSet<IChunk> find(ChunkTypeRequest pattern,
       Comparator<IChunk> sortRule, IChunkFilter filter,

@@ -21,8 +21,8 @@ public class ListenableFuture<C> extends FutureTask<C>
    * set the result or exception on this future, releasing any blocking
    * {@link #get()} calls
    * 
-   * @param result
-   * @param thrown
+   * @param result TODO
+   * @param thrown TODO
    */
   public void set(C result, Throwable thrown)
   {

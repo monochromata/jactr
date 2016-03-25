@@ -16,7 +16,7 @@ package org.jactr.tools.async.message.command.state;
 import java.io.Serializable;
 
 /**
- * @author developer
+ * 
  *
  */
 public interface IModelStateCommand extends IStateCommand, Serializable

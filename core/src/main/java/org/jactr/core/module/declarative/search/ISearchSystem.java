@@ -22,7 +22,7 @@ import org.jactr.core.production.request.ChunkTypeRequest;
 
 /**
  * A search system that indexes and retrieves I(ndexable) based on P(attern)
- * @author developer
+ * 
  *
  */
 public interface ISearchSystem
@@ -31,12 +31,14 @@ public interface ISearchSystem
   /**
    * index this object
    *
+   * @param chunk TODO
    */
   public void index(IChunk chunk);
   
   /**
    * remove this object from the index
    * 
+   * @param chunk TODO
    */
   public void unindex(IChunk chunk);
   
@@ -44,28 +46,25 @@ public interface ISearchSystem
   
   /**
    * return all I that match this pattern exactly
-   * @param pattern
+   * 
+   * @param pattern TODO
    * @param sortRule may be null
    * @param filter TODO
-   * @return
+   * @return TODO
    */
   public Collection<IChunk> findExact(ChunkTypeRequest pattern, Comparator<IChunk> sortRule, IChunkFilter filter);
   
   /**
    * find all I that match this pattern somewhat
-   * @param pattern
+   * 
+   * @param pattern TODO
+   * @param sortRule TODO
    * @param filter TODO
-   * @return
+   * @return TODO
    */
   public Collection<IChunk> findFuzzy(ChunkTypeRequest pattern, Comparator<IChunk> sortRule, IChunkFilter filter);
   
   public void clear();
-  
-//  public void addListener(ISearchListener listener, Executor executor);
-//  
-//  public void removeListener(ISearchListener listener);
-//  
-//  public boolean hasListeners();
 }
 
 

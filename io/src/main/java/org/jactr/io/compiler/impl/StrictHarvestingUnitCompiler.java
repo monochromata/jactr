@@ -55,7 +55,7 @@ public class StrictHarvestingUnitCompiler extends
    * later, when we will actually check the buffer and see if strict harvesting
    * is enabled or not
    * 
-   * @param node
+   * @param node TODO
    */
   protected void checkProduction(CommonTree node)
   {
@@ -89,7 +89,7 @@ public class StrictHarvestingUnitCompiler extends
    * StrictHarvestingEnabled. if it is not true, we remove the pending
    * exceptions from the appropriate collection.
    * 
-   * @param buffer
+   * @param buffer TODO
    */
   protected void checkBuffer(CommonTree buffer)
   {

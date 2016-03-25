@@ -55,8 +55,8 @@ public class DefaultVariableConditionalSlot extends DefaultConditionalSlot
 
   /**
    * if the name is still variablized, return false
-   * @param test
-   * @return
+   * @param test TODO
+   * @return TODO
    * @see org.jactr.core.slot.DefaultConditionalSlot#matchesCondition(java.lang.Object)
    */
   @Override

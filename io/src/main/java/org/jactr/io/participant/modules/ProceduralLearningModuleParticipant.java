@@ -25,7 +25,7 @@ import org.jactr.core.module.procedural.six.learning.IProceduralLearningModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class ProceduralLearningModuleParticipant extends BasicASTParticipant
 {

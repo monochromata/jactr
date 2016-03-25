@@ -16,10 +16,10 @@ import org.jactr.tools.async.shadow.ShadowController;
  * when it is desired to have the two sync up. Unless debugging, the two will
  * run asynchronously, which means the {@link RemoteInterface} may provide data
  * too fast to the {@link ShadowController}, resulting in buffer saturation and
- * other unpleasant things. <br/>
- * <br/>
- * When the {@link ShadowController} receives it, it replies immediately. Mean
- * while, the {@link RemoteInterface} can block the model(s)
+ * other unpleasant things.
+ * 
+ * <p>When the {@link ShadowController} receives it, it replies immediately. Mean
+ * while, the {@link RemoteInterface} can block the model(s)</p>
  * 
  * @author harrison
  */

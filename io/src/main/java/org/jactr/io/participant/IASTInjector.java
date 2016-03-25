@@ -15,17 +15,16 @@ package org.jactr.io.participant;
 
 import org.antlr.runtime.tree.CommonTree;
 
-
 /**
  * used to initialize a IModel descriptor when a specific module is required
- * @author developer
- *
  */
  public interface IASTInjector 
 {
   /**
    * install module specific information into this model descriptor.
    * 
+   * @param modelDescriptor TODO
+   * @param importBuffers TODO
    */
    public void inject(CommonTree modelDescriptor, boolean importBuffers);
 }

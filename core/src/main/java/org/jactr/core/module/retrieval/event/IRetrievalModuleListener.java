@@ -21,13 +21,15 @@ public interface IRetrievalModuleListener extends EventListener
 
   /**
    * when this is called you can only access the pattern used
-   * @param rme
+   * 
+   * @param rme the event
    */
   public void retrievalInitiated(RetrievalModuleEvent rme);
   
   /**
    * now you can get the chunk retrieved
-   * @param rme
+   * 
+   * @param rme the event
    */
   public void retrievalCompleted(RetrievalModuleEvent rme);
   

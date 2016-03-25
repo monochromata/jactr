@@ -47,7 +47,7 @@ public class FitStatistics
   }
 
   /**
-   * @param array
+   * @param comparisonPoints
    *          of pairs of points [[modelData, observedData]....]
    */
   public FitStatistics(double[][] comparisonPoints)
@@ -117,8 +117,9 @@ public class FitStatistics
    * compute bayesian information criterion using sample size, chiSquare, and
    * number of free parameters
    * 
-   * @see http://en.wikipedia.org/wiki/Bayesian_information_criterion
-   * @return
+   * <p><a href="http://en.wikipedia.org/wiki/Bayesian_information_criterion">http://en.wikipedia.org/wiki/Bayesian_information_criterion</a></p>
+   * @param freeParameters TODO
+   * @return TODO
    */
   public double computeBIC(int freeParameters)
   {
@@ -128,9 +129,10 @@ public class FitStatistics
   /**
    * compute Akaike information criterion using chiSq and free parameters
    * 
-   * @param freeParameters
-   * @see http://en.wikipedia.org/wiki/Akaike_information_criterion
-   * @return
+   * <p><a href="http://en.wikipedia.org/wiki/Akaike_information_criterion">http://en.wikipedia.org/wiki/Akaike_information_criterion</a></p>
+   * 
+   * @param freeParameters TODO
+   * @return TODO 
    */
   public double computeAIC(int freeParameters)
   {
@@ -141,9 +143,10 @@ public class FitStatistics
    * compute the corrected AIC, taking into account N. This is best for small N
    * or large # freeParameters.
    * 
-   * @param freeParameters
-   * @see http://en.wikipedia.org/wiki/Akaike_information_criterion
-   * @return
+   * <p><a href="http://en.wikipedia.org/wiki/Akaike_information_criterion">http://en.wikipedia.org/wiki/Akaike_information_criterion</a></p>
+   * 
+   * @param freeParameters TODO
+   * @return TODO
    */
   public double computeAICc(int freeParameters)
   {

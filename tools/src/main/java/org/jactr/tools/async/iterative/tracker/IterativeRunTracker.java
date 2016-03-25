@@ -33,7 +33,7 @@ import org.jactr.tools.deadlock.IDeadLockListener;
 /**
  * for the receiving of updates from the {@link NetworkedIterativeRunListener}
  * 
- * @author developer
+ * 
  */
 public class IterativeRunTracker extends NetworkedEndpoint
 {

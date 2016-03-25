@@ -405,6 +405,8 @@ public class DefaultSubsymbolicProduction4 extends BasicSubsymbolicProduction
 
   /**
    * partials must be computed before this
+   * 
+   * @param g TODO
    */
   protected void computeExpectedGain(double g)
   {
@@ -418,7 +420,7 @@ public class DefaultSubsymbolicProduction4 extends BasicSubsymbolicProduction
   }
 
   /**
-   * compute P & C based on the relevant equations
+   * compute P and C based on the relevant equations
    */
   protected synchronized void computePartials()
   {
@@ -449,7 +451,7 @@ public class DefaultSubsymbolicProduction4 extends BasicSubsymbolicProduction
    * check the _lastFiring time to determine if we need to recalculate the
    * partials..
    * 
-   * @return
+   * @return TODO
    */
   protected boolean partialsAreDirty()
   {

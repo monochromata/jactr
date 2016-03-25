@@ -15,15 +15,12 @@ package org.jactr.tools.async.message.event.state;
 
 import java.util.Collection;
 
-/**
- * @author developer
- *
- */
 public interface IRuntimeStateEvent extends IStateEvent
 {
   /**
    * valid for started events only
-   * @return
+   * 
+   * @return TODO
    */
   public Collection<String> getModelNames();
 

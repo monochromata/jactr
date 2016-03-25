@@ -19,14 +19,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.tools.async.message.BaseMessage;
 
-/**
- * @author developer
- */
 public class RuntimeStateCommand extends BaseMessage implements IRuntimeStateCommand, Serializable
 {
-  /**
-   * 
-   */
+
   private static final long serialVersionUID = 8174291191453013555L;
 
   /**
@@ -44,7 +39,7 @@ public class RuntimeStateCommand extends BaseMessage implements IRuntimeStateCom
   /**
    * assumes State.START
    * 
-   * @param suspendImmediately
+   * @param suspendImmediately TODO
    */
   public RuntimeStateCommand(boolean suspendImmediately)
   {
@@ -57,9 +52,6 @@ public class RuntimeStateCommand extends BaseMessage implements IRuntimeStateCom
     _state = requestedState;
   }
 
-  /**
-   * @see org.jactr.tools.async.message.command.state.IRuntimeStateCommand#getState()
-   */
   public State getState()
   {
     return _state;

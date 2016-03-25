@@ -45,7 +45,7 @@ import org.jactr.modules.pm.visual.memory.impl.DefaultVisualMemory;
  * into chunks), and filters (for search time prioritizing). The time it takes
  * to find or encode visual objects is also configurable.
  * 
- * @see http://jactr.org/node/137
+ * <p><a href="http://jactr.org/node/137">http://jactr.org/node/137</a></p>
  * @author harrison
  */
 public class DefaultVisualModule6 extends AbstractVisualModule implements
@@ -144,7 +144,7 @@ public class DefaultVisualModule6 extends AbstractVisualModule implements
    * snag the create the visual chunk at the visual location - actual encoding
    * is taken care of when the chunk is removed from the visual buffer
    * 
-   * @see org.jactr.modules.pm.visual.IVisualModule#encodeVisualChunkAt(org.jactr.core.chunk.IChunk)
+   * <p>TODO: resolve reference: org.jactr.modules.pm.visual.IVisualModule#encodeVisualChunkAt(org.jactr.core.chunk.IChunk)</p>
    */
   public Future<IChunk> attendTo(PerceptualSearchResult result,
       double requestTime)

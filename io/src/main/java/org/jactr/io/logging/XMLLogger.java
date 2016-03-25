@@ -31,7 +31,7 @@ import org.jactr.instrument.IInstrument;
 /**
  * dumps model log information to an xml fiile
  * 
- * @author developer
+ * 
  */
 public class XMLLogger implements IInstrument, ILogger, IParameterized
 {

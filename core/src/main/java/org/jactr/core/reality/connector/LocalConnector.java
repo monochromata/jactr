@@ -30,7 +30,7 @@ import org.jactr.core.model.IModel;
  * local connector responsible for providing the clocks to the models, and any
  * and all attachment handling for the non-existant perceptual interfaces.
  * 
- * @author developer
+ * 
  */
 public class LocalConnector implements IConnector
 {
@@ -143,9 +143,6 @@ public class LocalConnector implements IConnector
     getClockConfigurator().release(model, defined);
   }
 
-  /**
-   * @see org.jactr.core.reality.connector.IConnector#getAgentInterface(org.jactr.core.model.IModel)
-   */
   public IAgent getAgent(IModel model)
   {
     return null;

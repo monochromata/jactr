@@ -17,12 +17,13 @@ import org.jactr.core.slot.ISlot;
  * demarking the existence of valid modality information (i.e.,
  * "visual.isVisual"), a property handler to use to extract the data from the
  * afferent percept, and finally a default value to return should something go
- * wrong in extraction. <br/>
- * If configured with the above example values, the feature map would
+ * wrong in extraction.
+ * 
+ * <p>If configured with the above example values, the feature map would
  * automatically scan afferent objects with "visual.isVisual"=true, looking for
  * any that have "visual.retinotopicLocation". If it does, it will extract the
  * value as a double. You would then be able to make queries using
- * "visual-location.screen-x".
+ * "visual-location.screen-x".</p>
  * 
  * @author harrison
  */

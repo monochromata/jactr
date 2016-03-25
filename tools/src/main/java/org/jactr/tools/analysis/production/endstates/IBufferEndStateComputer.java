@@ -12,13 +12,14 @@ public interface IBufferEndStateComputer
 {
 
   /**
-   * 
    * return a collection of all the possible buffer end states for a given production and buffer. The production sequence analyzer
    * will handle the adding of the end states to the buffer end states structure. It should NOT be done
    * by the computer.
+   * 
    * @param endStates contains the production ast, as well as cached maps of the actions and conditions
-   * @param bufferName
-   * @return
+   * @param bufferName TODO
+   * @param analyzer TODO
+   * @return TODO
    */
   public Collection<BufferEndState> computePossibleEndStatesFor(BufferEndStates endStates, String bufferName, SequenceAnalyzer analyzer); 
 }

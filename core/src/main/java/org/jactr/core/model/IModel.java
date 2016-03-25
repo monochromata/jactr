@@ -39,7 +39,7 @@ import org.jactr.instrument.IInstrument;
  * IProceduralModule at minimal to run. IModules and IExtensions can only be
  * installed, never removed - at least at this level of abstraction.
  * 
- * @author developer
+ * 
  */
 public interface IModel extends IParameterized, IMetaContainer, IInitializable,
     IAdaptable
@@ -64,7 +64,7 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
   /**
    * has this models intiialize been called
    * 
-   * @return
+   * @return TODO
    */
   public boolean hasBeenInitialized();
 
@@ -72,6 +72,8 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * the model must have a timed event queue. this queue keeps track of all
    * internal model time-based changes (such as posting the results of a
    * retrieval). Most productions output a few timed events
+   * 
+   * @return TODO
    */
   public TimedEventQueue getTimedEventQueue();
 
@@ -79,7 +81,7 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * install a buffer into this model, usually called during a modules
    * installation
    * 
-   * @param buffer
+   * @param buffer TODO
    */
   public void addActivationBuffer(IActivationBuffer buffer);
 
@@ -87,13 +89,13 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * returned the named activation buffer. case sensitivity is up to the
    * implementation
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   public IActivationBuffer getActivationBuffer(String name);
 
   /**
-   * return the installed activation buffers
+   * @return the installed activation buffers
    */
   public Collection<IActivationBuffer> getActivationBuffers();
 
@@ -103,7 +105,7 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * install an IModule into the model. if it is the declarative or procedural
    * modules it will be installed as the models dec/proc module
    * 
-   * @param module
+   * @param module TODO
    */
   public void install(IModule module);
 
@@ -111,7 +113,7 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * return the declarative module - this is the primary access point for
    * declarative memory operations and controls
    * 
-   * @return
+   * @return TODO
    */
   public IDeclarativeModule getDeclarativeModule();
 
@@ -119,14 +121,14 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * return the procedural module - this is the primary access point for
    * procedural access and controls
    * 
-   * @return
+   * @return TODO
    */
   public IProceduralModule getProceduralModule();
 
   /**
    * get the module that is of class. effectively getInstallable(IModule.class);
    * 
-   * @param moduleClass
+   * @param moduleClass TODO
    * @return the module that implements Class, or null
    */
   public IModule getModule(Class<? extends IModule> moduleClass);
@@ -134,14 +136,14 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
   /**
    * get all the installed moduels
    * 
-   * @return
+   * @return TODO
    */
   public Collection<IModule> getModules();
 
   /**
    * install this extension
    * 
-   * @param extension
+   * @param extension TODO
    */
   public void install(IExtension extension);
 
@@ -151,15 +153,15 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * return the extension that implements this interface. just
    * getExtension(IExtension.class)
    * 
-   * @param extensionClass
-   * @return
+   * @param extensionClass TODO
+   * @return TODO
    */
   public IExtension getExtension(Class<? extends IExtension> extensionClass);
 
   /**
    * return all the installed extensions
    * 
-   * @return
+   * @return TODO
    */
   public Collection<IExtension> getExtensions();
 
@@ -167,15 +169,15 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
    * install some other installable element, attempting to install a module or
    * an extention here will reroute it to the more specific methods.
    * 
-   * @param installable
+   * @param installable TODO
    */
   public void install(IInstrument installable);
 
   public void uninstall(IInstrument installable);
 
   /**
-   * @param instrumentClass
-   * @return
+   * @param instrumentClass TODO
+   * @return TODO
    */
   public IInstrument getInstrument(Class<? extends IInstrument> instrumentClass);
 
@@ -200,7 +202,7 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
   /**
    * everyone needs a name..
    * 
-   * @return
+   * @return TODO
    */
   public String getName();
 
@@ -209,7 +211,7 @@ public interface IModel extends IParameterized, IMetaContainer, IInitializable,
   /**
    * age of the model used to shift the clock during runs
    * 
-   * @return
+   * @return TODO
    */
   public double getAge();
 

@@ -32,7 +32,7 @@ import org.jactr.core.utils.collections.CachedCollection;
  * this implementation is not thread safe for the add/remove of
  * conditions/actions
  * 
- * @author developer
+ * 
  */
 public class BasicSymbolicProduction extends DefaultAdaptable implements
     ISymbolicProduction

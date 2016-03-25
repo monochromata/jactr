@@ -28,7 +28,6 @@ import org.jactr.core.module.declarative.four.ISpreadingActivationEquation;
  * manipulation of associative links.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ISubsymbolicChunk4 extends ISubsymbolicChunk,
     IAssociativeLinkContainer

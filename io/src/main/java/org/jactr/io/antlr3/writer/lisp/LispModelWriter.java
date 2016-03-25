@@ -18,9 +18,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.writer.CodeGeneratorWriter;
 
-/**
- * @author developer
- */
 public class LispModelWriter extends CodeGeneratorWriter
 {
   /**
@@ -28,10 +25,6 @@ public class LispModelWriter extends CodeGeneratorWriter
    */
   static private final Log LOGGER = LogFactory.getLog(LispModelWriter.class);
 
-  /**
-   * @param codeGenerator
-   * @param trimImports
-   */
   public LispModelWriter(boolean trimImports)
   {
     super(CodeGeneratorFactory.getCodeGenerator("lisp"), trimImports);

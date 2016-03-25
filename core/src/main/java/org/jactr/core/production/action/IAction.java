@@ -24,7 +24,6 @@ import org.jactr.core.production.VariableBindings;
  * and the production is actually selected to fire.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 
 public interface IAction
@@ -38,8 +37,9 @@ public interface IAction
    * will be the actual one that is fired. Normally, an action should not change
    * the contents of variableBindings
    * 
-   * @param variableBindings
-   * @return
+   * @param variableBindings TODO
+   * @throws CannotInstantiateException TODO
+   * @return TODO
    */
   public IAction bind(VariableBindings variableBindings)
       throws CannotInstantiateException;
@@ -56,7 +56,10 @@ public interface IAction
    * firing time. It is in place now as a place keeper for the future when we
    * get to the point where we can empirically derive firing times for
    * individual actions.
+   * 
+   * @param instantiation TODO
    * @param firingTime when this production was fired
+   * @return TODO
    */
   public double fire(IInstantiation instantiation, double firingTime);
 

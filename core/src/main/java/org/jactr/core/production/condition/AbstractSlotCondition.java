@@ -70,7 +70,7 @@ public abstract class AbstractSlotCondition implements ICondition,
    * because each condition is fully duplicated during instantiation so we will
    * be the only modifiers of this..
    * 
-   * @returns an unmodifiable collection of the <b>actual</b> Slots backing
+   * @return an unmodifiable collection of the <b>actual</b> Slots backing
    *          this.
    * @see org.jactr.core.slot.ISlotContainer#getSlots()
    */

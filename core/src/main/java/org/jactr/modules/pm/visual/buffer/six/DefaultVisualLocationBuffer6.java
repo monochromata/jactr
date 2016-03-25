@@ -44,8 +44,6 @@ import org.jactr.modules.pm.visual.buffer.processor.VisualSearchRequestDelegate;
  * since visual-location and visual buffers share the same state information
  * (stored in the visual buffer) so care must be taken to use the visual buffers
  * state information and not visual location's
- * 
- * @author developer
  */
 public class DefaultVisualLocationBuffer6 extends AbstractPMActivationBuffer6
     implements IVisualLocationBuffer, ICompilableBuffer
@@ -129,7 +127,7 @@ public class DefaultVisualLocationBuffer6 extends AbstractPMActivationBuffer6
    * since the visual location chunks are reused, we want to turn off the copy
    * mechanism
    * 
-   * @see org.jactr.core.buffer.six.AbstractActivationBuffer6#copyChunkOnInsertion()
+   * <p>TODO: resolve reference org.jactr.core.buffer.six.AbstractActivationBuffer6#copyChunkOnInsertion()</p>
    */
   @Override
   protected boolean shouldCopyOnInsertion(IChunk sourceChunk)
@@ -141,7 +139,7 @@ public class DefaultVisualLocationBuffer6 extends AbstractPMActivationBuffer6
    * returns the current visual location in the buffer or the last attended
    * location
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.modules.pm.visual.buffer.IVisualLocationBuffer#getCurrentVisualLocation()
    */
   public IChunk getCurrentVisualLocation()

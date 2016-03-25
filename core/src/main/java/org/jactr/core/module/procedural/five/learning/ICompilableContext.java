@@ -13,7 +13,7 @@ public interface ICompilableContext
    * complete by the time the production has finished firing (not long duration
    * requests like the visual buffer)
    * 
-   * @return
+   * @return TODO
    */
   public boolean isImmediate(IRequest request);
 
@@ -22,20 +22,22 @@ public interface ICompilableContext
    * requested chunktype (or chunk) is what appears in the buffer - no matter
    * what (no errors and no transformations).
    * 
-   * @return
+   * @return TODO
    */
   public boolean isDeterministic(IRequest request);
   
   /**
    * subsequent requests may result in a buffer jam (and abort/error)
-   * @return
+   * 
+   * @return TODO
    */
   public boolean isJammable(IRequest request);
   
   /**
    * if the buffer requests/actions can be compiled out entirely (i.e.
    * the retrieval buffer)
-   * @return
+   * 
+   * @return TODO
    */
   public boolean canCompileOut(IRequest request);
 }

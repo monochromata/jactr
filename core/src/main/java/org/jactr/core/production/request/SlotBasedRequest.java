@@ -72,8 +72,9 @@ public class SlotBasedRequest implements IRequest, ISlotContainer
    * returns the number of slots in this container that match those in the
    * provided container.
    * 
-   * @param container
-   * @return
+   * @param chunk TODO
+   * @param bindings TODO
+   * @return TODO
    */
   public int countMatches(IChunk chunk, VariableBindings bindings)
   {
@@ -120,12 +121,12 @@ public class SlotBasedRequest implements IRequest, ISlotContainer
    * resolve a logical slot. We do this by recursing down and only checking on
    * the return result and exceptions based on the logical condition
    * 
-   * @param slotToResolve
-   * @param bindings
-   * @param slotContainerName
-   * @param container
-   * @return
-   * @throws CannotMatchException
+   * @param slotToResolve TODO
+   * @param bindings TODO
+   * @param slotContainerName TODO
+   * @param container TODO
+   * @return TODO
+   * @throws CannotMatchException TODO
    */
   protected boolean resolveLogicalSlot(ILogicalSlot slotToResolve,
       VariableBindings bindings, String slotContainerName,
@@ -204,10 +205,11 @@ public class SlotBasedRequest implements IRequest, ISlotContainer
    * (if there is a container to match against). Impossible matching errors may
    * result in cannot match.
    * 
-   * @param slotToResolve
-   * @param model
-   * @param bindings
-   * @param slotContainer
+   * @param slotToResolve TODO
+   * @param bindings TODO
+   * @param slotContainerName TODO
+   * @param slotContainer TODO
+   * @throws CannotMatchException TODO
    * @return true if it is fully resolved, false if it cannot be resolved at
    *         present
    */
@@ -459,12 +461,13 @@ public class SlotBasedRequest implements IRequest, ISlotContainer
    * container. This allows us to generally bind against anything that contains
    * a slot (chunk, chunktype, or buffer for queries)
    * 
-   * @param model
-   * @param container
-   * @param bindings
-   * @param iterativeCall
-   * @return
-   * @throws CannotMatchException
+   * @param model TODO
+   * @param containerName TODO
+   * @param container TODO
+   * @param bindings TODO
+   * @param iterativeCall TODO
+   * @return TODO
+   * @throws CannotMatchException TODO
    */
   public int bind(IModel model, String containerName,
       IUniqueSlotContainer container, VariableBindings bindings,
@@ -508,12 +511,12 @@ public class SlotBasedRequest implements IRequest, ISlotContainer
   /**
    * attempt to resolve the slot values using a container
    * 
-   * @param model
-   * @param containerName
-   * @param container
-   * @param bindings
-   * @param slots
-   * @throws CannotMatchException
+   * @param model TODO
+   * @param containerName TODO
+   * @param container TODO
+   * @param bindings TODO
+   * @param slots TODO
+   * @throws CannotMatchException TODO
    */
   public void bindSlots(IModel model, String containerName,
       IUniqueSlotContainer container, VariableBindings bindings,
@@ -526,6 +529,9 @@ public class SlotBasedRequest implements IRequest, ISlotContainer
   /**
    * bind and resolve as many slots in the collection as possible.
    * 
+   * @param model TODO
+   * @param bindings TODO
+   * @param slots TODO
    * @throws CannotMatchException
    *           if there is a critical binding error
    */

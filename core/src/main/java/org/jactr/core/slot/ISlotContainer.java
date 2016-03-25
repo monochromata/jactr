@@ -18,7 +18,6 @@ import java.util.Collection;
  * Description of the Interface
  * 
  * @author harrison
- * @created January 22, 2003
  */
 public interface ISlotContainer
 {
@@ -27,7 +26,6 @@ public interface ISlotContainer
    * return a duplicate copy of all the slots
    * 
    * @return The slots value
-   * @since
    */
   public Collection<? extends ISlot> getSlots();
   
@@ -38,7 +36,6 @@ public interface ISlotContainer
    * 
    * @param slot
    *            The feature to be added to the ISlot attribute
-   * @since
    */
   public void addSlot(ISlot slot);
 
@@ -47,7 +44,6 @@ public interface ISlotContainer
    * 
    * @param slot
    *            Description of Parameter
-   * @since
    */
   public void removeSlot(ISlot slot);
 

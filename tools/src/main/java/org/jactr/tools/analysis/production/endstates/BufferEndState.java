@@ -109,8 +109,8 @@ public class BufferEndState
    * compute the relationship between the conditionOrQueries slots and this end
    * state.. note: we currently ignore chunktype..
    * 
-   * @param conditionOrQuery
-   * @return
+   * @param conditionOrQuery TODO
+   * @return TODO
    */
   public int computeRelationship(CommonTree conditionOrQuery)
   {

@@ -48,8 +48,8 @@ public class LongitudinalParameterSetModifier extends ParameterSetModifier
    * called by the parser.. should probably just be a parameter for simplicities
    * sake.
    * 
-   * @param modelName
-   * @param modelFile
+   * @param modelName TODO
+   * @param modelFile TODO
    */
   public void associate(String modelName, String modelFile)
   {
@@ -75,7 +75,8 @@ public class LongitudinalParameterSetModifier extends ParameterSetModifier
   /**
    * serializes the models to the temp directory
    * 
-   * @param models
+   * @param models TODO
+   * @param iteration TODO
    */
   public void copyModels(Collection<IModel> models, long iteration)
   {
@@ -137,8 +138,8 @@ public class LongitudinalParameterSetModifier extends ParameterSetModifier
   /**
    * is this the first slice in a longitudinal run?
    * 
-   * @param parameterValue
-   * @return
+   * @param parameterValue TODO
+   * @return TODO
    */
   public boolean isFirstSlice(String parameterValue)
   {
@@ -153,6 +154,8 @@ public class LongitudinalParameterSetModifier extends ParameterSetModifier
 
   /**
    * called before loading, we get a chance to copy models in..
+   * 
+   * @param slice TODO
    */
   public void startSlice(ISlice slice)
   {

@@ -21,7 +21,7 @@ import org.jactr.core.runtime.controller.debug.BreakpointType;
 import org.jactr.tools.async.message.BaseMessage;
 
 /**
- * @author developer
+ * 
  */
 public class BreakpointCommand extends BaseMessage implements IBreakpointCommand, Serializable
 {

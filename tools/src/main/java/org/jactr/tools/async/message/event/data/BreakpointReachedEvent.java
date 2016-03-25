@@ -23,7 +23,7 @@ import org.jactr.tools.async.message.ast.BaseASTMessage;
 import org.jactr.tools.async.message.event.IEvent;
 
 /**
- * @author developer
+ * 
  */
 public class BreakpointReachedEvent extends BaseASTMessage implements IEvent, Serializable
 {

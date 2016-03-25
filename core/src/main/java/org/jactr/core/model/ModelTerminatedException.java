@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  * used to force the model to terminate and exit cleanly. primarily used by
  * production.action.StopAction
  * 
- * @author developer
+ * 
  */
 public class ModelTerminatedException extends RuntimeException
 {

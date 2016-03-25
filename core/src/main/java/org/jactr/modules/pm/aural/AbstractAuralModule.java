@@ -55,8 +55,6 @@ import org.jactr.modules.pm.common.memory.map.IFINSTFeatureMap;
  * details. It handles parameter, FINST management, and buffer stuffing. It is
  * up to the extenders to deal with the actual attending, search, buffer and
  * memory creation.
- * 
- * @author developer
  */
 public abstract class AbstractAuralModule extends AbstractPerceptualModule
     implements IAuralModule, IParameterized
@@ -108,9 +106,6 @@ public abstract class AbstractAuralModule extends AbstractPerceptualModule
 
   private IAuralEncodingTimeEquation                              _encodingTime                = new DefaultAuralEncodingTimeEquation();
 
-  /**
-   * @param name
-   */
   public AbstractAuralModule()
   {
     super("aural");
@@ -159,9 +154,6 @@ public abstract class AbstractAuralModule extends AbstractPerceptualModule
     if (_listener.hasListeners()) _listener.fire(event);
   }
 
-  /**
-   * @see org.jactr.core.module.AbstractModule#initialize()
-   */
   @Override
   public void initialize()
   {

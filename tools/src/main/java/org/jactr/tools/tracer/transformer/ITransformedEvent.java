@@ -19,29 +19,17 @@ import org.jactr.tools.async.message.IMessage;
 import org.jactr.tools.async.message.ast.IASTMessage;
 
 
-/**
- * @author developer
- *
- */
 public interface ITransformedEvent extends IMessage, IASTMessage, Serializable
 {
   /**
-   * returns the text of ACTREvent.getSource()
+   * @return the text of ACTREvent.getSource()
    */
   public String getSource();
   
   public String getModelName();
   
-  /**
-   * 
-   * @return
-   */
   public long getSystemTime();
   
-  /**
-   * 
-   * @return
-   */
   public double getSimulationTime();
 }
 

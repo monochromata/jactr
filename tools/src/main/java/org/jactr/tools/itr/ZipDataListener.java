@@ -163,6 +163,9 @@ public class ZipDataListener implements IIterativeRunListener, IParameterized
 
   /**
    * create the zip file
+   * 
+   * @param totalRuns TODO
+   * @throws TerminateIterativeRunException TODO
    */
   public void start(int totalRuns) throws TerminateIterativeRunException
   {
@@ -216,10 +219,11 @@ public class ZipDataListener implements IIterativeRunListener, IParameterized
   /**
    * archive the contents of root into the zipoutputstream
    * 
-   * @param root
-   * @param filter
-   * @param zos
-   * @throws IOException
+   * @param pathRoot TODO
+   * @param root TODO
+   * @param filter TODO
+   * @param zos TODO
+   * @throws IOException TODO
    */
   protected void archiveAndDeleteContents(String pathRoot, File root,
       FilenameFilter filter, ZipOutputStream zos) throws IOException
@@ -285,8 +289,6 @@ public class ZipDataListener implements IIterativeRunListener, IParameterized
   public void preLoad(int currentRunIndex, int totalRuns)
       throws TerminateIterativeRunException
   {
-    // TODO Auto-generated method stub
-
   }
 
 }

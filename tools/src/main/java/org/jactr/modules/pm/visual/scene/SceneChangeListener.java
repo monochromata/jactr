@@ -22,15 +22,14 @@ import org.jactr.modules.pm.common.memory.map.IFeatureMapListener;
 import org.jactr.modules.pm.visual.IVisualModule;
 
 /**
- * Scene change listener that implements both {@link IVisualFeatureMapListener} to
- * track changes to the {@link IVisualModule}'s {@link IVisualMap}'s feature maps, and
+ * Scene change listener that implements both (TODO: resolve reference: IVisualFeatureMapListener) to
+ * track changes to the {@link IVisualModule}'s (TODO: resolve reference: IVisualMap)'s feature maps, and
  * {@link IAfferentListener} which allows the listener to circumvent the visual module
- * and go straight to the source of the percepts. <br>
- * <br>
- * The listener works by collecting the {@link IIdentifier}s of all the percepts
+ * and go straight to the source of the percepts.
+ * 
+ * <p>The listener works by collecting the {@link IIdentifier}s of all the percepts
  * that change between calls to {@link #reset()}, call to {@link #check()} will
- * recompute the change ratio ( {@link #getChangeRatio()} ).
- * <br>
+ * recompute the change ratio ( {@link #getChangeRatio()} ).</p>
  * 
  * @author harrison
  */
@@ -65,7 +64,8 @@ public class SceneChangeListener implements IFeatureMapListener,
   /**
    * will be called when any new percept is added, we check to see if it
    * is a visual percept and log it
-   * @param addEvent
+   * 
+   * @param addEvent TODO
    * @see org.commonreality.object.manager.event.IObjectListener#objectsAdded(org.commonreality.object.manager.event.IObjectEvent)
    */
   public void objectsAdded(IObjectEvent<IAfferentObject, ?> addEvent)
@@ -77,7 +77,8 @@ public class SceneChangeListener implements IFeatureMapListener,
 
   /**
    * called when a percept is removed. if it is visual, we log it
-   * @param removeEvent
+   * 
+   * @param removeEvent TODO
    * @see org.commonreality.object.manager.event.IObjectListener#objectsRemoved(org.commonreality.object.manager.event.IObjectEvent)
    */
   public void objectsRemoved(IObjectEvent<IAfferentObject, ?> removeEvent)
@@ -89,7 +90,8 @@ public class SceneChangeListener implements IFeatureMapListener,
 
   /**
    * called when a percept changes, we determine if it is relevant and log it
-   * @param updateEvent
+   * 
+   * @param updateEvent TODO
    * @see org.commonreality.object.manager.event.IObjectListener#objectsUpdated(org.commonreality.object.manager.event.IObjectEvent)
    */
   public void objectsUpdated(IObjectEvent<IAfferentObject, ?> updateEvent)
@@ -120,7 +122,7 @@ public class SceneChangeListener implements IFeatureMapListener,
    * thread, we need to use the lock since {@link #reset()} can be called from
    * anywhere
    * 
-   * @param id
+   * @param id TODO
    */
   private void changed(IIdentifier id)
   {
@@ -164,7 +166,7 @@ public class SceneChangeListener implements IFeatureMapListener,
   /**
    * log the id of the removed percept
    * 
-   * @param id
+   * @param id TODO
    */
   private void removed(IIdentifier id)
   {
@@ -206,7 +208,7 @@ public class SceneChangeListener implements IFeatureMapListener,
   /**
    * calculate and return the change ratio since the last {@link #reset()}
    * 
-   * @return
+   * @return TODO
    */
   protected double check()
   {

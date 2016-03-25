@@ -19,7 +19,7 @@ import org.commonreality.identifier.IIdentifier;
 import org.jactr.core.chunk.IChunk;
 
 /**
- * @author developer
+ * 
  */
 public interface IFINSTFeatureMap extends IFeatureMap<FINSTState>
 {

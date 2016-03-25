@@ -25,7 +25,6 @@ import org.jactr.core.utils.DefaultAdaptable;
  * default impl
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public class BasicSubsymbolicChunkType extends DefaultAdaptable implements
     ISubsymbolicChunkType, ISubsymbolicChunkType4
@@ -36,13 +35,6 @@ public class BasicSubsymbolicChunkType extends DefaultAdaptable implements
 
   Map<String, String>          _unknownParameters;
 
-  /**
-   * Constructor for the DefaultSubsymbolicChunkType5 object
-   * 
-   * @param parentChunkType
-   *          Description of Parameter
-   * @since
-   */
   public BasicSubsymbolicChunkType()
   {
     _unknownParameters = new TreeMap<String, String>();
@@ -60,7 +52,6 @@ public class BasicSubsymbolicChunkType extends DefaultAdaptable implements
    *          The new parameter value
    * @param value
    *          The new parameter value
-   * @since
    */
   public void setParameter(String key, String value)
   {
@@ -73,7 +64,6 @@ public class BasicSubsymbolicChunkType extends DefaultAdaptable implements
    * @param key
    *          Description of Parameter
    * @return The parameter value
-   * @since
    */
   public String getParameter(String key)
   {
@@ -85,7 +75,6 @@ public class BasicSubsymbolicChunkType extends DefaultAdaptable implements
    * object
    * 
    * @return The possibleParameters value
-   * @since
    */
   public Collection<String> getPossibleParameters()
   {
@@ -97,7 +86,6 @@ public class BasicSubsymbolicChunkType extends DefaultAdaptable implements
    * object
    * 
    * @return The setableParameters value
-   * @since
    */
 
   public Collection<String> getSetableParameters()
@@ -105,11 +93,6 @@ public class BasicSubsymbolicChunkType extends DefaultAdaptable implements
     return _unknownParameters.keySet();
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @since
-   */
   public void dispose()
   {
     _parentChunkType = null;

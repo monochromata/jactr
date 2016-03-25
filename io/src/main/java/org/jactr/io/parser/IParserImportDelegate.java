@@ -20,19 +20,10 @@ import org.antlr.runtime.tree.CommonTree;
 
 /**
  * handles the importing of content based on either a url or a module classname
- * 
- * @author developer
  */
 public interface IParserImportDelegate
 {
 
-  /**
-   * @param modelDescriptor
-   * @param moduleClassName
-   * @param importContents
-   * @return TODO
-   * @throws Exception
-   */
   public CommonTree importModuleInto(CommonTree modelDescriptor, String moduleClassName,
       boolean importContents) throws Exception;
   

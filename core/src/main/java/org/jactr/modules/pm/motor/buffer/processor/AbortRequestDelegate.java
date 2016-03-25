@@ -115,8 +115,9 @@ public class AbortRequestDelegate extends SimpleRequestDelegate
    * returns the current movement associated with the muscle defined in this
    * request
    * 
-   * @param request
-   * @return
+   * @param cRequest TODO
+   * @param motor TODO
+   * @return TODO
    */
   static public IMovement getMovement(ChunkTypeRequest cRequest,
       AbstractMotorModule motor)

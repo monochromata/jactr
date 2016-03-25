@@ -92,7 +92,7 @@ public class DefaultAdaptable implements IAdaptable
    * used during representation merging. i.e., a merged chunk would adopt the
    * master's adaptable contents
    * 
-   * @param adaptable
+   * @param adaptable TODO
    */
   protected void adopt(DefaultAdaptable adaptable)
   {

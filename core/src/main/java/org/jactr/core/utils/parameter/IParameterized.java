@@ -20,7 +20,6 @@ import java.util.Collection;
  * using strings.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IParameterized
 {
@@ -28,6 +27,8 @@ public interface IParameterized
   /**
    * Set the named parameter
    * 
+   * @param key the key
+   * @param value the value
    */
   public void setParameter(String key, String value);
 

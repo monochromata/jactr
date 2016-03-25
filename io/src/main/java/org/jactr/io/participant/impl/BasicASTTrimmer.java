@@ -24,7 +24,7 @@ import org.jactr.io.antlr3.misc.ASTSupport;
 import org.jactr.io.participant.IASTTrimmer;
 
 /**
- * @author developer
+ * 
  */
 public class BasicASTTrimmer implements IASTTrimmer
 {

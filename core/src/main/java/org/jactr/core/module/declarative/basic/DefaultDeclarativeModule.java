@@ -75,24 +75,27 @@ import org.jactr.core.utils.parameter.ParameterHandler;
 
 /**
  * default declarative module that incorporates many useful features. This
- * module is full thread safe, and parameterizes the creation factories. <br/>
- * This module also uses the local {@link DefaultSearchSystem} for the indexing
- * of chunks.<br/>
- * This module provides encoding services for any buffer that returns false for
- * {@link IActivationBuffer#handlesEncoding()}.<br/>
- * This is the ideal point to start from when creating a new declarative module. <br/>
- * <br/>
- * Most modelers should be content with this or it's version specific
+ * module is full thread safe, and parameterizes the creation factories.
+ * 
+ * <p>This module also uses the local {@link DefaultSearchSystem} for the indexing
+ * of chunks.</p>
+ * 
+ * <p>This module provides encoding services for any buffer that returns false for
+ * {@link IActivationBuffer#handlesEncoding()}.</p>
+ * 
+ * <p>This is the ideal point to start from when creating a new declarative module.</p>
+ * 
+ * <p>Most modelers should be content with this or it's version specific
  * subclasses. If you need to add theoretic behavior, it is recommended that you
  * start with customizing the symbolic/ subsymbolic factories (most likely just
  * the {@link ISubsymbolicChunkFactory}). Custom {@link IChunk}s should not be
- * required as they are simply wrappers to the theoretically relevant contents. <br/>
- * <br/>
- * Most extensions will just extend this module to add their parameter
- * accessors, and any required listeners. If chunks do not need to be extended,
- * merely configured differently there is the {@link IChunkConfigurator}.
+ * required as they are simply wrappers to the theoretically relevant contents.</p>
  * 
- * @see http://jactr.org/node/121
+ * <p>Most extensions will just extend this module to add their parameter
+ * accessors, and any required listeners. If chunks do not need to be extended,
+ * merely configured differently there is the {@link IChunkConfigurator}.</p>
+ * 
+ * <p><a href="http://jactr.org/node/121">http://jactr.org/node/121</a></p>
  * @author harrison
  */
 public class DefaultDeclarativeModule extends AbstractDeclarativeModule
@@ -327,7 +330,7 @@ public class DefaultDeclarativeModule extends AbstractDeclarativeModule
    * tombstone marking. The removed chunk itself is not disposed of. if all is
    * successful, this will fire the chunk removed event.
    * 
-   * @param chunk
+   * @param chunk TODO
    */
   public void removeChunk(final IChunk chunk)
   {
@@ -418,8 +421,8 @@ public class DefaultDeclarativeModule extends AbstractDeclarativeModule
    * create a callable that will do all the work of adding a chunktype to the
    * model and firing the appropriate events
    * 
-   * @param chunkType
-   * @return
+   * @param chunkType TODO
+   * @return TODO
    */
   @Override
   protected IChunkType addChunkTypeInternal(IChunkType chunkType)

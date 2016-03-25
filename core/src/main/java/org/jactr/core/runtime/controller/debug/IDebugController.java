@@ -22,8 +22,6 @@ import org.jactr.core.runtime.controller.debug.event.IBreakpointListener;
 
 /**
  * An extension to a controller that permits breakpoint management
- * @author developer
- *
  */
 public interface IDebugController extends IController
 {
@@ -31,54 +29,59 @@ public interface IDebugController extends IController
   /**
    * when a break point is reached, the breakpoint listeners are called
    * 
+   * @param listener the listener to add
+   * @param executor TODO
    */
   public abstract void addListener(IBreakpointListener listener,
       Executor executor);
 
   /**
    * remove said listener
-   * @param listener
+   * @param listener the listener to be removed
    */
   public abstract void removeListener(IBreakpointListener listener);
 
   /**
    * clear all of the break points permitting uninterrupted execution,
    * unless an exception occurs
-   *
    */
   public abstract void clearBreakpoints();
 
   /**
    * clear the specified breakpoints
-   * @param model
-   * @param type
+   * 
+   * @param model the model
+   * @param type the breakpoint type
    */
   public abstract void clearBreakpoints(IModel model, BreakpointType type);
 
   /**
    * add a breakpoint
-   * @param model
-   * @param type
-   * @param value
+   * 
+   * @param model the model
+   * @param type the breakpoint type
+   * @param value the breakpoint
    */
   public abstract void addBreakpoint(IModel model, BreakpointType type,
       Object value);
 
   /**
    * remove a breakpoint
-   * @param model
-   * @param type
-   * @param value
+   * 
+   * @param model the model
+   * @param type the breakpoint type
+   * @param value the breakpoint
    */
   public abstract void removeBreakpoint(IModel model, BreakpointType type,
       Object value);
 
   /**
    * is this object a breakpoint
-   * @param model
-   * @param type
-   * @param value
-   * @return
+   * 
+   * @param model the model
+   * @param type the breakpoint type
+   * @param value the breakpoint
+   * @return TODO
    */
   public abstract boolean isBreakpoint(IModel model, BreakpointType type,
       Object value);

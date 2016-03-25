@@ -31,7 +31,6 @@ import org.jactr.core.utils.IInitializable;
  * activation to be propogated to its contents.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IActivationBuffer extends IInitializable, IAdaptable
 {
@@ -58,6 +57,8 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
   /**
    * called from within an instantiation notifying the buffer that this chunk
    * has been matched in the production that is about to fire.
+   * 
+   * @param chunk the matched chunk
    */
   public void matched(IChunk chunk);
 
@@ -122,6 +123,7 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
   /**
    * remove a chunk from the buffer, and notify listeners
    * 
+   * @param c the chunk to be removed
    * @see org.jactr.core.buffer.event.IActivationBufferListener
    */
   public void removeSourceChunk(IChunk c);
@@ -129,32 +131,45 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
   /**
    * return a chunk from the buffer - the exact behavior is specified by the
    * particular buffer
+   * 
+   * @return the source chunk
    */
   public IChunk getSourceChunk();
 
   /**
-   * return all the chunks in the buffer
+   * @return all the chunks in the buffer
    */
   public Collection<IChunk> getSourceChunks();
 
+  /**
+   * @param container TODO
+   * @return TODO
+   */
   public Collection<IChunk> getSourceChunks(Collection<IChunk> container);
 
   /**
    * returns the buffer's source chunk that is symbolically equal to c, or null
    * if none is available or symbolically equal. For exact equality, use
-   * {@link #getSourceChunks()#contains(IChunk)}
+   * {@link #getSourceChunks()}.contains(IChunk)
    * 
+   * @param c the chunk to compare
+   * @return TODO
    * @see IChunk#equalsSymbolic(IChunk)
    */
   public IChunk contains(IChunk c);
 
   /**
    * add a buffer listener
+   * 
+   * @param abl the buffer listener to add
+   * @param executor TODO
    */
   public void addListener(IActivationBufferListener abl, Executor executor);
 
   /**
    * remove a buffer listener
+   * 
+   * @param abl the buffer listener to remove
    */
   public void removeListener(IActivationBufferListener abl);
 
@@ -165,6 +180,9 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
    */
   public String getName();
 
+  /**
+   * @return the model
+   */
   public IModel getModel();
 
   /**
@@ -172,14 +190,12 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
    * chunks that are in it. otherwise, the model will encode at
    * removeSourceChunk
    * 
-   * @return
+   * @return whether the buffer handles encoding
    */
   public boolean handlesEncoding();
 
   /**
-   * return the module that controls this buffer
-   * 
-   * @return
+   * @return the module that controls this buffer 
    */
   public IModule getModule();
 
@@ -194,7 +210,7 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
    * actually responsible for enforcing strict harvesting. see
    * {@link DefaultProceduralModule6}
    * 
-   * @return
+   * @return {@code true}, if strict harvesting is enabled
    */
   public boolean isStrictHarvestingEnabled();
 

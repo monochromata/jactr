@@ -33,7 +33,6 @@ import org.jactr.core.production.condition.ICondition;
  * Description of the Class
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public class DefaultInstantiation5 extends AbstractInstantiation
 {

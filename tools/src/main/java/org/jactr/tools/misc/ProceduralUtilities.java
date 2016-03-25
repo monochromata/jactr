@@ -19,13 +19,13 @@ public class ProceduralUtilities
                                                 .getLog(ProceduralUtilities.class);
 
   /**
-   * reward/punish the model using {@link #executeLater(IModel, Runnable)}. This
+   * reward/punish the model using (TODO: resolve reference: #executeLater(IModel, Runnable)). This
    * assumes that the model has {@link IProceduralLearningModule6} installed
    * 
-   * @param model
-   * @param reward
-   * @return
-   * @throws IllegalStateException
+   * @param model TODO
+   * @param reward TODO
+   * @return TODO
+   * @throws IllegalStateException TODO
    */
   static public Future<Boolean> reward(final IModel model, final double reward)
       throws IllegalStateException

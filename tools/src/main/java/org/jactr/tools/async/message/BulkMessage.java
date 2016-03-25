@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author developer
+ * 
  */
 public class BulkMessage extends BaseMessage implements Serializable
 {

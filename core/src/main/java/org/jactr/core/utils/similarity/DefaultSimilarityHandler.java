@@ -27,19 +27,12 @@ import org.jactr.core.slot.ISlot;
  * permits the attaching of custom handlers
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class DefaultSimilarityHandler implements SimilarityHandler
 {
 
-  /**
-   * Description of the Field
-   */
   protected List<SimilarityHandler> _handlers;
 
-  /**
-   * Constructor for the DefaultSimilarityHandler object
-   */
   public DefaultSimilarityHandler()
   {
     _handlers = new ArrayList<SimilarityHandler>();

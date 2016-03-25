@@ -25,8 +25,6 @@ import org.jactr.core.utils.references.IReferences;
 
 /**
  * we just listen for slot value changes so that Links can be created correctly.
- * 
- * @author developer
  */
 public class ChunkListener extends ChunkListenerAdaptor
 {
@@ -57,7 +55,7 @@ public class ChunkListener extends ChunkListenerAdaptor
    * The updating is done here since the listener is removed after encoding, so
    * the master chunk will not have this listener attached
    * 
-   * @param event
+   * @param event the event
    * @see org.jactr.core.chunk.event.ChunkListenerAdaptor#mergingInto(org.jactr.core.chunk.event.ChunkEvent)
    */
   @Override
@@ -221,7 +219,7 @@ public class ChunkListener extends ChunkListenerAdaptor
     // }
   }
 
-  /**
+  /*
    * also handled by the associative.ChunkListener
    */
   // @Override

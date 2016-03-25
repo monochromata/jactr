@@ -18,7 +18,7 @@ import java.util.EventListener;
 /**
  * Something that receives logging messages from the architecture
  * 
- * @author developer
+ * 
  */
 public interface ILogger extends EventListener
 {
@@ -28,10 +28,7 @@ public interface ILogger extends EventListener
    * the provided model (possibly null if from the runtime), to be categorized
    * under streamName (should be unique from ILoggable).
    * 
-   * @param model
-   *            maybe null
-   * @param streamName
-   * @param message
+   * @param logEvent the event to log
    */
   public void log(LogEvent logEvent);
 

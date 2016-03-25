@@ -22,8 +22,6 @@ import org.jactr.core.queue.ITimedEvent;
  * to track any events that it is posting that it should track.
  * this allows the visual buffer to cancel pending requests if a clear
  * is called.
- * @author developer
- *
  */
 public interface IEventTrackingActivationBuffer extends IActivationBuffer
 {
@@ -31,7 +29,8 @@ public interface IEventTrackingActivationBuffer extends IActivationBuffer
   /**
    * enqueue the timed event to the model's event queue and track
    * said event
-   * @param timedEvent
+   * 
+   * @param timedEvent TODO
    */
   public void enqueueTimedEvent(ITimedEvent timedEvent);
 }

@@ -49,9 +49,9 @@ import org.jactr.core.utils.parameter.ParameterHandler;
 
 /**
  * production learning is accomplished by listening to the procedural module for
- * firing events..<br>
- * <br>
- * This module will update a production's 'ExpectedUtility' based on reward
+ * firing events..
+ * 
+ * <p>This module will update a production's 'ExpectedUtility' based on reward
  * signals (if any), and it's Utility. A production may have a 'Reward' value
  * which is the reward applied when that production fires and back propogates a
  * discounted reward signal all the way back to the most recently rewarded
@@ -59,10 +59,10 @@ import org.jactr.core.utils.parameter.ParameterHandler;
  * this production as participating in the reward process, but not to start it.
  * 'Reward' of 'skip'/-Infinity will allow the production to be skipped during
  * reward, or 'stop'/+Inf will permit the production to terminate the reward
- * sequence.
+ * sequence.</p>
  * 
- * @see http://jactr.org/node/67
- * @author developer
+ * <p><a href="http://jactr.org/node/67">http://jactr.org/node/67</a></p>
+ * 
  */
 public class DefaultProceduralLearningModule6 extends AbstractModule implements
     IProceduralLearningModule6, IParameterized

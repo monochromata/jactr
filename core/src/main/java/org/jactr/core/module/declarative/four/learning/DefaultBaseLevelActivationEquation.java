@@ -31,7 +31,6 @@ import org.jactr.core.utils.references.IReferences;
  * components of thought
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class DefaultBaseLevelActivationEquation implements
     IBaseLevelActivationEquation

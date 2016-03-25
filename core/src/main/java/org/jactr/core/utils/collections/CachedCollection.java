@@ -29,8 +29,8 @@ import org.apache.commons.logging.LogFactory;
  * affecting calls to getCachedCopy() Even though it is synchronized, care must
  * be taken to synchronize the collection while iterating over it
  * 
- * @author developer
- * @param <I>
+ * 
+ * @param <I> TODO
  */
 public class CachedCollection<I> implements Collection<I>
 {

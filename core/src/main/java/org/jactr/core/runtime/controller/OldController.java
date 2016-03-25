@@ -46,9 +46,7 @@ import org.jactr.core.runtime.event.ACTRRuntimeEvent;
 import org.jactr.core.runtime.event.IACTRRuntimeListener;
 import org.jactr.core.runtime.profile.ProfilingModelRunner;
 
-/**
- * @author developer
- */
+// TODO: Can this class be deleted?
 public class OldController //implements IController
 {
   /**
@@ -97,7 +95,7 @@ public class OldController //implements IController
   /**
    * return the model listener that we use in order to control execution
    * 
-   * @return
+   * @return the model listener
    */
   final protected IModelListener getModelListener()
   {
@@ -108,7 +106,7 @@ public class OldController //implements IController
    * return the runtime listener that we use in order to signal the controller
    * events (awake from wait)
    * 
-   * @return
+   * @return the runtime listener
    */
   final protected IACTRRuntimeListener getRuntimeListener()
   {
@@ -121,7 +119,7 @@ public class OldController //implements IController
    * new DecoratedModelListener(super.createModelListener()); and please, oh,
    * please, make sure you call the super.XXXX() in your versions too
    * 
-   * @return
+   * @return the new model listener
    */
   protected IModelListener createModelListener()
   {
@@ -345,7 +343,7 @@ public class OldController //implements IController
   /**
    * create the runtime listener that handles controller signalling.
    * 
-   * @return
+   * @return the new runtime listener
    */
   protected IACTRRuntimeListener createRuntimeListener()
   {
@@ -440,7 +438,7 @@ public class OldController //implements IController
   /**
    * if true, after start() is called, the models will immediately suspend
    * 
-   * @param suspendImmediately
+   * @param suspendImmediately whether to suspend immediately
    */
   final public void setSuspendImmediately(boolean suspendImmediately)
   {
@@ -450,6 +448,7 @@ public class OldController //implements IController
   /**
    * return all the models that are currently running
    * 
+   * @return the running models
    * @see org.jactr.core.runtime.controller.IController#getRunningModels()
    */
   final public Collection<IModel> getRunningModels()
@@ -468,6 +467,7 @@ public class OldController //implements IController
   /**
    * return all the models that are suspended
    * 
+   * @return the suspended models
    * @see org.jactr.core.runtime.controller.IController#getSuspendedModels()
    */
   final public Collection<IModel> getSuspendedModels()
@@ -486,6 +486,7 @@ public class OldController //implements IController
   /**
    * return all the models that have termianted
    * 
+   * @return the terminated models
    * @see org.jactr.core.runtime.controller.IController#getTerminatedModels()
    */
   final public Collection<IModel> getTerminatedModels()
@@ -503,10 +504,10 @@ public class OldController //implements IController
 
   /**
    * return the suspender which is responsible for flaging a model for
-   * suspension, doing it and propogating the events.
+   * suspension, doing it and propagating the events.
    * 
-   * @param model
-   * @return
+   * @param model the model to get the suspender for
+   * @return the suspender for the model
    */
   final protected Suspender getSuspender(IModel model)
   {
@@ -521,9 +522,6 @@ public class OldController //implements IController
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#isRunning()
-   */
   final public boolean isRunning()
   {
     try
@@ -537,9 +535,6 @@ public class OldController //implements IController
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#isSuspended()
-   */
   final public boolean isSuspended()
   {
     try
@@ -553,11 +548,6 @@ public class OldController //implements IController
     }
   }
 
-  /**
-   * reset a competed runtime to its prefrun state
-   * 
-   * @see org.jactr.core.runtime.controller.IController#reset()
-   */
   final public void reset()
   {
     if (isRunning()) try
@@ -658,9 +648,6 @@ public class OldController //implements IController
     reset();
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#start()
-   */
   final public void start()
   {
     start(_suspendOnStart);
@@ -670,6 +657,7 @@ public class OldController //implements IController
    * this will fire the onStart if present, signal the start of the runtime and
    * then start the models
    * 
+   * @param suspendImmediately whether to suspend immediately
    * @see org.jactr.core.runtime.controller.IController#start(boolean)
    */
   final public void start(boolean suspendImmediately)
@@ -784,9 +772,6 @@ public class OldController //implements IController
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#waitForCompletion()
-   */
   final public void waitForCompletion() throws InterruptedException
   {
     try
@@ -801,9 +786,6 @@ public class OldController //implements IController
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#waitForResumption()
-   */
   final public void waitForResumption() throws InterruptedException
   {
     try
@@ -818,9 +800,6 @@ public class OldController //implements IController
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#waitForSuspension()
-   */
   final public void waitForSuspension() throws InterruptedException
   {
     try
@@ -862,12 +841,12 @@ public class OldController //implements IController
   }
 
   /**
-   * override to provide ProfilingModelRunner if you'd like to track performance
-   * stats
+   * Creates a model runner, either a {@link DefaultModelRunner}, or, if the system property {@code jactr.profiling}
+   * is set to {@code true}, a {@link ProfilingModelRunner}.
    * 
-   * @param model
-   * @param service
-   * @return
+   * @param model the model to run
+   * @param service the executor service to use
+   * @return the model runner
    */
   protected Runnable createModelRunner(IModel model, ExecutorService service)
   {
@@ -879,11 +858,11 @@ public class OldController //implements IController
   }
 
   /**
-   * if you override instantiateModelRunner and need to clean up said runner,
+   * if you override {@link #createModelRunner(IModel, ExecutorService)} and need to clean up said runner,
    * clean up here
    * 
-   * @param runner
-   * @param model
+   * @param runner the model runner
+   * @param model the model
    */
   protected void destroyModelRunner(Runnable runner, IModel model)
   {
@@ -927,8 +906,8 @@ public class OldController //implements IController
    * threads must be run on ITimeDependentThreads. If you need a thread factory,
    * check ExecutorServices.TIME_DEPENDENT_THREAD_FACTORY
    * 
-   * @param model
-   * @return
+   * @param model the model
+   * @return the executor service
    */
   protected ExecutorService createExecutorService(IModel model)
   {
@@ -941,8 +920,8 @@ public class OldController //implements IController
   /**
    * destory the executor service.
    * 
-   * @param service
-   * @param model
+   * @param service the executor service
+   * @param model the model
    */
   protected void destroyExecutorService(ExecutorService service, IModel model)
   {
@@ -961,8 +940,8 @@ public class OldController //implements IController
   /**
    * actually start the model
    * 
-   * @param model
-   * @param suspendOnStart
+   * @param model the model
+   * @param suspendOnStart whether to suspend on start
    */
   final protected void startModel(final IModel model, boolean suspendOnStart)
   {
@@ -1020,6 +999,8 @@ public class OldController //implements IController
 
   /**
    * force the model to stop
+   * 
+   * @param model the model to stop
    */
   final protected void stopModel(IModel model)
   {
@@ -1038,8 +1019,8 @@ public class OldController //implements IController
   /**
    * is this model running?
    * 
-   * @param model
-   * @return
+   * @param model the model
+   * @return {@code true}, if the model is running
    */
   final protected boolean isRunning(IModel model)
   {
@@ -1057,8 +1038,8 @@ public class OldController //implements IController
   /**
    * is this model suspended
    * 
-   * @param model
-   * @return
+   * @param model the model
+   * @return {@code true}, if the model is suspended
    */
   final protected boolean isSuspended(IModel model)
   {
@@ -1076,7 +1057,7 @@ public class OldController //implements IController
   /**
    * request that this model be suspended
    * 
-   * @param model
+   * @param model the model
    */
   final protected void suspendModel(IModel model)
   {
@@ -1090,6 +1071,8 @@ public class OldController //implements IController
 
   /**
    * request that this model resume
+   * 
+   * @param model the model
    */
   final protected void resumeModel(IModel model)
   {
@@ -1104,8 +1087,6 @@ public class OldController //implements IController
   /**
    * actual class that will block a model's execution. It is also responsible
    * for firing the modelSuspend/resume events
-   * 
-   * @author developer
    */
   static protected class Suspender
   {

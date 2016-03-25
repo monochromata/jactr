@@ -28,7 +28,6 @@ import org.jactr.core.utils.ModelerException;
  * method and calls it.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class ExecuteAction extends DefaultAction
 {
@@ -39,9 +38,6 @@ public class ExecuteAction extends DefaultAction
 
   /*
    * Class name
-   */
-  /**
-   * Description of the Field
    */
   public String                _className;
 
@@ -60,9 +56,6 @@ public class ExecuteAction extends DefaultAction
     _className = className;
   }
 
-  /**
-   * Constructor for the ExecuteAction object
-   */
   public ExecuteAction()
   {
     this(null);
@@ -75,34 +68,16 @@ public class ExecuteAction extends DefaultAction
     return new ExecuteAction(getClassName());
   }
 
-  /**
-   * Gets the className attribute of the ExecuteAction object
-   * 
-   * @return The className value
-   */
   public String getClassName()
   {
     return _className;
   }
 
-  /**
-   * Sets the className attribute of the ExecuteAction object
-   * 
-   * @param name
-   *            The new className value
-   */
   public void setClassName(String name)
   {
     _className = name;
   }
 
-  /**
-   * Description of the Method
-   * @param instantiation
-   *            Description of the Parameter
-   * 
-   * @return Description of the Return Value
-   */
   @SuppressWarnings("unchecked")
   @Override
   public double fire(IInstantiation instantiation, double firingTime)

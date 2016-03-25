@@ -41,9 +41,9 @@ public abstract class OldAsynchronousRequestDelegate extends
   /**
    * make sure we release the blocking timed event
    * 
-   * @param request
-   * @param buffer
-   * @param startValue
+   * @param request TODO
+   * @param buffer TODO
+   * @param startValue TODO
    * @see org.jactr.core.buffer.delegate.AsynchronousRequestDelegate#abortRequest(org.jactr.core.production.request.IRequest,
    *      org.jactr.core.buffer.IActivationBuffer, java.lang.Object)
    */

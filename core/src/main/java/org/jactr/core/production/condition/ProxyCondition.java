@@ -109,7 +109,7 @@ public class ProxyCondition extends AbstractSlotCondition
   /**
    * route to delegate if it implements {@link ISlotContainer}
    * 
-   * @param slot
+   * @param slot TODO
    * @see org.jactr.core.production.condition.AbstractSlotCondition#addSlot(org.jactr.core.slot.ISlot)
    */
   @Override

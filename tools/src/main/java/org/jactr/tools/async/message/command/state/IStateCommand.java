@@ -18,7 +18,7 @@ import java.io.Serializable;
 
 
 /**
- * @author developer
+ * 
  *
  */
 public interface IStateCommand extends Serializable

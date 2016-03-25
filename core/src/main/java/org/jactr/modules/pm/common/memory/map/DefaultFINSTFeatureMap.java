@@ -65,7 +65,7 @@ import org.jactr.modules.pm.common.memory.IPerceptualMemory;
  * <br>
  * Note: this does not fire events
  * 
- * @author developer
+ * 
  */
 public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
 {
@@ -137,10 +137,6 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
     return _memory;
   }
 
-  /**
-   * @return
-   * @see org.jactr.modules.pm.common.memory.map.IFINSTFeatureMap#getNew()
-   */
   public void getNew(Set<IIdentifier> destination)
   {
     try
@@ -312,10 +308,6 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
     }
   }
 
-  /**
-   * @see org.jactr.modules.pm.common.memory.map.IFINSTFeatureMap#flagAsAttended(org.commonreality.identifier.IIdentifier,
-   *      org.jactr.core.chunk.IChunk)
-   */
   public void flagAsAttended(IIdentifier identifier, IChunk chunk,
       double duration)
   {
@@ -366,10 +358,6 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
           FeatureMapEvent.Type.UPDATED, Collections.singleton(identifier)));
   }
 
-  /**
-   * @see org.jactr.modules.pm.common.memory.map.IFINSTFeatureMap#flagAsNew(org.commonreality.identifier.IIdentifier,
-   *      org.jactr.core.chunk.IChunk)
-   */
   public void flagAsNew(IIdentifier identifier, IChunk chunk, double duration)
   {
     FINST finst = null;

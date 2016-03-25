@@ -20,7 +20,7 @@ import org.commonreality.net.session.ISessionInfo;
 import org.jactr.tools.async.message.event.data.BreakpointReachedEvent;
 import org.jactr.tools.async.shadow.ShadowController;
 /**
- * @author developer
+ * 
  *
  */
 public class BreakpointMessageHandler implements

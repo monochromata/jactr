@@ -38,7 +38,6 @@ import org.jactr.core.queue.event.TimedEventEvent;
  * will be executed.
  * 
  * @author harrison
- * @created February 17, 2003
  */
 public class TimedEventQueue
 {
@@ -130,6 +129,8 @@ public class TimedEventQueue
 
   /**
    * is the queue empty?
+   * 
+   * @return TODO
    */
   public boolean isEmpty()
   {
@@ -147,6 +148,8 @@ public class TimedEventQueue
   /**
    * returns the time of the next expiring event, you should check the size
    * first..
+   * 
+   * @return TODO
    */
   public double getNextEndTime()
   {
@@ -164,6 +167,8 @@ public class TimedEventQueue
 
   /**
    * queue up the event. If the event has already elapsed, it will be fired.
+   * 
+   * @param te TODO
    */
   public void enqueue(ITimedEvent te)
   {
@@ -192,6 +197,8 @@ public class TimedEventQueue
   /**
    * return all the events that are pending. this is a costly operation and
    * should only be used when absolutely necessary
+   * 
+   * @return TODO
    */
   public Collection<ITimedEvent> getPendingEvents()
   {
@@ -204,7 +211,7 @@ public class TimedEventQueue
    * access to the other events that will be (or have been) fired. Once the
    * firing is complete, this will return an empty list.
    * 
-   * @return
+   * @return TODO
    */
   public Collection<ITimedEvent> getFiringEvents()
   {
@@ -217,8 +224,8 @@ public class TimedEventQueue
    * that have expired will have their timeHasElapsed() methods called, removed,
    * and returned to the caller
    * 
-   * @param currentTime
-   * @since
+   * @param currentTime TODO
+   * @return TODO
    */
   public boolean fireExpiredEvents(double currentTime)
   {

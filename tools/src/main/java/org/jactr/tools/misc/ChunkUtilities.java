@@ -40,9 +40,9 @@ public class ChunkUtilities
    * manipulate using
    * {@link ExecutionUtilities#executeNow(org.jactr.core.model.IModel, Runnable)}
    * 
-   * @param buffer
-   * @param modifier
-   * @return
+   * @param buffer TODO
+   * @param modifier TODO
+   * @return TODO
    */
   static public Future<Boolean> manipulateChunkNow(IActivationBuffer buffer,
       final IChunkModifier modifier)
@@ -55,9 +55,9 @@ public class ChunkUtilities
    * modify using
    * {@link ExecutionUtilities#executeLater(org.jactr.core.model.IModel, Runnable)}
    * 
-   * @param buffer
-   * @param modifier
-   * @return
+   * @param buffer TODO
+   * @param modifier TODO
+   * @return TODO
    */
   static public Future<Boolean> manipulateChunkLater(IActivationBuffer buffer,
       IChunkModifier modifier)
@@ -70,12 +70,12 @@ public class ChunkUtilities
    * Standard search and returned named, if found, otherwise create (and
    * possibly encode). This is not atomic, merely streamlined.
    * 
-   * @param chunkName
-   * @param model
-   * @param type
-   * @param modifier
-   * @param encode
-   * @return
+   * @param chunkName TODO
+   * @param model TODO
+   * @param type TODO
+   * @param modifier TODO
+   * @param encode TODO
+   * @return TODO
    */
   static public CompletableFuture<IChunk> getOrCreate(String chunkName,
       IModel model, IChunkType type, IChunkModifier modifier, boolean encode)
@@ -107,16 +107,16 @@ public class ChunkUtilities
   /**
    * Functionally a single call to create and set the slot values of a chunk.
    * Merely attach a callback to process when complete, or (and this is not
-   * recommended) call get(). <br/>
-   * <br/>
-   * <code>
-   *  ChunkUtilities.createAndConfigure(type, name, slots).thenAccept((c)->ChunkUtilities.addToBuffer(c,buffer));
-   * </code>
+   * recommended) call get().
    * 
-   * @param type
-   * @param nameTemplate
-   * @param slotValues
-   * @return
+   * {@code
+   *  ChunkUtilities.createAndConfigure(type, name, slots).thenAccept((c)->ChunkUtilities.addToBuffer(c,buffer));
+   * }
+   * 
+   * @param type TODO
+   * @param nameTemplate TODO
+   * @param slotValues TODO
+   * @return TODO
    */
   static public CompletableFuture<IChunk> createAndConfigure(IChunkType type,
       String nameTemplate, Map<String, Object> slotValues)
@@ -156,10 +156,10 @@ public class ChunkUtilities
   /**
    * Create configure and encode.
    * 
-   * @param type
-   * @param nameTemplate
-   * @param slotValues
-   * @return
+   * @param type TODO
+   * @param nameTemplate TODO
+   * @param slotValues TODO
+   * @return TODO
    */
   static public CompletableFuture<IChunk> createConfigureAndEncode(
       final IChunkType type, String nameTemplate, Map<String, Object> slotValues)
@@ -186,11 +186,6 @@ public class ChunkUtilities
     return encode;
   }
 
-  /**
-   * @param chunk
-   * @param buffer
-   * @return
-   */
   static public CompletableFuture<IChunk> addToBuffer(final IChunk chunk,
       final IActivationBuffer buffer)
   {

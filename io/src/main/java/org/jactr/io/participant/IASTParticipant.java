@@ -19,8 +19,6 @@ import org.jactr.io.parser.IParserImportDelegate;
 /**
  * IModule(s) wanting to provide AST modifications (such as injecting the
  * visual-location chunktype into the AST describing the model).
- * 
- * @author developer
  */
 public interface IASTParticipant
 {
@@ -28,14 +26,16 @@ public interface IASTParticipant
   /**
    * return the trimmer that will cull out injected nodes
    * 
-   * @return
+   * @param delegateForLoading TODO
+   * @return TODO
    */
   public IASTTrimmer getTrimmer(IParserImportDelegate delegateForLoading);
 
   /**
    * return the initializer that will do the injecting
    * 
-   * @return
+   * @param delegateForLoading TODO
+   * @return TODO
    */
   public IASTInjector getInjector(IParserImportDelegate delegateForLoading);
 }

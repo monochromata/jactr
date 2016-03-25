@@ -25,7 +25,6 @@ import org.apache.commons.logging.LogFactory;
  * Description of the Class
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class ChainedComparator<T> implements Comparator<T>
 {
@@ -41,6 +40,8 @@ public class ChainedComparator<T> implements Comparator<T>
 
   /**
    * Constructor for the ChainedComparator object
+   * 
+   * @param permitEqualities TODO
    */
   public ChainedComparator(boolean permitEqualities)
   {
@@ -49,7 +50,8 @@ public class ChainedComparator<T> implements Comparator<T>
   }
 
   /**
-   * @param comp
+   * @param comp TODO
+   * @param permitEqualities TODO
    */
   public ChainedComparator(Comparator<T> comp, boolean permitEqualities)
   {

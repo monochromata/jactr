@@ -26,7 +26,7 @@ import org.jactr.modules.pm.common.event.IPerceptualMemoryModuleListener;
  * but will likely arrive before the chunk is actually inserted into the visual
  * buffer.
  * 
- * @author developer
+ * 
  */
 public interface IVisualModuleListener extends EventListener,
     IParameterListener, IPerceptualMemoryModuleListener

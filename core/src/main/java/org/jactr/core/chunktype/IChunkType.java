@@ -28,41 +28,46 @@ import org.jactr.core.utils.IMetaContainer;
  * listeners
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public interface IChunkType extends Comparable<IChunkType>, ICommentable,
     IAdaptable, IMetaContainer
 {
 
   /**
-   * return the symbolic compoentn.
+   * @return the symbolic component.
    */
   public ISymbolicChunkType getSymbolicChunkType();
 
   /**
-   * return the subsymbolic portion
+   * @return the subsymbolic portion
    */
   public ISubsymbolicChunkType getSubsymbolicChunkType();
 
   /**
    * add chunk listener
+   * 
+   * @param ctl the chunk type listener
+   * @param executor TODO
    */
   public void addListener(IChunkTypeListener ctl, Executor executor);
 
   /**
    * remove chunk listener
+   * 
+   * @param ctl the chunk type listener
    */
   public void removeListener(IChunkTypeListener ctl);
 
   public boolean hasListeners();
 
+  /** 
+   * @param event the event to dispatch
+   */
   public void dispatch(ChunkTypeEvent event);
 
   /**
    * Called when one is sure the IChunkType shall not be used again. This may
    * call the dispose() method of all the derived Chunks.
-   * 
-   * @since
    */
   public void dispose();
 
@@ -70,25 +75,20 @@ public interface IChunkType extends Comparable<IChunkType>, ICommentable,
    * Gets the a attribute of the IChunkType object
    * 
    * @param ct
-   *            Description of Parameter
-   * @return The a value
-   * @since
+   *            the chunk type
+   * @return TODO
    */
   public boolean isA(IChunkType ct);
 
   public void encode();
 
   /**
-   * has this chunktype been encoded
-   * 
-   * @return
+   * @return {@code true}, if this chunktype has been encoded 
    */
   public boolean isEncoded();
 
   /**
-   * get the model that contains this chunktype
-   * 
-   * @return
+   * @return the model that contains this chunktype
    */
   public IModel getModel();
 

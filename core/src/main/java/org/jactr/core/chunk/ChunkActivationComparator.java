@@ -30,7 +30,6 @@ import org.jactr.core.production.request.ChunkTypeRequest;
  * Description of the Class
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class ChunkActivationComparator implements java.util.Comparator<IChunk>
 {

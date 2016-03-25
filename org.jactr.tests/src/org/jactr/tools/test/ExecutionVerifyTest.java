@@ -28,7 +28,7 @@ import org.jactr.core.production.IInstantiation;
 import org.jactr.core.utils.StringUtilities;
 
 /**
- * @author developer
+ * 
  */
 public class ExecutionVerifyTest extends TestCase
 {

@@ -43,21 +43,21 @@ import org.jactr.modules.pm.visual.event.VisualModuleEvent;
  * scene-change and scene-change-value. scene-change-value is a proportion of
  * objects that have changed in the visual scene since the last time the
  * scene-change mechanism was reset (visual-onset-duration since last trigger,
- * or explicit reset with +visual> isa clear-scene-change).<br>
- * <br>
- * ?visual> scene-change =value will be true or false depending on whether or
+ * or explicit reset with {@code +visual> isa clear-scene-change}).
+ * 
+ * <p>{@code ?visual> scene-change =value} will be true or false depending on whether or
  * not the scene-change-value is greater than SceneChangeThreshold (default
- * 0.25). <br>
- * <br>
- * This is all accomplished by attaching listeners to the visual module, and
- * either the individual {@link IVisualFeatureMap}s or {@link IAgent}'s
+ * 0.25).</p>
+ * 
+ * <p>This is all accomplished by attaching listeners to the visual module, and
+ * either the individual (TODO: resolve reference: IVisualFeatureMap)s or {@link IAgent}'s
  * {@link IAfferentObjectManager}, depending upon whether accuracy or speed is
  * more important. Setting the AcceleratedDetectionEnabled to true will use the
- * faster ( {@link IAfferentListener} version).<br>
- * <br>
- * Injection of the chunktype clear-scene-change is handled by the
+ * faster ( {@link IAfferentListener} version).</p>
+ * 
+ * <p>Injection of the chunktype clear-scene-change is handled by the
  * {@link SceneChangeParticipant} and the extension point in the bundle
- * manifest.
+ * manifest.</p>
  * 
  * @author harrison
  */
@@ -155,14 +155,10 @@ public class SceneChangeExtension implements IExtension
 
       public void perceptAttended(IPerceptualMemoryModuleEvent event)
       {
-        // TODO Auto-generated method stub
-
       }
 
       public void perceptIndexFound(IPerceptualMemoryModuleEvent event)
       {
-        // TODO Auto-generated method stub
-
       }
 
     }, ExecutorServices.INLINE_EXECUTOR);
@@ -215,7 +211,7 @@ public class SceneChangeExtension implements IExtension
       /**
        * at the top of each cycle, we check for scene change
        * 
-       * @param event
+       * @param event TODO
        * @see org.jactr.core.model.event.ModelListenerAdaptor#cycleStarted(org.jactr.core.model.event.ModelEvent)
        */
       @Override
@@ -229,7 +225,7 @@ public class SceneChangeExtension implements IExtension
       {
         if (_useAfferentObjectListener)
         {
-          /**
+          /*
            * in order to listen to afferent objects, we need to attach to
            * IAgent, which isn't available until after the model has connected
            * to common reality.. so, we need to defer install/uninstall until a
@@ -334,10 +330,6 @@ public class SceneChangeExtension implements IExtension
     _sceneChangeListener = null;
   }
 
-  /**
-   * @throws Exception
-   * @see org.jactr.core.utils.IInitializable#initialize()
-   */
   public void initialize() throws Exception
   {
     reset();

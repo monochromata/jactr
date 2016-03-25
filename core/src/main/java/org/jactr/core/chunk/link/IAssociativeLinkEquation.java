@@ -20,7 +20,7 @@ public interface IAssociativeLinkEquation
   /**
    * reset all the associatve strengths in the model
    * 
-   * @param model
+   * @param model TODO
    */
   public void resetStrengths(IModel model);
 }

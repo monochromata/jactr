@@ -19,7 +19,7 @@ import org.jactr.core.model.IModel;
 import org.jactr.tools.async.message.BaseMessage;
 
 /**
- * @author developer
+ * 
  */
 public class ExceptionMessage extends BaseMessage implements Serializable
 {

@@ -12,7 +12,7 @@ public interface IScriptableFactory
   /**
    * description of the scripting language
    * 
-   * @return
+   * @return TODO
    */
   public String getDescription();
 
@@ -22,8 +22,8 @@ public interface IScriptableFactory
    * test the language name to see if we support it. Case cannot be assured, so
    * be tolerant
    * 
-   * @param scriptName
-   * @return
+   * @param scriptName TODO
+   * @return TODO
    */
   public boolean supports(String scriptName);
 
@@ -31,7 +31,7 @@ public interface IScriptableFactory
    * global variable context for the factory. That is, all scripts using this
    * language will have the same global context
    * 
-   * @return
+   * @return TODO
    */
   public Object getGlobalContext();
 

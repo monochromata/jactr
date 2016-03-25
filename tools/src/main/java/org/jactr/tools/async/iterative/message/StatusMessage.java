@@ -18,7 +18,7 @@ import java.io.Serializable;
 import org.jactr.tools.async.message.BaseMessage;
 
 /**
- * @author developer
+ * 
  */
 public class StatusMessage extends BaseMessage implements Serializable
 {

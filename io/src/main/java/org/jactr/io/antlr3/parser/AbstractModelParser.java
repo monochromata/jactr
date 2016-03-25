@@ -43,7 +43,7 @@ import org.jactr.io.parser.ITreeTracker;
 import org.jactr.io.parser.ParserImportDelegateFactory;
 
 /**
- * @author developer
+ * 
  */
 public abstract class AbstractModelParser implements IModelParser
 {

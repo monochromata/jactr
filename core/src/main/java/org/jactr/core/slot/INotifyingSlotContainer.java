@@ -19,9 +19,9 @@ public interface INotifyingSlotContainer extends IUniqueSlotContainer
    * method used by the owned slot to communicate its change of value to the
    * container
    * 
-   * @param slot
-   * @param oldValue
-   * @param newValue
+   * @param slot TODO
+   * @param oldValue TODO
+   * @param newValue TODO
    */
   public void valueChanged(ISlot slot, Object oldValue, Object newValue);
 }

@@ -23,7 +23,7 @@ import org.jactr.tools.tracer.transformer.IEventTransformer;
 import org.jactr.tools.tracer.transformer.ITransformedEvent;
 
 /**
- * @author developer
+ * 
  */
 public class DeclarativeModuleEventTransformer implements IEventTransformer
 {

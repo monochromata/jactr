@@ -32,7 +32,7 @@ public interface IProceduralModuleListener extends EventListener,
   /**
    * called when a production is added to the procedural module
    * 
-   * @param pme
+   * @param pme the event
    */
   public void productionAdded(ProceduralModuleEvent pme);
 
@@ -41,7 +41,7 @@ public interface IProceduralModuleListener extends EventListener,
    * {@link ProceduralModuleEvent#getProductions()} actually contains the
    * {@link IInstantiation}s of the individual {@link IProduction}s.
    * 
-   * @param pme
+   * @param pme the event
    */
   public void conflictSetAssembled(ProceduralModuleEvent pme);
 
@@ -50,7 +50,7 @@ public interface IProceduralModuleListener extends EventListener,
    * {@link ProceduralModuleEvent#getProduction()} actually returns the
    * {@link IInstantiation} of the {@link IProduction}.
    * 
-   * @param pme
+   * @param pme the event
    */
   public void productionWillFire(ProceduralModuleEvent pme);
 
@@ -59,13 +59,15 @@ public interface IProceduralModuleListener extends EventListener,
    * {@link ProceduralModuleEvent#getProduction()} actually returns the
    * {@link IInstantiation} of the {@link IProduction}.
    * 
-   * @param pme
+   * @param pme the event
    */
   public void productionFired(ProceduralModuleEvent pme);
 
   /**
    * called when a production has been created, but not necessarily configured
    * with all its symbolic/subsymbolic contents
+   * 
+   * @param pme the event
    */
   public void productionCreated(ProceduralModuleEvent pme);
 
@@ -73,6 +75,8 @@ public interface IProceduralModuleListener extends EventListener,
    * called when two productions have been merged into one. pme.getProductions()
    * will return handles for both the original (unchanged) and the mergie
    * (changed)
+   * 
+   * @param pme the event
    */
   public void productionsMerged(ProceduralModuleEvent pme);
 }

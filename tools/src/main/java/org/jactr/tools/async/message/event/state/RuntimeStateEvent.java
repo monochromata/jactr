@@ -24,9 +24,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
 import org.jactr.tools.async.message.BaseMessage;
 
-/**
- * @author developer
- */
 public class RuntimeStateEvent extends BaseMessage implements
     IRuntimeStateEvent, Serializable
 {
@@ -99,17 +96,11 @@ public class RuntimeStateEvent extends BaseMessage implements
     return sb.toString();
   }
 
-  /**
-   * @see org.jactr.tools.async.message.command.state.IStateCommand#getSimulationTime()
-   */
   public double getSimulationTime()
   {
     return _simulationTime;
   }
 
-  /**
-   * @see org.jactr.tools.async.message.command.state.IStateCommand#getSystemTime()
-   */
   public long getSystemTime()
   {
     return _systemTime;

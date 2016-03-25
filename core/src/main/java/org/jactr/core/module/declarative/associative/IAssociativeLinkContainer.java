@@ -20,7 +20,7 @@ public interface IAssociativeLinkContainer
   /**
    * get all the outbound links
    * 
-   * @param container
+   * @param container TODO
    */
   public void getOutboundLinks(Collection<IAssociativeLink> container);
 
@@ -29,7 +29,7 @@ public interface IAssociativeLinkContainer
   /**
    * all in bound links
    * 
-   * @param container
+   * @param container TODO
    */
   public void getInboundLinks(Collection<IAssociativeLink> container);
 
@@ -39,8 +39,8 @@ public interface IAssociativeLinkContainer
    * return all outbound links that connect to receiver. Normally, there is only
    * one, but this supports multiple.
    * 
-   * @param receiver
-   * @param container
+   * @param receiver TODO
+   * @param container TODO
    */
   public void getOutboundLinks(IChunk receiver,
       Collection<IAssociativeLink> container);
@@ -48,8 +48,8 @@ public interface IAssociativeLinkContainer
   /**
    * return all the links that we are getting
    * 
-   * @param sender
-   * @param container
+   * @param sender TODO
+   * @param container TODO
    */
   public void getInboundLinks(IChunk sender,
       Collection<IAssociativeLink> container);

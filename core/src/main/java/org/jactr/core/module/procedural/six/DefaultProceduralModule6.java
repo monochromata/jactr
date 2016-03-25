@@ -80,7 +80,7 @@ import org.jactr.core.utils.parameter.ParameterHandler;
  * if not, an {@link RemoveAction} is added (and therefore the production
  * explicitly removes the chunk).
  * 
- * @see http://jactr.org/node/132
+ * <p><a href="http://jactr.org/node/132">http://jactr.org/node/132</a></p>
  * @author harrison
  */
 public class DefaultProceduralModule6 extends AbstractModule implements
@@ -648,8 +648,8 @@ public class DefaultProceduralModule6 extends AbstractModule implements
    * iterates over productions, attempting to instantiate each. Those that can
    * be instantiated will be sorted by utility and returned. If
    * 
-   * @param productions
-   * @return
+   * @param productions TODO
+   * @return TODO
    */
   protected Collection<IInstantiation> createAndSortInstantiations(
       Collection<IProduction> productions)

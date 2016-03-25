@@ -21,7 +21,7 @@ import org.jactr.tools.async.credentials.ICredentials;
 import org.jactr.tools.async.message.BaseMessage;
 import org.jactr.tools.async.message.command.ICommand;
 /**
- * @author developer
+ * 
  *
  */
 public class LoginCommand extends BaseMessage implements ICommand, Serializable

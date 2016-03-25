@@ -27,10 +27,9 @@ import org.jactr.core.utils.parameter.IParameterized;
 
 /**
  * ChunkData contains blocks of code that are common to most chunk
- * implementations. <bR>
- * <bt> TODO this class needs to use the locks it has
+ * implementations.
  * 
- * @author developer
+ * <p>TODO this class needs to use the locks it has</p>
  */
 public class ChunkData
 {

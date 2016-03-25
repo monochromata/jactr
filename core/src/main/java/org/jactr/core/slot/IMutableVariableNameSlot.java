@@ -7,8 +7,8 @@ package org.jactr.core.slot;
 /**
  * interface for a variable named slot that can have the name
  * resolved.
+ * 
  * @author harrison
- *
  */
 public interface IMutableVariableNameSlot extends IVariableNameSlot
 {
@@ -18,7 +18,7 @@ public interface IMutableVariableNameSlot extends IVariableNameSlot
    * has already been resolved (i.e. {@link #isVariableName()} returns
    * false), the name is not changed.
    * 
-   * @param name
+   * @param name TODO
    */
   public void setName(String name);
 }

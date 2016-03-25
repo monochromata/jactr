@@ -21,14 +21,9 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.event.ModelEvent;
 import org.jactr.tools.tracer.transformer.AbstractTransformedEvent;
 
-/**
- * @author developer
- */
 public class TransformedModelEvent extends AbstractTransformedEvent implements Serializable
 {
-  /**
-   * 
-   */
+	
   private static final long serialVersionUID = -7699342223139814445L;
 
   /**
@@ -38,12 +33,7 @@ public class TransformedModelEvent extends AbstractTransformedEvent implements S
                                       .getLog(TransformedModelEvent.class);
 
   private ModelEvent.Type _type;
-  /**
-   * @param source
-   * @param systemTime
-   * @param simulationTime
-   * @param ast
-   */
+
   public TransformedModelEvent(String source, long systemTime,
       double simulationTime, ModelEvent.Type type, CommonTree ast)
   {

@@ -24,8 +24,8 @@ public interface ISymbolicChunkFactory
   /**
    * merge the copy into the master
    * 
-   * @param master
-   * @param copy
+   * @param master TODO
+   * @param copy TODO
    */
   public void merge(ISymbolicChunk master, ISymbolicChunk copy);
 
@@ -36,8 +36,8 @@ public interface ISymbolicChunkFactory
   /**
    * copy symbolic elements
    * 
-   * @param source
-   * @param destination
+   * @param source TODO
+   * @param destination TODO
    */
   public void copy(ISymbolicChunk source, ISymbolicChunk destination);
 }

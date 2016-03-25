@@ -19,7 +19,7 @@ public interface IInitializable
   /**
    * intialize this component
    * 
-   * @throws Exception
+   * @throws Exception if initialization fails
    */
   public void initialize() throws Exception;
 }

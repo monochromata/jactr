@@ -25,8 +25,6 @@ import org.jactr.core.production.IProduction;
 
 /**
  * specialized module for accessing procedural memory
- * 
- * @author developer
  */
 public interface IProceduralModule extends IModule
 {
@@ -39,30 +37,30 @@ public interface IProceduralModule extends IModule
   /**
    * create a production, likely backed by the factory
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   public CompletableFuture<IProduction> createProduction(String name);
 
   /**
    * add this production to procedural memory and check for duplicates
    * 
-   * @param production
-   * @return
+   * @param production TODO
+   * @return TODO
    */
   public CompletableFuture<IProduction> addProduction(IProduction production);
 
   /**
    * return the named production
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    */
   public CompletableFuture<IProduction> getProduction(String name);
   
   /**
-   * return all the productions
-   * @return
+   * return all the productions TODO
+   * @return TODO
    */
   public CompletableFuture<Collection<IProduction>> getProductions();
 
@@ -70,8 +68,8 @@ public interface IProceduralModule extends IModule
    * find the set of production instantiations that can fire based on the state
    * of the buffers and fire the notification events
    * 
-   * @param buffers
-   * @return
+   * @param buffers TODO
+   * @return TODO
    */
   public CompletableFuture<Collection<IInstantiation>> getConflictSet(
       Collection<IActivationBuffer> buffers);
@@ -81,9 +79,9 @@ public interface IProceduralModule extends IModule
    * fire this production and fire notification events. This should catch
    * and ModelTerminatedException and return Double.NaN if it catches it
    * 
-   * @param instantiation
+   * @param instantiation TODO
    * @param firingTime TODO
-   * @return
+   * @return TODO
    */
   public CompletableFuture<Double> fireProduction(IInstantiation instantiation,
       double firingTime);
@@ -98,15 +96,12 @@ public interface IProceduralModule extends IModule
   /**
    * the default production firing time, aka default action time
    * 
-   * @return
+   * @return TODO
    */
   public double getDefaultProductionFiringTime();
 
   public void setDefaultProductionFiringTime(double firingTime);
   
-  /**
-   * @return
-   */
   public long getNumberOfProductionsFired();
 
   public void setNumberOfProductionsFired(long fired);

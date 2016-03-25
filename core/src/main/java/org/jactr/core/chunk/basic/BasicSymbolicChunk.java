@@ -32,7 +32,6 @@ import org.jactr.core.utils.IAdaptable;
  * default symbolic chunk implementation
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public class BasicSymbolicChunk extends NotifyingSlotContainer implements
     ISymbolicChunk, IAdaptable
@@ -78,6 +77,8 @@ public class BasicSymbolicChunk extends NotifyingSlotContainer implements
 
   /**
    * cannot add/remove slots from a chunk
+   * 
+   * @return TODO
    */
   public boolean canModify()
   {

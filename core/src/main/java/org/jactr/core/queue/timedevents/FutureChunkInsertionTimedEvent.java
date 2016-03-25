@@ -25,7 +25,7 @@ import org.jactr.core.chunk.IChunk;
  * elapsed. This uses the Future interface so that asynchronous operations can
  * be active up until the time that the chunk is actually required
  * 
- * @author developer
+ * 
  */
 @Deprecated
 public class FutureChunkInsertionTimedEvent extends AbstractTimedEvent

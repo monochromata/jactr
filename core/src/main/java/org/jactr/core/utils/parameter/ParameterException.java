@@ -15,10 +15,7 @@ package org.jactr.core.utils.parameter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-/**
- * @author developer
- *
- */
+
 public class ParameterException extends RuntimeException
 {
   /**
@@ -26,40 +23,33 @@ public class ParameterException extends RuntimeException
    */
   static private final Log LOGGER = LogFactory.getLog(ParameterException.class);
 
-  /**
-   * 
-   */
   public ParameterException()
   {
-    // TODO Auto-generated constructor stub
   }
 
   /**
-   * @param arg0
+   * @param arg0 TODO
    */
   public ParameterException(String arg0)
   {
     super(arg0);
-    // TODO Auto-generated constructor stub
   }
 
   /**
-   * @param arg0
+   * @param arg0 TODO
    */
   public ParameterException(Throwable arg0)
   {
     super(arg0);
-    // TODO Auto-generated constructor stub
   }
 
   /**
-   * @param arg0
-   * @param arg1
+   * @param arg0 TODO
+   * @param arg1 TODO
    */
   public ParameterException(String arg0, Throwable arg1)
   {
     super(arg0, arg1);
-    // TODO Auto-generated constructor stub
   }
 
 }

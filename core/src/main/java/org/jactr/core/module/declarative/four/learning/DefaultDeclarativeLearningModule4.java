@@ -44,8 +44,8 @@ import org.jactr.core.utils.parameter.ParameterHandler;
  * production fired, binding to which chunks so that the associative links can
  * be updated
  * 
- * @see {@linkplain http://jactr.org/node/128}
- * @author developer
+ * <p><a href="http://jactr.org/node/128">http://jactr.org/node/128</a></p>
+ * 
  */
 public class DefaultDeclarativeLearningModule4 extends AbstractModule implements
     IDeclarativeLearningModule4, IParameterized
@@ -274,28 +274,17 @@ public class DefaultDeclarativeLearningModule4 extends AbstractModule implements
     }
   }
 
-
-
-  /**
-   * @see org.jactr.core.module.declarative.four.learning.IDeclarativeLearningModule4#getBaseLevelActivationEquation()
-   */
   public IBaseLevelActivationEquation getBaseLevelActivationEquation()
   {
     return _baseLevelActivationEquation;
   }
 
-  /**
-   * @see org.jactr.core.module.declarative.four.learning.IDeclarativeLearningModule4#setBaseLevelActivationEquation(org.jactr.core.module.declarative.four.IBaseLevelActivationEquation)
-   */
   public void setBaseLevelActivationEquation(
       IBaseLevelActivationEquation equation)
   {
     _baseLevelActivationEquation = equation;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getParameter(java.lang.String)
-   */
   public String getParameter(String key)
   {
     if (BASE_LEVEL_LEARNING_RATE.equalsIgnoreCase(key))
@@ -307,9 +296,6 @@ public class DefaultDeclarativeLearningModule4 extends AbstractModule implements
     return null;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getPossibleParameters()
-   */
   public Collection<String> getPossibleParameters()
   {
     ArrayList<String> rtn = new ArrayList<String>();
@@ -319,18 +305,11 @@ public class DefaultDeclarativeLearningModule4 extends AbstractModule implements
     return rtn;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getSetableParameters()
-   */
   public Collection<String> getSetableParameters()
   {
     return getPossibleParameters();
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#setParameter(java.lang.String,
-   *      java.lang.String)
-   */
   public void setParameter(String key, String value)
   {
     if (BASE_LEVEL_LEARNING_RATE.equalsIgnoreCase(key))

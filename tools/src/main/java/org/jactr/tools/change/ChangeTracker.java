@@ -207,8 +207,6 @@ public class ChangeTracker implements IInstrument, IParameterized
 
   public void initialize()
   {
-    // TODO Auto-generated method stub
-
   }
 
   public void install(IModel model)
@@ -271,8 +269,8 @@ public class ChangeTracker implements IInstrument, IParameterized
   /**
    * generate the ast of the to-be-fire instantaition
    * 
-   * @param model
-   * @param production
+   * @param model TODO
+   * @param production TODO
    */
   protected void generateAST(IModel model, IProduction production)
   {
@@ -291,7 +289,7 @@ public class ChangeTracker implements IInstrument, IParameterized
   /**
    * use the list of changed chunks to generate asts for them
    * 
-   * @param model
+   * @param model TODO
    */
   protected void generateASTs(IModel model)
   {
@@ -325,8 +323,8 @@ public class ChangeTracker implements IInstrument, IParameterized
    * generate the code for the asts and then send them to the logger on the
    * background thread
    * 
-   * @param model
-   * @param cleanUp
+   * @param model TODO
+   * @param cleanUp TODO
    */
   protected void flush( IModel model,  boolean cleanUp)
   {

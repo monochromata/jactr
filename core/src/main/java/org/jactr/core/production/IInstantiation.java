@@ -22,7 +22,6 @@ package org.jactr.core.production;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IInstantiation extends IProduction
 {
@@ -57,9 +56,9 @@ public interface IInstantiation extends IProduction
 
   /**
    * fire the instantiation returning the amount of time it should take
-   * @param firingTime TODO
    * 
-   * @return
+   * @param firingTime TODO
+   * @return TODO
    */
   public double fire(double firingTime);
 }

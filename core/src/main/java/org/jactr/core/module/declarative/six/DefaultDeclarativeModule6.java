@@ -40,13 +40,15 @@ import org.jactr.core.utils.references.IOptimizedReferences;
 import org.jactr.core.utils.references.IReferences;
 
 /**
- * Default declarative module for ACT-R 6. <br/>
- * This module uses the {@link IDeclarativeConfigurator} to set the chunk's
+ * Default declarative module for ACT-R 6.
+ * 
+ * <p>This module uses the (TODO: resolve reference: IDeclarativeConfigurator) to set the chunk's
  * various equations ({@link IBaseLevelActivationEquation},
  * {@link ISpreadingActivationEquation}, {@link IRandomActivationEquation}).
  * Clients extending this should be sure to delegate to the original
- * configurator as to keep this functionality ( {@link #getConfigurator()}). <h3>
- * Parameters</h3>
+ * configurator as to keep this functionality (TODO: resolve reference: #getConfigurator()).</p>
+ * 
+ * <h3>Parameters</h3>
  * <ul>
  * <li><b>EnablePartialMatching</b> : Turn on partial matching in searches
  * (values:true/false. default: false)
@@ -65,7 +67,7 @@ import org.jactr.core.utils.references.IReferences;
  * mismatched slot values (value: numeric. default:0)
  * </ul>
  * 
- * @see http://jactr.org/node/87
+ * <p><a href="http://jactr.org/node/87">http://jactr.org/node/87</a></p>
  * @author harrison
  */
 public class DefaultDeclarativeModule6 extends DefaultDeclarativeModule

@@ -62,10 +62,11 @@ import org.jactr.core.utils.StringUtilities;
  * Abstract declarative module that provides most of the functionality required
  * of the {@link IDeclarativeModule} including creation, merging and disposal of
  * chunks and types. However, the actual adding to the containers or searching
- * is left to subclasses. <br/>
- * The factories used by this class are not set by default.
+ * is left to subclasses.
  * 
- * @see http://jactr.org/node/120
+ * <p>The factories used by this class are not set by default.</p>
+ * 
+ * <p><a href="http://jactr.org/node/120">http://jactr.org/node/120</a></p>
  * @author harrison
  */
 public abstract class AbstractDeclarativeModule extends AbstractModule
@@ -91,7 +92,8 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
    * This mechanism is a recommendation only, that the declarative module can
    * use to temporarily suspend disposal.
    * 
-   * @param chunk
+   * @param chunk TODO
+   * @param suspend TODO
    */
   public static void setDisposalSuspended(IChunk chunk, boolean suspend)
   {
@@ -390,7 +392,7 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
    * preferrable to use this configurator and add yours to it, allowing more
    * than one to be installed and used.
    * 
-   * @return
+   * @return TODO
    */
   public IChunkConfigurator getChunkConfigurator()
   {
@@ -470,9 +472,9 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
    * create a chunk by delegating to
    * {@link #createChunkInternal(IChunkType, String)} on {@link #getExecutor()}
    * 
-   * @param parent
-   * @param name
-   * @return
+   * @param parent TODO
+   * @param name TODO
+   * @return TODO
    * @see org.jactr.core.module.declarative.IDeclarativeModule#createChunk(org.jactr.core.chunktype.IChunkType,
    *      java.lang.String)
    */
@@ -495,9 +497,9 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * create the chunk
    * 
-   * @param parent
-   * @param name
-   * @return
+   * @param parent TODO
+   * @param name TODO
+   * @return TODO
    */
   protected IChunk createChunkInternal(IChunkType parent, String name)
   {
@@ -524,7 +526,7 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * calls the pluggable IChunkConfigurator
    * 
-   * @param newChunk
+   * @param newChunk TODO
    */
   protected void configure(IChunk newChunk)
   {
@@ -535,8 +537,8 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
    * add chunk to DM. performs a search for any matches, then merely delegates
    * to {@link #addChunkInternal(IChunk, Collection)} on {@link #getExecutor()}
    * 
-   * @param chunk
-   * @return
+   * @param chunk TODO
+   * @return TODO
    * @see org.jactr.core.module.declarative.IDeclarativeModule#addChunk(org.jactr.core.chunk.IChunk)
    */
   public CompletableFuture<IChunk> addChunk(final IChunk chunk)
@@ -623,17 +625,19 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
    * add the chunk to DM on the module's executor. If the executor is INLINE or
    * multiply threaded, thread safety is a must.
    * 
-   * @param chunkToAdd
+   * @param chunkToAdd TODO
    * @param possibleMatches
    *          TODO
-   * @param
-   * @return
+   * @return TODO
    */
   abstract protected IChunk addChunkInternal(IChunk chunkToAdd,
       Collection<IChunk> possibleMatches);
 
   /**
    * copy the specified chunk, by default this will also copy subsymbolics
+   * 
+   * @param sourceChunk TODO
+   * @return TODO
    */
   public CompletableFuture<IChunk> copyChunk(IChunk sourceChunk)
   {
@@ -663,8 +667,9 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * copy source to copy
    * 
-   * @param sourceChunk
-   * @param copy
+   * @param sourceChunk TODO
+   * @param destination TODO
+   * @param copySubsymbolics TODO
    */
   protected void copyChunkInternal(IChunk sourceChunk, IChunk destination,
       boolean copySubsymbolics)
@@ -698,8 +703,8 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * delegated
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    * @see org.jactr.core.module.declarative.IDeclarativeModule#getChunk(java.lang.String)
    */
   public CompletableFuture<IChunk> getChunk(final String name)
@@ -716,10 +721,6 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
 
   abstract protected IChunk getChunkInternal(String chunkName);
 
-  /**
-   * @return
-   * @see org.jactr.core.module.declarative.IDeclarativeModule#getChunks()
-   */
   public CompletableFuture<Collection<IChunk>> getChunks()
   {
     Callable<Collection<IChunk>> callable = new Callable<Collection<IChunk>>() {
@@ -736,16 +737,15 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
 
   /**
    * create chunktype, delegates to
-   * {@link #createChunkTypeInternal(IChunkType, String)} on
+   * {@link #createChunkTypeInternal(Collection, String)} on
    * {@link #getExecutor()}
    * 
-   * @param parent
-   * @param name
-   * @return
+   * @param parents TODO
+   * @param name TODO
+   * @return TODO
    * @see org.jactr.core.module.declarative.IDeclarativeModule#createChunkType(org.jactr.core.chunktype.IChunkType,
    *      java.lang.String)
    */
-
   public CompletableFuture<IChunkType> createChunkType(
       final Collection<IChunkType> parents, final String name)
   {
@@ -794,7 +794,7 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * calls {@link IChunkTypeConfigurator}
    * 
-   * @param newChunkType
+   * @param newChunkType TODO
    */
   protected void configure(IChunkType newChunkType)
   {
@@ -805,8 +805,8 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
    * add chunktype to DM, delegated to {@link #addChunkTypeInternal(IChunkType)}
    * on {@link #getExecutor()}
    * 
-   * @param chunkType
-   * @return
+   * @param chunkType TODO
+   * @return TODO
    * @see org.jactr.core.module.declarative.IDeclarativeModule#addChunkType(org.jactr.core.chunktype.IChunkType)
    */
   public CompletableFuture<IChunkType> addChunkType(final IChunkType chunkType)
@@ -832,16 +832,16 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
    * add the chunktype DM on the module's executor. If the executor is INLINE or
    * multithreaded, thread safety is a must.
    * 
-   * @param chunkType
-   * @return
+   * @param chunkType TODO
+   * @return TODO
    */
   abstract protected IChunkType addChunkTypeInternal(IChunkType chunkType);
 
   /**
    * delegated
    * 
-   * @param name
-   * @return
+   * @param name TODO
+   * @return TODO
    * @see org.jactr.core.module.declarative.IDeclarativeModule#getChunkType(java.lang.String)
    */
   public CompletableFuture<IChunkType> getChunkType(final String name)
@@ -861,7 +861,7 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * delegated
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.module.declarative.IDeclarativeModule#getChunkTypes()
    */
   public CompletableFuture<Collection<IChunkType>> getChunkTypes()
@@ -898,7 +898,7 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * actually perform the disposal
    * 
-   * @param chunk
+   * @param chunk TODO
    */
   protected void disposeInternal(IChunk chunk)
   {
@@ -936,13 +936,14 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * entry point for merging chunks. This assumes that originalChunk is encoded,
    * newChunk was going to be encoded, but was determined to be merged into
-   * originalChunk instead. newChunk may or maynot have been encoded. <br/>
-   * This method handles the event dispatching, logging and ultimately calls
-   * {@link #mergeChunksInternal(IChunk, IChunk)} to do the real work.
+   * originalChunk instead. newChunk may or maynot have been encoded.
    * 
-   * @param originalChunk
-   * @param newChunk
-   * @return
+   * <p>This method handles the event dispatching, logging and ultimately calls
+   * {@link #mergeChunksInternal(IChunk, IChunk)} to do the real work.</p>
+   * 
+   * @param originalChunk TODO
+   * @param newChunk TODO
+   * @return TODO
    */
   protected IChunk merge(IChunk originalChunk, IChunk newChunk)
   {
@@ -980,8 +981,8 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * actually do the work or merging newChunk into originalChunk.
    * 
-   * @param originalChunk
-   * @param newChunk
+   * @param originalChunk TODO
+   * @param newChunk TODO
    */
   protected void mergeChunksInternal(IChunk originalChunk, IChunk newChunk)
   {
@@ -1061,6 +1062,8 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
 
   /**
    * schedule this chunk to be disposed, at the module's earliest convenience
+   * 
+   * @param chunk TODO
    */
   public void dispose(IChunk chunk)
   {
@@ -1078,7 +1081,7 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   /**
    * encode this chunk at some later time (top/bottom of the cycle).
    * 
-   * @param chunk
+   * @param chunk TODO
    */
   protected void deferredEncode(IChunk chunk)
   {
@@ -1201,7 +1204,10 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
   }
 
   /**
-   * called internally at the top & bottom of the cycle and at the end of a run.
+   * called internally at the top and bottom of the cycle and at the end of a run.
+   * 
+   * @param chunkContainer TODO
+   * @param bufferContainer TODO
    */
   protected void processPendingDisposals(FastList<IChunk> chunkContainer,
       FastList<IActivationBuffer> bufferContainer)

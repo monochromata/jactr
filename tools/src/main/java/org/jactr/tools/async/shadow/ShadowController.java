@@ -55,8 +55,6 @@ import org.jactr.tools.async.shadow.handlers.RuntimeStateMessageHandler;
 /**
  * a mock controller that is to be used to interface with the real one
  * controller.NetworkedDebugController
- * 
- * @author developer
  */
 public class ShadowController extends NetworkedEndpoint
 {
@@ -131,7 +129,7 @@ public class ShadowController extends NetworkedEndpoint
   {
     try
     {
-      /**
+      /*
        * horrible exception handler..
        */
       session.addExceptionHandler((s, t) -> {
@@ -341,9 +339,6 @@ public class ShadowController extends NetworkedEndpoint
     _lastSimulationTime = time;
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#isRunning()
-   */
   public boolean isRunning()
   {
     try
@@ -370,9 +365,6 @@ public class ShadowController extends NetworkedEndpoint
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#isSuspended()
-   */
   public boolean isSuspended()
   {
     try
@@ -463,9 +455,6 @@ public class ShadowController extends NetworkedEndpoint
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#reset()
-   */
   public void reset()
   {
     checkConnection();
@@ -501,9 +490,6 @@ public class ShadowController extends NetworkedEndpoint
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#resume()
-   */
   public void resume()
   {
     checkConnection();
@@ -547,17 +533,11 @@ public class ShadowController extends NetworkedEndpoint
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#start()
-   */
   public void start()
   {
     start(false);
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#start(boolean)
-   */
   public void start(boolean suspendImmediately)
   {
     checkConnection();
@@ -578,9 +558,6 @@ public class ShadowController extends NetworkedEndpoint
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#stop()
-   */
   public void stop()
   {
     checkConnection();
@@ -621,9 +598,6 @@ public class ShadowController extends NetworkedEndpoint
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#suspend()
-   */
   public void suspend()
   {
     checkConnection();
@@ -678,9 +652,9 @@ public class ShadowController extends NetworkedEndpoint
    * may miss events if the notifications are coming in faster than
    * ShadowController can respond to them.
    * 
-   * @param maxWait
+   * @param maxWait TODO
    * @return the number of state changes that have elapsed since start of wait
-   * @throws InterruptedException
+   * @throws InterruptedException TODO
    */
   public long waitForStateChange(long maxWait) throws InterruptedException
   {
@@ -712,7 +686,7 @@ public class ShadowController extends NetworkedEndpoint
   /**
    * should only be called from within the lock blocks
    * 
-   * @return
+   * @return TODO
    */
   protected long getStateCounter()
   {
@@ -725,7 +699,9 @@ public class ShadowController extends NetworkedEndpoint
   }
 
   /**
+   * @param maxWait TODO
    * @return if the runtime is running
+   * @throws InterruptedException TODO
    * @see org.jactr.core.runtime.controller.IController#waitForCompletion()
    */
   public boolean waitForCompletion(long maxWait) throws InterruptedException
@@ -758,6 +734,8 @@ public class ShadowController extends NetworkedEndpoint
 
   /**
    * called by the io handler only when the actual runtime has resumed.
+   * 
+   * @param modelName TODO
    */
   public void resumed(String modelName)
   {
@@ -785,8 +763,8 @@ public class ShadowController extends NetworkedEndpoint
 
   /**
    * @see #waitForResumption(long)
-   * @return
-   * @throws InterruptedException
+   * @return TODO
+   * @throws InterruptedException TODO
    */
   public boolean waitForResumption() throws InterruptedException
   {
@@ -801,6 +779,7 @@ public class ShadowController extends NetworkedEndpoint
    *          milliseconds to block, 0 is indefinite
    * @return if the runtime has resumed, if false, you should explicitly check
    *         the state
+   * @throws InterruptedException TODO
    * @see #waitForStateChange(long)
    */
   public boolean waitForResumption(long maxWait) throws InterruptedException
@@ -841,6 +820,8 @@ public class ShadowController extends NetworkedEndpoint
   /**
    * called by the io handler only to signal that the runtime (where ever it is)
    * has been suspended.
+   * 
+   * @param modelName TODO
    */
   public void suspended(String modelName)
   {
@@ -866,8 +847,9 @@ public class ShadowController extends NetworkedEndpoint
   }
 
   /**
+   * @return TODO
    * @see #waitForSuspension(long)
-   * @throws InterruptedException
+   * @throws InterruptedException TODO
    */
   public boolean waitForSuspension() throws InterruptedException
   {
@@ -882,6 +864,7 @@ public class ShadowController extends NetworkedEndpoint
    *          milliseconds to block, 0 is indefinite
    * @return if the runtime has suspended, if false, you should explicitly check
    *         the state
+   * @throws InterruptedException TODO
    * @see #waitForStateChange(long)
    */
   public boolean waitForSuspension(long maxWait) throws InterruptedException
@@ -918,9 +901,6 @@ public class ShadowController extends NetworkedEndpoint
     }
   }
 
-  /**
-   * @see org.jactr.core.runtime.controller.IController#waitForStart()
-   */
   public boolean waitForStart() throws InterruptedException
   {
     return waitForStart(0);
@@ -934,6 +914,7 @@ public class ShadowController extends NetworkedEndpoint
    *          milliseconds to block, 0 is indefinite
    * @return if the runtime has started, if false, you should explicitly check
    *         the state
+   * @throws InterruptedException TODO
    * @see #waitForStateChange(long)
    */
   public boolean waitForStart(long maxWait) throws InterruptedException
@@ -961,6 +942,8 @@ public class ShadowController extends NetworkedEndpoint
 
   /**
    * called by the io handler only when the runtime has actually started.
+   * 
+   * @param modelNames TODO
    */
   public void started(Collection<String> modelNames)
   {
@@ -993,6 +976,8 @@ public class ShadowController extends NetworkedEndpoint
 
   /**
    * called by the io handler only when the runtime has stopped.
+   * 
+   * @param modelName TODO
    */
   public void stopped(String modelName)
   {

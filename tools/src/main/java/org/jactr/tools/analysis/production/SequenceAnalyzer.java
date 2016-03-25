@@ -87,7 +87,7 @@ public class SequenceAnalyzer
    * we track all the chunktypes and their children so that we can check
    * chunktype conditions
    * 
-   * @param chunkType
+   * @param chunkType TODO
    */
   public void addChunkType(CommonTree chunkType)
   {

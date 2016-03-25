@@ -26,7 +26,6 @@ import org.jactr.core.utils.IAdaptable;
  * Description of the Interface
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ISymbolicProduction extends IAdaptable
 {

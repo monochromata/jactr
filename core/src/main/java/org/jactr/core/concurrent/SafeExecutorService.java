@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  ses.setDelegate(Executors.newSingleThreadExecutor(setf));
  </code>
  * 
- * @author developer
+ * 
  */
 public class SafeExecutorService extends AbstractExecutorService
 {
@@ -70,51 +70,32 @@ public class SafeExecutorService extends AbstractExecutorService
     return _permitSelfExecution;
   }
 
-  /**
-   * @see java.util.concurrent.ExecutorService#awaitTermination(long,
-   *      java.util.concurrent.TimeUnit)
-   */
   public boolean awaitTermination(long arg0, TimeUnit arg1)
       throws InterruptedException
   {
     return _delegate.awaitTermination(arg0, arg1);
   }
 
-  /**
-   * @see java.util.concurrent.ExecutorService#isShutdown()
-   */
   public boolean isShutdown()
   {
     return _delegate.isShutdown();
   }
 
-  /**
-   * @see java.util.concurrent.ExecutorService#isTerminated()
-   */
   public boolean isTerminated()
   {
     return _delegate.isTerminated();
   }
 
-  /**
-   * @see java.util.concurrent.ExecutorService#shutdown()
-   */
   public void shutdown()
   {
     _delegate.shutdown();
   }
 
-  /**
-   * @see java.util.concurrent.ExecutorService#shutdownNow()
-   */
   public List<Runnable> shutdownNow()
   {
     return _delegate.shutdownNow();
   }
 
-  /**
-   * @see java.util.concurrent.Executor#execute(java.lang.Runnable)
-   */
   public void execute(Runnable arg0)
   {
     canExecute(arg0);
@@ -138,6 +119,8 @@ public class SafeExecutorService extends AbstractExecutorService
 
   /**
    * test to see if the current thread is managed and we permit self executions
+   * 
+   * @param arg0 TODO
    */
   protected void canExecute(Runnable arg0)
   {

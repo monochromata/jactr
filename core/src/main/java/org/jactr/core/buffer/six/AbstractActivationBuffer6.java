@@ -41,8 +41,6 @@ import org.jactr.core.slot.event.ISlotContainerListener;
 /**
  * template for an activation buffer that handles it's own status and inserts
  * only copies of chunks
- * 
- * @author developer
  */
 public abstract class AbstractActivationBuffer6 extends
     AbstractActivationBuffer implements IStatusBuffer
@@ -264,8 +262,8 @@ public abstract class AbstractActivationBuffer6 extends
    * other words, copy the chunk if its been encoded or is currently in another
    * buffer
    * 
-   * @param chunk
-   * @return
+   * @param chunk TODO
+   * @return TODO
    */
   protected boolean shouldCopyOnInsertion(IChunk chunk)
   {
@@ -549,8 +547,8 @@ public abstract class AbstractActivationBuffer6 extends
   /**
    * called when we have to copy the source chunk before adding it.
    * 
-   * @param originalChunk
-   * @param nextSourceChunk
+   * @param originalChunk TODO
+   * @param nextSourceChunk TODO
    */
   protected void sourceChunkCopied(IChunk originalChunk, IChunk nextSourceChunk)
   {

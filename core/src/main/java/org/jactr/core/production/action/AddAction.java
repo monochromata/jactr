@@ -42,7 +42,6 @@ import org.jactr.core.slot.ISlot;
  * variable name, or to create a new chunk in the buffer.
  * 
  * @author harrison
- * @created January 22, 2003
  */
 public class AddAction extends DefaultAction implements IBufferAction,
     org.jactr.core.slot.ISlotContainer
@@ -66,31 +65,23 @@ public class AddAction extends DefaultAction implements IBufferAction,
 
   /**
    * the name of the buffer for the chunk to be inserted into
-   * 
-   * @since
    */
   private String                             _bufferName;
 
   // required
   /**
    * a map of slots to be assigned to the to be inserted chunk
-   * 
-   * @since
    */
   private Collection<IMutableSlot>           _slots;
 
   /**
    * referant can be either a chunkname, a variable name, a chunktype or a chunk
    * proper
-   * 
-   * @since
    */
   private Object                             _referant;
 
   /**
    * default constructor equivalent to AddAction("goal", null)
-   * 
-   * @since
    */
   public AddAction()
   {
@@ -104,7 +95,7 @@ public class AddAction extends DefaultAction implements IBufferAction,
    *          name of the buffer to insert into
    * @param ref
    *          IChunk, IChunkType, chunkName, or variable name
-   * @since
+   * @param slots TODO
    */
   public AddAction(String bufferName, Object ref,
       Collection<? extends ISlot> slots)
@@ -122,23 +113,12 @@ public class AddAction extends DefaultAction implements IBufferAction,
     this(bufferName, ref, Collections.EMPTY_LIST);
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @return Description of the Returned Value
-   * @since
-   */
   @Override
   public String toString()
   {
     return String.format("Add(%s, %s[%s])", _bufferName, _referant, _slots);
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @since
-   */
   @Override
   public void dispose()
   {
@@ -150,24 +130,11 @@ public class AddAction extends DefaultAction implements IBufferAction,
     _referant = null;
   }
 
-  /**
-   * Gets the referant attribute of the AddAction object
-   * 
-   * @return The referant value
-   * @since
-   */
   public Object getReferant()
   {
     return _referant;
   }
 
-  /**
-   * Sets the referant attribute of the AddAction object
-   * 
-   * @param o
-   *          The new referant value
-   * @since
-   */
   public void setReferant(Object o)
   {
     _referant = o;
@@ -210,7 +177,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * return the name of the buffer that the chunk will be added to
    * 
    * @return The bufferName value
-   * @since
    */
   public String getBufferName()
   {
@@ -222,7 +188,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * 
    * @param name
    *          The new bufferName value
-   * @since
    */
   public void setBufferName(String name)
   {
@@ -234,7 +199,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * 
    * @param ct
    *          The new chunkType value
-   * @since
    */
   public void setChunkType(IChunkType ct)
   {
@@ -248,7 +212,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * 
    * @param name
    *          The new chunkName value
-   * @since
    */
   public void setChunkName(String name)
   {
@@ -260,7 +223,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * 
    * @param c
    *          The new chunk value
-   * @since
    */
   public void setChunk(IChunk c)
   {
@@ -272,7 +234,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * otherwise
    * 
    * @return The chunkName value
-   * @since
    */
   public String getChunkName()
   {
@@ -285,7 +246,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * null otherwise
    * 
    * @return The chunkType value
-   * @since
    */
   public IChunkType getChunkType()
   {
@@ -297,7 +257,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * return the chunk to be added if it was specified.
    * 
    * @return The chunk value
-   * @since
    */
   public IChunk getChunk()
   {
@@ -315,7 +274,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * added chunk.
    * 
    * @return The slots value
-   * @since
    */
   public Collection<? extends ISlot> getSlots()
   {
@@ -337,7 +295,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * 
    * @param s
    *          The feature to be added to the ISlot attribute
-   * @since
    */
   public void addSlot(ISlot s)
   {
@@ -349,7 +306,6 @@ public class AddAction extends DefaultAction implements IBufferAction,
    * 
    * @param s
    *          Description of Parameter
-   * @since
    */
   public void removeSlot(ISlot s)
   {
@@ -359,7 +315,7 @@ public class AddAction extends DefaultAction implements IBufferAction,
   /**
    * return a mutable copy of the request that underlies this action.
    * 
-   * @return
+   * @return TODO
    */
   public IRequest getRequest()
   {

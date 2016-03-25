@@ -24,36 +24,15 @@ public interface IDeclarativeLearningModule4 extends ILearningModule
   static public final String ASSOCIATIVE_LEARNING_RATE = "AssociativeLearningRate";
   static public final String OPTIMIZED_LEARNING = "OptimizedLearning";
   
-  /**
-   * 
-   * @return
-   */
   public boolean isBaseLevelLearningEnabled();
   
-  
-  /**
-   * 
-   * @return
-   */
   public double getBaseLevelLearning();
   
-  
-  /**
-   * 
-   * @return
-   */
   public boolean isAssociativeLearningEnabled();
   
-  
-  /**
-   * 
-   * @return
-   */
   public double getAssociativeLearning();
   
-  
   public int getOptimizationLevel();
-  
   
   public IBaseLevelActivationEquation getBaseLevelActivationEquation();
   

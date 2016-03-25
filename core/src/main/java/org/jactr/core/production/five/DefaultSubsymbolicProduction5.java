@@ -20,7 +20,6 @@ import org.jactr.core.production.four.DefaultSubsymbolicProduction4;
 
 /**
  * @author harrison
- * @created February 5, 2003
  */
 public class DefaultSubsymbolicProduction5 extends DefaultSubsymbolicProduction4 implements
     ISubsymbolicProduction
@@ -30,16 +29,6 @@ public class DefaultSubsymbolicProduction5 extends DefaultSubsymbolicProduction4
                                                                 .getLog(DefaultSubsymbolicProduction5.class
                                                                     .getName());
 
-
-  /**
-   * Constructor for the DefaultSubsymbolicProduction5 object
-   * 
-   * @param p
-   *          Description of Parameter
-   * @param parentModel
-   *          Description of Parameter
-   * @since
-   */
   public DefaultSubsymbolicProduction5(DefaultProduction5 p, IModel parentModel)
   {
     super(p,parentModel);

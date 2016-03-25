@@ -148,12 +148,6 @@ public class DefaultChunkType extends DefaultAdaptable implements
         o.getSymbolicChunkType().getName());
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @since
-   */
-
   public void dispose()
   {
     /*
@@ -175,7 +169,6 @@ public class DefaultChunkType extends DefaultAdaptable implements
    * @param obj
    *            Description of Parameter
    * @return Description of the Returned Value
-   * @since
    */
   public boolean equals(IChunkType obj)
   {
@@ -205,7 +198,6 @@ public class DefaultChunkType extends DefaultAdaptable implements
    *          The new MetaData value
    * @param value
    *          The new MetaData value
-   * @since
    */
   public void setMetaData(String key, Object value)
   {
@@ -213,15 +205,17 @@ public class DefaultChunkType extends DefaultAdaptable implements
   }
 
   /**
-   * return all the keys
-   * 
-   * @return
+   * @return all the keys
    */
   public Collection<String> getMetaDataKeys()
   {
     return Collections.unmodifiableCollection(_metaData.keySet());
   }
 
+  /**
+   * @param symbolic TODO
+   * @param subsymbolic TODO
+   */
   public void bind(ISymbolicChunkType symbolic, ISubsymbolicChunkType subsymbolic)
   {
     _symbolicChunkType = symbolic;
@@ -232,7 +226,6 @@ public class DefaultChunkType extends DefaultAdaptable implements
    * Gets the symbolicChunkType attribute of the DefaultChunkType5 object
    * 
    * @return The symbolicChunkType value
-   * @since
    */
   public ISymbolicChunkType getSymbolicChunkType()
   {
@@ -243,7 +236,6 @@ public class DefaultChunkType extends DefaultAdaptable implements
    * Gets the subsymbolicChunkType attribute of the DefaultChunkType5 object
    * 
    * @return The subsymbolicChunkType value
-   * @since
    */
   public ISubsymbolicChunkType getSubsymbolicChunkType()
   {

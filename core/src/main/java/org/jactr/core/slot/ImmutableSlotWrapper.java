@@ -15,8 +15,7 @@ package org.jactr.core.slot;
 
 
 /**
- * @author harrison TODO To change the template for this generated type comment
- *         go to Window - Preferences - Java - Code Style - Code Templates
+ * @author harrison
  */
 public class ImmutableSlotWrapper extends Object implements ISlot
 {
@@ -57,9 +56,6 @@ public class ImmutableSlotWrapper extends Object implements ISlot
     return _slot.equals(value);
   }
 
-  /**
-   * @see org.jactr.core.utils.Duplicateable#duplicate()
-   */
   public ImmutableSlotWrapper clone()
   {
     return new ImmutableSlotWrapper(_slot);

@@ -39,8 +39,6 @@ import org.jactr.io.environment.EnvironmentParser;
 
 /**
  * Utility class for ensuring that model's fire correctly
- * 
- * @author developer
  */
 public class ExecutionTester
 {
@@ -67,7 +65,7 @@ public class ExecutionTester
    * called by the model listener so that Junit tests can handle the exception
    * gracefully
    * 
-   * @param thrown
+   * @param thrown TODO
    */
   public void exceptionCaught(Throwable thrown)
   {
@@ -77,8 +75,8 @@ public class ExecutionTester
   /**
    * called by the proceduralModuleListener after each production fires
    * 
-   * @param model
-   * @param instantiation
+   * @param model TODO
+   * @param instantiation TODO
    */
   final public void verifyThatProductionShouldFire(IModel model,
       IInstantiation instantiation)
@@ -111,7 +109,8 @@ public class ExecutionTester
    * this can be overriden if you want to check the state of the model just
    * after a production has fired
    * 
-   * @param model
+   * @param model TODO
+   * @param instantiation TODO
    */
   public void verifyModelState(IModel model, IInstantiation instantiation)
   {
@@ -127,6 +126,7 @@ public class ExecutionTester
    *            keyed on model name, a sequence of productions that should fire
    * @param failedProductionMap
    *            keyed on model name, a set of productions that should never fire
+   * @return TODO
    */
   public Collection<Throwable> test(URL url,
       Map<String, Collection<String>> productionSequenceMap,
@@ -220,13 +220,14 @@ public class ExecutionTester
   }
 
   /**
-   * @param url
+   * @param url TODO
    * @param modelName
    *            not null
    * @param productionSequence
    *            not null or empty
    * @param failedProductions
    *            not null
+   * @return TODO
    */
   public Collection<Throwable> test(URL url, String modelName,
       Collection<String> productionSequence,

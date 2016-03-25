@@ -21,7 +21,7 @@ import org.antlr.runtime.tree.CommonTree;
 /**
  * Output a modelDescriptor to a file. This often wraps ICodeGenerators
  * 
- * @author developer
+ * 
  */
 public interface IModelWriter
 {

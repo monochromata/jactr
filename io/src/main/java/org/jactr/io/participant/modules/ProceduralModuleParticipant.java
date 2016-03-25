@@ -23,7 +23,7 @@ import org.jactr.core.module.procedural.six.IProceduralModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class ProceduralModuleParticipant extends BasicASTParticipant
 {

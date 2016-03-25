@@ -37,7 +37,8 @@ public class VariableCondition extends AbstractBufferCondition
   private String                     _variableName;
 
   /**
-   * @param bufferName
+   * @param bufferName TODO
+   * @param variableName TODO
    */
   public VariableCondition(String bufferName, String variableName)
   {

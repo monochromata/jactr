@@ -14,8 +14,9 @@ import org.jactr.core.model.IModel;
  * IChunk wrappers. Usually, the default implementation is to be used. This is
  * separate from the theoretically motivated factories for symbolic and
  * subsymbolic components because the wrapper is largely an implementation
- * construct that derives its theoretic behavior from its contents.<br/>
- * <code>
+ * construct that derives its theoretic behavior from its contents.
+ * 
+ * {@code
  * IChunkType type = ...;
  * IChunkFactory cFac = ....;
  * ISymbolicChunkFactory scFac = ....;
@@ -29,9 +30,7 @@ import org.jactr.core.model.IModel;
  * scFac.bind(sc, chunk, type);
  * sscFac.bind(ssc, chunk, type);
  * cFac.bind(chunk, sc, ssc);
- * 
- * 
- * </code>
+ * }
  * 
  * @author harrison
  */
@@ -44,6 +43,7 @@ public interface IChunkFactory
    * create a new IChunk wrapper, its symbolic and subsymbolic contents should
    * not be set.
    * 
+   * @param model TODO
    * @return new, unbound (to sub/symbolic contents) chunk
    */
   public IChunk newChunk(IModel model);
@@ -52,9 +52,9 @@ public interface IChunkFactory
    * bind this chunk wrapper to its related contents. This is a separate call so
    * that other factories can contribute their theoretically motivated contents.
    * 
-   * @param chunk
-   * @param symbolic
-   * @param subsymbolic
+   * @param chunk TODO
+   * @param symbolic TODO
+   * @param subsymbolic TODO
    */
   public void bind(IChunk chunk, ISymbolicChunk symbolic,
       ISubsymbolicChunk subsymbolic);
@@ -62,9 +62,9 @@ public interface IChunkFactory
   /**
    * disassociate the chunk from its contents
    * 
-   * @param chunk
-   * @param symbolic
-   * @param subsymbolic
+   * @param chunk TODO
+   * @param symbolic TODO
+   * @param subsymbolic TODO
    */
   public void unbind(IChunk chunk, ISymbolicChunk symbolic,
       ISubsymbolicChunk subsymbolic);
@@ -73,7 +73,7 @@ public interface IChunkFactory
    * dispose of an unneeded chunk wrapper. sub/symbolic contents will have
    * already been unbound
    * 
-   * @param chunk
+   * @param chunk TODO
    */
   public void dispose(IChunk chunk);
 
@@ -82,8 +82,8 @@ public interface IChunkFactory
   /**
    * copy relevant metadata to a chunk that will (ultimately) be a copy
    * 
-   * @param source
-   * @param destination
+   * @param source TODO
+   * @param destination TODO
    */
   public void copy(IChunk source, IChunk destination);
 }

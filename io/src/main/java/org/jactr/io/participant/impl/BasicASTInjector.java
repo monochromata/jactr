@@ -26,9 +26,6 @@ import org.jactr.io.antlr3.misc.ASTSupport;
 import org.jactr.io.antlr3.misc.DetailedCommonTree;
 import org.jactr.io.participant.IASTInjector;
 
-/**
- * @author developer
- */
 public class BasicASTInjector implements IASTInjector
 {
   /**
@@ -57,9 +54,6 @@ public class BasicASTInjector implements IASTInjector
     _participantClass = participantClass;
   }
 
-  /**
-   * @see org.jactr.io.participant.IASTInjector#inject(org.antlr.runtime.tree.CommonTree)
-   */
   public void inject(CommonTree modelDescriptor, boolean importBuffers)
   {
     importAll(_modelDescriptor, modelDescriptor, importBuffers);
@@ -82,8 +76,8 @@ public class BasicASTInjector implements IASTInjector
    * (named) chunk-type, dest will be used instead and it will steal the chunks
    * from source.
    * 
-   * @param sourceDeclarativeMemory
-   * @param destinationDeclarativeMemory
+   * @param sourceDeclarativeMemory TODO
+   * @param destinationDeclarativeMemory TODO
    */
   static public void importChunkTypes(CommonTree sourceDeclarativeMemory,
       CommonTree destinationDeclarativeMemory)
@@ -272,7 +266,7 @@ public class BasicASTInjector implements IASTInjector
   /**
    * clear the location information of imported nodes.
    * 
-   * @param root
+   * @param root TODO
    */
   @Deprecated
   protected void clearLocations(CommonTree root)

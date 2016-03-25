@@ -20,7 +20,7 @@ package org.jactr.core.queue;
  * TimedEventQueue, each cycle will fire currentTime() until the event's fire
  * (end) time is reached
  * 
- * @author developer
+ * 
  */
 public interface IIntermediateTimedEvent extends ITimedEvent
 {
@@ -29,7 +29,7 @@ public interface IIntermediateTimedEvent extends ITimedEvent
    * fired at each cycle of the timed event queue until this events fire time is
    * reached
    * 
-   * @param time
+   * @param time TODO
    */
   public void currentTime(double time);
 }

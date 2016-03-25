@@ -16,18 +16,13 @@ package org.jactr.core.module.procedural.four.learning;
 import org.jactr.core.model.IModel;
 import org.jactr.core.production.IProduction;
 
-/**
- * Description of the Interface
- * 
+/** 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IProbabilityEquation 
 {
 
   /**
-   * Description of the Method
-   * 
    * @param model
    *          Description of the Parameter
    * @param p

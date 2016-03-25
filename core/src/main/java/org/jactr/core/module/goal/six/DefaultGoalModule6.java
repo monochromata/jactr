@@ -26,7 +26,7 @@ import org.jactr.core.module.goal.six.buffer.DefaultGoalBuffer6;
 /**
  * handles the goal and imaginal buffers
  * 
- * @author developer
+ * 
  */
 public class DefaultGoalModule6 extends AbstractModule implements IGoalModule
 {

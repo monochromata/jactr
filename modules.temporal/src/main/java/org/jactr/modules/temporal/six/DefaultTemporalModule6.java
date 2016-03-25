@@ -32,22 +32,21 @@ import org.jactr.modules.temporal.buffer.DefaultTemporalActivationBuffer;
 
 /**
  * implementation of the temporal module. This module is very basic. By calling
- * {@link #startTimer()} a new time {@link IChunk} is added to the temporal
+ * {@link #startTimer(int)} a new time {@link IChunk} is added to the temporal
  * {@link IActivationBuffer}. At the same time, an {@link ITimedEvent} is
  * posted to the {@link TimedEventQueue}. It will expire after the initial tick
  * duration. Uponing firing, it will increment the tick count of the
  * {@link IChunk} and then post a new {@link ITimedEvent} that will expire
  * later. The durations are computed by {@link #computeTickDuration(double)}.
- * The {@link ITimedEvent}s are posted by {@link #nextTickTimedEvent()}.<br>
- * <br>
- * All the modifications by this buffer are done through the {@link ITimedEvent}s
+ * The {@link ITimedEvent}s are posted by {@link #nextTickTimedEvent(double, double)}.
+
+ * <p>All the modifications by this buffer are done through the {@link ITimedEvent}s
  * (necessarily on the model thread) or as a result of {@link ChunkPattern}
  * requests made to the {@link IActivationBuffer} (again, on the model thread).
- * So, thread safety is not much of a concern here.<br>
- * <br>
- * <br>
- * This module is dynamically resolved via the modules extension point in
- * plugin.xml
+ * So, thread safety is not much of a concern here.</p>
+
+ * <p>This module is dynamically resolved via the modules extension point in
+ * plugin.xml</p>
  * 
  * @author harrison
  */
@@ -123,7 +122,7 @@ public class DefaultTemporalModule6 extends AbstractModule implements
   /**
    * create the temporal buffer {@link DefaultTemporalActivationBuffer}
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.core.module.AbstractModule#createBuffers()
    */
   @Override
@@ -136,7 +135,7 @@ public class DefaultTemporalModule6 extends AbstractModule implements
   /**
    * return the buffer
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.modules.temporal.ITemporalModule#getBuffer()
    */
   public IActivationBuffer getBuffer()
@@ -147,7 +146,7 @@ public class DefaultTemporalModule6 extends AbstractModule implements
   /**
    * return the current tick count, or 0 if not time chunk is in the buffer
    * 
-   * @return
+   * @return TODO
    * @see org.jactr.modules.temporal.ITemporalModule#getTicks()
    */
   public long getTicks()
@@ -177,7 +176,8 @@ public class DefaultTemporalModule6 extends AbstractModule implements
    * start a timer. The current timer is removed, a new one created and added to
    * the buffer.
    * 
-   * @see org.jactr.modules.temporal.ITemporalModule#startTimer()
+   * @param initialTicks TODO
+   * @see org.jactr.modules.temporal.ITemporalModule#startTimer(int)
    */
   public void startTimer(int initialTicks)
   {
@@ -224,8 +224,8 @@ public class DefaultTemporalModule6 extends AbstractModule implements
    * compute the duration of the next tick given the previous one. if
    * previousDuration is 0, t0 is recomputed
    * 
-   * @param previousDuration
-   * @return
+   * @param previousDuration TODO
+   * @return TODO
    */
   protected double computeTickDuration(double previousDuration)
   {
@@ -251,6 +251,10 @@ public class DefaultTemporalModule6 extends AbstractModule implements
   /**
    * internal method to increment the number of ticks of the current source
    * chunk in the buffer. This is called by {@link TickTimedEvent#fire(double)}
+   * 
+   * @param startTime TODO
+   * @param endTime TODO
+   * @param duration TODO
    */
   protected void incrementTicks(double startTime, double endTime,
       double duration)
@@ -258,7 +262,7 @@ public class DefaultTemporalModule6 extends AbstractModule implements
 
     double ticks = 0;
 
-    /**
+    /*
      * this is necessary if (endTime-startTime) >= duration, i.e. more than one
      * tick may have elapsed
      */
@@ -294,7 +298,10 @@ public class DefaultTemporalModule6 extends AbstractModule implements
 
   /**
    * creates a new timed event which will actually perform the tick increments.
-   * called by {@link TickTimedEvent#fire(double)} and {@link #startTimer()}
+   * called by {@link TickTimedEvent#fire(double)} and {@link #startTimer(int)}
+   * 
+   * @param now TODO
+   * @param previousDuration TODO
    */
   protected void nextTickTimedEvent(double now, double previousDuration)
   {
@@ -303,9 +310,6 @@ public class DefaultTemporalModule6 extends AbstractModule implements
     getModel().getTimedEventQueue().enqueue(_currentTimedEvent);
   }
 
-  /**
-   * 
-   */
   public String getParameter(String key)
   {
     if (TIME_MULTIPLIER_PARAM.equalsIgnoreCase(key))

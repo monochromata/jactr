@@ -26,7 +26,6 @@ import org.jactr.core.utils.IAdaptable;
  * propogated appropriately.
  * 
  * @author harrison
- * @created January 22, 2003
  */
 public interface ISymbolicChunkType extends
     org.jactr.core.slot.IUniqueSlotContainer, IAdaptable
@@ -37,7 +36,6 @@ public interface ISymbolicChunkType extends
    * unique names.
    * 
    * @return The chunkTypeName value
-   * @since
    */
   public String getName();
 
@@ -47,7 +45,6 @@ public interface ISymbolicChunkType extends
    * 
    * @param name
    *            The new chunkTypeName value
-   * @since
    */
   public void setName(String name);
 
@@ -56,7 +53,7 @@ public interface ISymbolicChunkType extends
    * 
    * @throws IllegalStateException
    *           if there are more than one parent
-   * @return
+   * @return TODO
    */
   public IChunkType getParent();
 
@@ -65,7 +62,6 @@ public interface ISymbolicChunkType extends
    * possible to support multiple inheritance
    * 
    * @return The parent value
-   * @since
    */
   public Collection<IChunkType> getParents();
 
@@ -73,7 +69,6 @@ public interface ISymbolicChunkType extends
    * return an array of all the children chunk types
    * 
    * @return The children value
-   * @since
    */
   public Collection<IChunkType> getChildren();
 
@@ -81,18 +76,20 @@ public interface ISymbolicChunkType extends
    * Gets the numberOfChildren attribute of the ISymbolicChunkType object
    * 
    * @return The numberOfChildren value
-   * @since
    */
   public int getNumberOfChildren();
 
   /**
    * add a parent of this chunktype
- * @return
+   * @param ct TODO
+   * @return TODO
    */
   public IChunkType addParent(IChunkType ct);
   
   /**
    * add a chunktype as a child,
+   * 
+   * @param ct the new child chunk type
    */
   public void addChild(IChunkType ct);
 
@@ -100,12 +97,13 @@ public interface ISymbolicChunkType extends
    * return all chunks of this type
    * 
    * @return The chunks value
-   * @since
    */
   public Collection<IChunk> getChunks();
 
   /**
    * add an encoded chunk to this chunktypes collection
+   * 
+   * @param c TODO
    */
   public void addChunk(IChunk c);
 
@@ -113,20 +111,15 @@ public interface ISymbolicChunkType extends
    * Gets the numberOfChunks attribute of the ISymbolicChunkType object
    * 
    * @return The numberOfChunks value
-   * @since
    */
   public int getNumberOfChunks();
 
   /**
-   *
+   * @param ct TODO
+   * @return TODO
    */
   public boolean isA(IChunkType ct);
 
-  /**
-   * Description of the Method
-   * 
-   * @since
-   */
   public void dispose();
 
   public void encode();

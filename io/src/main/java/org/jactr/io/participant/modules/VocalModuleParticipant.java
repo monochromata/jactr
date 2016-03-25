@@ -21,7 +21,7 @@ import org.jactr.io.participant.impl.BasicASTParticipant;
 import org.jactr.modules.pm.vocal.six.DefaultVocalModule6;
 
 /**
- * @author developer
+ * 
  */
 public class VocalModuleParticipant extends BasicASTParticipant
 {

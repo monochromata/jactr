@@ -20,7 +20,7 @@ import org.jactr.core.chunk.IChunk;
 /**
  * interface for an activation buffer that can contain more than one chunk.
  * 
- * @author developer
+ * 
  */
 public interface ICapacityBuffer extends IActivationBuffer
 {

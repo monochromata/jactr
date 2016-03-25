@@ -21,7 +21,6 @@ import org.jactr.core.production.request.ChunkTypeRequest;
  * static public XXXEquation getInstance()
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IRetrievalTimeEquation
 {
@@ -29,6 +28,9 @@ public interface IRetrievalTimeEquation
   /**
    * compute retrieval time of chunk c in the model. This call is used when
    * there is no partial matching.
+   * 
+   * @param c the chunk
+   * @return the retrieval time
    */
   public double computeRetrievalTime(IChunk c);
 
@@ -36,9 +38,9 @@ public interface IRetrievalTimeEquation
    * compute the retrieval time of retrievedChunk relative to retrievalRequest
    * if partial matching is enabled.
    * 
-   * @param retrievedChunk
-   * @param retrievalRequest
-   * @return
+   * @param retrievedChunk TODO
+   * @param retrievalRequest TODO
+   * @return TODO
    */
   public double computeRetrievalTime(IChunk retrievedChunk,
       ChunkTypeRequest retrievalRequest);

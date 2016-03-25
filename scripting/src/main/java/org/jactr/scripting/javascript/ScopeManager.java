@@ -26,7 +26,6 @@ import org.mozilla.javascript.ScriptableObject;
  * Maps javascript contexts to a model
  * 
  * @author harrison
- * @created March 3, 2003
  */
 public class ScopeManager
 {
@@ -98,19 +97,12 @@ public class ScopeManager
     return rtn;
   }
 
-
-  /**
-   * @param scope
-   * @param variableName
-   * @param object
-   */
   static public void defineVariable(Scriptable scope, String variableName,
       Object object)
   {
     Object variable = Context.javaToJS(object, scope);
     ScriptableObject.putProperty(scope, variableName, variable);
   }
-
 
   static public Object getVariable(Scriptable scope, String variableName)
   {

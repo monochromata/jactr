@@ -14,15 +14,11 @@
 package org.jactr.tools.async.message;
 
 import java.io.Serializable;
-/**
- * @author developer
- *
- */
+
 public interface IMessage extends Serializable
 {
   /**
-   * a message identifier
-   * @return
+   * @return a message identifier
    */
   public long getID();
 }

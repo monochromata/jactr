@@ -40,7 +40,7 @@ import org.jactr.instrument.IInstrument;
 /**
  * demuxing logger
  * 
- * @author developer
+ * 
  */
 public class DefaultModelLogger implements IInstrument, ILogger, IParameterized
 {

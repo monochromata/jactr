@@ -37,8 +37,6 @@ import org.jactr.io.parser.ParserImportDelegateFactory;
 
 /**
  * convenience utilities for the lazy
- * 
- * @author developer
  */
 public class IOUtilities
 {
@@ -109,10 +107,12 @@ public class IOUtilities
   /**
    * load the specified model file and store any and all warnings and exceptions
    * 
-   * @param modelFileLocation
-   * @param warnings
-   * @param errors
+   * @param modelFileLocation TODO
+   * @param delegate TODO
+   * @param warnings TODO
+   * @param errors TODO
    * @return null if a critical error occured
+   * @throws IOException TODO
    */
   static public CommonTree loadModelFile(URL modelFileLocation,
       IParserImportDelegate delegate,
@@ -161,9 +161,9 @@ public class IOUtilities
   /**
    * attempt to compile the model
    * 
-   * @param modelDescriptor
-   * @param warnings
-   * @param errors
+   * @param modelDescriptor TODO
+   * @param warnings TODO
+   * @param errors TODO
    * @return true if there are no compilation errors
    */
   static public boolean compileModelDescriptor(CommonTree modelDescriptor,
@@ -182,9 +182,10 @@ public class IOUtilities
   /**
    * construct the described model
    * 
-   * @param modelDescriptor
-   * @return
-   * @throws BuilderException
+   * @param modelDescriptor TODO
+   * @param warnings TODO
+   * @param errors TODO
+   * @return TODO
    */
   static public IModel constructModel(CommonTree modelDescriptor,
       Collection<Exception> warnings, Collection<Exception> errors)

@@ -21,7 +21,6 @@ package org.jactr.core.production;
  * Description of the Class
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class IllegalProductionStateException extends IllegalStateException
 {

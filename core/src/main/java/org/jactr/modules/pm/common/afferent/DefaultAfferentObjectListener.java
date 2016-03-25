@@ -45,7 +45,7 @@ import org.jactr.core.utils.collections.CachedCollection;
  * them, they get queued so that only the most recent update needs to be
  * processed
  * 
- * @author developer
+ * 
  */
 public class DefaultAfferentObjectListener implements IAfferentListener,
     Runnable

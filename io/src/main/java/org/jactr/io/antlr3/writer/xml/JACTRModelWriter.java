@@ -18,9 +18,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.writer.CodeGeneratorWriter;
 
-/**
- * @author developer
- */
 public class JACTRModelWriter extends CodeGeneratorWriter
 {
   /**
@@ -28,10 +25,6 @@ public class JACTRModelWriter extends CodeGeneratorWriter
    */
   static private final Log LOGGER = LogFactory.getLog(JACTRModelWriter.class);
 
-  /**
-   * @param codeGenerator
-   * @param trimImports
-   */
   public JACTRModelWriter(boolean trimImports)
   {
     super(CodeGeneratorFactory.getCodeGenerator("jactr"), trimImports);

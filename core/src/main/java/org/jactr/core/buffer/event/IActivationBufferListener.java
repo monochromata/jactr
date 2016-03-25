@@ -26,7 +26,6 @@ import org.jactr.core.event.IParameterListener;
  * off {@link #sourceChunkRemoved(ActivationBufferEvent)}
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IActivationBufferListener extends EventListener,
     IParameterListener
@@ -34,6 +33,8 @@ public interface IActivationBufferListener extends EventListener,
 
   /**
    * called when a source chunk is added to the buffer
+   * 
+   * @param abe the event
    */
   public void sourceChunkAdded(ActivationBufferEvent abe);
 
@@ -41,6 +42,8 @@ public interface IActivationBufferListener extends EventListener,
    * called when a source chunk is removed from the buffer. If the listener
    * is not inline, the hash of the removed chunk may be different if
    * it is encoded and merged into an existing chunk
+   * 
+   * @param abe the event
    */
   public void sourceChunkRemoved(ActivationBufferEvent abe);
 
@@ -48,6 +51,8 @@ public interface IActivationBufferListener extends EventListener,
    * called when all the chunks are removed from the buffer. If a clear is
    * called, this is the only event fired, not
    * {@link #sourceChunkRemoved(ActivationBufferEvent)}
+   * 
+   * @param abe the event
    */
   public void sourceChunksCleared(ActivationBufferEvent abe);
 
@@ -57,18 +62,22 @@ public interface IActivationBufferListener extends EventListener,
    * the notification occurs depends upon the implementation of the request
    * handler.
    * 
-   * @param abe
+   * @param abe the event
    */
   public void requestAccepted(ActivationBufferEvent abe);
 
   /**
    * name says it all
+   * 
+   * @param abe the event
    */
   public void statusSlotChanged(ActivationBufferEvent abe);
 
   /**
    * called when a chunk has been matched within the buffer by a some production
    * that has fired
+   * 
+   * @param abe the event
    */
   public void chunkMatched(ActivationBufferEvent abe);
 }

@@ -23,7 +23,7 @@ import org.jactr.core.module.declarative.six.learning.IDeclarativeLearningModule
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class DeclarativeLearningModuleParticipant6 extends BasicASTParticipant
 {

@@ -71,9 +71,6 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
     setDefaultParameters();
   }
 
-  /**
-   * @since
-   */
   public void dispose()
   {
     _probabilityEquation = null;
@@ -85,8 +82,6 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
   /**
    * Sets the defaultParameters attribute of the DefaultSubsymbolicProduction5
    * object
-   * 
-   * @since
    */
   protected void setDefaultParameters()
   {
@@ -104,7 +99,6 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
    * object
    * 
    * @return The possibleParameters value
-   * @since
    */
   public Collection<String> getPossibleParameters()
   {
@@ -116,7 +110,6 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
    * object
    * 
    * @return The setableParameters value
-   * @since
    */
   public Collection<String> getSetableParameters()
   {
@@ -134,7 +127,6 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
    *          The new parameter value
    * @param value
    *          The new parameter value
-   * @since
    */
   public void setParameter(String key, String value)
   {
@@ -164,7 +156,6 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
    * @param key
    *          Description of Parameter
    * @return The parameter value
-   * @since
    */
   public String getParameter(String key)
   {
@@ -181,6 +172,8 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
 
   /**
    * how long does this production take to fire (normally)
+   * 
+   * @return TODO
    */
   public double getFiringTime()
   {
@@ -192,7 +185,6 @@ public class BasicSubsymbolicProduction extends DefaultAdaptable implements
    * 
    * @param defAct
    *          The new effortTime value
-   * @since
    */
   public void setFiringTime(double defAct)
   {

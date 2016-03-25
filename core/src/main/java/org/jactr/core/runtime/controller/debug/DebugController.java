@@ -53,8 +53,6 @@ import org.jactr.core.runtime.event.IACTRRuntimeListener;
  * support production break points that block the model when the marked
  * productions are instantiated and selected for firing. it also supports a few
  * other break point types
- * 
- * @author developer
  */
 public class DebugController extends DefaultController implements
     IDebugController
@@ -470,9 +468,9 @@ public class DebugController extends DefaultController implements
    * will check to see if value represents a valid break point of type within
    * model and block after calling breakpointReached
    * 
-   * @param model
-   * @param type
-   * @param value
+   * @param model the model to break
+   * @param type the breakpoint type
+   * @param value the breakpoint
    */
   protected void checkForBreakpoint(IModel model, BreakpointType type,
       Object value)
@@ -489,9 +487,9 @@ public class DebugController extends DefaultController implements
    * tripped this breakpoint will suspend right here, but everyone else will
    * suspend at the top of the next cycle, unless they also trip a breakpoint.
    * 
-   * @param model
-   * @param type
-   * @param value
+   * @param model the model to break
+   * @param type the breakpoint type
+   * @param value the breakpoint
    */
   protected void breakpointReached(IModel model, BreakpointType type,
       Object value)

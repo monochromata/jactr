@@ -17,11 +17,17 @@ public interface IRemovableSymbolicChunkType extends ISymbolicChunkType
 {
 
   /**
-   * @param chunk
+   * @param chunk the chunk
    */
   public void removeChunk(IChunk chunk);
 
+  /**
+   * @param chunkType the chunk type
+   */
   public void removeChild(IChunkType chunkType);
 
+  /**
+   * @param chunkType the chunk type
+   */
   public void removeParent(IChunkType chunkType);
 }

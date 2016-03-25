@@ -17,7 +17,7 @@ import org.jactr.modules.pm.buffer.IPerceptualBuffer;
 
 /**
  * visual buffer
- * @author developer
+ * 
  *
  */
 public interface IVisualActivationBuffer extends IPerceptualBuffer

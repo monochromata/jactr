@@ -21,7 +21,6 @@ import org.jactr.core.utils.IInstallable;
  * Description of the Interface
  * 
  * @author harrison
- * @created March 25, 2003
  */
 public interface IInstrument extends IInstallable, IInitializable
 {

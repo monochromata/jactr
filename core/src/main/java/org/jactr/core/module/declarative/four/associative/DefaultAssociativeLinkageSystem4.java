@@ -111,10 +111,12 @@ public class DefaultAssociativeLinkageSystem4 extends
   }
 
   /**
-   * allows us to detect slot changes and handle merging & encoding may return
+   * allows us to detect slot changes and handle merging and encoding may return
    * null
    * 
-   * @return
+   * @param learningModule TODO
+   * @param executor TODO
+   * @return TODO
    */
   protected IChunkListener createChunkListener(
       IDeclarativeLearningModule4 learningModule, Executor executor)
@@ -131,7 +133,9 @@ public class DefaultAssociativeLinkageSystem4 extends
   /**
    * we use the production firing to trigger the learning may return null.
    * 
-   * @return
+   * @param learningModule TODO
+   * @param executor TODO
+   * @return TODO
    */
   protected IProceduralModuleListener createProceduralListener(
       IDeclarativeLearningModule4 learningModule, Executor executor)
@@ -175,9 +179,9 @@ public class DefaultAssociativeLinkageSystem4 extends
    * establishing the containment link. if valueIsOld, the link will be
    * decremented until 0 then removed.
    * 
-   * @param iChunk
-   * @param value
-   * @param valueIsOld
+   * @param iChunk TODO
+   * @param jChunk TODO
+   * @param valueIsOld TODO
    */
   protected void linkSlotValue(IChunk iChunk, IChunk jChunk, boolean valueIsOld)
   {

@@ -227,9 +227,6 @@ public class InstantiationCache
     }
   }
 
-  /**
-   * @param production
-   */
   protected void unregisterAll(IProduction production,
       Collection<IInvalidator> invalidators)
   {
@@ -244,9 +241,10 @@ public class InstantiationCache
    * analyze the cause of the exception and possibly install invalidators. if no
    * invalidators can be created, this CIE cannot be cached.
    * 
-   * @param production
-   * @param cie
-   * @return
+   * @param production TODO
+   * @param cie TODO
+   * @param invalidators TODO
+   * @return TODO
    */
   protected boolean registerAll(IProduction production,
       CannotInstantiateException cie, Collection<IInvalidator> invalidators)

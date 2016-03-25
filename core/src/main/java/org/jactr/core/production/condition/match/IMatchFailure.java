@@ -19,14 +19,14 @@ public interface IMatchFailure
    * set condition is used by conditions that delegate to requests (which have
    * no knowledge of their containing condition)
    * 
-   * @param condition
+   * @param condition TODO
    */
   public void setCondition(ICondition condition);
 
   /**
    * the condition that is responsible for this failure, if any.
    * 
-   * @return
+   * @return TODO
    */
   public ICondition getCondition();
 }

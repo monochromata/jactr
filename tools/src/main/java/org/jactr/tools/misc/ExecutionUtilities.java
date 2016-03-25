@@ -21,9 +21,11 @@ import org.jactr.core.runtime.controller.IController;
  * {@link #executeLater(IModel, Runnable)} and
  * {@link #executeLater(IModel, Runnable, Runnable)} both wrap the runnables in
  * {@link ITimedEvent}s that are posted onto the {@link IModel}'s
- * {@link TimedEventQueue}. <br/> {@link #executeNow(IModel, Runnable)} uses the
+ * {@link TimedEventQueue}.
+ * 
+ * <p>{@link #executeNow(IModel, Runnable)} uses the
  * {@link ModelCycleExecutor} to fire the runnable
- * {@link ModelCycleExecutor.When#ASAP}.
+ * {@link ModelCycleExecutor.When#ASAP}.</p>
  * 
  * @author harrison
  */
@@ -43,8 +45,9 @@ public class ExecutionUtilities
    * if it is fired or aborted. This method uses {@link ITimedEvent}s to handle
    * the execution
    * 
-   * @param model
-   * @param runnable
+   * @param model TODO
+   * @param onFire TODO
+   * @param onAbort TODO
    * @return future boolean if the runnable was fired (false if aborted)
    * @throws IllegalStateException
    *           if the model is not running
@@ -108,9 +111,9 @@ public class ExecutionUtilities
   /**
    * post this runnable to execute after the current cycle finishes
    * 
-   * @param model
-   * @param onFire
-   * @return
+   * @param model TODO
+   * @param onFire TODO
+   * @return TODO
    */
   static public Future<Boolean> executeNow(IModel model, final Runnable onFire)
   {

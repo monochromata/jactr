@@ -19,12 +19,6 @@ import org.jactr.core.production.six.ISubsymbolicProduction6;
 /*
  * sorts descending based on current expected Gain
  */
-/**
- * Description of the Class
- * 
- * @author harrison
- * @created April 18, 2003
- */
 public class ProductionUtilityComparator implements
     java.util.Comparator<IProduction>
 {
@@ -58,13 +52,6 @@ public class ProductionUtilityComparator implements
     return -1;
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @param one
-   *            Description of the Parameter
-   * @return Description of the Return Value
-   */
   @Override
   public boolean equals(Object one)
   {

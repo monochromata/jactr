@@ -17,7 +17,7 @@ import org.jactr.core.module.IModule;
 
 /**
  * basic interface for any learning module (declarative or procedural)
- * @author developer
+ * 
  *
  */
 public interface ILearningModule extends IModule

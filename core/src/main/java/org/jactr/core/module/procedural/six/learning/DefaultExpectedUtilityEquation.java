@@ -23,14 +23,8 @@ public class DefaultExpectedUtilityEquation implements
     IExpectedUtilityEquation
 {
 
-  /**
-   * 
-   */
   private DefaultProceduralLearningModule6 _proceduralLearningModule6;
 
-  /**
-   * @param defaultProceduralLearningModule6
-   */
   public DefaultExpectedUtilityEquation()
   {
   }

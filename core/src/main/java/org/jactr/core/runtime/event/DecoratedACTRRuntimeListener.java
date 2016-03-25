@@ -16,7 +16,7 @@ package org.jactr.core.runtime.event;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 /**
- * @author developer
+ * 
  *
  */
 public class DecoratedACTRRuntimeListener implements IACTRRuntimeListener

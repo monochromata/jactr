@@ -28,17 +28,17 @@ import org.apache.commons.logging.LogFactory;
  * one reason: java.util.PriorityQueue does not maintain insertion order of
  * items when they have the same priority. jACT-R needs to maintain the order so
  * that timed events added by instantiations are fired in the order they are
- * queued.<br>
- * <br>
- * This has three pieces, IPrioritizer<T> which takes a T and returns a double
- * value. When you add an item, its priority is used to determine which
- * collection, in a sorted map of collections, it will be stored in.<br>
- * <br>
- * You call Collection<T> remove(double) to remove all items from the queue
- * that have priorities less than or equal to the value.<br>
- * <b>Note</b>: this is not thread safe
+ * queued.
  * 
- * @author developer
+ * <p>This has three pieces, {@link IPrioritizer} which takes a T and returns a double
+ * value. When you add an item, its priority is used to determine which
+ * collection, in a sorted map of collections, it will be stored in.</p>
+ * 
+ * <p>You call {@link #remove(double, Collection)} to remove all items from the queue
+ * that have priorities less than or equal to the value.<br>
+ * <b>Note</b>: this is not thread safe</p>
+ * 
+ * 
  */
 public class PrioritizedQueue<T>
 {
@@ -100,8 +100,8 @@ public class PrioritizedQueue<T>
   /**
    * return all the items of less than or equal to upThrough
    * 
-   * @param upThrough
-   * @return
+   * @param upThrough TODO
+   * @param removedEvents TODO
    */
   synchronized public void remove(double upThrough, Collection<T> removedEvents)
   {
@@ -141,7 +141,7 @@ public class PrioritizedQueue<T>
    * return all the elements in order of priority (and insertion if priorities
    * are the same)
    * 
-   * @return
+   * @return TODO
    */
   synchronized public Collection<T> get()
   {
@@ -157,7 +157,7 @@ public class PrioritizedQueue<T>
   /**
    * first key, or NaN if empty
    * 
-   * @return
+   * @return TODO
    */
   synchronized public double getFirstPriority()
   {
@@ -168,8 +168,8 @@ public class PrioritizedQueue<T>
   /**
    * first key after afterPriority, or NaN
    * 
-   * @param afterPriority
-   * @return
+   * @param afterPriority TODO
+   * @return TODO
    */
   synchronized public double getFirstPriorityAfter(double afterPriority)
   {

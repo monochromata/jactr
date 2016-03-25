@@ -22,7 +22,6 @@ import org.jactr.core.utils.references.IReferences;
  * necessary for learning and activation computation.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface ISubsymbolicChunk extends
     org.jactr.core.utils.parameter.IParameterized, IAdaptable
@@ -142,8 +141,7 @@ public interface ISubsymbolicChunk extends
   public IReferences getReferences();
 
   /**
-   * @param when
-   * 
+   * @param when TODO
    */
   public void encode(double when);
 
@@ -151,6 +149,7 @@ public interface ISubsymbolicChunk extends
    * Is called whenever the chunk is accessed (check via a condition or modified
    * via an action in a IProduction) ? it can only be called once per cycle
    * since the ReferenceList maintains a listing of unique access times.
+   * 
    * @param time TODO
    */
   public void accessed(double time);
@@ -160,6 +159,7 @@ public interface ISubsymbolicChunk extends
    * another chunk that is in an activation propogating buffer (the goal buffer
    * for instance). This is called by the IActivationBuffer after a call to
    * IActivationBuffer.setSourceChunk(IChunk).
+   * 
    * @param sourceBuffer TODO
    * @param source
    *            The new sourceActivation value
@@ -176,8 +176,8 @@ public interface ISubsymbolicChunk extends
   /**
    * return the buffer specific portion of source activation. 0 if undefined.
    * 
-   * @param buffer
-   * @return
+   * @param buffer TODO
+   * @return TODO
    */
   public double getSourceActivation(IActivationBuffer buffer);
 
@@ -211,7 +211,7 @@ public interface ISubsymbolicChunk extends
    * get the transient, random activation of this chunk (calculated at most,
    * once per cycle)
    * 
-   * @return
+   * @return TODO
    */
   public double getRandomActivation();
 

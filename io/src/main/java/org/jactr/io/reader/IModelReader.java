@@ -14,7 +14,7 @@
 package org.jactr.io.reader;
 
 /**
- * @author developer
+ * 
  *
  */
 public interface IModelReader

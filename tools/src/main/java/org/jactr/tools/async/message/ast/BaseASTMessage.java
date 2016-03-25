@@ -29,7 +29,7 @@ import org.jactr.io.antlr3.serialization.Serializer;
 import org.jactr.tools.async.message.BaseMessage;
 
 /**
- * @author developer
+ * 
  */
 public class BaseASTMessage extends BaseMessage implements Serializable,
     IASTMessage

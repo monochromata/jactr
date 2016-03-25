@@ -24,7 +24,6 @@ import org.jactr.core.runtime.ACTRRuntime;
  * TimedEvent events are sent whenever a TimedEvent's state has changed.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class TimedEventEvent extends
     AbstractACTREvent<TimedEventQueue, ITimedEventListener>
@@ -52,9 +51,6 @@ public class TimedEventEvent extends
     _timedEvent = te;
   }
 
-  /**
-   * 
-   */
   public ITimedEvent getTimedEvent()
   {
     return _timedEvent;

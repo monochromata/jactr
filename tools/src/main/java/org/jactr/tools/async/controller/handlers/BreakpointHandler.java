@@ -32,7 +32,7 @@ import org.jactr.tools.async.message.command.breakpoint.IBreakpointCommand;
  * take the requested breakpoint action and apply it. currently we only support
  * all clear, add/remove of time, cycle, and production
  * 
- * @author developer
+ * 
  */
 public class BreakpointHandler implements IMessageHandler<BreakpointCommand>
 {

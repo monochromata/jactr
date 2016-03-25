@@ -25,7 +25,6 @@ import org.jactr.core.production.condition.CannotMatchException;
  * by {@link IProduction}s when they try to instantiate (common)
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class CannotInstantiateException extends Exception
 {
@@ -38,18 +37,7 @@ public class CannotInstantiateException extends Exception
   private Collection<CannotMatchException> _matchExceptions = Collections.EMPTY_LIST; ;
 
   private IProduction                      _production;
-
-  /**
-   * Constructor for the CannotInstantiateException object
-   * 
-   * @param message
-   *          Description of the Parameter
-   */
-  // public CannotInstantiateException(String message)
-  // {
-  // super(message);
-  // }
-  //
+  
   public CannotInstantiateException(String message, Exception cause)
   {
     super(message, cause);
@@ -68,7 +56,7 @@ public class CannotInstantiateException extends Exception
   }
 
   /**
-   * @param production
+   * @param production TODO
    * @param cmes
    *          collection of exceptions that is <b>copied</b>
    */

@@ -20,8 +20,8 @@ import org.jactr.core.queue.timedevents.BlockingTimedEvent;
  * start of the request.
  * 
  * @author harrison
- * @param <M>
- * @param <R>
+ * @param <M> TODO
+ * @param <R> TODO
  */
 public abstract class BasicAsynchronousModuleDelegate<M extends IAsynchronousModule, R>
     implements IAsynchronousModuleDelegate<M, R>
@@ -99,10 +99,9 @@ public abstract class BasicAsynchronousModuleDelegate<M extends IAsynchronousMod
    * called on the asynch thread after processInternal has completed. primarily
    * used to output some logging info..
    * 
-   * @param request
-   * @param result
-   * @param startTime
-   * @param harvestAt
+   * @param request TODO
+   * @param result TODO
+   * @param parameters TODO
    */
   protected void processInternalCompleted(IRequest request, R result, Object...parameters)
   {
@@ -114,11 +113,12 @@ public abstract class BasicAsynchronousModuleDelegate<M extends IAsynchronousMod
   /**
    * Called on the initiating thread (i.e. model thread), this checks the module
    * and the buffers to be sure that the processing can proceed. If true, it
-   * will queue {@link #processInternal(ChunkPattern)} on the asynchronous
+   * will queue {@link #processInternal(IRequest, double, Object...)} on the asynchronous
    * executor.
    * 
-   * @param request
-   * @return
+   * @param request TODO
+   * @param parameters TODO
+   * @return TODO
    */
   abstract protected boolean shouldProcess(IRequest request,
       Object... parameters);
@@ -127,8 +127,10 @@ public abstract class BasicAsynchronousModuleDelegate<M extends IAsynchronousMod
    * called on the asynchronous thread, this does the actual processing,
    * returning some result. This method should handle all its own exceptions.
    * 
-   * @param request
-   * @return
+   * @param request TODO
+   * @param requestTime TODO
+   * @param parameters TODO
+   * @return TODO
    */
   abstract protected R processInternal(IRequest request, double requestTime, Object... parameters);
 

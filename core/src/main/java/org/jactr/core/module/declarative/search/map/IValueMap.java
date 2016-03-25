@@ -15,11 +15,6 @@ package org.jactr.core.module.declarative.search.map;
 
 import java.util.Collection;
 
-/**
- * 
- * @author developer
- *
- */
 public interface IValueMap<V,I>
 {
 
@@ -35,9 +30,6 @@ public interface IValueMap<V,I>
   
   public long equalToSize(V value);
 
-  /**
-   * 
-   */
   public Collection<I> lessThan(V value) throws UnsupportedOperationException;
   
   public long lessThanSize(V value) throws UnsupportedOperationException;

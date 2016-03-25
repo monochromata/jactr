@@ -64,8 +64,8 @@ public class RuntimeBuilder
    * add the model to the runtime to be built. This model must have all it's
    * instruments installed already.
    * 
-   * @param model
-   * @return
+   * @param model TODO
+   * @return TODO
    */
   public RuntimeBuilder addModel(IModel model)
   {
@@ -77,8 +77,8 @@ public class RuntimeBuilder
    * If you need to add access to custom model parsers, it can be contributed at
    * this point. Accessible via the {@link ModelParserFactory} singleton
    * 
-   * @param initializer
-   * @return
+   * @param initializer TODO
+   * @return TODO
    */
   public RuntimeBuilder addParserInitializer(Runnable initializer)
   {
@@ -87,12 +87,12 @@ public class RuntimeBuilder
   }
 
   /**
-   * If you need to add access to custome ast participants (used by modules &
+   * If you need to add access to custome ast participants (used by modules and
    * extensions), it is contributed here. Accesible via the
    * {@link ASTParticipantRegistry} singelton
    * 
-   * @param intializer
-   * @return
+   * @param intializer TODO
+   * @return TODO
    */
   public RuntimeBuilder addASTInitializer(Runnable intializer)
   {
@@ -104,8 +104,8 @@ public class RuntimeBuilder
    * If you need to add access to custom scripting support. Accessible via the
    * {@link ScriptingManager} singleton
    * 
-   * @param initializer
-   * @return
+   * @param initializer TODO
+   * @return TODO
    */
   public RuntimeBuilder addScriptInitializer(Runnable initializer)
   {
@@ -119,23 +119,17 @@ public class RuntimeBuilder
     return this;
   }
 
-  /**
-   * @param connector
-   * @return
-   */
   public RuntimeBuilder with(IConnector connector)
   {
     _connector = connector;
     return this;
   }
 
-
-
   /**
    * Terminal build operator that will construct and configure the runtime. It
    * returns the controller that should be used to manage the runtime.
    * 
-   * @return
+   * @return TODO
    */
   public IController build()
   {
@@ -147,7 +141,7 @@ public class RuntimeBuilder
    * Alternatitve terminal build operator that constructs the runtime, returning
    * a debug controller for finer grained runtime control.
    * 
-   * @return
+   * @return TODO
    */
   public IController debugBuild()
   {
@@ -235,13 +229,10 @@ public class RuntimeBuilder
   {
     ACTRRuntime runtime = ACTRRuntime.getRuntime();
 
-
     runtime.setConnector(_connector);
 
     for (IModel model : _models)
       runtime.addModel(model);
   }
-
-
 
 }

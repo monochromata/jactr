@@ -26,7 +26,7 @@ import org.jactr.modules.pm.visual.six.DefaultSearchTimeEquation;
 import org.jactr.modules.pm.visual.six.DefaultVisualModule6;
 
 /**
- * @author developer
+ * 
  */
 public class VisualModuleParticipant extends BasicASTParticipant
 {

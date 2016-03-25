@@ -19,28 +19,31 @@ public interface ICycleProcessor
    * run a single cycle of the model returning the time that the next cycle
    * should start at. or if NaN if there is nothing that can be done and there
    * are no pending events
+   * 
+   * @param model TODO
    * @param eventsHaveFired TODO
+   * @return the time after the cycle
    */
   public double cycle(IModel model, boolean eventsHaveFired);
 
   /**
    * execute this before the next cycle starts
    * 
-   * @param runner
+   * @param runner TODO
    */
   public void executeBefore(Runnable runner);
 
   /**
    * execute this after the current cycle finishes
    * 
-   * @param runner
+   * @param runner TODO
    */
   public void executeAfter(Runnable runner);
 
   /**
    * is the cycle currently executing? True between cycle start and stop events.
    * 
-   * @return
+   * @return TODO
    */
   public boolean isExecuting();
 

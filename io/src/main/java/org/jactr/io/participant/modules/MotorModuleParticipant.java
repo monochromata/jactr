@@ -26,7 +26,7 @@ import org.jactr.modules.pm.motor.command.translators.PunchTranslator;
 import org.jactr.modules.pm.motor.six.DefaultMotorModule6;
 
 /**
- * @author developer
+ * 
  */
 public class MotorModuleParticipant extends BasicASTParticipant
 {

@@ -28,11 +28,11 @@ public class BufferStateUtilities
                                                 .getLog(BufferStateUtilities.class);
 
   /**
-   * {@value #YES} means that given the values and the conditions the slots
+   * {@link #YES} means that given the values and the conditions the slots
    * have, they COULD be equivalent (but still might not be)<br>
-   * {@value #NO} means that given the values and the conditions, the two slots
+   * {@link #NO} means that given the values and the conditions, the two slots
    * can never be equivalent <br>
-   * {@value #AMBIGUOUS} means that the given values and conditions are not
+   * {@link #AMBIGUOUS} means that the given values and conditions are not
    * sufficient to make any judgement.<br>
    * 
    * @author harrison
@@ -45,8 +45,9 @@ public class BufferStateUtilities
    * this will search through all the conditions and queries looking for more
    * information about variableName. When it finds another slot that matches to
    * that variable name, all other non-variable conditions for that slot are
-   * saved and remapped to the provided slotName. ex: <br>
-   * <code>
+   * saved and remapped to the provided slotName. ex:
+   * 
+   * {@code
    *  (p
    *   =goal>
    *   isa fact
@@ -58,17 +59,18 @@ public class BufferStateUtilities
    *    isa other-fact
    *    argA =value
    *    )
-   * </code>
-   * <br>
-   * We know that other-fact.argA cannot be null OR Z.<br>
-   * Ideally this method should be recursively because some mean modeler might
-   * use a whole slew of variable indirections within a single production.. but
-   * that will be for version 2.
+   * }
    * 
-   * @param slotName
-   * @param variableName
-   * @param endStates
-   * @return
+   * <p>We know that other-fact.argA cannot be null OR Z.</p>
+   * 
+   * <p>Ideally this method should be recursively because some mean modeler might
+   * use a whole slew of variable indirections within a single production.. but
+   * that will be for version 2.</p>
+   * 
+   * @param slotName TODO
+   * @param variableName TODO
+   * @param endStates TODO
+   * @return TODO
    */
   static public Collection<CommonTree> expandVariable(String slotName,
       String variableName, BufferEndStates endStates)
@@ -126,8 +128,8 @@ public class BufferStateUtilities
    * {@link JACTRBuilder#IDENTIFIER}, {@link JACTRBuilder#VARIABLE}, or
    * {@link JACTRBuilder#NUMBER}
    * 
-   * @param conditionOrAction
-   * @return
+   * @param conditionOrAction TODO
+   * @return TODO
    */
   static public Map<Integer, Collection<CommonTree>> getSlots(
       CommonTree conditionOrAction)
@@ -152,8 +154,8 @@ public class BufferStateUtilities
   /**
    * return all slots that arent variables
    * 
-   * @param mapOfSlots
-   * @return
+   * @param mapOfSlots TODO
+   * @return TODO
    */
   static public Collection<CommonTree> getNonVariables(
       Map<Integer, Collection<CommonTree>> mapOfSlots)
@@ -172,8 +174,8 @@ public class BufferStateUtilities
    * return all slots that are equality conditions (aka assignments), even
    * variables
    * 
-   * @param mapOfTrees
-   * @return
+   * @param mapOfTrees TODO
+   * @return TODO
    */
   static public Collection<CommonTree> getAssignments(
       Map<Integer, Collection<CommonTree>> mapOfTrees)
@@ -198,9 +200,9 @@ public class BufferStateUtilities
   /**
    * uses {@link IConditionalSlot} condition constants, not {@link JACTRBuilder}
    * 
-   * @param slot
-   * @param condition
-   * @return
+   * @param slot TODO
+   * @param condition TODO
+   * @return TODO
    */
   static public boolean conditionIs(CommonTree slot, int condition)
   {
@@ -224,9 +226,9 @@ public class BufferStateUtilities
   /**
    * compare two slots to see if they are applicable, this is just a name check
    * 
-   * @param endStateSlot
-   * @param conditionalSlot
-   * @return
+   * @param endStateSlot TODO
+   * @param conditionalSlot TODO
+   * @return TODO
    */
   static public boolean slotIsApplicable(CommonTree endStateSlot,
       CommonTree conditionalSlot)
@@ -241,16 +243,16 @@ public class BufferStateUtilities
    * accordingly. The values should NEVER be variables in either slot.
    * similarly, before calling this,
    * {@link #slotIsApplicable(CommonTree, CommonTree)} should have returned
-   * true.<br>
-   * <br>
-   * Currently this will return ambiguous if either slot condition is anything
-   * but equals or not
+   * true.
    * 
-   * @param endStateSlot
-   * @param conditionalSlot
+   * <p>Currently this will return ambiguous if either slot condition is anything
+   * but equals or not</p>
+   * 
+   * @param endStateSlot TODO
+   * @param conditionalSlot TODO
    * @throws IllegalStateException
    *             if either is a variable or the condition type is not recognized
-   * @return {@link Consistent}
+   * @return  TODO
    */
   static public Consistent isConsistentWith(CommonTree endStateSlot,
       CommonTree conditionalSlot)

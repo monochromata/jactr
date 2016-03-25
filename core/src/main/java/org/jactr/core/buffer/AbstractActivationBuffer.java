@@ -43,8 +43,6 @@ import org.jactr.core.utils.parameter.ParameterHandler;
 /**
  * basic implementation of an activation buffer that handles the spreading of
  * activation to chunks. this is thread safe.
- * 
- * @author developer
  */
 public abstract class AbstractActivationBuffer extends DefaultAdaptable
     implements IActivationBuffer, IParameterized
@@ -179,6 +177,9 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
 
   /**
    * return true if the matched event should be fired
+   * 
+   * @param chunk the chunk
+   * @return whether the chunk matches
    */
   protected boolean matchedInternal(IChunk chunk)
   {
@@ -498,6 +499,8 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
 
   /**
    * return the source chunk from the internal backing store
+   * 
+   * @return TODO
    */
   abstract protected IChunk getSourceChunkInternal();
 
@@ -643,7 +646,7 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
 
   /**
    * called once the model is started. this is the hook to grab references to
-   * chunks & types
+   * chunks and types
    */
   protected void grabReferences()
   {

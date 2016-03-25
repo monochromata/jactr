@@ -31,8 +31,8 @@ public class LogicMatchFailure extends AbstractMatchFailure
   /**
    * call for when the container doesn't actually have the slot
    * 
-   * @param container
-   * @param cSlot
+   * @param container TODO
+   * @param lSlot TODO
    */
   public LogicMatchFailure(IUniqueSlotContainer container, ILogicalSlot lSlot)
   {
@@ -43,12 +43,9 @@ public class LogicMatchFailure extends AbstractMatchFailure
    * failure when the mismatchedSlot in the container does not meet the
    * condition
    * 
-   * @param container
-   * @param cSlot
-   * @param mismatchedSlot
-   * @param variableDefinition
-   *          the slot that bound the variable value (if any) or possibly the
-   *          buffer
+   * @param condition TODO
+   * @param container TODO
+   * @param lSlot TODO
    */
   public LogicMatchFailure(ICondition condition, IUniqueSlotContainer container,
       ILogicalSlot lSlot)

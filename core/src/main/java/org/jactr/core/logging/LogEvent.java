@@ -22,7 +22,7 @@ import org.jactr.core.runtime.ACTRRuntime;
 /**
  * Log event
  * 
- * @author developer
+ * 
  */
 public class LogEvent extends AbstractACTREvent<IModel, ILogger>
 {

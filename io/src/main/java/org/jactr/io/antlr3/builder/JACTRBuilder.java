@@ -170,8 +170,11 @@ public class JACTRBuilder extends TreeParser {
 
 
     /**
-     apply the parameters in the parametersNode to parameterized
-    */
+     * apply the parameters in the parametersNode to parameterized
+     * 
+     * @param parameterized TODO
+     * @param parameterNodes TODO
+     */
     public void applyParameters(IParameterized parameterized, Collection<CommonTree> parameterNodes)
     {
      for(CommonTree param: parameterNodes)
@@ -202,7 +205,7 @@ public class JACTRBuilder extends TreeParser {
      if(T.equalsIgnoreCase(strToResolve))
       return Boolean.TRUE; 
      
-     /**
+     /*
       I'd rather use Boolean.valueOf() but it returns false
       unless the string is equal to "true" - and doesn't throw
       any formatting exceptions if it is nothing like "false"
@@ -215,11 +218,12 @@ public class JACTRBuilder extends TreeParser {
      return strToResolve; 
     }
 
-    /**
+        /**
          * we use stringbuilders to mark string literals, which are removed during resolveSlots, but
          * that is only called on chunks and chunktypes, not conditions/actions. this takes care of that.
-         * @param slot
-         * @return
+         * 
+         * @param slot TODO
+         * @return TODO
          */
         protected ISlot cleanupSlot(ISlot slot)
         {

@@ -18,7 +18,6 @@ package org.jactr.core.chunktype;
  * slot value for an impossible slot..
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class IllegalChunkTypeStateException extends IllegalStateException
 {

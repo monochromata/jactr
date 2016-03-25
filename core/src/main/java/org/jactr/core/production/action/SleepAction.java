@@ -32,7 +32,7 @@ import org.jactr.core.production.VariableBindings;
  * An action, that when fired will block the model thread until a chunk appears
  * in the goal buffer
  * 
- * @author developer
+ * 
  */
 public class SleepAction implements IAction
 {

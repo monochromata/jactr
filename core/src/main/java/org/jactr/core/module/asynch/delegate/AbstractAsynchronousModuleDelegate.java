@@ -22,8 +22,8 @@ import org.jactr.core.queue.timedevents.BlockingTimedEvent;
  * start of the request.
  * 
  * @author harrison
- * @param <M>
- * @param <R>
+ * @param <M> TODO
+ * @param <R> TODO
  */
 public abstract class AbstractAsynchronousModuleDelegate<M extends IAsynchronousModule, R>
     implements IAsynchronousModuleDelegate<M, R>
@@ -144,7 +144,7 @@ public abstract class AbstractAsynchronousModuleDelegate<M extends IAsynchronous
    * called on the asynch thread on the creation of the blocking timed event.
    * this is useful if you need to snag a reference to it.
    * 
-   * @param bte
+   * @param bte TODO
    */
   protected void blockingTimedEventCreated(BlockingTimedEvent bte)
   {
@@ -155,10 +155,10 @@ public abstract class AbstractAsynchronousModuleDelegate<M extends IAsynchronous
    * called on the asynch thread after processInternal has completed. primarily
    * used to output some logging info..
    * 
-   * @param request
-   * @param result
-   * @param startTime
-   * @param harvestAt
+   * @param request TODO
+   * @param result TODO
+   * @param startTime TODO
+   * @param harvestAt TODO
    */
   protected void processInternalCompleted(IRequest request, R result,
       double startTime, double harvestAt)
@@ -171,7 +171,7 @@ public abstract class AbstractAsynchronousModuleDelegate<M extends IAsynchronous
    * method to queue the timed event. By default
    * getModule().getModel().getTimedEventQueue().enqueue()
    * 
-   * @param timedEvent
+   * @param timedEvent TODO
    */
   protected void enqueue(ITimedEvent timedEvent)
   {
@@ -181,12 +181,13 @@ public abstract class AbstractAsynchronousModuleDelegate<M extends IAsynchronous
   /**
    * Called on the initiating thread (i.e. model thread), this checks the module
    * and the buffers to be sure that the processing can proceed. If true, it
-   * will queue {@link #processInternal(ChunkPattern)} on the asynchronous
-   * executor and then execute {@link #finalizeProcessing(ChunkPattern, Object)}
+   * will queue {@link #processInternal(IRequest, Object...)} on the asynchronous
+   * executor and then execute {@link #finalizeProcessing(IRequest, Object, Object...)}
    * on the model thread once all is completed
    * 
-   * @param request
-   * @return
+   * @param request TODO
+   * @param parameters TODO
+   * @return TODO
    */
   abstract protected boolean shouldProcess(IRequest request,
       Object... parameters);
@@ -195,8 +196,9 @@ public abstract class AbstractAsynchronousModuleDelegate<M extends IAsynchronous
    * called on the asynchronous thread, this does the actual processing,
    * returning some result. This method should handle all its own exceptions.
    * 
-   * @param request
-   * @return
+   * @param request TODO
+   * @param parameters TODO
+   * @return TODO
    */
   abstract protected R processInternal(IRequest request,
       Object... parameters);
@@ -204,23 +206,25 @@ public abstract class AbstractAsynchronousModuleDelegate<M extends IAsynchronous
   /**
    * called on the model thread, this handles the clean up
    * 
-   * @param request
-   * @param result
+   * @param request TODO
+   * @param result TODO
+   * @param parameters TODO
    */
   abstract protected void finalizeProcessing(IRequest request, R result,
       Object... parameters);
 
   /**
    * returns the time at which this result should be made available. In other
-   * words, after {@link #processInternal(ChunkPattern)} finishes, a new
+   * words, after {@link #processInternal(IRequest, Object...)} finishes, a new
    * {@link ITimedEvent} is queued that will fire at the returned time. Upon
-   * firing it will call {@link #finalizeProcessing(ChunkPattern, Object)}.
+   * firing it will call {@link #finalizeProcessing(IRequest, Object, Object...)}.
    * This is called on the asynch thread
    * 
-   * @param request
-   * @param result
-   * @param startTime
-   * @return
+   * @param request TODO
+   * @param result TODO
+   * @param startTime TODO
+   * @param parameters TODO
+   * @return TODO
    */
   abstract protected double computeHarvestTime(IRequest request, R result,
       double startTime, Object... parameters);

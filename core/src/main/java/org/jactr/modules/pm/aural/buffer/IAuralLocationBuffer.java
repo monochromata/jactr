@@ -16,7 +16,7 @@ package org.jactr.modules.pm.aural.buffer;
 import org.jactr.modules.pm.buffer.IPerceptualBuffer;
 
 /**
- * @author developer
+ * 
  */
 public interface IAuralLocationBuffer extends IPerceptualBuffer
 {

@@ -40,7 +40,6 @@ import org.jactr.core.slot.ISlot;
  * retrieval times can be infinite.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class DefaultRetrievalTimeEquation implements IRetrievalTimeEquation
 {
@@ -77,15 +76,6 @@ public class DefaultRetrievalTimeEquation implements IRetrievalTimeEquation
     _retrievalModule = module;
   }
 
-  /**
-   * Description of the Method
-   * 
-   * @param model
-   *          Description of the Parameter
-   * @param chunk
-   *          Description of the Parameter
-   * @return Description of the Return Value
-   */
   public double computeRetrievalTime(IChunk chunk)
   {
     return computeRetrievalTime(chunk, null);

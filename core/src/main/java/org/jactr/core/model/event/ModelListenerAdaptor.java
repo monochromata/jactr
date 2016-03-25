@@ -6,10 +6,6 @@ package org.jactr.core.model.event;
 
 import org.jactr.core.event.IParameterEvent;
 
-/**
- * @author harrison To change the template for this generated type comment go to
- *         Window - Preferences - Java - Code Generation - Code and Comments
- */
 public class ModelListenerAdaptor implements IModelListener
 {
 
@@ -65,48 +61,30 @@ public class ModelListenerAdaptor implements IModelListener
 
   }
 
-  /**
-   * @see org.jactr.core.model.event.IModelListener#modelResumed(org.jactr.core.model.event.ModelEvent)
-   */
   public void modelResumed(ModelEvent me)
   {
 
   }
 
-  /**
-   * @see org.jactr.core.model.event.IModelListener#modelSuspended(org.jactr.core.model.event.ModelEvent)
-   */
   public void modelSuspended(ModelEvent me)
   {
 
   }
 
-  /**
-   * @see org.jactr.core.model.event.IModelListener#logEvent(org.jactr.core.model.event.ModelEvent)
-   */
   public void logEvent(ModelEvent me)
   {
 
   }
 
-  /**
-   * @see org.jactr.core.model.event.IModelListener#modelConnected(org.jactr.core.model.event.ModelEvent)
-   */
   public void modelConnected(ModelEvent me)
   {
   }
 
-  /**
-   * @see org.jactr.core.model.event.IModelListener#cycleStopped(org.jactr.core.model.event.ModelEvent)
-   */
   public void cycleStopped(ModelEvent me)
   {
 
   }
 
-  /**
-   * @see org.jactr.core.model.event.IModelListener#modelDisconnected(org.jactr.core.model.event.ModelEvent)
-   */
   public void modelDisconnected(ModelEvent me)
   {
 

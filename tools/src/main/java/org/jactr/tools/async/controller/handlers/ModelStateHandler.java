@@ -27,7 +27,7 @@ import org.jactr.tools.async.message.command.state.ModelStateCommand;
  * Largely historic, as we no longer support individual model control, but only
  * runtime control. We continue to support it in case of older clients
  * 
- * @author developer
+ * 
  */
 public class ModelStateHandler implements IMessageHandler<ModelStateCommand>
 {

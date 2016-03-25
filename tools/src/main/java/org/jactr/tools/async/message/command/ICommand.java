@@ -18,7 +18,7 @@ import java.io.Serializable;
 import org.jactr.tools.async.message.IMessage;
 
 /**
- * @author developer
+ * 
  *
  */
 public interface ICommand extends IMessage, Serializable

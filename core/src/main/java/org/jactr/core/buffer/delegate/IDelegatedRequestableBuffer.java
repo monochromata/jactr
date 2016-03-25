@@ -23,7 +23,7 @@ import org.jactr.core.production.request.IRequest;
 
 /**
  * permits delegating of {@link IRequest} to {@link IRequestDelegate}
- * @author developer
+ * 
  *
  */
 public interface IDelegatedRequestableBuffer extends IRequestableBuffer,

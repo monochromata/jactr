@@ -27,10 +27,10 @@ import org.apache.commons.logging.LogFactory;
 /**
  * cached values map for rapid access w/o worrying about iterating too
  * much..
- * @author developer
+ * 
  *
- * @param <K>
- * @param <V>
+ * @param <K> TODO
+ * @param <V> TODO
  */
 public class CachedMap<K, V> implements Map<K, V>
 {

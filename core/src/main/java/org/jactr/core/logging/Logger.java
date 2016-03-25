@@ -24,7 +24,7 @@ import org.jactr.core.logging.impl.MessageBuilderFactory;
 import org.jactr.core.model.IModel;
 
 /**
- * @author developer
+ * 
  */
 public class Logger
 {
@@ -55,8 +55,8 @@ public class Logger
   /**
    * loggers are always added on the background executor
    * 
-   * @param model
-   * @param logger
+   * @param model TODO
+   * @param logger the logger
    */
   static public void addLogger(IModel model, ILogger logger)
   {
@@ -91,9 +91,9 @@ public class Logger
   /**
    * log the message and recycle the message builder
    * 
-   * @param model
-   * @param stream
-   * @param message
+   * @param model TODO
+   * @param stream TODO
+   * @param message the message builder
    */
   static public void log(IModel model, Stream stream, IMessageBuilder message)
   {

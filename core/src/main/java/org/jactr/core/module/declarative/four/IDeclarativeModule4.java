@@ -15,11 +15,6 @@ package org.jactr.core.module.declarative.four;
 
 import org.jactr.core.module.declarative.IDeclarativeModule;
 
-/**
- * 
- * @author developer
- *
- */
 public interface IDeclarativeModule4 extends IDeclarativeModule
 {
   static public final String PARTIAL_MATCHING = "EnablePartialMatching";
@@ -27,8 +22,6 @@ public interface IDeclarativeModule4 extends IDeclarativeModule
 
   static public final String PERMANENT_ACTIVATION_NOISE = "PermanentActivationNoise";
   static public final String BASE_LEVEL_CONSTANT = "BaseLevelConstant";
-  
-  
   
   public boolean isPartialMatchingEnabled();
   
@@ -51,15 +44,13 @@ public interface IDeclarativeModule4 extends IDeclarativeModule
    * partial matching is enabled
    * 
    * @return The MismatchPenalty value
-   * @since
    */
   public double getMismatchPenalty();
 
   /**
    * set the activation penalty for a mismatched slot value
    * 
-   * @param p
-   * @since
+   * @param p TODO
    */
   public void setMismatchPenalty(double p);
 }

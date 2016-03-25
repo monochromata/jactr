@@ -21,7 +21,6 @@ package org.jactr.core.chunk;
  * Description of the Class
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class IllegalChunkStateException extends IllegalStateException
 {

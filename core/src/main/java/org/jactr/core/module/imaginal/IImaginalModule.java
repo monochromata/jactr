@@ -14,10 +14,7 @@
 package org.jactr.core.module.imaginal;
 
 import org.jactr.core.module.IModule;
-/**
- * @author developer
- *
- */
+
 public interface IImaginalModule extends IModule
 {
   static public final String IMAGINAL_BUFFER = "imaginal";
@@ -30,7 +27,8 @@ public interface IImaginalModule extends IModule
   /**
    * set the amount of time it takes to add a new chunk
    * to the imaginal buffer
-   * @param addDelayTime
+   * 
+   * @param addDelayTime TODO
    */
   public void setAddDelayTime(double addDelayTime);
   
@@ -38,7 +36,8 @@ public interface IImaginalModule extends IModule
   
   /**
    * set the amount of time it takes for modification requests
-   * @param modDelayTime
+   * 
+   * @param modDelayTime TODO
    */
   public void setModifyDelayTime(double modDelayTime);
   

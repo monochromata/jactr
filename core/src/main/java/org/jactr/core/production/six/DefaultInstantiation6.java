@@ -34,7 +34,6 @@ import org.jactr.core.production.condition.ICondition;
  * Description of the Class
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public class DefaultInstantiation6 extends AbstractInstantiation
 {
@@ -74,7 +73,7 @@ public class DefaultInstantiation6 extends AbstractInstantiation
   /**
    * overriden since the default version returns the subsymbolic of the instantiating
    * production
-   * @return
+   * @return TODO
    * @see org.jactr.core.production.basic.AbstractInstantiation#getSubsymbolicProduction()
    */
   @Override

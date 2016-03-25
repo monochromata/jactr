@@ -28,7 +28,7 @@ import org.jactr.tools.async.message.command.breakpoint.ProductionCommand;
  * take the requested breakpoint action and apply it. currently we only support
  * all clear, add/remove of time, cycle, and production
  * 
- * @author developer
+ * 
  */
 public class ProductionHandler implements IMessageHandler<ProductionCommand>
 {

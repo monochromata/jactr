@@ -29,12 +29,12 @@ public class ParameterProcessor<T>
   private final String               _parameterName;
 
   /**
-   * @param parameterName
-   * @param fromString
-   * @param setFunction
+   * @param parameterName TODO
+   * @param fromString TODO
+   * @param setFunction TODO
    *          may be null if read only
-   * @param toString
-   * @param getFunction
+   * @param toString TODO
+   * @param getFunction TODO
    */
   public ParameterProcessor(String parameterName,
       Function<String, T> fromString, Consumer<T> setFunction,

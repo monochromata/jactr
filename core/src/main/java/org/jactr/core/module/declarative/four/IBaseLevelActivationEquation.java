@@ -23,7 +23,6 @@ import org.jactr.core.model.IModel;
  * getInstance()
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface IBaseLevelActivationEquation extends IActivationParticipant
 {

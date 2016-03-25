@@ -19,7 +19,7 @@ import org.jactr.core.runtime.controller.debug.BreakpointType;
 import org.jactr.tools.async.message.command.ICommand;
 
 /**
- * @author developer
+ * 
  *
  */
 public interface IBreakpointCommand extends ICommand, Serializable

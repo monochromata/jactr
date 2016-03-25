@@ -27,13 +27,11 @@ public class LinkParameterProcessor extends
   /**
    * full constructor for others to overload.
    * 
-   * @param parameterName
-   * @param fromString
-   * @param setFunction
-   * @param toString
-   * @param getFunction
-   * @param actrProcessor
-   * @param sourceChunk
+   * @param parameterName TODO
+   * @param fromString TODO
+   * @param setFunction TODO
+   * @param toString TODO
+   * @param getFunction TODO
    */
   public LinkParameterProcessor(String parameterName,
       Function<String, IAssociativeLink> fromString,
@@ -48,11 +46,11 @@ public class LinkParameterProcessor extends
    * link parameter handler with string transform functions supporting "(iLink
    * count strength fNiCj)"
    * 
-   * @param parameterName
-   * @param setFunction
-   * @param getFunction
-   * @param actrProcessor
-   * @param sourceChunk
+   * @param parameterName TODO
+   * @param setFunction TODO
+   * @param getFunction TODO
+   * @param actrProcessor TODO
+   * @param sourceChunk TODO
    */
   public LinkParameterProcessor(String parameterName,
       Consumer<IAssociativeLink> setFunction,

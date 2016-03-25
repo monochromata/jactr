@@ -17,25 +17,23 @@ import org.antlr.runtime.tree.CommonTree;
 
 /**
  * used to specify whether or not a specific CommonTree element should be output
- * by a code generator.<br>
- * <br>
- * The name is a bit of a misnomer and should probably be changed. The
- * CommonTree describing the model does not change.
+ * by a code generator.
  * 
- * @author developer
+ * <p>The name is a bit of a misnomer and should probably be changed. The
+ * CommonTree describing the model does not change.</p>
  */
 public interface IASTTrimmer
 {
   /**
    * during the walking of the CommonTree describing the model, this will be
    * called for each visited node. If it returns true, the code for the element
-   * will not be generated.<br>
-   * <br>
-   * in the case of nodes describing chunktypes, the chunk children will still
-   * be visited.
+   * will not be generated.
    * 
-   * @param element
-   * @return
+   * <p>in the case of nodes describing chunktypes, the chunk children will still
+   * be visited.</p>
+   * 
+   * @param element TODO
+   * @return TODO
    */
   public boolean shouldIgnore(CommonTree element);
 }

@@ -30,7 +30,6 @@ import org.jactr.core.production.condition.ICondition;
  * Description of the Class
  * 
  * @author harrison
- * @created February 5, 2003
  */
 public class DefaultProduction5 extends AbstractProduction
 {
@@ -39,13 +38,6 @@ public class DefaultProduction5 extends AbstractProduction
                                           .getLog(DefaultProduction5.class
                                               .getName());
 
-  /**
-   * Constructor for the DefaultProduction5 object
-   * 
-   * @param m
-   *            Description of Parameter
-   * @since
-   */
   public DefaultProduction5(IModel m)
   {
     super(m);

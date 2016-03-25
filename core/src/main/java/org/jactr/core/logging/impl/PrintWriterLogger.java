@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 import org.jactr.core.logging.ILogger;
 import org.jactr.core.logging.LogEvent;
 /**
- * @author developer
+ * 
  *
  */
 public class PrintWriterLogger implements ILogger

@@ -34,7 +34,8 @@ public interface IMotorModule extends IPerceptualModule, IParameterized
 
   /**
    * the root movement type chunk
-   * @return
+   * 
+   * @return TODO
    */
   public IChunkType getMovementChunkType();
   
@@ -43,36 +44,40 @@ public interface IMotorModule extends IPerceptualModule, IParameterized
   /**
    * the {@link IMotorTimeEquation} that determines how much time is spent
    * processing the movement. Actual equation times are determined by
-   * individual {@link IEfferentCommandTranslator}s.
-   * @return
+   * individual (TODO: resolve reference: IEfferentCommandTranslator)s.
+   * 
+   * @return TODO
    */
   public IMotorTimeEquation getProcessingTimeEquation();
   
   /**
    * the {@link IMotorTimeEquation} that determines how long the preparation
    * of a motor movement lasts
-   * @return
+   * 
+   * @return TODO
    */
   public IMotorTimeEquation getPreparationTimeEquation();
   
   /**
    * returns the most recently prepared movement for the given muscle
+   * 
    * @param muscle if null, return the last movement regardless of the muscle
-   * @return
+   * @return TODO
    */
   public IMovement getLastMovement(IIdentifier muscle);
   
   /**
    * responsible code snippet that translates {@link ChunkPattern}s into
    * {@link IEfferentCommand}s
-   * @return
+   * 
+   * @return TODO
    */
   public ICommandTranslator getCommandTranslator();
 
   /**
    * tracker and manager of muscle info
    * 
-   * @return
+   * @return TODO
    */
   public MuscleStateManager getMuscleManager();
 
@@ -81,8 +86,8 @@ public interface IMotorModule extends IPerceptualModule, IParameterized
   /**
    * return true if we could prepare this motor command
    * 
-   * @param pattern
-   * @return
+   * @param pattern TODO
+   * @return TODO
    */
   public boolean canPrepare(ChunkTypeRequest pattern);
 
@@ -91,7 +96,10 @@ public interface IMotorModule extends IPerceptualModule, IParameterized
    * the buffer (and queueing timed events), and negotiating the newly created
    * {@link IEfferentCommand} with common reality
    * 
-   * @param pattern
+   * @param pattern TODO
+   * @param requestTime TODO
+   * @param prepareOnly TODO
+   * @return TODO
    */
   public Future<IMovement> prepare(ChunkTypeRequest pattern,
       double requestTime, boolean prepareOnly);
@@ -103,11 +111,11 @@ public interface IMotorModule extends IPerceptualModule, IParameterized
    * execute a motor movement. This involves communicating the movement
    * start with common reality and queueing whatever timed events are necessary
    * 
-   * @param movement
-   * @return
+   * @param movement TODO
+   * @param requestTime TODO
+   * @return TODO
    */
   public Future<IMovement> execute(IMovement movement, double requestTime);
-  
   
   public boolean canAbort(ChunkTypeRequest request);
 
@@ -133,14 +141,14 @@ public interface IMotorModule extends IPerceptualModule, IParameterized
    * reset all the muscles that are in error and optionally stop all active
    * movements too.
    * 
-   * @param stopActiveMovements
+   * @param stopActiveMovements TODO
    */
   public void reset(boolean stopActiveMovements);
 
   /**
    * reset the state of a single muscle
    * 
-   * @param muscle
+   * @param muscle TODO
    */
   public void reset(String muscle);
 

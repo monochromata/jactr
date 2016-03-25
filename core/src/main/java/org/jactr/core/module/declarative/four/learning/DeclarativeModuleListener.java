@@ -25,7 +25,7 @@ import org.jactr.core.module.declarative.event.DeclarativeModuleListenerAdaptor;
  * this listener is just to attach the ChunkListener to newly created chunks so
  * that we can add and remove links
  * 
- * @author developer
+ * 
  */
 public class DeclarativeModuleListener extends DeclarativeModuleListenerAdaptor
 {

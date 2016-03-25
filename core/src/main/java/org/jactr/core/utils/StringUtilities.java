@@ -19,7 +19,7 @@ import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.chunktype.ISymbolicChunkType;
 
 /**
- * @author developer
+ * 
  */
 public class StringUtilities
 {

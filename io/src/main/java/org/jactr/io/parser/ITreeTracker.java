@@ -18,7 +18,7 @@ import java.util.Collection;
 import org.antlr.runtime.tree.CommonTree;
 
 /**
- * @author developer
+ * 
  */
 public interface ITreeTracker
 {

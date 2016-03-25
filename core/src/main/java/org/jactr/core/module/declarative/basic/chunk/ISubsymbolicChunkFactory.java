@@ -25,8 +25,8 @@ public interface ISubsymbolicChunkFactory
   /**
    * merge copy into master
    * 
-   * @param master
-   * @param copy
+   * @param master TODO
+   * @param copy TODO
    */
   public void merge(ISubsymbolicChunk master, ISubsymbolicChunk copy);
 

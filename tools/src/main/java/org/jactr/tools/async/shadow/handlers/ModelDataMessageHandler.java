@@ -20,7 +20,7 @@ import org.commonreality.net.session.ISessionInfo;
 import org.jactr.tools.async.message.event.data.ModelDataEvent;
 import org.jactr.tools.async.shadow.ShadowController;
 /**
- * @author developer
+ * 
  *
  */
 public class ModelDataMessageHandler implements IMessageHandler<ModelDataEvent>

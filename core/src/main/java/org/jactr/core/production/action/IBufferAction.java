@@ -18,7 +18,8 @@ public interface IBufferAction extends IAction
 
   /**
    * set the name of the buffer that this action manipulates
-   * @param bufferName
+   * 
+   * @param bufferName TODO
    */
   public void setBufferName(String bufferName);
   

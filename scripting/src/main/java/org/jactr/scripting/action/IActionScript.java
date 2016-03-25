@@ -15,9 +15,7 @@ public interface IActionScript
 {
 
   /**
-   * return the actual script
-   * 
-   * @return
+   * @return the actual script
    */
   public String getScript();
 
@@ -27,7 +25,7 @@ public interface IActionScript
    * can be returned.
    * 
    * @param variableBindings
-   * @return
+   * @return TODO
    */
   public IActionScript bind(VariableBindings variableBindings)
       throws CannotInstantiateException;
@@ -36,9 +34,9 @@ public interface IActionScript
    * Actually execute the script, returning the time it takes to complete (which
    * is added to the production firing time)
    * 
-   * @param scriptSupport
-   * @param instantiation
-   * @param firedAt
+   * @param scriptSupport TODO
+   * @param instantiation TODO
+   * @param firedAt TODO
    * @return additional time it takes to fire this condition (typically 0)
    */
   public double fire(ScriptSupport scriptSupport, IInstantiation instantiation,

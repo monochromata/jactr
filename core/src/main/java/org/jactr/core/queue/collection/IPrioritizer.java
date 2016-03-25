@@ -14,7 +14,7 @@
 package org.jactr.core.queue.collection;
 
 /**
- * @author developer
+ * 
  */
 public interface IPrioritizer<T>
 {

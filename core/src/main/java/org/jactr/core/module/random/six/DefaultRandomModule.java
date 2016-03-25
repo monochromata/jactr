@@ -27,8 +27,8 @@ import org.jactr.core.utils.parameter.ParameterHandler;
 /**
  * default random module
  * 
- * @see http://jactr.org/node/88
- * @see http://jactr.org/node/89
+ * <p><a href="http://jactr.org/node/88">http://jactr.org/node/88</a></p>
+ * <p><a href="http://jactr.org/node/89">http://jactr.org/node/88</a></p>
  * @author harrison
  */
 public class DefaultRandomModule extends AbstractModule implements

@@ -22,58 +22,66 @@ public interface IACTRRuntimeListener extends EventListener
   /**
    * called anytime a model is added to the runtime
    * 
-   * @param event
+   * @param event the event signaling the addition of the model
+   * @see ACTRRuntimeEvent.Type#MODEL_ADDED
    */
   public void modelAdded(ACTRRuntimeEvent event);
   
   /**
    * when model is removed
    * 
-   * @param event
+   * @param event the event signaling the removal of the model
+   * @see ACTRRuntimeEvent.Type#MODEL_REMOVED
    */
   public void modelRemoved(ACTRRuntimeEvent event);
   
   /**
-   * after at least one model has starteed
+   * after at least one model has started
    * 
-   * @param event
+   * @param event the event signaling the start of the runtime
+   * @see ACTRRuntimeEvent.Type#STARTED
    */
   public void runtimeStarted(ACTRRuntimeEvent event);
   
   /**
    * after the last model has stopped
    * 
-   * @param event
+   * @param event the event signaling the stop of the runtime
+   * @see ACTRRuntimeEvent.Type#STARTED
    */
   public void runtimeStopped(ACTRRuntimeEvent event);
   
   /**
    * after last model has suspended
    * 
-   * @param event
+   * @param event the event signaling the suspension of the runtime
+   * @see ACTRRuntimeEvent.Type#SUSPENDED
    */
   public void runtimeSuspended(ACTRRuntimeEvent event);
   
   /**
    * after last model resumes
    * 
-   * @param event
+   * @param event the event signaling the resumption of the runtime
+   * @see ACTRRuntimeEvent.Type#RESUMED
    */
   public void runtimeResumed(ACTRRuntimeEvent event);
 
   /**
    * after model has started
    * 
-   * @param event
+   * @param event the event signaling the start of a model
+   * @see ACTRRuntimeEvent.Type#MODEL_STARTED
    */
   public void modelStarted(ACTRRuntimeEvent event);
 
   /**
    * after model has stopped, and all its events (stopped, disconnected) have
-   * been fired, this will be called (but before runtimeStopped if this is th
-   * elast model)
+   * been fired, this will be called (but before runtimeStopped if this is the
+   * last model)
    * 
-   * @param event
+   * @param event the event signaling the stop of a model
+   * @see ACTRRuntimeEvent.Type#MODEL_STOPPED
    */
   public void modelStopped(ACTRRuntimeEvent event);
 }

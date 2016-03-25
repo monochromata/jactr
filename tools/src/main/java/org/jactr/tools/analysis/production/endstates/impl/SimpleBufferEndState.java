@@ -8,8 +8,6 @@ import org.jactr.core.slot.IConditionalSlot;
 import org.jactr.tools.analysis.production.endstates.BufferEndState;
 
 /**
- * 
- * 
  * @author harrison
  */
 public class SimpleBufferEndState extends BufferEndState
@@ -17,9 +15,11 @@ public class SimpleBufferEndState extends BufferEndState
 
   /**
    * first commontree is the equality, everything else is the not
-   * @param bufferName
-   * @param slotName
-   * @param content
+   * 
+   * @param bufferName TODO
+   * @param conditionedOn TODO
+   * @param slotName TODO
+   * @param content TODO
    */
   public SimpleBufferEndState(String bufferName, String conditionedOn, String slotName, CommonTree ... content)
   {

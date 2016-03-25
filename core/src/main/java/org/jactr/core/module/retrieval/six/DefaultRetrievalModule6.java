@@ -60,7 +60,7 @@ import org.jactr.core.utils.parameter.ParameterHandler;
 /**
  * default retrieval buffer
  * 
- * @see http://jactr.org/node/33
+ * <p>See <a href="http://jactr.org/node/33">http://jactr.org/node/33</a></p>
  * @author harrison
  */
 public class DefaultRetrievalModule6 extends AbstractModule implements
@@ -283,10 +283,11 @@ public class DefaultRetrievalModule6 extends AbstractModule implements
   /**
    * choose the best matching result from the colleciton
    * 
-   * @param results
-   * @param errorChunk
-   * @param originalRequest
-   * @return
+   * @param results TODO
+   * @param errorChunk TODO
+   * @param originalRequest TODO
+   * @param cleanedRequest TODO
+   * @return TODO
    */
   protected IChunk selectRetrieval(Collection<IChunk> results,
       IChunk errorChunk, ChunkTypeRequest originalRequest,
@@ -480,9 +481,6 @@ public class DefaultRetrievalModule6 extends AbstractModule implements
     _latencyFactor = fact;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getParameter(java.lang.String)
-   */
   public String getParameter(String key)
   {
     if (RETRIEVAL_THRESHOLD.equalsIgnoreCase(key))
@@ -499,9 +497,6 @@ public class DefaultRetrievalModule6 extends AbstractModule implements
     return null;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getPossibleParameters()
-   */
   public Collection<String> getPossibleParameters()
   {
     ArrayList<String> rtn = new ArrayList<String>();
@@ -514,18 +509,11 @@ public class DefaultRetrievalModule6 extends AbstractModule implements
     return rtn;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getSetableParameters()
-   */
   public Collection<String> getSetableParameters()
   {
     return getPossibleParameters();
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#setParameter(java.lang.String,
-   *      java.lang.String)
-   */
   public void setParameter(String key, String value)
   {
     if (RETRIEVAL_THRESHOLD.equalsIgnoreCase(key))

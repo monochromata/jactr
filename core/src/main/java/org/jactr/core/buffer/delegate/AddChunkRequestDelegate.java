@@ -24,11 +24,11 @@ import org.jactr.core.slot.ISlot;
  * inserting into the buffer via
  * {@link IActivationBuffer#addSourceChunk(org.jactr.core.chunk.IChunk)}. If the
  * chunk is encoded and there are slots to be modified, the chunk will
- * automatically be copied.<br/>
- * <br/>
- * This is used when you have a buffer that accepts new chunk insertions
+ * automatically be copied.
+ *
+ * <p>This is used when you have a buffer that accepts new chunk insertions
  * directly and immediately (like goal). As opposed to a delayed request that
- * takes some amount of time (beyond the current cycle).
+ * takes some amount of time (beyond the current cycle).</p>
  * 
  * @author harrison
  */

@@ -23,7 +23,7 @@ import org.jactr.modules.pm.visual.IVisualSearchTimeEquation;
 /**
  * merely returns 0. this is the default behavior.
  * 
- * @author developer
+ * 
  */
 public class DefaultSearchTimeEquation implements IVisualSearchTimeEquation
 {

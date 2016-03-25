@@ -26,7 +26,7 @@ import org.jactr.core.model.IModel;
  * {@link TerminateIterativeRunException}. Even if the exception is thrown,
  * {@link #stop()} will still be called.
  * 
- * @author developer
+ * 
  */
 public interface IIterativeRunListener
 {
@@ -42,8 +42,8 @@ public interface IIterativeRunListener
    * called before each build of the models in the IterativeMain. This gives the
    * listener a chance to tweak the models before they are constructed
    * 
-   * @param currentRunIndex
-   * @param totalRuns
+   * @param currentRunIndex TODO
+   * @param totalRuns TODO
    * @param modelDescriptors
    *          all the descriptors of the models to be created.
    * @throws TerminateIterativeRunException
@@ -56,9 +56,9 @@ public interface IIterativeRunListener
   /**
    * called before the run starts
    * 
-   * @param currentRunIndex
-   * @param totalRuns
-   * @param models
+   * @param currentRunIndex TODO
+   * @param totalRuns TODO
+   * @param models TODO
    * @throws TerminateIterativeRunException
    *           TODO
    */
@@ -70,22 +70,24 @@ public interface IIterativeRunListener
 
   /**
    * called if something goes horribly wrong. This can be invoked at any of
-   * three locations: <br>
-   * <br>
-   * During a model execution (in which case index>=1, model!=null)<br>
-   * <br>
-   * If something goes wrong after the run during cleanup (index>=1,
-   * model==null) <br>
-   * <br>
-   * or at the end if something goes wrong (index==0, model==null). <br/>
-   * you cannot throw {@link TerminateIterativeRunException} when model!=null,
+   * three locations:
+   * 
+   * <p>During a model execution (in which case index&gt;=1, model!=null)</p>
+   * 
+   * <p>If something goes wrong after the run during cleanup (index&gt;=1,
+   * model==null)</p>
+   * 
+   * <p>or at the end if something goes wrong (index==0, model==null). </p>
+   * 
+   * <p>you cannot throw {@link TerminateIterativeRunException} when model!=null,
    * as it will not be caught by the IterativeMain entry point. If you need to
    * terminate the iterative run entirely because of a model level exception,
-   * you should record that the exception occured and then terminate from
-   * postRun()
+   * you should record that the exception occurred and then terminate from
+   * postRun()</p>
    * 
-   * @param index
-   * @param thrown
+   * @param index TODO
+   * @param model TODO
+   * @param thrown TODO
    * @throws TerminateIterativeRunException
    *           if the iterative run should be killed. TODO
    */

@@ -17,7 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.event.IParameterEvent;
 /**
- * @author developer
+ * 
  *
  */
 public class ProceduralModuleListenerAdaptor implements

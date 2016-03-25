@@ -16,7 +16,7 @@ package org.jactr.core.event;
 /**
  * general event for notification that a parameter has changed
  * 
- * @author developer
+ * 
  * @param <S>
  *            source
  * @param <L>

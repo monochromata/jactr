@@ -23,7 +23,7 @@ import org.jactr.core.module.retrieval.six.DefaultRetrievalModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
 /**
- * @author developer
+ * 
  */
 public class RetrievalModuleParticipant extends BasicASTParticipant
 {

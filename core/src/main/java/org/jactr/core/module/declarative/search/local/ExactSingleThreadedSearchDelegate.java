@@ -191,9 +191,11 @@ public class ExactSingleThreadedSearchDelegate implements ISearchDelegate
    * sort the slots by the guessed size of the result set. This is only used by
    * findExact. We also convert not's into filters instead whereever possible
    * 
-   * @param chunkType
-   * @param originalSlots
-   * @return
+   * @param chunkType TODO
+   * @param originalSlots TODO
+   * @param container TODO
+   * @param searchSystem TODO
+   * @return TODO
    */
   protected IChunkFilter sortPattern(IChunkType chunkType,
       Collection<? extends ISlot> originalSlots, List<ISlot> container,
@@ -249,9 +251,10 @@ public class ExactSingleThreadedSearchDelegate implements ISearchDelegate
   /**
    * sort the slots by the guessed size of the result set.
    * 
-   * @param chunkType
-   * @param slots
-   * @return
+   * @param chunkType TODO
+   * @param slots TODO
+   * @param searchSystem TODO
+   * @return TODO
    */
   protected List<ISlot> sortPatternOriginal(IChunkType chunkType,
       Collection<? extends ISlot> slots, DefaultSearchSystem searchSystem)

@@ -29,7 +29,7 @@ import org.jactr.core.slot.ISlot;
 /**
  * condition for checking the state of a buffer
  * 
- * @author developer
+ * 
  */
 public class QueryCondition extends AbstractBufferCondition implements
     Cloneable

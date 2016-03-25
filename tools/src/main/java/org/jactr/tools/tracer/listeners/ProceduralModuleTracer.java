@@ -24,7 +24,7 @@ import org.jactr.core.module.procedural.event.ProceduralModuleEvent;
 import org.jactr.tools.tracer.transformer.procedural.ProceduralModuleEventTransformer;
 
 /**
- * @author developer
+ * 
  */
 public class ProceduralModuleTracer extends BaseTraceListener implements
     ITraceListener, IProceduralModuleListener

@@ -30,8 +30,8 @@ import org.apache.commons.logging.LogFactory;
  * extends default value map to provide sortable values
  * 
  * @author harrison
- * @param <V>
- * @param <I>
+ * @param <V> TODO
+ * @param <I> TODO
  */
 public class SortedValueMap<V extends Comparable<V>, I> extends
     DefaultValueMap<V, I>
@@ -52,6 +52,7 @@ public class SortedValueMap<V extends Comparable<V>, I> extends
    * overridden to create a sortable set to track the sorted keys, but we still
    * use the same core map
    * 
+   * @return TODO
    * @see org.jactr.core.module.declarative.search.map.DefaultValueMap#instantiateCoreMap()
    */
   @Override

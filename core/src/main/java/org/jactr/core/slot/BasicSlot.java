@@ -100,15 +100,7 @@ public class BasicSlot implements ISlot, Comparable<ISlot>
       return _value.equals(test);
   }
 
-  /**
-   * equality is only defined as equal names
-   * 
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
 
-  /**
-   * @see org.jactr.core.utils.Duplicateable#duplicate()
-   */
   @Override
   public BasicSlot clone()
   {
@@ -206,8 +198,8 @@ public class BasicSlot implements ISlot, Comparable<ISlot>
   /**
    * set the value of the slot, returning the prior value
    * 
-   * @param value
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   final protected Object setValueInternal(Object value)
   {

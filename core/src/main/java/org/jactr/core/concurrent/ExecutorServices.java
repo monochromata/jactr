@@ -121,17 +121,12 @@ public class ExecutorServices
   /**
    * wait for a specific executor to finish its processing load
    * 
-   * @param executor
-   * @param waitInMs
+   * @param executor TODO
+   * @param waitInMs TODO
    * @return true if the block was reached, false if timeout or exception
    */
   static public boolean waitFor(ExecutorService executor, long waitInMs)
   {
-    /*
-     * 
-     * 
-     */
-
     Future future = executor.submit(new Runnable() {
       public void run()
       {
@@ -153,6 +148,8 @@ public class ExecutorServices
   /**
    * shutdown and wait for the shutdown of all the executors that are currently
    * installed. if millisecondsToWait is 0, it will wait indefinitely
+   * 
+   * @param millisecondsToWait TODO
    */
   static public void shutdown(long millisecondsToWait)
   {

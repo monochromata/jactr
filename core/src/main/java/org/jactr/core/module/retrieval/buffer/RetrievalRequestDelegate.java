@@ -169,7 +169,7 @@ public class RetrievalRequestDelegate extends AsynchronousRequestDelegate
    * when chunks are expanded into search patterns, this determines whether null
    * slot values will be included in the search pattern, defaults to false
    * 
-   * @param includeNulls
+   * @param includeNulls TODO
    */
   public void setIncludeNullValues(boolean includeNulls)
   {
@@ -178,6 +178,10 @@ public class RetrievalRequestDelegate extends AsynchronousRequestDelegate
 
   /**
    * test to make sure all the slots are contained in the chunktype
+   * 
+   * @param request TODO
+   * @param buffer TODO
+   * @return TODO
    */
   @Override
   protected boolean isValid(IRequest request, IActivationBuffer buffer)
@@ -208,8 +212,8 @@ public class RetrievalRequestDelegate extends AsynchronousRequestDelegate
    * expands chunk requests into chunktype requests, unless indexed retrievals
    * are enabled.
    * 
-   * @param request
-   * @return
+   * @param request TODO
+   * @return TODO
    */
   @Override
   protected IRequest expandRequest(IRequest request)

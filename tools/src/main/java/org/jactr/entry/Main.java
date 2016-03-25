@@ -48,16 +48,12 @@ import org.jactr.io.environment.EnvironmentParser;
  * codes: -3 unknown -2 compilation error -1 configuration error 0 success
  * 
  * @author harrison
- * @created July 19, 2001
  */
 public class Main
 {
 
   static private final Log LOGGER = LogFactory.getLog(Main.class);
 
-  /**
-   * @param cmd
-   */
   public Main()
   {
   }
@@ -66,7 +62,9 @@ public class Main
    * create the deafault environment for a run.. possibly setting up the
    * onStart/Stop
    * 
-   * @return
+   * @param runtime TODO
+   * @param cmd TODO
+   * @return TODO
    */
   public ACTRRuntime configureRuntime(ACTRRuntime runtime, CommandLine cmd)
   {
@@ -114,8 +112,9 @@ public class Main
   /**
    * set up the logging for the models
    * 
-   * @param cmd
-   * @return
+   * @param runtime TODO
+   * @param cmd TODO
+   * @return TODO
    */
   public ACTRRuntime configureLogging(ACTRRuntime runtime, CommandLine cmd)
   {
@@ -264,7 +263,7 @@ public class Main
   /**
    * compile the models
    * 
-   * @param cmd
+   * @param cmd TODO
    */
   public void compile(CommandLine cmd)
   {
@@ -386,7 +385,6 @@ public class Main
    * 
    * @param argv
    *          The command line arguments
-   * @since
    */
   public static void main(String[] argv)
   {

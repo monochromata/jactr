@@ -15,47 +15,39 @@ package org.jactr.core.production;
 
 import org.jactr.core.utils.IAdaptable;
 
-/**
- * Description of the Interface
- * 
- * @author harrison
- * @created April 18, 2003
- */
 public interface ISubsymbolicProduction extends
     org.jactr.core.utils.parameter.IParameterized, IAdaptable
 {
 
-  /**
-   * Description of the Field
-   */
   public final static String CREATION_TIME = "CreationTime";
 
-  /**
-   * Description of the Field
-   */
-
-  /**
-   * Description of the Field
-   */
   public final static String FIRING_TIME   = "FiringTime";
 
   /**
    * how long will it take to execute this production
+   * 
+   * @return TODO
    */
   public double getFiringTime();
 
   /**
    * how long will it take to execute this production
+   * 
+   * @param defAct TODO
    */
   public void setFiringTime(double defAct);
 
   /**
    * when was this production created
+   * 
+   * @return TODO
    */
   public double getCreationTime();
 
   /**
    * when was this production created
+   * 
+   * @param time TODO
    */
   public void setCreationTime(double time);
 

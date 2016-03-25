@@ -32,7 +32,7 @@ import org.jactr.core.production.request.IRequest;
 /**
  * default goal buffer with a capacity of one
  * 
- * @author developer
+ * 
  */
 public class DefaultGoalBuffer6 extends DefaultDelegatedRequestableBuffer6
     implements ICompilableBuffer

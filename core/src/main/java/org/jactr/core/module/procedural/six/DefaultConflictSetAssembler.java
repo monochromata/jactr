@@ -37,11 +37,11 @@ import org.jactr.core.production.condition.ICondition;
  * sorted by the most specific characteristic used for conflict set assembly.
  * Typically this is the chunktype of one of the conditions. If there are no
  * chunktype matches, it drops down to the buffer (for queries), and finally if
- * that doesn't work, the production is always considered for matching. <br/>
- * <br/>
- * full indexing (of all conditions) is not strictly necessary since all
+ * that doesn't work, the production is always considered for matching.
+
+ * <p>full indexing (of all conditions) is not strictly necessary since all
  * conditions must match for firing, but performing full indexing can be useful
- * if subsets of productions can change.
+ * if subsets of productions can change.</p>
  * 
  * @author harrison
  */

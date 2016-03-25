@@ -18,7 +18,7 @@ import org.jactr.core.event.IACTREvent;
 /**
  * a chunk of code that transforms a IACTREvent into an IMessage (most likely
  * an IASTMessage)
- * @author developer
+ * 
  *
  */
 public interface IEventTransformer

@@ -31,7 +31,7 @@ import org.jactr.core.utils.StringUtilities;
 /**
  * default retrieval buffer
  * 
- * @author developer
+ * 
  */
 public class DefaultRetrievalBuffer6 extends DefaultDelegatedRequestableBuffer6
     implements ICompilableBuffer
@@ -95,8 +95,9 @@ public class DefaultRetrievalBuffer6 extends DefaultDelegatedRequestableBuffer6
   /**
    * this lets the retrieval buffer contain the original chunk and not its copy
    * 
+   * <p>TODO: resolve link org.jactr.core.buffer.six.AbstractActivationBuffer6#copyChunkOnInsertion()</p>
+   * 
    * @return false
-   * @see org.jactr.core.buffer.six.AbstractActivationBuffer6#copyChunkOnInsertion()
    */
   @Override
   protected boolean shouldCopyOnInsertion(IChunk chunk)

@@ -81,14 +81,15 @@ public abstract class AbstractCapacityBuffer6 extends
    * return true if the capacity has been reached and someone needs to be
    * removed
    * 
-   * @return
+   * @return TODO
    */
   abstract protected boolean isCapacityReached();
 
   /**
    * return true if a chunk of this type can be added to the buffer
-   * 
-   * @return
+   *
+   * @param chunkType the chunk type to check
+   * @return TODO
    */
   abstract protected boolean isValidChunkType(IChunkType chunkType);
 
@@ -97,7 +98,7 @@ public abstract class AbstractCapacityBuffer6 extends
    * caution and be sure when you do so you are wrapped within at least a
    * readlock
    * 
-   * @return
+   * @return TODO
    */
   protected SortedMap<Double, IChunk> getTimesAndChunks()
   {
@@ -151,7 +152,7 @@ public abstract class AbstractCapacityBuffer6 extends
    * is a MOST*, it returns to oldest. Other implementations may overload this
    * in order to do more detailed calculations
    * 
-   * @return
+   * @return TODO
    */
   protected IChunk getRemovalCandidate()
   {
@@ -261,7 +262,7 @@ public abstract class AbstractCapacityBuffer6 extends
   /**
    * set the status slots after insertion
    * 
-   * @param insertedChunk
+   * @param insertedChunk TODO
    */
   protected void chunkInserted(IChunk insertedChunk)
   {

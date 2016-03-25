@@ -24,7 +24,7 @@ import org.jactr.core.event.IParameterListener;
  * will be called after the encoding request, but will likely arrive before the
  * chunk is actually inserted into the buffer.
  * 
- * @author developer
+ * 
  */
 public interface IPerceptualMemoryModuleListener extends EventListener,
     IParameterListener

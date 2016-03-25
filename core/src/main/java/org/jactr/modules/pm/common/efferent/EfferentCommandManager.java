@@ -43,11 +43,11 @@ import org.commonreality.object.manager.event.IObjectEvent;
  * , execute and abort ({@link #execute(DeltaTracker)}
  * {@link #abort(DeltaTracker)}), and upon completion (typically called from
  * {@link #commandCompleted(IEfferentCommand)} and
- * {@link #commandAborted(IEfferentCommand)}), the ability to remove the
+ * {@link #commandAborted(IEfferentCommand, boolean)}), the ability to remove the
  * command.
  * 
  * @author harrison
- * @param <C>
+ * @param <C> TODO
  */
 public abstract class EfferentCommandManager<C extends IEfferentCommand>
 {
@@ -375,10 +375,6 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
     }
   }
 
-  /**
-   * @param container
-   * @return
-   */
   final public Set<IIdentifier> getExecutingCommandIds(
       Set<IIdentifier> container)
   {
@@ -398,8 +394,8 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
   /**
    * return all the commands that are currently executing
    * 
-   * @param container
-   * @return
+   * @param container TODO
+   * @return TODO
    */
   final public Collection<C> getExecutingCommands(Collection<C> container)
   {
@@ -424,9 +420,9 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
   /**
    * creates and submits the command, w/o using the future..
    * 
-   * @param object
-   * @param parameters
-   * @return
+   * @param object TODO
+   * @param parameters TODO
+   * @return TODO
    */
   final protected C newCommandInternal(IEfferentObject object,
       Object... parameters)
@@ -468,9 +464,9 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
    * The future returned will block until an exception occurs, or the command is
    * accepted or rejected.
    * 
-   * @param object
-   * @param parameters
-   * @return
+   * @param object TODO
+   * @param parameters TODO
+   * @return TODO
    */
   final public Future<C> newCommand(IEfferentObject object,
       Object... parameters)
@@ -498,8 +494,8 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
   /**
    * request that the command be executed
    * 
-   * @param commandChange
-   * @return
+   * @param commandChange TODO
+   * @return TODO
    */
   public Future<C> execute(DeltaTracker<? extends IMutableObject> commandChange)
   {
@@ -509,8 +505,8 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
   /**
    * request that the command be aborted
    * 
-   * @param commandChange
-   * @return
+   * @param commandChange TODO
+   * @return TODO
    */
   public Future<C> abort(DeltaTracker<? extends IMutableObject> commandChange)
   {
@@ -557,7 +553,7 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
   /**
    * request removal
    * 
-   * @param command
+   * @param command TODO
    */
   final public void remove(C command)
   {
@@ -570,7 +566,8 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
    * will find the future associated with this command, set its return value,
    * release and remove it from the collection of futures
    * 
-   * @param command
+   * @param command TODO
+   * @param exception TODO
    */
   private void setAndRelease(C command, Throwable exception)
   {
@@ -599,8 +596,8 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
   /**
    * tests the identifier to see if it is pending, future or managed
    * 
-   * @param identifier
-   * @return
+   * @param identifier TODO
+   * @return TODO
    */
   private boolean isInterestedIn(IIdentifier identifier)
   {
@@ -702,8 +699,9 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
    * create the command using the provided efferent object, from which a
    * template should be extracted and instantiated
    * 
-   * @param object
-   * @return
+   * @param object TODO
+   * @param parameters TODO
+   * @return TODO
    */
   abstract protected C createCommand(IEfferentObject object,
       Object... parameters);
@@ -711,42 +709,43 @@ public abstract class EfferentCommandManager<C extends IEfferentCommand>
   /**
    * call back executed on the CR executor
    * 
-   * @param command
+   * @param command TODO
    */
   abstract protected void commandAccepted(C command);
 
   /**
    * call back executed on the CR executor
    * 
-   * @param command
+   * @param command TODO
    */
   abstract protected void commandRejected(C command);
 
   /**
    * call back executed on the CR executor
    * 
-   * @param command
+   * @param command TODO
    */
   abstract protected void commandRunning(C command);
 
   /**
    * call back executed on the CR executor
    * 
-   * @param command
+   * @param command TODO
+   * @param wasRequested TODO
    */
   abstract protected void commandAborted(C command, boolean wasRequested);
 
   /**
    * call back executed on the CR executor
    * 
-   * @param command
+   * @param command TODO
    */
   abstract protected void commandCompleted(C command);
 
   /**
    * call back executed on the CR executor
    * 
-   * @param command
+   * @param command TODO
    */
   protected void commandRemoved(C command)
   {

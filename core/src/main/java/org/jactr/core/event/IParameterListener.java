@@ -18,7 +18,7 @@ import java.util.EventListener;
 /**
  * a listener for changes to object parameters (typically subsymbolic elements)
  * 
- * @author developer
+ * 
  */
 public interface IParameterListener extends EventListener
 {

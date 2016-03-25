@@ -23,7 +23,7 @@ import org.jactr.core.production.condition.ChunkPattern;
 /**
  * insert a chunk into a specific buffer after a certain time has elapsed
  * 
- * @author developer
+ * 
  */
 public class DelayedBufferInsertionTimedEvent extends AbstractTimedEvent
     implements IBufferBasedTimedEvent
@@ -62,9 +62,7 @@ public class DelayedBufferInsertionTimedEvent extends AbstractTimedEvent
 
 
   /**
-   * the chunk that is to be inserted into the buffer
-   * 
-   * @return
+   * @return the chunk that is to be inserted into the buffer 
    */
   public IChunk getChunkToInsert()
   {
@@ -72,10 +70,8 @@ public class DelayedBufferInsertionTimedEvent extends AbstractTimedEvent
   }
 
   /**
-   * return the chunk that is actually in the buffer after firing, often this is
+   * @return the chunk that is actually in the buffer after firing, often this is
    * a copy of chunktoinsert
-   * 
-   * @return
    */
   public IChunk getInsertedChunk()
   {

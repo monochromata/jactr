@@ -18,8 +18,8 @@ public interface IChunkFilter
   /**
    * return true if this chunk should be included in the search results.
    * 
-   * @param chunk
-   * @return
+   * @param chunk TODO
+   * @return TODO
    */
   public boolean accept(IChunk chunk);
 }

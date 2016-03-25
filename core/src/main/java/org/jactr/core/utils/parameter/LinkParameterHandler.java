@@ -125,8 +125,8 @@ public class LinkParameterHandler extends ParameterHandler<IAssociativeLink>
   /**
    * object[] values had better be link[]
    * 
-   * @param values
-   * @return
+   * @param value TODO
+   * @return TODO
    */
   @Override
   public String toString(IAssociativeLink value)
@@ -150,8 +150,9 @@ public class LinkParameterHandler extends ParameterHandler<IAssociativeLink>
   
   /**
    * return the string rep of the links parameters, i.e., "count strength fnicj"
-   * @param link
-   * @return
+   * 
+   * @param link TODO
+   * @return TODO
    */
   protected String getLinkParameters(IAssociativeLink link)
   {

@@ -39,7 +39,7 @@ import org.jactr.modules.pm.buffer.IEventTrackingActivationBuffer;
 import org.jactr.modules.pm.buffer.IPerceptualBuffer;
 
 /**
- * @author developer
+ * 
  */
 public abstract class AbstractCapacityPMActivationBuffer6 extends
     AbstractCapacityBuffer6 implements IDelegatedRequestableBuffer,

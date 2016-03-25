@@ -23,10 +23,10 @@ public interface IPerceptualMemoryModule extends IPerceptualModule
   /**
    * search perceptual memory, returning some result in the future
    * 
-   * @param request
-   * @param requestTime
-   * @param isStuffRequest
-   * @return
+   * @param request TODO
+   * @param requestTime TODO
+   * @param isStuffRequest TODO
+   * @return TODO
    */
   public Future<PerceptualSearchResult> search(ChunkTypeRequest request,
       double requestTime,
@@ -36,9 +36,9 @@ public interface IPerceptualMemoryModule extends IPerceptualModule
    * attend to some search result, potentially returning some attended
    * perceptual representation in the future.
    * 
-   * @param audioEvent
-   * @param requestTime
-   * @return
+   * @param searchResult TODO
+   * @param requestTime TODO
+   * @return TODO
    */
   public Future<IChunk> attendTo(PerceptualSearchResult searchResult,
       double requestTime);

@@ -29,7 +29,6 @@ import org.jactr.scripting.ScriptingManager;
  * bindings) { }
  * 
  * @author harrison
- * @created April 18, 2003
  */
 
 public class ScriptableAction extends DefaultAction
@@ -42,15 +41,14 @@ public class ScriptableAction extends DefaultAction
 
   /**
    * Constructor for the ScriptableAction object
+   * 
+   * @param script TODO
    */
   public ScriptableAction(IActionScript script)
   {
     _script = script;
   }
 
-  /**
-   * Description of the Method
-   */
   @Override
   public void dispose()
   {
@@ -79,16 +77,6 @@ public class ScriptableAction extends DefaultAction
   {
     return _script.getFactory();
   }
-
-  /**
-   * Description of the Method
-   * 
-   * @param instantiation
-   *          Description of the Parameter
-   * @param bindings
-   *          Description of the Parameter
-   * @return Description of the Return Value
-   */
   @Override
   public double fire(IInstantiation instantiation, double firingTime)
   {

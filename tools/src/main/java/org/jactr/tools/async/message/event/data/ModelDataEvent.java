@@ -22,7 +22,7 @@ import org.jactr.io.resolver.ASTResolver;
 import org.jactr.tools.async.message.ast.BaseASTMessage;
 import org.jactr.tools.async.message.event.IEvent;
 /**
- * @author developer
+ * 
  *
  */
 public class ModelDataEvent extends BaseASTMessage implements IEvent,

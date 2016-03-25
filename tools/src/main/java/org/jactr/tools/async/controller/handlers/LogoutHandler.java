@@ -23,7 +23,7 @@ import org.jactr.tools.async.controller.RemoteInterface;
 import org.jactr.tools.async.message.command.login.LogoutCommand;
 
 /**
- * @author developer
+ * 
  */
 public class LogoutHandler implements IMessageHandler<LogoutCommand>
 {

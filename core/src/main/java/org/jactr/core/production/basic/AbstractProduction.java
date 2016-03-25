@@ -315,11 +315,12 @@ public abstract class AbstractProduction extends DefaultAdaptable implements
   /**
    * return a new instantiation
    * 
-   * @param parent
-   * @param boundConditions
+   * @param parent TODO
+   * @param boundConditions TODO
    * @param bindings
    *          will be copied.
-   * @return
+   * @throws CannotInstantiateException TODO
+   * @return TODO
    */
   abstract protected IInstantiation createInstantiation(
       AbstractProduction parent, Collection<ICondition> boundConditions,

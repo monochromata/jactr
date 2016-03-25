@@ -18,7 +18,7 @@ import org.jactr.core.utils.collections.SkipListSetFactory;
 /**
  * adapts the exact parallel to work as partial. It does this by disabling the
  * not filter support entirely (as they must be considered as populating), and
- * changing the {@link #combineResults(Collection, DefaultSearchSystem)} method
+ * changing the {@link #combineResults(Collection, IChunkFilter, DefaultSearchSystem)} method
  * to only use addAll.
  * 
  * @author harrison
@@ -37,6 +37,12 @@ public class PartialParallelSearchDelegate extends ExactParallelSearchDelegate
 
   /**
    * Overriden to not do any filtering
+   * 
+   * @param chunkType TODO
+   * @param originalSlots TODO
+   * @param container TODO
+   * @param searchSystem TODO
+   * @return TODO
    */
   @Override
   protected IChunkFilter selectSlotsToSearch(IChunkType chunkType,
@@ -51,9 +57,10 @@ public class PartialParallelSearchDelegate extends ExactParallelSearchDelegate
    * perform set logic to all the slot search results, recycling interim
    * collections
    * 
-   * @param slotSearchResults
-   * @param searchSystem
-   * @return
+   * @param slotSearchResults TODO
+   * @param chunkFilter TODO
+   * @param searchSystem TODO
+   * @return TODO
    */
   @Override
   protected SortedSet<IChunk> combineResults(

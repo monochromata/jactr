@@ -16,9 +16,10 @@ import org.jactr.core.production.bindings.BindingFactory;
  * storage for variable bindings plus where they originated. If the binding
  * originated with a buffer (i.e., =retrieval) {@link #getSource(String)} will
  * return the buffer. If it is a slot container (i.e., symbolic chunk, muscle
- * state, status buffer) it will be that <br/>
- * If this binding is to be used in an instantiated, it should not recycle
- * bindings.
+ * state, status buffer) it will be that
+ * 
+ * <p>If this binding is to be used in an instantiated, it should not recycle
+ * bindings.</p>
  * 
  * @author harrison
  */
@@ -51,7 +52,7 @@ public class VariableBindings
   /**
    * make a copy, without any recycling of bindings
    * 
-   * @param bindings
+   * @param bindings TODO
    */
   public VariableBindings(VariableBindings bindings)
   {
@@ -81,7 +82,7 @@ public class VariableBindings
   /**
    * copy the bindings from bindings into this.
    * 
-   * @param bindings
+   * @param bindings TODO
    */
   public void copy(VariableBindings bindings)
   {

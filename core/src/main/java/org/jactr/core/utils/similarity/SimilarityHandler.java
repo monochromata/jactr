@@ -18,7 +18,6 @@ package org.jactr.core.utils.similarity;
  * a caching mechanism so that hard coded similarities will nto be overwritten.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public interface SimilarityHandler
 {

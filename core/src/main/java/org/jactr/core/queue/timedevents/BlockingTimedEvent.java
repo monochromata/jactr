@@ -23,7 +23,6 @@ import org.apache.commons.logging.LogFactory;
  * the block will pass and the IModel will resume.
  * 
  * @author harrison
- * @created April 18, 2003
  */
 public class BlockingTimedEvent extends AbstractTimedEvent
 {
@@ -40,6 +39,7 @@ public class BlockingTimedEvent extends AbstractTimedEvent
   /**
    * Constructor for the BlockingTimedEvent object
    * 
+   * @param owner TODO
    * @param sTime
    *            Description of the Parameter
    * @param eTime

@@ -24,8 +24,7 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.IMutableSlot;
 
 /**
- * @author harrison To change the template for this generated type comment go to
- *         Window>Preferences>Java>Code Generation>Code and Comments
+ * @author harrison
  */
 public class ScriptSupport
 {
@@ -73,10 +72,6 @@ public class ScriptSupport
     _model.getTimedEventQueue().enqueue(event);
   }
 
-  /**
-   * @param variableName
-   * @param value
-   */
   public void setGlobal(String variableName, Object value)
   {
     _factory.setVariable(variableName, value, _factory.getGlobalContext());

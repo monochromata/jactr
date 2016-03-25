@@ -20,7 +20,7 @@ import org.commonreality.net.session.ISessionInfo;
 import org.jactr.tools.async.message.event.state.RuntimeStateEvent;
 import org.jactr.tools.async.shadow.ShadowController;
 /**
- * @author developer
+ * 
  *
  */
 public class RuntimeStateMessageHandler implements
