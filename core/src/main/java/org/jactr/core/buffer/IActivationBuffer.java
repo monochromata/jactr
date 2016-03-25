@@ -40,34 +40,16 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
 
   static final public String IMAGINAL        = "imaginal";
 
-  /**
-   * Description of the Field
-   */
   public final static String RETRIEVAL       = "retrieval";
 
-  /**
-   * Description of the Field
-   */
   public final static String VISUAL          = "visual";
 
-  /**
-   * Description of the Field
-   */
   public final static String VISUAL_LOCATION = "visual-location";
 
-  /**
-   * Description of the Field
-   */
   public final static String AURAL           = "aural";
 
-  /**
-   * Description of the Field
-   */
   public final static String AURAL_LOCATION  = "aural-location";
 
-  /**
-   * Description of the Field
-   */
   public final static String MOTOR           = "motor";
 
   public final static String VOCAL           = "vocal";
@@ -76,8 +58,6 @@ public interface IActivationBuffer extends IInitializable, IAdaptable
   /**
    * called from within an instantiation notifying the buffer that this chunk
    * has been matched in the production that is about to fire.
-   * 
-   * @param chunk
    */
   public void matched(IChunk chunk);
 

@@ -179,9 +179,6 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
 
   /**
    * return true if the matched event should be fired
-   * 
-   * @param chunk
-   * @return
    */
   protected boolean matchedInternal(IChunk chunk)
   {
@@ -501,8 +498,6 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
 
   /**
    * return the source chunk from the internal backing store
-   * 
-   * @return
    */
   abstract protected IChunk getSourceChunkInternal();
 
@@ -591,7 +586,6 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
 
   /**
    * @see org.jactr.core.utils.parameter.IParameterized#getSetableParameters()
-   * @return
    */
   public Collection<String> getSetableParameters()
   {
@@ -600,7 +594,6 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
 
   /**
    * @see org.jactr.core.utils.parameter.IParameterized#getPossibleParameters()
-   * @return
    */
   public Collection<String> getPossibleParameters()
   {
@@ -608,9 +601,7 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
   }
 
   /**
-   * @param parameter
    * @see org.jactr.core.utils.parameter.IParameterized#getParameter(java.lang.String)
-   * @return
    */
   public String getParameter(String parameter)
   {
@@ -627,8 +618,6 @@ public abstract class AbstractActivationBuffer extends DefaultAdaptable
   }
 
   /**
-   * @param parameter
-   * @param value
    * @see org.jactr.core.utils.parameter.IParameterized#setParameter(java.lang.String,
    *      String)
    */
