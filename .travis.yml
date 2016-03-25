@@ -1,0 +1,6 @@
+language: java
+jdk: oraclejdk8
+# skip separate installation step
+install: true
+# NOTE: the value of newVersion might need to be updated with time.
+script: mvn -DnewVersion=2.1.0 -Djarsigner.skip=true -Dgpg.skip=true clean verify
