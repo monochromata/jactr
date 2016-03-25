@@ -359,6 +359,7 @@
 					<version>2.10.3</version>
 					<configuration>
 						<quiet>true</quiet>
+						<additionalparam>-Xdoclint:all</additionalparam>
 					</configuration>
 				</plugin>
 			</plugins>
