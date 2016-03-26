@@ -1,6 +1,9 @@
 # jACT-R [![Build Status](https://secure.travis-ci.org/monochromata/jactr.png)](http://travis-ci.org/monochromata/jactr)
 
 A Java-based implementation of [ACT-R](http://act-r.psy.cmu.edu/). More info on jACT-R is available from http://www.jactr.org.
+jACT-R uses [CommonReality](http://github.com/monochromata/commonreality). Use the
+[Eclipse integration of jACT-R](http://github.com/monochromata/jactr-eclipse) to develop, debug and run jACT-R models and analyze
+their results.
 
 The Maven site is located at http://monochromata.de/maven/sites/org.jactr/
 
