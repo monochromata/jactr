@@ -11,7 +11,9 @@
 	<artifactId>tycho-parent</artifactId>
 	<version>2.0.0</version>
 	<packaging>pom</packaging>
-	<description>A parent for tycho-based artifacts in group org.junit.</description>
+	<name>Tycho-Parent</name>
+	<description>A parent for tycho-based artifacts in group org.jactr.</description>
+	<url>http://monochromata.de/maven/sites/org.jactr/</url>
 
 	<properties>
 		<tycho.version>0.24.0</tycho.version>

@@ -10,6 +10,9 @@
 	<groupId>org.jactr</groupId>
 	<artifactId>tools.masterslave</artifactId>
 	<version>2.0.0</version>
+	<name>Tools.Masterslave</name>
+	<description>Master-Slave model execution</description>
+	<url>http://monochromata.de/maven/sites/org.jactr/</url>
 
 	<!-- Needs to be kept in sync with Require-Bundle and Eclipse-RegisterBuddy attributes for tools.masterslave in p2repo POM -->
 	<dependencies>
