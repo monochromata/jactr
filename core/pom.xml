@@ -25,6 +25,16 @@
 	<!-- Needs to be kept in sync with Require-Bundle and Eclipse-RegisterBuddy attributes for core in p2repo POM -->
 	<dependencies>
 		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<scope>test</scope>
+		</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-math</artifactId>
+				<scope>test</scope>
+			</dependency>
+		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 		</dependency>

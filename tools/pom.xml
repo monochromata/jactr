@@ -14,7 +14,8 @@
 	<description>jACT-R tools</description>
 	<url>http://monochromata.de/maven/sites/org.jactr/</url>
 
-	<!-- Needs to be kept in sync with the Require-Bundle and Eclipse-RegisterBuddy attributes for toosl in the p2repo POM -->
+	<!-- Needs to be kept in sync with the Require-Bundle and Eclipse-RegisterBuddy 
+		attributes for toosl in the p2repo POM -->
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -31,6 +32,11 @@
 		<dependency>
 			<groupId>org.commonreality</groupId>
 			<artifactId>netty</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>mina</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jactr</groupId>

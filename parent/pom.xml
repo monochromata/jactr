@@ -225,6 +225,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.commonreality</groupId>
+				<artifactId>mina</artifactId>
+				<version>${commonreality.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.commonreality</groupId>
 				<artifactId>modalities</artifactId>
 				<version>${commonreality.version}</version>
 			</dependency>
