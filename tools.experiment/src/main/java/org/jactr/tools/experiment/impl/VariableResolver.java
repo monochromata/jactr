@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,9 +27,13 @@ public class VariableResolver
 
   private Map<String, String>        _aliases;
 
-  static private String              PREFIX = "${";
+  static final public String         PREFIX         = "${";
 
-  static private String              SUFFIX = "}";
+  static final public String         SUFFIX         = "}";
+
+  static final private String        ESCAPED_PREFIX = "\\$\\{";
+
+  static final private String        ESCAPED_SUFFIX = "\\}";
 
   /**
    * will return all models with matching names in the current runtime
@@ -158,12 +164,53 @@ public class VariableResolver
     return rtn != null;
   }
 
+  /**
+   * find and attempt to resolve all variables in this string, returning the
+   * resolved string. resolution follows
+   * {@link #resolve(String, IVariableContext)}
+   * 
+   * @param variablizedTemplate
+   * @param context
+   * @return
+   */
+  public String resolveValues(String variablizedTemplate,
+      IVariableContext context)
+  {
+    // four group pattern. 0-all, 1-prefix, 2-variableName, 3-suffix
+    Pattern p = Pattern.compile(String.format("(%s)(.*)(%s)", ESCAPED_PREFIX,
+        ESCAPED_SUFFIX));
+    Matcher m = p.matcher(variablizedTemplate);
+    StringBuffer sb = new StringBuffer();
+
+    while (m.find())
+    {
+      String fullName = m.group(0);
+      String resolved = resolve(fullName, context).toString();
+      m.appendReplacement(sb, resolved);
+    }
+    m.appendTail(sb);
+
+    return sb.toString();
+  }
+
+  /**
+   * attempts to resolve the variable key. It will resolve to the actual object,
+   * not necessarily a string. If it cannot be resolved, the key is returned. In
+   * this way, you can differentiate between a null value (
+   * resolve(key,context)==null ), and undefined ( resolve(key,context)==key)
+   * 
+   * @param key
+   * @param context
+   * @return
+   */
   public Object resolve(String key, IVariableContext context)
   {
     if (!isVariable(key)) return key;
 
     String oKey = key;
-    key = key.substring(key.indexOf(PREFIX) + 2, key.lastIndexOf(SUFFIX));
+    int start = key.indexOf(PREFIX) + 2;
+    int end = key.indexOf(SUFFIX, start);
+    key = key.substring(start, end);
 
     Object rtn = null;
     for (IResolver resolver : _resolvers)
@@ -176,9 +223,9 @@ public class VariableResolver
     if (rtn == null)
     {
       if (LOGGER.isWarnEnabled())
-        LOGGER.warn(String.format("Could not resolve %s, returing %s", oKey,
-            key));
-      rtn = key;
+        LOGGER.warn(String.format("Could not resolve %s, returing %s", key,
+            oKey));
+      rtn = oKey;
     }
     return rtn;
   }
