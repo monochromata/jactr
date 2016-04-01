@@ -64,7 +64,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.commonreality</groupId>
+			<artifactId>netty</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
 			<artifactId>sensors</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.commonreality</groupId>
+			<artifactId>sensors.xml</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.commonreality</groupId>

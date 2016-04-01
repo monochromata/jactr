@@ -86,10 +86,11 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 	}
 
 	protected void createGoalChunk(IDeclarativeModule dm) throws InterruptedException, ExecutionException {
+		final IChunkType tone = dm.getChunkType("tone").get();
 		goal = createChunk(dm, attendingTest, "goal", chunk -> {
 			ISymbolicChunk sc = chunk.getSymbolicChunk();
-			sc.addSlot(new DefaultConditionalSlot("testValue", "'a'"));
-			sc.addSlot(new DefaultConditionalSlot("kind", "tone"));
+			sc.addSlot(new DefaultConditionalSlot("testValue", "a"));
+			sc.addSlot(new DefaultConditionalSlot("kind", tone));
 		});
 	}
 
@@ -98,16 +99,16 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 			throws InterruptedException, ExecutionException {
 
 		super.populateProceduralMemory(dm, pm);
-
-		final IChunk tone = dm.getChunk("tone").get();
-		final IChunk digit = dm.getChunk("digit").get();
-		final IChunk word = dm.getChunk("word").get();
-		final IChunk speech = dm.getChunk("speech").get();
-
-		createHeardProduction(dm, pm, "heard-tone", tone, digit, "'1'");
-		createHeardProduction(dm, pm, "heard-digit", digit, word, "'foobar'");
-		createHeardProduction(dm, pm, "heard-word", word, speech, "'hey you over there'");
-		createHeardSpeechProduction(dm, pm);
+		
+		IChunkType tone = dm.getChunkType("tone").get();
+		IChunkType digit = dm.getChunkType("digit").get();
+		IChunkType word = dm.getChunkType("word").get();
+		IChunkType speech = dm.getChunkType("speech").get();
+		
+		createHeardProduction(dm, pm, "heard-tone", tone, digit, "1");
+		createHeardProduction(dm, pm, "heard-digit", digit, word, "foobar");
+		createHeardProduction(dm, pm, "heard-word", word, speech, "hey you over there");
+		createHeardSpeechProduction(dm, pm, speech);
 
 		createSearchForSoundProduction(dm, pm);
 		createSearchForSoundFailedProduction(dm, pm);
@@ -119,10 +120,9 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 		createEncodingCorrectProduction(dm, pm);
 	}
 
-	protected void createHeardSpeechProduction(final IDeclarativeModule dm, final IProceduralModule pm)
+	protected void createHeardSpeechProduction(final IDeclarativeModule dm, final IProceduralModule pm, IChunkType speech)
 			throws InterruptedException, ExecutionException {
 		final String name = "heard-speech";
-		final IChunk speech = dm.getChunk("speech").get();
 		createProduction(dm, pm, name, production -> {
 			ISymbolicProduction sp = production.getSymbolicProduction();
 			sp.addCondition(new ChunkTypeCondition("goal", attendingTest, Arrays.asList(
@@ -134,7 +134,7 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 	}
 
 	protected void createHeardProduction(final IDeclarativeModule dm, final IProceduralModule pm, final String name,
-			final IChunk currentKind, final IChunk nextKind, final String nextTestValue)
+			final IChunkType currentKind, final IChunkType nextKind, final String nextTestValue)
 					throws InterruptedException, ExecutionException {
 		createProduction(dm, pm, name, production -> {
 			ISymbolicProduction sp = production.getSymbolicProduction();
@@ -156,7 +156,7 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 					Arrays.asList(new DefaultConditionalSlot("status", starting),
 							new DefaultVariableConditionalSlot("kind", "=kind"))));
 			sp.addCondition(new QueryCondition("aural-location",
-					Arrays.asList(new DefaultConditionalSlot("state", dm.getBusyChunk()))));
+					Arrays.asList(new DefaultConditionalSlot("state", NOT_EQUALS, dm.getBusyChunk()))));
 
 			sp.addAction(new AddAction("aural-location", audioEvent,
 					Arrays.asList(new DefaultVariableConditionalSlot("kind", "=kind"),
@@ -168,7 +168,7 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 
 	protected void createSearchForSoundFailedProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "search-for-sound-sound", production -> {
+		createProduction(dm, pm, "search-for-sound-failed", production -> {
 			ISymbolicProduction sp = production.getSymbolicProduction();
 			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
 					Arrays.asList(new DefaultConditionalSlot("status", searching),
@@ -222,9 +222,10 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 					Arrays.asList(new DefaultConditionalSlot("status", encoding),
 							new DefaultVariableConditionalSlot("kind", "=kind"),
 							new DefaultVariableConditionalSlot("testValue", "=value"))));
+			sp.addCondition(new QueryCondition("aural",
+					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
 			sp.addCondition(new ChunkTypeCondition("aural", sound,
-					Arrays.asList(new DefaultConditionalSlot(":state", dm.getFreeChunk()),
-							new DefaultVariableConditionalSlot("kind", NOT_EQUALS, "=kind"))));
+					Arrays.asList(new DefaultVariableConditionalSlot("kind", NOT_EQUALS, "=kind"))));
 			sp.addAction(new OutputAction("incorrect kind"));
 			sp.addAction(new RemoveAction("goal"));
 		});
@@ -239,9 +240,10 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 					Arrays.asList(new DefaultConditionalSlot("status", encoding),
 							new DefaultVariableConditionalSlot("kind", "=kind"),
 							new DefaultVariableConditionalSlot("testValue", "=value"))));
+			sp.addCondition(new QueryCondition("aural",
+					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
 			sp.addCondition(new ChunkTypeCondition("aural", sound,
-					Arrays.asList(new DefaultConditionalSlot(":state", dm.getFreeChunk()),
-							new DefaultVariableConditionalSlot("content", NOT_EQUALS, "=value"))));
+					Arrays.asList(new DefaultVariableConditionalSlot("content", NOT_EQUALS, "=value"))));
 			sp.addAction(new OutputAction("incorrect content"));
 			sp.addAction(new RemoveAction("goal"));
 		});
@@ -256,9 +258,10 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 					Arrays.asList(new DefaultConditionalSlot("status", encoding),
 							new DefaultVariableConditionalSlot("kind", "=kind"),
 							new DefaultVariableConditionalSlot("testValue", "=value"))));
+			sp.addCondition(new QueryCondition("aural",
+					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
 			sp.addCondition(new ChunkTypeCondition("aural", sound,
-					Arrays.asList(new DefaultConditionalSlot(":state", dm.getFreeChunk()),
-							new DefaultVariableConditionalSlot("kind", "=kind"),
+					Arrays.asList(new DefaultVariableConditionalSlot("kind", "=kind"),
 							new DefaultVariableConditionalSlot("content", "=value"))));
 			sp.addAction(new OutputAction("I heard =value"));
 			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("status", succeeded))));
