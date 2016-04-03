@@ -20,6 +20,7 @@ import org.jactr.core.module.retrieval.six.DefaultRetrievalModule6;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.modules.pm.aural.six.DefaultAuralModule6;
+import org.jactr.modules.pm.motor.six.DefaultMotorModule6;
 import org.jactr.modules.pm.visual.six.DefaultVisualModule6;
 
 /**
@@ -32,7 +33,7 @@ import org.jactr.modules.pm.visual.six.DefaultVisualModule6;
  * <li>{@link DefaultRetrievalModule6}</li>
  * </ul>
  */
-public abstract class AbstractModelFactory implements ModelFactory {
+public abstract class AbstractModelFactory implements IModelFactory {
 
 	private final String modelName;
 
@@ -72,6 +73,8 @@ public abstract class AbstractModelFactory implements ModelFactory {
 			installChunkTypesAndChunksForDefaultVisualModule6(dm);
 		if (dm.getModel().getModule(DefaultAuralModule6.class) != null)
 			installChunkTypesAndChunksForDefaultAuralModule6(dm);
+		if(dm.getModel().getModule(DefaultMotorModule6.class) != null)
+			installChunkTypesAndChunksForDefaultMotorModule6(dm);
 	}
 
 	// TODO: Move to DefaultDeclarativeModule6
@@ -268,6 +271,90 @@ public abstract class AbstractModelFactory implements ModelFactory {
 		createChunk(dm, chunk, "external");
 		createChunk(dm, chunk, "internal");
 	}
+	
+	// TODO: Move to DefaultMotorModule6
+	protected void installChunkTypesAndChunksForDefaultMotorModule6(IDeclarativeModule dm) throws InterruptedException, ExecutionException {
+		
+		final IChunkType motorCommand = createChunkType(dm, "motor-command", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("muscle", null));
+		}, command);
+		
+		final IChunkType compoundMotorCommand = createChunkType(dm, "compound-motor-command", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("state", dm.getBusyChunk()));
+		}, motorCommand);
+		
+		final IChunkType abort = createChunkType(dm, "abort", motorCommand);
+		
+		final IChunkType handCommand = createChunkType(dm, "hand-command", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("hand", null));
+		}, motorCommand);
+		
+		final IChunkType fingerCommand = createChunkType(dm, "finger-command", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("finger", null));
+		}, handCommand);
+		
+		final IChunkType motorConstant = createChunkType(dm, "motor-constant");
+		
+		final IChunk right = createChunk(dm, motorConstant, "right");
+		createChunk(dm, motorConstant, "left");
+		createChunk(dm, motorConstant, "index");
+		createChunk(dm, motorConstant, "middle");
+		createChunk(dm, motorConstant, "ring");
+		createChunk(dm, motorConstant, "thumb");
+		createChunk(dm, motorConstant, "pinkie");
+		createChunk(dm, motorConstant, "mouse");
+		createChunk(dm, motorConstant, "joystick1");
+		createChunk(dm, motorConstant, "joystick2");
+		createChunk(dm, motorConstant, "aborting");
+		
+		IChunkType peck = createChunkType(dm, "peck", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("r", null));
+			sct.addSlot(new DefaultConditionalSlot("theta", null));
+		}, fingerCommand);
+		
+		createChunkType(dm, "peck-recoil", peck);
+		
+		createChunkType(dm, "punch", fingerCommand);
+		
+		createChunkType(dm, "point-hand-at-key", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("to-key", null));
+		}, handCommand);
+		
+		createChunkType(dm, "press-key", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("key", null));
+		}, motorCommand);
+		
+		createChunkType(dm, "click-mouse", motorCommand);
+		
+		createChunkType(dm, "hand-to-mouse", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("hand", right));
+		}, handCommand);
+		
+		createChunkType(dm, "hand-to-home", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("hand", right));
+		}, handCommand);
+		
+		createChunkType(dm, "move-cursor", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("object", null));
+			sct.addSlot(new DefaultConditionalSlot("loc", null));
+			sct.addSlot(new DefaultConditionalSlot("device", null));
+		}, motorCommand);
+		
+		createChunkType(dm, "motor-clear", chunkType -> {
+			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+			sct.addSlot(new DefaultConditionalSlot("muscle", null));
+		}, dm.getChunkType("clear").get());
+	}
 
 	protected IChunkType createChunkType(IDeclarativeModule dm, String name, IChunkType... parents)
 			throws InterruptedException, ExecutionException {
@@ -314,6 +401,8 @@ public abstract class AbstractModelFactory implements ModelFactory {
 			setupImaginalBuffer(model);
 		if (model.getModule(DefaultAuralModule6.class) != null)
 			setupAuralBuffers(model);
+		if(model.getModule(DefaultMotorModule6.class) != null)
+			setupMotorBuffer(model);
 	}
 
 	// TODO: Move to DefaultGoalModule6
@@ -341,6 +430,11 @@ public abstract class AbstractModelFactory implements ModelFactory {
 	protected void setupAuralBuffers(IModel model) {
 		createBuffer(model, "aural-location", "0", "0", "true");
 		createBuffer(model, "aural", "0", "0", "true");
+	}
+	
+    // TODO: Move to DefaultMotorModule6
+	protected void setupMotorBuffer(IModel model) {
+		createBuffer(model, "motor", "0", "0", "true");
 	}
 
 	protected void createBuffer(final IModel model, final String name, final String activation, final String g, final String strictHarvestingEnabled) {
