@@ -19,7 +19,6 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-import java.net.SocketAddress;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +27,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.agents.IAgent;
 import org.commonreality.net.message.credentials.PlainTextCredentials;
-import org.commonreality.net.protocol.IProtocolConfiguration;
 import org.commonreality.net.provider.INetworkingProvider;
 import org.commonreality.net.service.IClientService;
 import org.commonreality.net.transport.ITransportProvider;
@@ -38,12 +36,12 @@ import org.commonreality.netty.transport.LocalTransportProvider;
 import org.commonreality.participant.impl.AbstractParticipant;
 import org.commonreality.reality.IReality;
 import org.commonreality.reality.control.RealitySetup;
-import org.commonreality.reality.impl.DefaultReality;
 import org.commonreality.sensors.ISensor;
 import org.commonreality.sensors.xml.XMLSensor;
 import org.jactr.core.concurrent.ExecutorServices;
 import org.jactr.core.logging.impl.DefaultModelLogger;
 import org.jactr.core.model.IModel;
+import org.jactr.core.models.IModelFactory;
 import org.jactr.core.module.procedural.event.ProceduralModuleEvent;
 import org.jactr.core.module.procedural.event.ProceduralModuleListenerAdaptor;
 import org.jactr.core.production.IProduction;
@@ -51,21 +49,16 @@ import org.jactr.core.reality.ACTRAgent;
 import org.jactr.core.reality.connector.CommonRealityConnector;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.debug.DebugController;
+import org.jactr.modules.AbstractModuleTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AuralModuleTest {
+public class AuralModuleTest extends AbstractModuleTest {
 	/**
 	 * logger definition
 	 */
 	static public final Log LOGGER = LogFactory.getLog(AuralModuleTest.class);
-
-	ACTRRuntime _runtime;
-
-	private IReality _reality;
-
-	DebugController _controller;
 
 	String[] _productionSequence = { "search-for-sound-succeeded", "encoding-correct", "heard-tone",
 			"search-for-sound-succeeded", "encoding-correct", "heard-digit", "search-for-sound-succeeded",
@@ -78,88 +71,19 @@ public class AuralModuleTest {
 
 	int _productionFireCount = 0;
 
-	@Before
-	public void setUp() throws Exception {
-		_runtime = ACTRRuntime.getRuntime();//new ACTRRuntime();
-		_reality = getReality();
-		_runtime.setConnector(new CommonRealityConnector());
-		_runtime.setController(new DebugController());
-		
-		final IModel model = new AuralTestModelFactory().createAndInitializeModel();
-		_runtime.addModel(model);
-		
-		final DefaultModelLogger logger = new DefaultModelLogger();
-		logger.setParameter("all", "err");
-		model.install(logger);
-		
-		_controller = (DebugController) _runtime.getController();
+	@Override
+	protected IModelFactory createModelFactory() {
+		return new AuralTestModelFactory();
+	}
+
+	protected ISensor createSensor(INetworkingProvider netProvider) throws Exception {
+		return createXMLSensor(netProvider, "org/jactr/modules/pm/aural/sensorData.xml");
+	}
+
+	protected String getModelName() {
+		return "aural-test";
 	}
 	
-	@After
-	public void tearDown() {
-		_runtime = null;
-		_reality = null;
-		_controller = null;
-	}
-
-	protected IReality getReality() throws Exception {
-		INetworkingProvider netProvider = new NettyNetworkingProvider();
-		IReality reality = createReality(netProvider);
-		ISensor xmlSensor = createXMLSensor(netProvider);
-		IAgent actrAgent = createACTRAgent(netProvider);
-		new RealitySetup(reality, Arrays.asList(xmlSensor), Arrays.asList(actrAgent)).run();
-		return reality;
-	}
-
-	protected IAgent createACTRAgent(INetworkingProvider netProvider) throws Exception {
-		IAgent actrAgent = new ACTRAgent();
-		ITransportProvider transport = createTransport(netProvider);
-		((AbstractParticipant) actrAgent).addClientService(netProvider.newClient(), transport,
-				createProtocol(netProvider), createAddress(transport));
-		actrAgent.setCredentials(new PlainTextCredentials("agent", "pass"));
-		Map<String, String> properties = new HashMap<>();
-		properties.put("ACTRAgent.ModelName", "aural-test");
-		actrAgent.configure(properties);
-		return actrAgent;
-	}
-
-	protected ISensor createXMLSensor(INetworkingProvider netProvider) throws Exception {
-		ISensor xmlSensor = new XMLSensor();
-		final IClientService client = netProvider.newClient();
-		final ITransportProvider transport = createTransport(netProvider);
-		((AbstractParticipant) xmlSensor).addClientService(client, transport, createProtocol(netProvider),
-				createAddress(transport));
-		xmlSensor.setCredentials(new PlainTextCredentials("sensor", "pass"));
-		Map<String, String> properties = new HashMap<>();
-		properties.put("XMLSensor.DataURI", "org/jactr/modules/pm/aural/sensorData.xml");
-		xmlSensor.configure(properties);
-		return xmlSensor;
-	}
-
-	protected IReality createReality(INetworkingProvider netProvider) {
-		IReality reality = new DefaultReality();
-		final ITransportProvider transport = createTransport(netProvider);
-		final SocketAddress address = transport.createAddress("1400");
-		((AbstractParticipant) reality).addServerService(netProvider.newServer(), transport,
-				createProtocol(netProvider), address);
-		boolean wantsClockControl = false;
-		reality.add(new PlainTextCredentials("sensor", "pass"), wantsClockControl);
-		reality.add(new PlainTextCredentials("agent", "pass"), wantsClockControl);
-		return reality;
-	}
-
-	protected SocketAddress createAddress(final ITransportProvider transport) {
-		return transport.createAddress("1400");
-	}
-
-	protected IProtocolConfiguration createProtocol(INetworkingProvider netProvider) {
-		return netProvider.getProtocol("protocol.noop");//NOOPProtocol.class.getName());
-	}
-
-	protected ITransportProvider createTransport(INetworkingProvider netProvider) {
-		return netProvider.getTransport("transport.noop");//LocalTransportProvider.class.getName());
-	}
-
 	@Test
 	public void test() throws Exception {
 		assertThat(_runtime.getModels().size(), equalTo(1));
