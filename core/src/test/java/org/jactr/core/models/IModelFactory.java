@@ -5,7 +5,7 @@ import org.jactr.core.model.IModel;
 /**
  * A factory for jATC-R models.
  */
-public interface ModelFactory {
+public interface IModelFactory {
 
 	/**
 	 * @return A new model with the name configured in the constructor
