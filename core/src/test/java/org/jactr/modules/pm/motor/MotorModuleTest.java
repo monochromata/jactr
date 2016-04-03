@@ -13,6 +13,12 @@
  */
 package org.jactr.modules.pm.motor;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -20,33 +26,26 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.net.provider.INetworkingProvider;
+import org.commonreality.sensors.ISensor;
 import org.jactr.core.concurrent.ExecutorServices;
 import org.jactr.core.model.IModel;
+import org.jactr.core.models.IModelFactory;
 import org.jactr.core.module.procedural.event.ProceduralModuleEvent;
 import org.jactr.core.module.procedural.event.ProceduralModuleListenerAdaptor;
 import org.jactr.core.production.IProduction;
-import org.jactr.core.runtime.ACTRRuntime;
-import org.jactr.core.runtime.controller.debug.DebugController;
-import org.jactr.entry.Main;
-import org.jactr.io.CommonIO;
+import org.jactr.modules.AbstractModuleTest;
+import org.junit.Test;
 
-public class MotorModuleTest extends TestCase
+public class MotorModuleTest extends AbstractModuleTest
 {
   /**
    * logger definition
    */
   static public final Log    LOGGER               = LogFactory
                                                       .getLog(MotorModuleTest.class);
-
-  static public final String ENVIRONMENT_FILE     = "org/jactr/modules/pm/motor/environment.xml";
-
-  ACTRRuntime                _runtime;
-
-  DebugController            _controller;
 
   String[]                   _productionSequence  = { "start", "start-punch",
       "movement-completed", "retrieve-next-movement", "start-peck",
@@ -58,22 +57,17 @@ public class MotorModuleTest extends TestCase
 
   int                        _productionFireCount = 0;
 
-  @Override
-  protected void setUp() throws Exception
-  {
-    super.setUp();
-    _runtime = new Main().createRuntime(getClass().getClassLoader()
-        .getResource(ENVIRONMENT_FILE));
-    _controller = (DebugController) _runtime.getController();
-  }
-  
-  
-
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-  }
+	protected IModelFactory createModelFactory() {
+		return new MotorTestModelFactory();
+	}
+	
+	protected ISensor createSensor(final INetworkingProvider netProvider) throws Exception {
+		return createKeyboardSensor(netProvider);
+	}
+	
+	protected String getModelName() {
+		return "motor-test";
+	}
 
   protected JFrame openWindow()
   {
@@ -87,7 +81,7 @@ public class MotorModuleTest extends TestCase
       {
         JTextArea textArea = new JTextArea();
         frame.getContentPane().add(new JScrollPane(textArea));
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        frame.setSize(100, 80);
         frame.setVisible(true);
         textArea.grabFocus();
       }
@@ -103,7 +97,7 @@ public class MotorModuleTest extends TestCase
 
   protected void closeWindow(final JFrame frame) throws Exception
   {
-    Thread.sleep(10000);
+    Thread.sleep(3000);
     SwingUtilities.invokeLater(new Runnable(){
       public void run()
       {
@@ -112,22 +106,15 @@ public class MotorModuleTest extends TestCase
     });
   }
 
+  @Test
   public void test() throws Exception
   {
-    assertEquals(1, _runtime.getModels().size());
+    assertThat(_runtime.getModels().size(), equalTo(1));
     IModel model = _runtime.getModels().iterator().next();
-    assertNotNull(model);
-
-    // for(StringBuilder line : CommonIO.generateSource(model, "jactr"))
-    // System.err.println(line);
+    assertThat(model, notNullValue());
 
     // will be null until we start
-    assertNull(_runtime.getConnector().getAgent(model));
-
-    /*
-     * we need to run this model and track all the visual-locations that get
-     * inserted into the visual-location buffer
-     */
+    assertThat(_runtime.getConnector().getAgent(model), nullValue());
 
     model.getProceduralModule().addListener(
         new ProceduralModuleListenerAdaptor() {
@@ -155,12 +142,8 @@ public class MotorModuleTest extends TestCase
 
     _controller.complete().get();
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Model run has completed");
-    assertEquals("Not all the productions have fired",
-        _productionSequence.length, _productionFireCount);
-
-    if (LOGGER.isDebugEnabled())
-      for (StringBuilder sb : CommonIO.generateSource(model, "jactr"))
-        LOGGER.debug(sb.toString());
+    assertThat("Not all the productions have fired",
+        _productionSequence.length, equalTo(_productionFireCount));
     
     closeWindow(window);
   }
