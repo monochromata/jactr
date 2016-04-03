@@ -17,6 +17,8 @@ import org.jactr.core.module.imaginal.six.DefaultImaginalModule6;
 import org.jactr.core.module.procedural.IProceduralModule;
 import org.jactr.core.module.procedural.six.DefaultProceduralModule6;
 import org.jactr.core.module.retrieval.six.DefaultRetrievalModule6;
+import org.jactr.core.production.IProduction;
+import org.jactr.core.production.ISymbolicProduction;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.modules.pm.aural.six.DefaultAuralModule6;
@@ -73,7 +75,7 @@ public abstract class AbstractModelFactory implements IModelFactory {
 			installChunkTypesAndChunksForDefaultVisualModule6(dm);
 		if (dm.getModel().getModule(DefaultAuralModule6.class) != null)
 			installChunkTypesAndChunksForDefaultAuralModule6(dm);
-		if(dm.getModel().getModule(DefaultMotorModule6.class) != null)
+		if (dm.getModel().getModule(DefaultMotorModule6.class) != null)
 			installChunkTypesAndChunksForDefaultMotorModule6(dm);
 	}
 
@@ -85,11 +87,11 @@ public abstract class AbstractModelFactory implements IModelFactory {
 
 		chunk = createChunkType(dm, "chunk");
 		command = createChunkType(dm, "command");
-		createChunkType(dm, "clear", chunkType -> {
-			chunkType.getSymbolicChunkType().addSlot(new DefaultConditionalSlot("all", false));
+		createChunkType(dm, "clear", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("all", false));
 		} , command);
-		createChunkType(dm, "attend-to", chunkType -> {
-			chunkType.getSymbolicChunkType().addSlot(new DefaultConditionalSlot("where", null));
+		createChunkType(dm, "attend-to", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("where", null));
 		} , command);
 
 		createChunk(dm, chunk, "new");
@@ -118,16 +120,14 @@ public abstract class AbstractModelFactory implements IModelFactory {
 	protected void installChunkTypesAndChunksForDefaultVisualModule6(IDeclarativeModule dm)
 			throws InterruptedException, ExecutionException {
 
-		color = createChunkType(dm, "color", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		color = createChunkType(dm, "color", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("red", null));
 			sct.addSlot(new DefaultConditionalSlot("green", null));
 			sct.addSlot(new DefaultConditionalSlot("blue", null));
 			sct.addSlot(new DefaultConditionalSlot("alpha", null));
 		});
 
-		final IChunkType visualLocation = createChunkType(dm, "visual-location", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType visualLocation = createChunkType(dm, "visual-location", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("screen-x", null));
 			sct.addSlot(new DefaultConditionalSlot("screen-y", null));
 			sct.addSlot(new DefaultConditionalSlot("distance", null));
@@ -140,8 +140,7 @@ public abstract class AbstractModelFactory implements IModelFactory {
 
 		final IChunkType setDefaultVisualSearch = createChunkType(dm, "set-default-visual-search", visualLocation);
 
-		final IChunkType visualObject = createChunkType(dm, "visual-object", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType visualObject = createChunkType(dm, "visual-object", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("screen-pos", null));
 			sct.addSlot(new DefaultConditionalSlot("value", null));
 			sct.addSlot(new DefaultConditionalSlot("height", null));
@@ -152,8 +151,7 @@ public abstract class AbstractModelFactory implements IModelFactory {
 			sct.addSlot(new DefaultConditionalSlot("color", null));
 		});
 
-		final IChunkType gui = createChunkType(dm, "gui", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType gui = createChunkType(dm, "gui", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("text", null));
 			sct.addSlot(new DefaultConditionalSlot("enabled", false));
 		} , visualObject);
@@ -166,8 +164,7 @@ public abstract class AbstractModelFactory implements IModelFactory {
 
 		final IChunkType oval = createChunkType(dm, "oval", gui);
 
-		final IChunkType line = createChunkType(dm, "line", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType line = createChunkType(dm, "line", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("other-pos", null));
 			sct.addSlot(new DefaultConditionalSlot("end1-x", null));
 			sct.addSlot(new DefaultConditionalSlot("end1-y", null));
@@ -175,24 +172,21 @@ public abstract class AbstractModelFactory implements IModelFactory {
 			sct.addSlot(new DefaultConditionalSlot("end2-y", null));
 		} , visualObject);
 
-		final IChunkType phrase = createChunkType(dm, "phrase", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType phrase = createChunkType(dm, "phrase", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("objects", null));
 			sct.addSlot(new DefaultConditionalSlot("words", null));
 		} , visualObject);
 
 		final IChunkType visionCommand = createChunkType(dm, "vision-command", dm.getChunkType("command").get());
 
-		final IChunkType moveAttention = createChunkType(dm, "move-attention", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType moveAttention = createChunkType(dm, "move-attention", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("screen-pos", null));
 			sct.addSlot(new DefaultConditionalSlot("scale", null));
 		} , visionCommand);
 
 		final IChunkType startTracking = createChunkType(dm, "start-tracking", visionCommand);
 
-		final IChunkType assgignFirst = createChunkType(dm, "assign-first", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType assgignFirst = createChunkType(dm, "assign-first", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("object", null));
 			sct.addSlot(new DefaultConditionalSlot("location", null));
 		} , visionCommand);
@@ -223,8 +217,7 @@ public abstract class AbstractModelFactory implements IModelFactory {
 
 	protected IChunk createColorChunk(final IDeclarativeModule dm, final String name, final double red,
 			final double green, final double blue, final double alpha) throws InterruptedException, ExecutionException {
-		return createChunk(dm, color, name, chunk -> {
-			final ISymbolicChunk sc = chunk.getSymbolicChunk();
+		return createChunk(dm, color, name, sc -> {
 			sc.addSlot(new DefaultConditionalSlot("red", red));
 			sc.addSlot(new DefaultConditionalSlot("green", green));
 			sc.addSlot(new DefaultConditionalSlot("blue", blue));
@@ -233,10 +226,10 @@ public abstract class AbstractModelFactory implements IModelFactory {
 	}
 
 	// TODO: Move to DefaultAuralModule6
-	protected void installChunkTypesAndChunksForDefaultAuralModule6(IDeclarativeModule dm) throws InterruptedException, ExecutionException {
-		
-		final IChunkType audioEvent = createChunkType(dm, "audio-event", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+	protected void installChunkTypesAndChunksForDefaultAuralModule6(IDeclarativeModule dm)
+			throws InterruptedException, ExecutionException {
+
+		final IChunkType audioEvent = createChunkType(dm, "audio-event", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("kind", null));
 			sct.addSlot(new DefaultConditionalSlot("location", null));
 			sct.addSlot(new DefaultConditionalSlot("onset", null));
@@ -247,17 +240,15 @@ public abstract class AbstractModelFactory implements IModelFactory {
 			sct.addSlot(new DefaultConditionalSlot("elevation", null));
 		});
 
-		final IChunkType sound = createChunkType(dm, "sound", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType sound = createChunkType(dm, "sound", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("content", null));
 			sct.addSlot(new DefaultConditionalSlot("event", null));
-			sct.addSlot(new DefaultConditionalSlot("kind", null));			
+			sct.addSlot(new DefaultConditionalSlot("kind", null));
 		});
 
-		final IChunkType tone = createChunkType(dm, "tone", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		final IChunkType tone = createChunkType(dm, "tone", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("pitch", null));
-		}, sound);
+		} , sound);
 
 		final IChunkType digit = createChunkType(dm, "digit", sound);
 		final IChunkType speech = createChunkType(dm, "speech", sound);
@@ -266,39 +257,37 @@ public abstract class AbstractModelFactory implements IModelFactory {
 		final IChunkType auralCommand = createChunkType(dm, "aural-command", dm.getChunkType("command").get());
 
 		// location chunks
-		// TODO: Chunks with the same name were already contributed by DefaultVisualModule6.
+		// TODO: Chunks with the same name were already contributed by
+		// DefaultVisualModule6.
 		// Should a separate model be used per module?
 		createChunk(dm, chunk, "external");
 		createChunk(dm, chunk, "internal");
 	}
-	
+
 	// TODO: Move to DefaultMotorModule6
-	protected void installChunkTypesAndChunksForDefaultMotorModule6(IDeclarativeModule dm) throws InterruptedException, ExecutionException {
-		
-		final IChunkType motorCommand = createChunkType(dm, "motor-command", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+	protected void installChunkTypesAndChunksForDefaultMotorModule6(IDeclarativeModule dm)
+			throws InterruptedException, ExecutionException {
+
+		final IChunkType motorCommand = createChunkType(dm, "motor-command", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("muscle", null));
-		}, command);
-		
-		final IChunkType compoundMotorCommand = createChunkType(dm, "compound-motor-command", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		} , command);
+
+		final IChunkType compoundMotorCommand = createChunkType(dm, "compound-motor-command", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("state", dm.getBusyChunk()));
-		}, motorCommand);
-		
+		} , motorCommand);
+
 		final IChunkType abort = createChunkType(dm, "abort", motorCommand);
-		
-		final IChunkType handCommand = createChunkType(dm, "hand-command", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+
+		final IChunkType handCommand = createChunkType(dm, "hand-command", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("hand", null));
-		}, motorCommand);
-		
-		final IChunkType fingerCommand = createChunkType(dm, "finger-command", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		} , motorCommand);
+
+		final IChunkType fingerCommand = createChunkType(dm, "finger-command", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("finger", null));
-		}, handCommand);
-		
+		} , handCommand);
+
 		final IChunkType motorConstant = createChunkType(dm, "motor-constant");
-		
+
 		final IChunk right = createChunk(dm, motorConstant, "right");
 		createChunk(dm, motorConstant, "left");
 		createChunk(dm, motorConstant, "index");
@@ -310,50 +299,43 @@ public abstract class AbstractModelFactory implements IModelFactory {
 		createChunk(dm, motorConstant, "joystick1");
 		createChunk(dm, motorConstant, "joystick2");
 		createChunk(dm, motorConstant, "aborting");
-		
-		IChunkType peck = createChunkType(dm, "peck", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+
+		IChunkType peck = createChunkType(dm, "peck", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("r", null));
 			sct.addSlot(new DefaultConditionalSlot("theta", null));
-		}, fingerCommand);
-		
+		} , fingerCommand);
+
 		createChunkType(dm, "peck-recoil", peck);
-		
+
 		createChunkType(dm, "punch", fingerCommand);
-		
-		createChunkType(dm, "point-hand-at-key", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+
+		createChunkType(dm, "point-hand-at-key", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("to-key", null));
-		}, handCommand);
-		
-		createChunkType(dm, "press-key", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		} , handCommand);
+
+		createChunkType(dm, "press-key", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("key", null));
-		}, motorCommand);
-		
+		} , motorCommand);
+
 		createChunkType(dm, "click-mouse", motorCommand);
-		
-		createChunkType(dm, "hand-to-mouse", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+
+		createChunkType(dm, "hand-to-mouse", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("hand", right));
-		}, handCommand);
-		
-		createChunkType(dm, "hand-to-home", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		} , handCommand);
+
+		createChunkType(dm, "hand-to-home", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("hand", right));
-		}, handCommand);
-		
-		createChunkType(dm, "move-cursor", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		} , handCommand);
+
+		createChunkType(dm, "move-cursor", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("object", null));
 			sct.addSlot(new DefaultConditionalSlot("loc", null));
 			sct.addSlot(new DefaultConditionalSlot("device", null));
-		}, motorCommand);
-		
-		createChunkType(dm, "motor-clear", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		} , motorCommand);
+
+		createChunkType(dm, "motor-clear", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("muscle", null));
-		}, dm.getChunkType("clear").get());
+		} , dm.getChunkType("clear").get());
 	}
 
 	protected IChunkType createChunkType(IDeclarativeModule dm, String name, IChunkType... parents)
@@ -361,11 +343,12 @@ public abstract class AbstractModelFactory implements IModelFactory {
 		return createChunkType(dm, name, null, parents);
 	}
 
-	protected IChunkType createChunkType(IDeclarativeModule dm, String name, Consumer<IChunkType> configurator,
+	protected IChunkType createChunkType(IDeclarativeModule dm, String name, Consumer<ISymbolicChunkType> configurator,
 			IChunkType... parents) throws InterruptedException, ExecutionException {
 		final IChunkType ct = dm.createChunkType(Arrays.asList(parents), name).get();
-		if (configurator != null)
-			configurator.accept(ct);
+		if (configurator != null) {
+			configurator.accept(ct.getSymbolicChunkType());
+		}
 		dm.addChunkType(ct);
 		return ct;
 	}
@@ -376,10 +359,10 @@ public abstract class AbstractModelFactory implements IModelFactory {
 	}
 
 	protected IChunk createChunk(IDeclarativeModule dm, IChunkType chunkType, String name,
-			Consumer<IChunk> configurator) throws InterruptedException, ExecutionException {
+			Consumer<ISymbolicChunk> configurator) throws InterruptedException, ExecutionException {
 		final IChunk chunk = dm.createChunk(chunkType, name).get();
 		if (configurator != null)
-			configurator.accept(chunk);
+			configurator.accept(chunk.getSymbolicChunk());
 		dm.addChunk(chunk);
 		return chunk;
 	}
@@ -401,7 +384,7 @@ public abstract class AbstractModelFactory implements IModelFactory {
 			setupImaginalBuffer(model);
 		if (model.getModule(DefaultAuralModule6.class) != null)
 			setupAuralBuffers(model);
-		if(model.getModule(DefaultMotorModule6.class) != null)
+		if (model.getModule(DefaultMotorModule6.class) != null)
 			setupMotorBuffer(model);
 	}
 
@@ -431,20 +414,29 @@ public abstract class AbstractModelFactory implements IModelFactory {
 		createBuffer(model, "aural-location", "0", "0", "true");
 		createBuffer(model, "aural", "0", "0", "true");
 	}
-	
-    // TODO: Move to DefaultMotorModule6
+
+	// TODO: Move to DefaultMotorModule6
 	protected void setupMotorBuffer(IModel model) {
 		createBuffer(model, "motor", "0", "0", "true");
 	}
 
-	protected void createBuffer(final IModel model, final String name, final String activation, final String g, final String strictHarvestingEnabled) {
-		final IParameterized buffer = (IParameterized)model.getActivationBuffer(name);
+	protected void createBuffer(final IModel model, final String name, final String activation, final String g,
+			final String strictHarvestingEnabled) {
+		final IParameterized buffer = (IParameterized) model.getActivationBuffer(name);
 		buffer.setParameter("Activation", activation);
 		buffer.setParameter("G", g);
 		buffer.setParameter("StrictHarvestingEnabled", strictHarvestingEnabled);
 	}
-	
+
 	protected void setModelParameters(IModel model) {
+	}
+
+	protected IProduction createProduction(IDeclarativeModule dm, IProceduralModule pm, String name,
+			Consumer<ISymbolicProduction> configurator) throws InterruptedException, ExecutionException {
+		IProduction production = pm.createProduction(name).get();
+		configurator.accept(production.getSymbolicProduction());
+		pm.addProduction(production);
+		return production;
 	}
 
 }

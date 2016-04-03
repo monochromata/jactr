@@ -45,42 +45,43 @@ public class SemanticModelFactory extends AbstractModelFactory {
 
 		super.populateDeclarativeMemory(dm);
 
-		attribute = createSimpleChunkType(dm, "attribute");
-		object = createSimpleChunkType(dm, "object");
+		IChunkType chunk = dm.getChunkType("chunk").get();
+		attribute = createChunkType(dm, "attribute", chunk);
+		object = createChunkType(dm, "object", chunk);
 		createPropertyChunkType(dm);
 		createIsMemberChunkType(dm);
 
-		shark = createChunk(dm, "shark");
-		fish = createChunk(dm, "fish");
-		salmon = createChunk(dm, "salmon");
-		animal = createChunk(dm, "animal");
-		canary = createChunk(dm, "canary");
-		bird = createChunk(dm, "bird");
-		ostrich = createChunk(dm, "ostrich");
+		shark = createChunk(dm, chunk, "shark");
+		fish = createChunk(dm, chunk, "fish");
+		salmon = createChunk(dm, chunk, "salmon");
+		animal = createChunk(dm, chunk, "animal");
+		canary = createChunk(dm, chunk, "canary");
+		bird = createChunk(dm, chunk, "bird");
+		ostrich = createChunk(dm, chunk, "ostrich");
 
-		dangerous = createChunk(dm, "dangerous");
-		locomotion = createChunk(dm, "locomotion");
-		category = createChunk(dm, "category");
-		edible = createChunk(dm, "edible");
-		breathe = createChunk(dm, "breathe");
-		moves = createChunk(dm, "moves");
-		skin = createChunk(dm, "skin");
-		color = createChunk(dm, "color");
-		sings = createChunk(dm, "sings");
-		flies = createChunk(dm, "flies");
-		height = createChunk(dm, "height");
-		wings = createChunk(dm, "wings");
+		dangerous = createChunk(dm, chunk, "dangerous");
+		locomotion = createChunk(dm, chunk, "locomotion");
+		category = createChunk(dm, chunk, "category");
+		edible = createChunk(dm, chunk, "edible");
+		breathe = createChunk(dm, chunk, "breathe");
+		moves = createChunk(dm, chunk, "moves");
+		skin = createChunk(dm, chunk, "skin");
+		color = createChunk(dm, chunk, "color");
+		sings = createChunk(dm, chunk, "sings");
+		flies = createChunk(dm, chunk, "flies");
+		height = createChunk(dm, chunk, "height");
+		wings = createChunk(dm, chunk, "wings");
 
-		_true = createChunk(dm, "true");
-		_false = createChunk(dm, "false");
-		swimming = createChunk(dm, "swimming");
-		gills = createChunk(dm, "gills");
-		yellow = createChunk(dm, "yellow");
-		tall = createChunk(dm, "tall");
-		flying = createChunk(dm, "flying");
-		yes = createChunk(dm, "yes");
-		no = createChunk(dm, "no");
-		pending = createChunk(dm, "pending");
+		_true = createChunk(dm, chunk, "true");
+		_false = createChunk(dm, chunk, "false");
+		swimming = createChunk(dm, chunk, "swimming");
+		gills = createChunk(dm, chunk, "gills");
+		yellow = createChunk(dm, chunk, "yellow");
+		tall = createChunk(dm, chunk, "tall");
+		flying = createChunk(dm, chunk, "flying");
+		yes = createChunk(dm, chunk, "yes");
+		no = createChunk(dm, chunk, "no");
+		pending = createChunk(dm, chunk, "pending");
 
 		createProperty(dm, "p1", shark, dangerous, _true);
 		createProperty(dm, "p2", shark, locomotion, swimming);
@@ -114,44 +115,27 @@ public class SemanticModelFactory extends AbstractModelFactory {
 		g3 = createIsMember(dm, "g3", canary, fish, null);
 	}
 
-	protected IChunkType createSimpleChunkType(IDeclarativeModule dm, String name)
-			throws InterruptedException, ExecutionException {
-		IChunkType chunkType = dm.createChunkType(dm.getChunkType("chunk").get(), name).get();
-		dm.addChunkType(chunkType);
-		return chunkType;
-	}
-
 	protected void createPropertyChunkType(IDeclarativeModule dm) throws InterruptedException, ExecutionException {
-		property = dm.createChunkType(Collections.emptyList(), "property").get();
-		final ISymbolicChunkType sCT = property.getSymbolicChunkType();
-		sCT.addSlot(new DefaultConditionalSlot("object", null));
-		sCT.addSlot(new DefaultConditionalSlot("attribute", null));
-		sCT.addSlot(new DefaultConditionalSlot("value", null));
-		dm.addChunkType(property);
+		property = createChunkType(dm, "property", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("object", null));
+			sct.addSlot(new DefaultConditionalSlot("attribute", null));
+			sct.addSlot(new DefaultConditionalSlot("value", null));
+		});
 	}
 
 	protected void createIsMemberChunkType(IDeclarativeModule dm) throws InterruptedException, ExecutionException {
-		isMember = dm.createChunkType(Collections.emptyList(), "is-member").get();
-		final ISymbolicChunkType sCT = isMember.getSymbolicChunkType();
-		sCT.addSlot(new DefaultConditionalSlot("object", null));
-		sCT.addSlot(new DefaultConditionalSlot("category", null));
-		sCT.addSlot(new DefaultConditionalSlot("judgement", null));
-		dm.addChunkType(isMember);
-	}
-
-	protected IChunk createChunk(IDeclarativeModule dm, String chunkName)
-			throws InterruptedException, ExecutionException {
-		return createChunk(dm, dm.getChunkType("chunk").get(), chunkName, null);
+		isMember = createChunkType(dm, "is-member", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("object", null));
+			sct.addSlot(new DefaultConditionalSlot("category", null));
+			sct.addSlot(new DefaultConditionalSlot("judgement", null));
+		});
 	}
 
 	
 	@Override
 	protected IChunk createChunk(IDeclarativeModule dm, IChunkType chunkType, final String name,
-			final Consumer<IChunk> configurator) throws InterruptedException, ExecutionException {
-		final IChunk addedChunk = super.createChunk(dm, chunkType, name, chunk -> {
-					if(configurator != null)
-						configurator.accept(chunk);
-				});
+			final Consumer<ISymbolicChunk> configurator) throws InterruptedException, ExecutionException {
+		final IChunk addedChunk = super.createChunk(dm, chunkType, name, configurator);
 		// apply chunk parameters, after the chunk has been added to DM
 		getChunkParameterConfiguration().accept(name, addedChunk);
 		return addedChunk;
@@ -164,21 +148,19 @@ public class SemanticModelFactory extends AbstractModelFactory {
 
 	protected void createProperty(final IDeclarativeModule dm, final String name, final IChunk object,
 			final IChunk attribute, final IChunk value) throws InterruptedException, ExecutionException {
-		createChunk(dm, property, name, chunk -> {
-			final ISymbolicChunk sChunk = chunk.getSymbolicChunk();
-			sChunk.addSlot(new DefaultConditionalSlot("object", object));
-			sChunk.addSlot(new DefaultConditionalSlot("attribute", attribute));
-			sChunk.addSlot(new DefaultConditionalSlot("value", value));
+		createChunk(dm, property, name, sc -> {
+			sc.addSlot(new DefaultConditionalSlot("object", object));
+			sc.addSlot(new DefaultConditionalSlot("attribute", attribute));
+			sc.addSlot(new DefaultConditionalSlot("value", value));
 		});
 	}
 
 	protected IChunk createIsMember(final IDeclarativeModule dm, final String name, final IChunk object,
 			final IChunk category, final IChunk judgement) throws InterruptedException, ExecutionException {
-		return createChunk(dm, isMember, name, chunk -> {
-			final ISymbolicChunk sChunk = chunk.getSymbolicChunk();
-			sChunk.addSlot(new DefaultConditionalSlot("object", object));
-			sChunk.addSlot(new DefaultConditionalSlot("category", category));
-			sChunk.addSlot(new DefaultConditionalSlot("judgement", judgement));
+		return createChunk(dm, isMember, name, sc -> {
+			sc.addSlot(new DefaultConditionalSlot("object", object));
+			sc.addSlot(new DefaultConditionalSlot("category", category));
+			sc.addSlot(new DefaultConditionalSlot("judgement", judgement));
 		});
 	}
 
@@ -192,10 +174,10 @@ public class SemanticModelFactory extends AbstractModelFactory {
 		createFailProduction(dm, pm);
 	}
 
-	protected void createProduction(IProceduralModule pm, String name, Consumer<IProduction> slotConfiguration)
+	protected void createProduction(IProceduralModule pm, String name, Consumer<ISymbolicProduction> slotConfiguration)
 			throws InterruptedException, ExecutionException {
 		final IProduction production = pm.createProduction(name).get();
-		slotConfiguration.accept(production);
+		slotConfiguration.accept(production.getSymbolicProduction());
 		getProductionParameterConfiguration().accept(production);
 		pm.addProduction(production);
 	}
@@ -207,14 +189,14 @@ public class SemanticModelFactory extends AbstractModelFactory {
 
 	protected void createInitialRetrieveProduction(final IDeclarativeModule dm, final IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(pm, "initial-retrieve", production -> {
-			final ISymbolicProduction sp = production.getSymbolicProduction();
+		createProduction(pm, "initial-retrieve", sp -> {
 			sp.addCondition(new ChunkTypeCondition("goal", isMember,
 					Arrays.asList(new DefaultVariableConditionalSlot("object", "=obj"),
 							new DefaultVariableConditionalSlot("category", "=cat"),
 							new DefaultVariableConditionalSlot("judgement", null))));
 			sp.addCondition(new QueryCondition("retrieval",
 					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			
 			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("judgement", pending))));
 			sp.addAction(new AddAction("retrieval", property,
 					Arrays.asList(new DefaultVariableConditionalSlot("object", "=obj"),
@@ -227,8 +209,7 @@ public class SemanticModelFactory extends AbstractModelFactory {
 
 	protected void createDirectVerifyProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(pm, "direct-verify", production -> {
-			final ISymbolicProduction sp = production.getSymbolicProduction();
+		createProduction(pm, "direct-verify", sp -> {
 			sp.addCondition(new ChunkTypeCondition("goal", isMember,
 					Arrays.asList(new DefaultVariableConditionalSlot("object", "=obj"),
 							new DefaultVariableConditionalSlot("category", "=cat"),
@@ -237,6 +218,7 @@ public class SemanticModelFactory extends AbstractModelFactory {
 					Arrays.asList(new DefaultVariableConditionalSlot("object", "=obj"),
 							new DefaultConditionalSlot("attribute", category),
 							new DefaultVariableConditionalSlot("value", "=cat"))));
+			
 			sp.addAction(new RemoveAction("goal", Arrays.asList(new DefaultConditionalSlot("judgement", yes))));
 			sp.addAction(new OutputAction("Yes, a =obj is a =cat"));
 			sp.addAction(new RemoveAction("retrieval"));
@@ -245,8 +227,7 @@ public class SemanticModelFactory extends AbstractModelFactory {
 
 	protected void createChainCategoryProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(pm, "chain-category", production -> {
-			final ISymbolicProduction sp = production.getSymbolicProduction();
+		createProduction(pm, "chain-category", sp -> {
 			sp.addCondition(new ChunkTypeCondition("goal", isMember,
 					Arrays.asList(new DefaultVariableConditionalSlot("object", "=obj"),
 							new DefaultVariableConditionalSlot("category", "=cat"),
@@ -258,6 +239,7 @@ public class SemanticModelFactory extends AbstractModelFactory {
 							new DefaultVariableConditionalSlot("value", NOT_EQUALS, "=cat"))));
 			sp.addCondition(new QueryCondition("retrieval",
 					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			
 			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultVariableConditionalSlot("object", "=val"))));
 			sp.addAction(new AddAction("retrieval", property,
 					Arrays.asList(new DefaultVariableConditionalSlot("object", "=val"),
@@ -269,14 +251,14 @@ public class SemanticModelFactory extends AbstractModelFactory {
 
 	protected void createFailProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(pm, "fail", production -> {
-			ISymbolicProduction sp = production.getSymbolicProduction();
+		createProduction(pm, "fail", sp -> {
 			sp.addCondition(new ChunkTypeCondition("goal", isMember,
 					Arrays.asList(new DefaultVariableConditionalSlot("object", "=obj"),
 							new DefaultVariableConditionalSlot("category", "=cat"),
 							new DefaultConditionalSlot("judgement", pending))));
 			sp.addCondition(new QueryCondition("retrieval",
 					Arrays.asList(new DefaultConditionalSlot("state", dm.getErrorChunk()))));
+			
 			sp.addAction(new RemoveAction("goal", Arrays.asList(new DefaultConditionalSlot("judgement", no))));
 			sp.addAction(new OutputAction("No, a =obj is not a =cat"));
 			sp.addAction(new RemoveAction("retrieval"));

@@ -37,24 +37,23 @@ public class CountModelFactory extends AbstractModelFactory {
 
 		super.populateDeclarativeMemory(dm);
 
-		countOrder = dm.createChunkType(Collections.emptyList(), "count-order").get();
-		countOrder.getSymbolicChunkType().addSlot(new DefaultConditionalSlot("first", null));
-		countOrder.getSymbolicChunkType().addSlot(new DefaultConditionalSlot("second", null));
+		countOrder = createChunkType(dm, "count-order", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("first", null));
+			sct.addSlot(new DefaultConditionalSlot("second", null));
+		});
 		dm.addChunkType(countOrder);
 
-		countFrom = dm.createChunkType(Collections.emptyList(), "count-from").get();
-		countFrom.getSymbolicChunkType().addSlot(new DefaultConditionalSlot("start", null));
-		countFrom.getSymbolicChunkType().addSlot(new DefaultConditionalSlot("end", null));
-		countFrom.getSymbolicChunkType().addSlot(new DefaultConditionalSlot("step", null));
+		countFrom = createChunkType(dm, "count-from", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("start", null));
+			sct.addSlot(new DefaultConditionalSlot("end", null));
+			sct.addSlot(new DefaultConditionalSlot("step", null));
+		});
 		dm.addChunkType(countFrom);
 		
 		IChunkType chunk = dm.getChunkType("chunk").get();
-		start = dm.createChunk(chunk, "start").get();
-		dm.addChunk(start);
-		counting = dm.createChunk(chunk, "counting").get();
-		dm.addChunk(counting);
-		stop = dm.createChunk(chunk, "stop").get();
-		dm.addChunk(stop);
+		start = createChunk(dm, chunk, "start");
+		counting = createChunk(dm, chunk, "counting");
+		stop = createChunk(dm, chunk, "stop");
 
 		// TODO: Why doesn't the order start at "a"?
 		createCountOrderAndAddToDM(dm, "b", 1, 2);
@@ -63,19 +62,19 @@ public class CountModelFactory extends AbstractModelFactory {
 		createCountOrderAndAddToDM(dm, "e", 4, 5);
 		createCountOrderAndAddToDM(dm, "f", 5, 6);
 
-		firstGoal = dm.createChunk(countFrom, "first-goal").get();
-		firstGoal.getSymbolicChunk().addSlot(new DefaultConditionalSlot("start", 2.0d));
-		firstGoal.getSymbolicChunk().addSlot(new DefaultConditionalSlot("end", 5.0d));
-		firstGoal.getSymbolicChunk().addSlot(new DefaultConditionalSlot("step", start));
-		dm.addChunk(firstGoal);
+		firstGoal = createChunk(dm, countFrom, "first-goal", sc -> {
+			sc.addSlot(new DefaultConditionalSlot("start", 2.0d));
+			sc.addSlot(new DefaultConditionalSlot("end", 5.0d));
+			sc.addSlot(new DefaultConditionalSlot("step", start));
+		});
 	}
 
 	protected void createCountOrderAndAddToDM(IDeclarativeModule dm, String name, double first, double second)
 			throws InterruptedException, ExecutionException {
-		IChunk chunk = dm.createChunk(countOrder, "b").get();
-		chunk.getSymbolicChunk().addSlot(new DefaultConditionalSlot("first", first));
-		chunk.getSymbolicChunk().addSlot(new DefaultConditionalSlot("second", second));
-		dm.addChunk(chunk);
+		IChunk chunk = createChunk(dm, countOrder, "b", sc -> {
+			sc.addSlot(new DefaultConditionalSlot("first", first));
+			sc.addSlot(new DefaultConditionalSlot("second", second));
+		});
 	}
 
 	@Override
@@ -91,63 +90,62 @@ public class CountModelFactory extends AbstractModelFactory {
 
 	protected void createStartProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction startProduction = pm.createProduction("start").get();
-		startProduction.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("goal", countFrom,
+		createProduction(dm, pm, "start", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", countFrom,
 						Arrays.asList(new DefaultVariableConditionalSlot("start", "=num1"),
 								new DefaultVariableConditionalSlot("step", start))));
-		startProduction.getSymbolicProduction()
-				.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("step", counting))));
-		startProduction.getSymbolicProduction().addAction(new AddAction("retrieval", countOrder,
+			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("step", counting))));
+			sp.addAction(new AddAction("retrieval", countOrder,
 				Arrays.asList(new DefaultVariableConditionalSlot("first", "=num1"))));
-		startProduction.getSymbolicProduction().addAction(new OutputAction("Search for something start at =num1"));
-		pm.addProduction(startProduction);
+			sp.addAction(new OutputAction("Search for something start at =num1"));
+		});
 	}
 
 	protected void createFailedProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction failedProduction = pm.createProduction("failed").get();
-		failedProduction.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("goal", countFrom,
+		createProduction(dm, pm, "failed", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", countFrom,
 						Arrays.asList(new DefaultVariableConditionalSlot("start", "=num"),
 								new DefaultVariableConditionalSlot("step", counting))));
-		failedProduction.getSymbolicProduction().addCondition(new QueryCondition("retrieval",
+			sp.addCondition(new QueryCondition("retrieval",
 				Arrays.asList(new DefaultConditionalSlot("state", dm.getErrorChunk()))));
-		failedProduction.getSymbolicProduction().addAction(new RemoveAction("goal"));
-		failedProduction.getSymbolicProduction()
-				.addAction(new OutputAction("Awh, crap, I can't retrieve anything starting with =num "));
-		pm.addProduction(failedProduction);
+			
+			sp.addAction(new RemoveAction("goal"));
+			sp.addAction(new OutputAction("Awh, crap, I can't retrieve anything starting with =num "));
+		});
 	}
 
 	protected void createIncrementProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction incrementProduction = pm.createProduction("increment").get();
-		incrementProduction.getSymbolicProduction().addCondition(new ChunkTypeCondition("goal", countFrom, Arrays.asList(
+		createProduction(dm, pm, "increment", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", countFrom, Arrays.asList(
 				new DefaultVariableConditionalSlot("start", "=num1"),
 				new DefaultVariableConditionalSlot("end", "=num1"),
 				new DefaultConditionalSlot("step", counting))));
-		incrementProduction.getSymbolicProduction().addCondition(new ChunkTypeCondition("retrieval", countOrder, Arrays.asList(
+			sp.addCondition(new ChunkTypeCondition("retrieval", countOrder, Arrays.asList(
 				new DefaultVariableConditionalSlot("first", "=num1"),
 				new DefaultVariableConditionalSlot("second", "=num2"))));
-		incrementProduction.getSymbolicProduction().addAction(new ModifyAction("goal", Arrays.asList(
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
 				new DefaultVariableConditionalSlot("start", "=num2"))));
-		incrementProduction.getSymbolicProduction().addAction(new AddAction("retrieval", countOrder, Arrays.asList(
+			sp.addAction(new AddAction("retrieval", countOrder, Arrays.asList(
 				new DefaultVariableConditionalSlot("first", "=num2"))));
-		incrementProduction.getSymbolicProduction().addAction(new OutputAction("=num1"));
-		pm.addProduction(incrementProduction);
+			sp.addAction(new OutputAction("=num1"));
+		});
 	}
 	
 	protected void createStopProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction stopProduction = pm.createProduction("stop").get();
-		stopProduction.getSymbolicProduction().addCondition(new ChunkTypeCondition("goal", countFrom, Arrays.asList(
+		createProduction(dm, pm, "stop", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", countFrom, Arrays.asList(
 				new DefaultVariableConditionalSlot("start", "=num"),
 				new DefaultVariableConditionalSlot("end", "=num"),
 				new DefaultConditionalSlot("step", counting))));
-		stopProduction.getSymbolicProduction().addAction(new ModifyAction("goal", Arrays.asList(
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
 				new DefaultConditionalSlot("stop", stop))));
-		stopProduction.getSymbolicProduction().addAction(new OutputAction("Answer =num"));
-		pm.addProduction(stopProduction);
+			sp.addAction(new OutputAction("Answer =num"));
+		});
 	}
 	
 	@Override

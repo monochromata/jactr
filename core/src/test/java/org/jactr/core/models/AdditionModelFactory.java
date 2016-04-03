@@ -59,8 +59,7 @@ public class AdditionModelFactory extends AbstractModelFactory {
 	}
 
 	protected void createChunkTypeAddAndAddToDM(IDeclarativeModule dm) throws InterruptedException, ExecutionException {
-		chunkTypeAdd = createChunkType(dm, "add", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		chunkTypeAdd = createChunkType(dm, "add", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("arg1", null));
 			sct.addSlot(new DefaultConditionalSlot("arg2", null));
 			sct.addSlot(new DefaultConditionalSlot("count", null));
@@ -70,8 +69,7 @@ public class AdditionModelFactory extends AbstractModelFactory {
 
 	protected void createChunkTypeCountOrderAndAddToDM(IDeclarativeModule dm)
 			throws InterruptedException, ExecutionException {
-		chunkTypeCountOrder = createChunkType(dm, "count-order", chunkType -> {
-			final ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		chunkTypeCountOrder = createChunkType(dm, "count-order", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("first", null));
 			sct.addSlot(new DefaultConditionalSlot("second", null));
 		});
@@ -79,8 +77,7 @@ public class AdditionModelFactory extends AbstractModelFactory {
 
 	protected void createChunkSecondGoalAndAddToDM(IDeclarativeModule dm)
 			throws InterruptedException, ExecutionException {
-		secondGoal = createChunk(dm, chunkTypeAdd, "second-goal", chunk -> {
-			final ISymbolicChunk sc = chunk.getSymbolicChunk();
+		secondGoal = createChunk(dm, chunkTypeAdd, "second-goal", sc -> {
 			sc.addSlot(new DefaultConditionalSlot("arg1", 5.0d));
 			sc.addSlot(new DefaultConditionalSlot("arg2", 2.0d));
 			sc.addSlot(new DefaultConditionalSlot("count", null));
@@ -90,11 +87,10 @@ public class AdditionModelFactory extends AbstractModelFactory {
 
 	protected IChunk createCountOrderChunkAndAddToDM(IDeclarativeModule dm, String name, double firstValue,
 			double secondValue) throws InterruptedException, ExecutionException {
-		IChunk chunk = dm.createChunk(dm.getChunkType("count-order").get(), name).get();
-		chunk.getSymbolicChunk().addSlot(new DefaultConditionalSlot("first", firstValue));
-		chunk.getSymbolicChunk().addSlot(new DefaultConditionalSlot("second", secondValue));
-		dm.addChunk(chunk);
-		return chunk;
+		return createChunk(dm, dm.getChunkType("count-order").get(), name, sc -> {
+			sc.addSlot(new DefaultConditionalSlot("first", firstValue));
+			sc.addSlot(new DefaultConditionalSlot("second", secondValue));
+		});
 	}
 
 	@Override
@@ -103,86 +99,78 @@ public class AdditionModelFactory extends AbstractModelFactory {
 
 		super.populateProceduralMemory(dm, pm);
 
-		createInitializeAdditionProductionAndAddToPM(pm);
-		createTerminateAdditionProductionAndAddToPM(pm);
+		createInitializeAdditionProductionAndAddToPM(dm, pm);
+		createTerminateAdditionProductionAndAddToPM(dm, pm);
 		createIncrementCountProductionAndAddToPM(dm, pm);
 		createIncrementSumProductionAndAddToPM(dm, pm);
 	}
 
-	protected void createInitializeAdditionProductionAndAddToPM(IProceduralModule pm)
+	protected void createInitializeAdditionProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction initializeAddition = pm.createProduction("initialize-addition").get();
-		initializeAddition.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
+		createProduction(dm, pm, "initialize-addition", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
 						Arrays.asList(new DefaultVariableConditionalSlot("arg1", "=num1"),
 								new DefaultVariableConditionalSlot("arg2", "=num2"),
 								new DefaultConditionalSlot("sum", null))));
-		initializeAddition.getSymbolicProduction()
-				.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("count", 0.0d),
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("count", 0.0d),
 						new DefaultVariableConditionalSlot("sum", "=num1"))));
-		initializeAddition.getSymbolicProduction().addAction(new AddAction("retrieval", chunkTypeCountOrder,
+			sp.addAction(new AddAction("retrieval", chunkTypeCountOrder,
 				Arrays.asList(new DefaultVariableConditionalSlot("first", "=num1"))));
-		pm.addProduction(initializeAddition);
+		});
 	}
 
-	protected void createTerminateAdditionProductionAndAddToPM(IProceduralModule pm)
+	protected void createTerminateAdditionProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction terminateAddition = pm.createProduction("terminate-addition").get();
-		terminateAddition.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
+		createProduction(dm, pm, "terminate-addition", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
 						Arrays.asList(new DefaultVariableConditionalSlot("arg1", "=num1"),
 								new DefaultVariableConditionalSlot("arg2", "=num2"),
 								new DefaultVariableConditionalSlot("count", "=num2"),
 								new DefaultVariableConditionalSlot("sum", "=answer"))));
-		terminateAddition.getSymbolicProduction()
-				.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("count", null))));
-		terminateAddition.getSymbolicProduction().addAction(new OutputAction("=num1 + =num2 is =answer"));
-		pm.addProduction(terminateAddition);
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("count", null))));
+			sp.addAction(new OutputAction("=num1 + =num2 is =answer"));
+		});
 	}
 
 	protected void createIncrementCountProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction incrementCount = pm.createProduction("increment-count").get();
-		incrementCount.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
+		createProduction(dm, pm, "increment-count", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
 						Arrays.asList(new DefaultVariableConditionalSlot("sum", "=sum"),
 								new DefaultVariableConditionalSlot("count", "=count"))));
-		incrementCount.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("retrieval", chunkTypeCountOrder,
+			sp.addCondition(new ChunkTypeCondition("retrieval", chunkTypeCountOrder,
 						Arrays.asList(new DefaultVariableConditionalSlot("first", "=count"),
 								new DefaultVariableConditionalSlot("second", "=newCount"),
 								new DefaultConditionalSlot(":state", dm.getFreeChunk()))));
-		incrementCount.getSymbolicProduction().addAction(
-				new ModifyAction("goal", Arrays.asList(new DefaultVariableConditionalSlot("count", "=newCount"))));
-		incrementCount.getSymbolicProduction().addAction(new AddAction("retrieval", chunkTypeCountOrder,
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultVariableConditionalSlot("count", "=newCount"))));
+			sp.addAction(new AddAction("retrieval", chunkTypeCountOrder,
 				Arrays.asList(new DefaultVariableConditionalSlot("first", "=sum"))));
-		incrementCount.getSymbolicProduction().addAction(new OutputAction("That was the =newCount finger"));
-		incrementCount.getSymbolicProduction()
-				.addAction(new OutputAction("Will try to retrieve a count-order first =sum"));
-		pm.addProduction(incrementCount);
+			sp.addAction(new OutputAction("That was the =newCount finger"));
+			sp.addAction(new OutputAction("Will try to retrieve a count-order first =sum"));
+		});
 	}
 
 	protected void createIncrementSumProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction incrementSum = pm.createProduction("increment-sum").get();
-		incrementSum.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
+		createProduction(dm, pm, "increment-sum", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
 						Arrays.asList(new DefaultVariableConditionalSlot("sum", "=sum"),
 								new DefaultVariableConditionalSlot("count", "=count"),
 								new DefaultVariableConditionalSlot("arg2", "=count"))));
-		incrementSum.getSymbolicProduction()
-				.addCondition(new ChunkTypeCondition("retrieval", chunkTypeCountOrder,
+			sp.addCondition(new ChunkTypeCondition("retrieval", chunkTypeCountOrder,
 						Arrays.asList(new DefaultVariableConditionalSlot("first", "=sum"),
 								new DefaultVariableConditionalSlot("second", "=newSum"),
 								new DefaultConditionalSlot(":state", dm.getFreeChunk()))));
-		incrementSum.getSymbolicProduction().addAction(
-				new ModifyAction("goal", Arrays.asList(new DefaultVariableConditionalSlot("sum", "=newSum"))));
-		incrementSum.getSymbolicProduction().addAction(new AddAction("retrieval", chunkTypeCountOrder,
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultVariableConditionalSlot("sum", "=newSum"))));
+			sp.addAction(new AddAction("retrieval", chunkTypeCountOrder,
 				Arrays.asList(new DefaultVariableConditionalSlot("first", "=count"))));
-		incrementSum.getSymbolicProduction().addAction(new OutputAction("=newSum"));
-		incrementSum.getSymbolicProduction()
-				.addAction(new OutputAction("Will try to retrieve a count-order first =count"));
-		pm.addProduction(incrementSum);
+			sp.addAction(new OutputAction("=newSum"));
+			sp.addAction(new OutputAction("Will try to retrieve a count-order first =count"));
+		});
 	}
 
 	@Override

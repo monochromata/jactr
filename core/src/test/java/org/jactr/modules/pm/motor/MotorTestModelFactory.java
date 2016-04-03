@@ -75,8 +75,7 @@ public class MotorTestModelFactory extends AbstractModelFactory {
 		
 		final IChunkType chunkCT = dm.getChunkType("chunk").get();
 		
-		sequence = createChunkType(dm, "sequence", chunkType -> {
-			ISymbolicChunkType sct = chunkType.getSymbolicChunkType();
+		sequence = createChunkType(dm, "sequence", sct -> {
 			sct.addSlot(new DefaultConditionalSlot("order", null));
 			sct.addSlot(new DefaultConditionalSlot("command", null));
 			sct.addSlot(new DefaultConditionalSlot("finger", null));
@@ -92,9 +91,8 @@ public class MotorTestModelFactory extends AbstractModelFactory {
 		finished = createChunk(dm, chunkCT, "finished");
 		
 		// goal chunk type that defines the sequence of firing
-		goal = createChunkType(dm, "goal", chunkType -> {
-			chunkType.getSymbolicChunkType().addSlot(
-					new DefaultConditionalSlot("state", starting));
+		goal = createChunkType(dm, "goal", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("state", starting));
 		});
 		
 		punch = dm.getChunkType("punch").get();
@@ -105,16 +103,14 @@ public class MotorTestModelFactory extends AbstractModelFactory {
 		left = dm.getChunk("left").get();
 		right = dm.getChunk("right").get();
 		
-		createChunk(dm, sequence, "punch-j", chunk -> {
-			ISymbolicChunk sc = chunk.getSymbolicChunk();
+		createChunk(dm, sequence, "punch-j", sc -> {
 			sc.addSlot(new DefaultConditionalSlot("order", 1.0));
 			sc.addSlot(new DefaultConditionalSlot("command", punch));
 			sc.addSlot(new DefaultConditionalSlot("finger", index));
 			sc.addSlot(new DefaultConditionalSlot("hand", right));
 		});
 		
-		createChunk(dm, sequence, "peck-g", chunk -> {
-			ISymbolicChunk sc = chunk.getSymbolicChunk();
+		createChunk(dm, sequence, "peck-g", sc -> {
 			sc.addSlot(new DefaultConditionalSlot("order", 2.0));
 			sc.addSlot(new DefaultConditionalSlot("command", peck));
 			sc.addSlot(new DefaultConditionalSlot("finger", index));
@@ -123,16 +119,14 @@ public class MotorTestModelFactory extends AbstractModelFactory {
 			sc.addSlot(new DefaultConditionalSlot("theta", 0.0));
 		});
 		
-		createChunk(dm, sequence, "punch-g", chunk -> {
-			ISymbolicChunk sc = chunk.getSymbolicChunk();
+		createChunk(dm, sequence, "punch-g", sc -> {
 			sc.addSlot(new DefaultConditionalSlot("order", 3.0));
 			sc.addSlot(new DefaultConditionalSlot("command", punch));
 			sc.addSlot(new DefaultConditionalSlot("finger", index));
 			sc.addSlot(new DefaultConditionalSlot("hand", left));
 		});
 		
-		createChunk(dm, sequence, "peck-recoil-h", chunk -> {
-			ISymbolicChunk sc = chunk.getSymbolicChunk();
+		createChunk(dm, sequence, "peck-recoil-h", sc -> {
 			sc.addSlot(new DefaultConditionalSlot("order", 4.0));
 			sc.addSlot(new DefaultConditionalSlot("command", peckRecoil));
 			sc.addSlot(new DefaultConditionalSlot("finger", index));
@@ -163,180 +157,171 @@ public class MotorTestModelFactory extends AbstractModelFactory {
 	// Create the production that starts up the test
 	protected void createStartProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction production = pm.createProduction("start").get();
-		ISymbolicProduction sp = production.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", starting))));
-		sp.addCondition(new QueryCondition("retrieval", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-		
-		sp.addAction(new AddAction("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("order", 1.0))));
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", retrieving))));
-		sp.addAction(new OutputAction("Trying to retrieve first movement"));
-		pm.addProduction(production);
+		createProduction(dm, pm, "start", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", starting))));
+			sp.addCondition(new QueryCondition("retrieval", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			
+			sp.addAction(new AddAction("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("order", 1.0))));
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", retrieving))));
+			sp.addAction(new OutputAction("Trying to retrieve first movement"));
+		});
 	}
 	
 	// post completion production
 	// which launches another retrieval of the next movement
 	protected void createRetrieveNextMovementProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction production = pm.createProduction("retrieve-next-movement").get();
-		ISymbolicProduction sp = production.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", motorCompleted))));
-		sp.addCondition(new QueryCondition("retrieval", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-		sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("order", "=index"))));
-		sp.addCondition(new IncrementingCondition("=index", "=next"));
-		
-		sp.addAction(new AddAction("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("order", "=next"))));
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", retrieving))));
-		sp.addAction(new OutputAction("Trying to retrieve =index movement"));
-		pm.addProduction(production);
+		createProduction(dm, pm, "retrieve-next-movement", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", motorCompleted))));
+			sp.addCondition(new QueryCondition("retrieval", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("order", "=index"))));
+			sp.addCondition(new IncrementingCondition("=index", "=next"));
+			
+			sp.addAction(new AddAction("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("order", "=next"))));
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", retrieving))));
+			sp.addAction(new OutputAction("Trying to retrieve =index movement"));
+		});
 	}
 	
 	// failed to find a sequence, we are done
 	protected void createRetrievalFailedProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction production = pm.createProduction("retrieval-failed").get();
-		ISymbolicProduction sp = production.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", retrieving))));
-		sp.addCondition(new QueryCondition("retrieval", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getErrorChunk()))));
-		
-		sp.addAction(new RemoveAction("retrieval"));
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", "finished"))));
-		sp.addAction(new OutputAction("Could not find the next movement sequence. Finished"));
-		sp.addAction(new StopAction());
-		
-		pm.addProduction(production);
+		createProduction(dm, pm, "retrieval-failed", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", retrieving))));
+			sp.addCondition(new QueryCondition("retrieval", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getErrorChunk()))));
+			
+			sp.addAction(new RemoveAction("retrieval"));
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", "finished"))));
+			sp.addAction(new OutputAction("Could not find the next movement sequence. Finished"));
+			sp.addAction(new StopAction());
+		});
 	}
 	
 	// general movement end production
 	protected void createMovementCompletedProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction production = pm.createProduction("movement-completed").get();
-		ISymbolicProduction sp = production.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", motorStarted))));
-		sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("command", "=command"))));
-		sp.addCondition(new QueryCondition("motor", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-		
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", motorCompleted))));
-		// keep the command around for the next production
-		sp.addAction(new ModifyAction("retrieval"));
-		sp.addAction(new OutputAction("Completed command =command defined by =retrieval"));
-		pm.addProduction(production);
+		createProduction(dm, pm, "movement-completed", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", motorStarted))));
+			sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("command", "=command"))));
+			sp.addCondition(new QueryCondition("motor", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", motorCompleted))));
+			// keep the command around for the next production
+			sp.addAction(new ModifyAction("retrieval"));
+			sp.addAction(new OutputAction("Completed command =command defined by =retrieval"));
+		});
 	}
 	
 	// general movement failed production
 	protected void createMovementFailedProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction production = pm.createProduction("movement-failed").get();
-		ISymbolicProduction sp = production.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", motorStarted))));
-		sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("command", "=command"))));
-		sp.addCondition(new QueryCondition("motor", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getErrorChunk()))));
-		
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", finished))));
-		sp.addAction(new OutputAction("Failed to execute command =command defined by =retrieval"));
-		pm.addProduction(production);
+		createProduction(dm, pm, "movement-failed", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", motorStarted))));
+			sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("command", "=command"))));
+			sp.addCondition(new QueryCondition("motor", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getErrorChunk()))));
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", finished))));
+			sp.addAction(new OutputAction("Failed to execute command =command defined by =retrieval"));
+		});
 	}
 	
 	// got a command sequence, lets do something with it
 	
 	protected void createStartPunchProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction p = pm.createProduction("start-punch").get();
-		ISymbolicProduction sp = p.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", retrieving))));
-		sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("command", punch),
-				new DefaultConditionalSlot("finger", "=finger"),
-				new DefaultConditionalSlot("hand", "=hand"))));
-		sp.addCondition(new QueryCondition("motor", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-		
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", motorStarted))));
-		sp.addAction(new AddAction("motor", punch, Arrays.asList(
-				new DefaultConditionalSlot("finger", "=finger"),
-				new DefaultConditionalSlot("hand", "=hand"))));
-		// Keep it around for a bit
-		sp.addAction(new ModifyAction("retrieval"));
-		sp.addAction(new OutputAction("Punching =hand =finger"));
-		pm.addProduction(p);
+		createProduction(dm, pm, "start-punch", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", retrieving))));
+			sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("command", punch),
+					new DefaultConditionalSlot("finger", "=finger"),
+					new DefaultConditionalSlot("hand", "=hand"))));
+			sp.addCondition(new QueryCondition("motor", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", motorStarted))));
+			sp.addAction(new AddAction("motor", punch, Arrays.asList(
+					new DefaultConditionalSlot("finger", "=finger"),
+					new DefaultConditionalSlot("hand", "=hand"))));
+			// Keep it around for a bit
+			sp.addAction(new ModifyAction("retrieval"));
+			sp.addAction(new OutputAction("Punching =hand =finger"));
+		});
 	}
 	
 	protected void createStartPeckProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction p = pm.createProduction("start-peck").get();
-		ISymbolicProduction sp = p.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", retrieving))));
-		sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("command", peck),
-				new DefaultConditionalSlot("finger", "=finger"),
-				new DefaultConditionalSlot("hand", "=hand"),
-				new DefaultConditionalSlot("r", "=r"),
-				new DefaultConditionalSlot("theta", "=theta"))));
-		sp.addCondition(new QueryCondition("motor", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-		
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", motorStarted))));
-		sp.addAction(new AddAction("motor", peck, Arrays.asList(
-				new DefaultConditionalSlot("finger", "=finger"),
-				new DefaultConditionalSlot("hand", "=hand"),
-				new DefaultConditionalSlot("r", "=r"),
-				new DefaultConditionalSlot("theta", "=theta"))));
-		// Keep it around for a bit
-		sp.addAction(new ModifyAction("retrieval"));
-		sp.addAction(new OutputAction("Pecking =hand =finger =r along =theta"));
-		pm.addProduction(p);
+		createProduction(dm, pm, "start-peck", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", retrieving))));
+			sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("command", peck),
+					new DefaultConditionalSlot("finger", "=finger"),
+					new DefaultConditionalSlot("hand", "=hand"),
+					new DefaultConditionalSlot("r", "=r"),
+					new DefaultConditionalSlot("theta", "=theta"))));
+			sp.addCondition(new QueryCondition("motor", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", motorStarted))));
+			sp.addAction(new AddAction("motor", peck, Arrays.asList(
+					new DefaultConditionalSlot("finger", "=finger"),
+					new DefaultConditionalSlot("hand", "=hand"),
+					new DefaultConditionalSlot("r", "=r"),
+					new DefaultConditionalSlot("theta", "=theta"))));
+			// Keep it around for a bit
+			sp.addAction(new ModifyAction("retrieval"));
+			sp.addAction(new OutputAction("Pecking =hand =finger =r along =theta"));
+		});
 	}
 	
 	protected void createStartPeckRecoilProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		IProduction p = pm.createProduction("start-peck-recoil").get();
-		ISymbolicProduction sp = p.getSymbolicProduction();
-		sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
-				new DefaultConditionalSlot("state", retrieving))));
-		sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
-				new DefaultConditionalSlot("command", peckRecoil),
-				new DefaultConditionalSlot("finger", "=finger"),
-				new DefaultConditionalSlot("hand", "=hand"),
-				new DefaultConditionalSlot("r", "=r"),
-				new DefaultConditionalSlot("theta", "=theta"))));
-		sp.addCondition(new QueryCondition("motor", Arrays.asList(
-				new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-		
-		sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("state", motorStarted))));
-		sp.addAction(new AddAction("motor", peckRecoil, Arrays.asList(
-				new DefaultConditionalSlot("finger", "=finger"),
-				new DefaultConditionalSlot("hand", "=hand"),
-				new DefaultConditionalSlot("r", "=r"),
-				new DefaultConditionalSlot("theta", "=theta"))));
-		// Keep it around for a bit
-		sp.addAction(new ModifyAction("retrieval"));
-		sp.addAction(new OutputAction("Pecking and recoil =hand =finger =r along =theta"));
-		pm.addProduction(p);
+		createProduction(dm, pm, "start-peck-recoil", sp -> {
+			sp.addCondition(new ChunkTypeCondition("goal", goal, Arrays.asList(
+					new DefaultConditionalSlot("state", retrieving))));
+			sp.addCondition(new ChunkTypeCondition("retrieval", sequence, Arrays.asList(
+					new DefaultConditionalSlot("command", peckRecoil),
+					new DefaultConditionalSlot("finger", "=finger"),
+					new DefaultConditionalSlot("hand", "=hand"),
+					new DefaultConditionalSlot("r", "=r"),
+					new DefaultConditionalSlot("theta", "=theta"))));
+			sp.addCondition(new QueryCondition("motor", Arrays.asList(
+					new DefaultConditionalSlot("state", dm.getFreeChunk()))));
+			
+			sp.addAction(new ModifyAction("goal", Arrays.asList(
+					new DefaultConditionalSlot("state", motorStarted))));
+			sp.addAction(new AddAction("motor", peckRecoil, Arrays.asList(
+					new DefaultConditionalSlot("finger", "=finger"),
+					new DefaultConditionalSlot("hand", "=hand"),
+					new DefaultConditionalSlot("r", "=r"),
+					new DefaultConditionalSlot("theta", "=theta"))));
+			// Keep it around for a bit
+			sp.addAction(new ModifyAction("retrieval"));
+			sp.addAction(new OutputAction("Pecking and recoil =hand =finger =r along =theta"));
+		});
 	}
 		
 	@Override
