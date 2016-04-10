@@ -113,59 +113,71 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 
 	protected void createHeardSpeechProduction(final IDeclarativeModule dm, final IProceduralModule pm, IChunkType speech)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "heard-speech", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest, Arrays.asList(
-					new DefaultConditionalSlot("status", succeeded), new DefaultConditionalSlot("kind", speech))));
-			
-			sp.addAction(new OutputAction("All done"));
-			sp.addAction(new RemoveAction("goal"));
-			sp.addAction(new StopAction());
+		createProduction(dm, pm, "heard-speech", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(succeeded)
+					.slot("kind").eqChunkType(speech)
+					
+			.actions()
+				.output("All done")
+				.remove("goal")
+				.stop();
 		});
 	}
 
 	protected void createHeardProduction(final IDeclarativeModule dm, final IProceduralModule pm, final String name,
 			final IChunkType currentKind, final IChunkType nextKind, final String nextTestValue)
 					throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, name, sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest, Arrays.asList(
-					new DefaultConditionalSlot("status", succeeded), new DefaultConditionalSlot("kind", currentKind))));
-			
-			sp.addAction(new ModifyAction("goal",
-					Arrays.asList(new DefaultConditionalSlot("status", starting),
-							new DefaultConditionalSlot("kind", nextKind),
-							new DefaultConditionalSlot("testValue", nextTestValue))));
+		createProduction(dm, pm, name, pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(succeeded)
+					.slot("kind").eqChunkType(currentKind)
+					
+			.actions()
+				.modify("goal")
+					.set("status").toChunk(starting)
+					.set("kind").toChunkType(nextKind)
+					.set("testValue").toString(nextTestValue);
 		});
 	}
 
 	protected void createSearchForSoundProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
 		final IChunkType audioEvent = dm.getChunkType("audio-event").get();
-		createProduction(dm, pm, "search-for-sound", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
-					Arrays.asList(new DefaultConditionalSlot("status", starting),
-							new DefaultVariableConditionalSlot("kind", "=kind"))));
-			sp.addCondition(new QueryCondition("aural-location",
-					Arrays.asList(new DefaultConditionalSlot("state", NOT_EQUALS, dm.getBusyChunk()))));
-
-			sp.addAction(new AddAction("aural-location", audioEvent,
-					Arrays.asList(new DefaultVariableConditionalSlot("kind", "=kind"),
-							new DefaultConditionalSlot(":attended", null))));
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("status", searching))));
-			sp.addAction(new OutputAction("Im listening for something new that is =kind"));
+		createProduction(dm, pm, "search-for-sound", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(starting)
+					.slot("kind").eqVariable("=kind")
+				.query("aural-location")
+					.slot("state").neqChunk(dm.getBusyChunk())
+					
+			.actions()
+				.add("aural-location", audioEvent)
+					.set("kind").toVariable("=kind")
+					.set(":attended").toNull()
+				.modify("goal")
+					.set("status").toChunk(searching)
+				.output("Im listening for something new that is =kind");
 		});
 	}
 
 	protected void createSearchForSoundFailedProduction(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "search-for-sound-failed", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
-					Arrays.asList(new DefaultConditionalSlot("status", searching),
-							new DefaultVariableConditionalSlot("kind", "=kind"))));
-			sp.addCondition(new QueryCondition("aural-location",
-					Arrays.asList(new DefaultConditionalSlot("state", dm.getErrorChunk()))));
-
-			sp.addAction(new OutputAction("Damn couldnt hear any =kind trying again"));
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("status", starting))));
+		createProduction(dm, pm, "search-for-sound-failed", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(searching)
+					.slot("kind").eqVariable("=kind")
+				.query("aural-location")
+					.slot("state").eqChunk(dm.getErrorChunk())
+					
+			.actions()
+				.output("Damn couldnt hear any =kind trying again")
+				.modify("goal")
+					.set("status").toChunk(starting);
 		});
 	}
 
@@ -173,87 +185,99 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 			throws InterruptedException, ExecutionException {
 		final IChunkType audioEvent = dm.getChunkType("audio-event").get();
 		final IChunkType attendTo = dm.getChunkType("attend-to").get();
-		createProduction(dm, pm, "search-for-sound-succeeded", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
-					Arrays.asList(new DefaultConditionalSlot("status", searching),
-							new DefaultVariableConditionalSlot("kind", "=kind"))));
-			sp.addCondition(new ChunkTypeCondition("aural-location", audioEvent,
-					Arrays.asList(new DefaultVariableConditionalSlot("kind", "=kind"))));
-
-			sp.addAction(new AddAction("aural", attendTo,
-					Arrays.asList(new DefaultVariableConditionalSlot("where", "=aural-location"))));
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("status", encoding))));
-			sp.addAction(new OutputAction("Found =kind attending"));
+		createProduction(dm, pm, "search-for-sound-succeeded", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(searching)
+					.slot("kind").eqVariable("=kind")
+				.chunkType("aural-location", audioEvent)
+					.slot("kind").eqVariable("=kind")
+			
+			.actions()
+				.add("aural", attendTo)
+					.set("where").toVariable("=aural-location")
+				.modify("goal")
+					.set("status").toChunk(encoding)
+				.output("Found =kind attending");
 		});
 	}
 
 	protected void createEncodingFailedProduction(final IDeclarativeModule dm, final IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "encoding-failed", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
-					Arrays.asList(new DefaultConditionalSlot("status", encoding))));
-			sp.addCondition(new QueryCondition("aural",
-					Arrays.asList(new DefaultConditionalSlot("state", dm.getErrorChunk()))));
-			
-			sp.addAction(new OutputAction("Failed to encode sound"));
-			sp.addAction(new RemoveAction("goal"));
+		createProduction(dm, pm, "encoding-failed", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(encoding)
+				.query("aural")
+					.slot("state").eqChunk(dm.getErrorChunk())
+					
+			.actions()
+				.output("Failed to encode sound")
+				.remove("goal");
 		});
 	}
 
 	protected void createEncodingIncorrectKindProduction(final IDeclarativeModule dm, final IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
 		final IChunkType sound = dm.getChunkType("sound").get();
-		createProduction(dm, pm, "encoding-incorrect-kind", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
-					Arrays.asList(new DefaultConditionalSlot("status", encoding),
-							new DefaultVariableConditionalSlot("kind", "=kind"),
-							new DefaultVariableConditionalSlot("testValue", "=value"))));
-			sp.addCondition(new QueryCondition("aural",
-					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-			sp.addCondition(new ChunkTypeCondition("aural", sound,
-					Arrays.asList(new DefaultVariableConditionalSlot("kind", NOT_EQUALS, "=kind"))));
-			
-			sp.addAction(new OutputAction("incorrect kind"));
-			sp.addAction(new RemoveAction("goal"));
+		createProduction(dm, pm, "encoding-incorrect-kind", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(encoding)
+					.slot("kind").eqVariable("=kind")
+					.slot("testValue").eqVariable("=value")
+				.query("aural")
+					.slot("state").eqChunk(dm.getFreeChunk())
+				.chunkType("aural", sound)
+					.slot("kind").neqVariable("=kind")
+					
+			.actions()
+				.output("incorrect kind")
+				.remove("goal");
 		});
 	}
 
 	protected void createEncodingIncorrectContentProduction(final IDeclarativeModule dm, final IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
 		final IChunkType sound = dm.getChunkType("sound").get();
-		createProduction(dm, pm, "encoding-incorrect-content", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
-					Arrays.asList(new DefaultConditionalSlot("status", encoding),
-							new DefaultVariableConditionalSlot("kind", "=kind"),
-							new DefaultVariableConditionalSlot("testValue", "=value"))));
-			sp.addCondition(new QueryCondition("aural",
-					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-			sp.addCondition(new ChunkTypeCondition("aural", sound,
-					Arrays.asList(new DefaultVariableConditionalSlot("content", NOT_EQUALS, "=value"))));
+		createProduction(dm, pm, "encoding-incorrect-content", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(encoding)
+					.slot("kind").eqVariable("=kind")
+					.slot("testValue").eqVariable("=value")
+				.query("aural")
+					.slot("state").eqChunk(dm.getFreeChunk())
+				.chunkType("aural", sound)
+					.slot("content").neqVariable("=value")
 			
-			sp.addAction(new OutputAction("incorrect content"));
-			sp.addAction(new RemoveAction("goal"));
+			.actions()
+				.output("incorrect content")
+				.remove("goal");
 		});
 	}
 
 	protected void createEncodingCorrectProduction(final IDeclarativeModule dm, final IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
 		final IChunkType sound = dm.getChunkType("sound").get();
-		createProduction(dm, pm, "encoding-correct", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", attendingTest,
-					Arrays.asList(new DefaultConditionalSlot("status", encoding),
-							new DefaultVariableConditionalSlot("kind", "=kind"),
-							new DefaultVariableConditionalSlot("testValue", "=value"))));
-			sp.addCondition(new QueryCondition("aural",
-					Arrays.asList(new DefaultConditionalSlot("state", dm.getFreeChunk()))));
-			sp.addCondition(new ChunkTypeCondition("aural", sound,
-					Arrays.asList(new DefaultVariableConditionalSlot("kind", "=kind"),
-							new DefaultVariableConditionalSlot("content", "=value"))));
-			
-			sp.addAction(new OutputAction("I heard =value"));
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("status", succeeded))));
-			sp.addAction(new RemoveAction("aural"));
-			sp.addAction(new RemoveAction("aural-location"));
+		createProduction(dm, pm, "encoding-correct", pb -> {
+			pb.conditions()
+				.chunkType("goal", attendingTest)
+					.slot("status").eqChunk(encoding)
+					.slot("kind").eqVariable("=kind")
+					.slot("testValue").eqVariable("=value")
+				.query("aural")
+					.slot("state").eqChunk(dm.getFreeChunk())
+				.chunkType("aural", sound)
+					.slot("kind").eqVariable("=kind")
+					.slot("content").eqVariable("=value")
+					
+			.actions()
+				.output("I heard =value")
+				.modify("goal")
+					.set("status").toChunk(succeeded)
+				.remove("aural")
+				.remove("aural-location");
 		});
 	}
 

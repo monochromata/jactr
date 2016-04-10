@@ -107,69 +107,77 @@ public class AdditionModelFactory extends AbstractModelFactory {
 
 	protected void createInitializeAdditionProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "initialize-addition", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
-						Arrays.asList(new DefaultVariableConditionalSlot("arg1", "=num1"),
-								new DefaultVariableConditionalSlot("arg2", "=num2"),
-								new DefaultConditionalSlot("sum", null))));
-			
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("count", 0.0d),
-						new DefaultVariableConditionalSlot("sum", "=num1"))));
-			sp.addAction(new AddAction("retrieval", chunkTypeCountOrder,
-				Arrays.asList(new DefaultVariableConditionalSlot("first", "=num1"))));
+		createProduction(dm, pm, "initialize-addition", pb -> {
+			pb.conditions()
+					.chunkType("goal", chunkTypeAdd)
+					.slot("arg1").eqVariable("=num1")
+					.slot("arg2").eqVariable("=num2")
+					.slot("sum").eqNull()
+			.actions()
+				.modify("goal")
+					.set("count").toDouble(0.0d)
+					.set("sum").toVariable("=num1")
+				.add("retrieval", chunkTypeCountOrder)
+					.set("first").toVariable("=num1");
 		});
 	}
 
 	protected void createTerminateAdditionProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "terminate-addition", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
-						Arrays.asList(new DefaultVariableConditionalSlot("arg1", "=num1"),
-								new DefaultVariableConditionalSlot("arg2", "=num2"),
-								new DefaultVariableConditionalSlot("count", "=num2"),
-								new DefaultVariableConditionalSlot("sum", "=answer"))));
-			
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("count", null))));
-			sp.addAction(new OutputAction("=num1 + =num2 is =answer"));
+		createProduction(dm, pm, "terminate-addition", pb -> {
+			pb.conditions()
+				.chunkType("goal", chunkTypeAdd)
+					.slot("arg1").eqVariable("=num1")
+					.slot("arg2").eqVariable("=num2")
+					.slot("count").eqVariable("=num2")
+					.slot("sum").eqVariable("=answer")
+			.actions()
+				.modify("goal")
+					.set("count").toNull()
+				.output("=num1 + =num2 is =answer");
 		});
 	}
 
 	protected void createIncrementCountProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "increment-count", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
-						Arrays.asList(new DefaultVariableConditionalSlot("sum", "=sum"),
-								new DefaultVariableConditionalSlot("count", "=count"))));
-			sp.addCondition(new ChunkTypeCondition("retrieval", chunkTypeCountOrder,
-						Arrays.asList(new DefaultVariableConditionalSlot("first", "=count"),
-								new DefaultVariableConditionalSlot("second", "=newCount"),
-								new DefaultConditionalSlot(":state", dm.getFreeChunk()))));
-			
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultVariableConditionalSlot("count", "=newCount"))));
-			sp.addAction(new AddAction("retrieval", chunkTypeCountOrder,
-				Arrays.asList(new DefaultVariableConditionalSlot("first", "=sum"))));
-			sp.addAction(new OutputAction("That was the =newCount finger"));
-			sp.addAction(new OutputAction("Will try to retrieve a count-order first =sum"));
+		createProduction(dm, pm, "increment-count", pb -> {
+			pb.conditions()
+				.chunkType("goal", chunkTypeAdd)
+					.slot("sum").eqVariable("=sum")
+					.slot("count").eqVariable("=count")
+				.chunkType("retrieval", chunkTypeCountOrder)
+					.slot("first").eqVariable("=count")
+					.slot("second").eqVariable("=newCount")
+					.slot(":state").eqChunk(dm.getFreeChunk())
+			.actions()
+				.modify("goal")
+					.set("count").toVariable("=newCount")
+				.add("retrieval", chunkTypeCountOrder)
+					.set("first").toVariable("=sum")
+				.output("That was the =newCount finger")
+				.output("Will try to retrieve a count-order first =sum");
 		});
 	}
 
 	protected void createIncrementSumProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "increment-sum", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", chunkTypeAdd,
-						Arrays.asList(new DefaultVariableConditionalSlot("sum", "=sum"),
-								new DefaultVariableConditionalSlot("count", "=count"),
-								new DefaultVariableConditionalSlot("arg2", "=count"))));
-			sp.addCondition(new ChunkTypeCondition("retrieval", chunkTypeCountOrder,
-						Arrays.asList(new DefaultVariableConditionalSlot("first", "=sum"),
-								new DefaultVariableConditionalSlot("second", "=newSum"),
-								new DefaultConditionalSlot(":state", dm.getFreeChunk()))));
-			
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultVariableConditionalSlot("sum", "=newSum"))));
-			sp.addAction(new AddAction("retrieval", chunkTypeCountOrder,
-				Arrays.asList(new DefaultVariableConditionalSlot("first", "=count"))));
-			sp.addAction(new OutputAction("=newSum"));
-			sp.addAction(new OutputAction("Will try to retrieve a count-order first =count"));
+		createProduction(dm, pm, "increment-sum", pb -> {
+			pb.conditions()
+				.chunkType("goal", chunkTypeAdd)
+					.slot("sum").eqVariable("=sum")
+					.slot("count").eqVariable("=count")
+					.slot("arg2").eqVariable("=count")
+				.chunkType("retrieval", chunkTypeCountOrder)
+					.slot("first").eqVariable("=sum")
+					.slot("second").eqVariable("=newSum")
+					.slot(":state").eqChunk(dm.getFreeChunk())
+			.actions()
+				.modify("goal")
+					.set("sum").toVariable("=newSum")
+				.add("retrieval", chunkTypeCountOrder)
+					.set("first").toVariable("=count")
+				.output("=newSum")
+				.output("Will try to retrieve a count-order first =count");
 		});
 	}
 

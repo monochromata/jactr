@@ -13,130 +13,110 @@
  */
 package org.jactr.modules.pm.vocal;
 
-import junit.framework.TestCase;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.concurrent.ExecutorServices;
 import org.jactr.core.model.IModel;
+import org.jactr.core.models.IModelFactory;
 import org.jactr.core.module.procedural.event.ProceduralModuleEvent;
 import org.jactr.core.module.procedural.event.ProceduralModuleListenerAdaptor;
 import org.jactr.core.production.IProduction;
-import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.controller.IController;
 import org.jactr.core.runtime.controller.debug.DebugController;
-import org.jactr.io.CommonIO;
-import org.jactr.entry.Main;
+import org.jactr.modules.pm.visual.VisualModuleTestConfiguration;
+import org.junit.Test;
 
-public class VocalModuleTest extends TestCase
-{
-  /**
-   * logger definition
-   */
-  static public final Log    LOGGER               = LogFactory
-                                                      .getLog(VocalModuleTest.class);
+public class VocalModuleTest extends VisualModuleTestConfiguration {
+	
+	/**
+	 * logger definition
+	 */
+	static public final Log LOGGER = LogFactory.getLog(VocalModuleTest.class);
 
-  static public final String ENVIRONMENT_FILE     = "org/jactr/modules/pm/vocal/environment.xml";
+	String[] _productionSequence = { "search-kind", "search-succeeded", "encoding-succeeded", "search-less-than",
+			"search-succeeded", "encoding-succeeded", "search-greater-than", "search-succeeded", "encoding-succeeded",
+			"search-color", "search-succeeded", "encoding-succeeded", "search-size", "search-succeeded",
+			"encoding-succeeded", "search-size-succeeded" };
 
-  ACTRRuntime                _runtime;
+	String[] _failedProductions = { "search-failed", "search-match-failed", "encoding-failed",
+			"encoding-match-failed" };
 
-  DebugController            _controller;
+	int _productionFireCount = 0;
 
-  String[]                   _productionSequence  = { "search-kind",
-      "search-succeeded", "encoding-succeeded", "search-less-than",
-      "search-succeeded", "encoding-succeeded", "search-greater-than",
-      "search-succeeded", "encoding-succeeded", "search-color",
-      "search-succeeded", "encoding-succeeded", "search-size",
-      "search-succeeded", "encoding-succeeded", "search-size-succeeded" };
+	@Override
+	protected IController createController() {
+		return new DebugController();
+	}
 
-  String[]                   _failedProductions   = { "search-failed",
-      "search-match-failed", "encoding-failed", "encoding-match-failed" };
+	@Override
+	protected IModelFactory createModelFactory() {
+		return new VocalModuleTestFactory();
+	}
 
-  int                        _productionFireCount = 0;
+	@Override
+	protected String getModelName() {
+		return "vocal-test";
+	}
 
-  @Override
-  protected void setUp() throws Exception
-  {
-    super.setUp();
-    _runtime = (new Main()).createRuntime(getClass().getClassLoader()
-        .getResource(ENVIRONMENT_FILE));
-    _controller = (DebugController) _runtime.getController();
-  }
+	@Test
+	public void test() throws Exception {
+		assertThat(_runtime.getModels().size(), equalTo(1));
+		IModel model = _runtime.getModels().iterator().next();
+		assertThat(model, notNullValue());
 
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-  }
+		// will be null until we start
+		assertThat(_runtime.getConnector().getAgent(model), nullValue());
 
-  public void test() throws Exception
-  {
-    assertEquals(1, _runtime.getModels().size());
-    IModel model = _runtime.getModels().iterator().next();
-    assertNotNull(model);
+		/*
+		 * we need to run this model and track all the visual-locations that get
+		 * inserted into the visual-location buffer
+		 */
 
-    // for(StringBuilder line : CommonIO.generateSource(model, "jactr"))
-    // System.err.println(line);
+		model.getProceduralModule().addListener(new ProceduralModuleListenerAdaptor() {
 
-    // will be null until we start
-    assertNull(_runtime.getConnector().getAgent(model));
+			@Override
+			public void conflictSetAssembled(ProceduralModuleEvent pme) {
+				if (LOGGER.isDebugEnabled())
+					LOGGER.debug("conflict set : " + pme.getProductions());
+			}
 
-    /*
-     * we need to run this model and track all the visual-locations that get
-     * inserted into the visual-location buffer
-     */
+			@Override
+			public void productionWillFire(ProceduralModuleEvent pme) {
+				IProduction production = pme.getProduction();
+				LOGGER.debug(production + " is about to run, checking");
+				testProduction(production);
 
-    model.getProceduralModule().addListener(
-        new ProceduralModuleListenerAdaptor() {
+			}
+		}, ExecutorServices.INLINE_EXECUTOR);
 
-          @Override
-          public void conflictSetAssembled(ProceduralModuleEvent pme)
-          {
-            if (LOGGER.isDebugEnabled())
-              LOGGER.debug("conflict set : " + pme.getProductions());
-          }
+		_controller.start().get();
 
-          @Override
-          public void productionWillFire(ProceduralModuleEvent pme)
-          {
-            IProduction production = pme.getProduction();
-            LOGGER.debug(production + " is about to run, checking");
-            testProduction(production);
+		if (LOGGER.isDebugEnabled())
+			LOGGER.debug("model run has started");
 
-          }
-        }, ExecutorServices.INLINE_EXECUTOR);
+		_controller.complete().get();
 
-    _controller.start().get();
+		if (LOGGER.isDebugEnabled())
+			LOGGER.debug("Model run has completed");
+		assertThat("Not all the productions have fired", _productionFireCount, equalTo(_productionSequence.length));
+	}
 
-    if (LOGGER.isDebugEnabled()) LOGGER.debug("model run has started");
+	protected void testProduction(IProduction production) {
+		String pName = production.getSymbolicProduction().getName();
+		// fail any in the _failedProductions
+		for (String name : _failedProductions)
+			if (name.equals(pName))
+				fail("production " + name + " should not have fired. should have been "
+						+ _productionSequence[_productionFireCount]);
 
-    _controller.complete().get();
-
-    try
-    {
-      if (LOGGER.isDebugEnabled()) LOGGER.debug("Model run has completed");
-      assertEquals("Not all the productions have fired",
-          _productionSequence.length, _productionFireCount);
-    }
-    finally
-    {
-      if (LOGGER.isDebugEnabled())
-        for (StringBuilder sb : CommonIO.generateSource(model, "jactr"))
-          LOGGER.debug(sb.toString());
-    }
-  }
-
-  protected void testProduction(IProduction production)
-  {
-    String pName = production.getSymbolicProduction().getName();
-    // fail any in the _failedProductions
-    for (String name : _failedProductions)
-      if (name.equals(pName))
-        fail("production " + name + " should not have fired. should have been "
-            + _productionSequence[_productionFireCount]);
-
-    if (!_productionSequence[_productionFireCount].equals(pName))
-      fail(pName + " was fired out of sequence, expecting "
-          + _productionSequence[_productionFireCount]);
-    _productionFireCount++;
-  }
+		if (!_productionSequence[_productionFireCount].equals(pName))
+			fail(pName + " was fired out of sequence, expecting " + _productionSequence[_productionFireCount]);
+		_productionFireCount++;
+	}
 }

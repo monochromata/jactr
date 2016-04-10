@@ -8,6 +8,8 @@ import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunk.ISymbolicChunk;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.chunktype.ISymbolicChunkType;
+import org.jactr.core.fluent.IProductionBuilder;
+import org.jactr.core.fluent.impl.DefaultProductionBuilder;
 import org.jactr.core.model.IModel;
 import org.jactr.core.model.basic.BasicModel;
 import org.jactr.core.module.declarative.IDeclarativeModule;
@@ -18,12 +20,12 @@ import org.jactr.core.module.procedural.IProceduralModule;
 import org.jactr.core.module.procedural.six.DefaultProceduralModule6;
 import org.jactr.core.module.retrieval.six.DefaultRetrievalModule6;
 import org.jactr.core.production.IProduction;
-import org.jactr.core.production.ISymbolicProduction;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.modules.pm.aural.six.DefaultAuralModule6;
 import org.jactr.modules.pm.motor.six.DefaultMotorModule6;
 import org.jactr.modules.pm.visual.six.DefaultVisualModule6;
+import org.jactr.modules.pm.vocal.six.DefaultVocalModule6;
 
 /**
  * A factory for models that contain the following modules.
@@ -77,6 +79,8 @@ public abstract class AbstractModelFactory implements IModelFactory {
 			installChunkTypesAndChunksForDefaultAuralModule6(dm);
 		if (dm.getModel().getModule(DefaultMotorModule6.class) != null)
 			installChunkTypesAndChunksForDefaultMotorModule6(dm);
+		if (dm.getModel().getModule(DefaultVocalModule6.class) != null)
+			installChunkTypesAndChunksForDefaultVocalModule6(dm);
 	}
 
 	// TODO: Move to DefaultDeclarativeModule6
@@ -338,6 +342,18 @@ public abstract class AbstractModelFactory implements IModelFactory {
 		} , dm.getChunkType("clear").get());
 	}
 
+	// TODO: Move to DefaultVocalModule6
+	protected void installChunkTypesAndChunksForDefaultVocalModule6(IDeclarativeModule dm)
+			throws InterruptedException, ExecutionException {
+		
+		IChunkType vocalCommand = createChunkType(dm, "vocal-command", sct -> {
+			sct.addSlot(new DefaultConditionalSlot("sting", null));
+		}, command);
+
+		createChunkType(dm, "speak", vocalCommand);
+		createChunkType(dm, "subvocalize", vocalCommand);
+	}
+	
 	protected IChunkType createChunkType(IDeclarativeModule dm, String name, IChunkType... parents)
 			throws InterruptedException, ExecutionException {
 		return createChunkType(dm, name, null, parents);
@@ -386,6 +402,8 @@ public abstract class AbstractModelFactory implements IModelFactory {
 			setupAuralBuffers(model);
 		if (model.getModule(DefaultMotorModule6.class) != null)
 			setupMotorBuffer(model);
+		if (model.getModule(DefaultVocalModule6.class) != null)
+			setupVocalBuffer(model);
 	}
 
 	// TODO: Move to DefaultGoalModule6
@@ -419,6 +437,11 @@ public abstract class AbstractModelFactory implements IModelFactory {
 	protected void setupMotorBuffer(IModel model) {
 		createBuffer(model, "motor", "0", "0", "true");
 	}
+	
+	// TODO: Move to DefaultVocalModule6
+	protected void setupVocalBuffer(IModel model) {
+		createBuffer(model, "vocal", "0", "0", "true");
+	}
 
 	protected void createBuffer(final IModel model, final String name, final String activation, final String g,
 			final String strictHarvestingEnabled) {
@@ -432,10 +455,11 @@ public abstract class AbstractModelFactory implements IModelFactory {
 	}
 
 	protected IProduction createProduction(IDeclarativeModule dm, IProceduralModule pm, String name,
-			Consumer<ISymbolicProduction> configurator) throws InterruptedException, ExecutionException {
+			Consumer<IProductionBuilder> constructor) throws InterruptedException, ExecutionException {
 		IProduction production = pm.createProduction(name).get();
-		configurator.accept(production.getSymbolicProduction());
-		pm.addProduction(production);
+		final DefaultProductionBuilder builder = new DefaultProductionBuilder(dm, production);
+		constructor.accept(builder);
+		pm.addProduction(builder.getProduction());
 		return production;
 	}
 

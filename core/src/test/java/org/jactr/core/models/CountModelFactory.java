@@ -90,61 +90,67 @@ public class CountModelFactory extends AbstractModelFactory {
 
 	protected void createStartProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "start", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", countFrom,
-						Arrays.asList(new DefaultVariableConditionalSlot("start", "=num1"),
-								new DefaultVariableConditionalSlot("step", start))));
-			sp.addAction(new ModifyAction("goal", Arrays.asList(new DefaultConditionalSlot("step", counting))));
-			sp.addAction(new AddAction("retrieval", countOrder,
-				Arrays.asList(new DefaultVariableConditionalSlot("first", "=num1"))));
-			sp.addAction(new OutputAction("Search for something start at =num1"));
+		createProduction(dm, pm, "start", pb -> {
+			pb.conditions()
+				.chunkType("goal", countFrom)
+					.slot("start").eqVariable("=num1")
+					.slot("step").eqChunk(start)
+			.actions()
+				.modify("goal")
+					.set("step").toChunk(counting)
+				.add("retrieval", countOrder)
+					.set("first").toVariable("=num1")
+				.output("Search for something start at =num1");
 		});
 	}
 
 	protected void createFailedProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "failed", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", countFrom,
-						Arrays.asList(new DefaultVariableConditionalSlot("start", "=num"),
-								new DefaultVariableConditionalSlot("step", counting))));
-			sp.addCondition(new QueryCondition("retrieval",
-				Arrays.asList(new DefaultConditionalSlot("state", dm.getErrorChunk()))));
-			
-			sp.addAction(new RemoveAction("goal"));
-			sp.addAction(new OutputAction("Awh, crap, I can't retrieve anything starting with =num "));
+		createProduction(dm, pm, "failed", pb -> {
+			pb.conditions()
+				.chunkType("goal", countFrom)
+					.slot("start").eqVariable("=num")
+					.slot("step").eqChunk(counting)
+				.query("retrieval")
+					.slot("state").eqChunk(dm.getErrorChunk())
+			.actions()
+				.remove("goal")
+				.output("Awh, crap, I can't retrieve anything starting with =num ");
 		});
 	}
 
 	protected void createIncrementProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "increment", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", countFrom, Arrays.asList(
-				new DefaultVariableConditionalSlot("start", "=num1"),
-				new DefaultVariableConditionalSlot("end", "=num1"),
-				new DefaultConditionalSlot("step", counting))));
-			sp.addCondition(new ChunkTypeCondition("retrieval", countOrder, Arrays.asList(
-				new DefaultVariableConditionalSlot("first", "=num1"),
-				new DefaultVariableConditionalSlot("second", "=num2"))));
-			
-			sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultVariableConditionalSlot("start", "=num2"))));
-			sp.addAction(new AddAction("retrieval", countOrder, Arrays.asList(
-				new DefaultVariableConditionalSlot("first", "=num2"))));
-			sp.addAction(new OutputAction("=num1"));
+		createProduction(dm, pm, "increment", pb -> {
+			pb.conditions()
+				.chunkType("goal", countFrom)
+					.slot("start").eqVariable("=num1")
+					.slot("end").eqVariable("=num1")
+					.slot("step").eqChunk(counting)
+				.chunkType("retrieval", countOrder)
+					.slot("first").eqVariable("=num1")
+					.slot("second").eqVariable("=num2")
+			.actions()
+				.modify("goal")
+					.set("start").toVariable("=num2")
+				.add("retrieval", countOrder)
+					.set("first").toVariable("=num2")
+				.output("=num1");
 		});
 	}
 	
 	protected void createStopProductionAndAddToPM(IDeclarativeModule dm, IProceduralModule pm)
 			throws InterruptedException, ExecutionException {
-		createProduction(dm, pm, "stop", sp -> {
-			sp.addCondition(new ChunkTypeCondition("goal", countFrom, Arrays.asList(
-				new DefaultVariableConditionalSlot("start", "=num"),
-				new DefaultVariableConditionalSlot("end", "=num"),
-				new DefaultConditionalSlot("step", counting))));
-			
-			sp.addAction(new ModifyAction("goal", Arrays.asList(
-				new DefaultConditionalSlot("stop", stop))));
-			sp.addAction(new OutputAction("Answer =num"));
+		createProduction(dm, pm, "stop", pb -> {
+			pb.conditions()
+				.chunkType("goal", countFrom)
+					.slot("start").eqVariable("=num")
+					.slot("end").eqVariable("=num")
+					.slot("step").eqChunk(counting)
+			.actions()
+				.modify("goal")
+					.set("stop").toChunk(stop)
+				.output("Answer =num");
 		});
 	}
 	

@@ -4,6 +4,7 @@ import java.net.SocketAddress;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.commonreality.agents.IAgent;
@@ -19,6 +20,7 @@ import org.commonreality.reality.control.RealitySetup;
 import org.commonreality.reality.impl.DefaultReality;
 import org.commonreality.sensors.ISensor;
 import org.commonreality.sensors.keyboard.DefaultKeyboardSensor;
+import org.commonreality.sensors.speech.DefaultSpeechSensor;
 import org.commonreality.sensors.xml.XMLSensor;
 import org.jactr.core.logging.impl.DefaultModelLogger;
 import org.jactr.core.model.IModel;
@@ -26,6 +28,7 @@ import org.jactr.core.models.IModelFactory;
 import org.jactr.core.reality.ACTRAgent;
 import org.jactr.core.reality.connector.CommonRealityConnector;
 import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.controller.IController;
 import org.jactr.core.runtime.controller.debug.DebugController;
 import org.junit.After;
 import org.junit.Before;
@@ -35,16 +38,17 @@ import org.junit.Before;
  */
 public abstract class AbstractModuleTest {
 
+	protected static final boolean NO_CLOCK_CONTROL_DESIRED = false;
 	protected ACTRRuntime _runtime;
 	protected IReality _reality;
-	protected DebugController _controller;
+	protected IController _controller;
 
 	@Before
 	public void setUp() throws Exception {
 		_runtime = ACTRRuntime.getRuntime(); // new ACTRRuntime();
 		_reality = getReality();
 		_runtime.setConnector(new CommonRealityConnector());
-		_controller = new DebugController();
+		_controller = createController();
 		_runtime.setController(_controller);
 		final IModel model = createModelFactory().createAndInitializeModel();
 		_runtime.addModel(model);
@@ -54,17 +58,25 @@ public abstract class AbstractModuleTest {
 		model.install(logger);
 	}
 
+	protected IController createController() {
+		return new DebugController();
+	}
+
 	protected IReality getReality() throws Exception {
 		final NettyNetworkingProvider netProvider = new NettyNetworkingProvider();
 		final IReality reality = createReality(netProvider);
-		final ISensor keyboardSensor = createSensor(netProvider);
+		final List<ISensor> sensor = createSensors(netProvider);
 		final IAgent actrAgent = createACTRAgent(netProvider, getModelName());
-		setup(reality, keyboardSensor, actrAgent);
+		setup(reality, sensor, actrAgent);
 		return reality;
 	}
 
 	protected abstract IModelFactory createModelFactory();
 
+	protected List<ISensor> createSensors(final INetworkingProvider netProvider) throws Exception {
+		return Arrays.asList(createSensor(netProvider));
+	}
+	
 	protected abstract ISensor createSensor(final INetworkingProvider netProvider) throws Exception;
 
 	protected abstract String getModelName();
@@ -76,15 +88,14 @@ public abstract class AbstractModuleTest {
 		_controller = null;
 	}
 
-	protected static IReality createReality(INetworkingProvider netProvider) {
+	protected IReality createReality(INetworkingProvider netProvider) {
 		IReality reality = new DefaultReality();
 		final ITransportProvider transport = createTransport(netProvider);
 		final SocketAddress address = transport.createAddress("1400");
 		((AbstractParticipant) reality).addServerService(netProvider.newServer(), transport,
 				createProtocol(netProvider), address);
-		boolean wantsClockControl = false;
-		reality.add(new PlainTextCredentials("sensor", "pass"), wantsClockControl);
-		reality.add(new PlainTextCredentials("agent", "pass"), wantsClockControl);
+		reality.add(new PlainTextCredentials("sensor", "pass"), NO_CLOCK_CONTROL_DESIRED);
+		reality.add(new PlainTextCredentials("agent", "pass"), NO_CLOCK_CONTROL_DESIRED);
 		return reality;
 	}
 
@@ -117,6 +128,10 @@ public abstract class AbstractModuleTest {
 		properties.put("XMLSensor.DataURI", sensorDataURI);
 		return configureSensor(netProvider, new XMLSensor(), properties);
 	}
+	
+	protected static ISensor createSpeechSensor(INetworkingProvider netProvider) throws Exception {
+		return configureSensor(netProvider, new DefaultSpeechSensor());
+	}
 
 	protected static ISensor createKeyboardSensor(INetworkingProvider netProvider) throws Exception {
 		return configureSensor(netProvider, new DefaultKeyboardSensor());
@@ -147,8 +162,8 @@ public abstract class AbstractModuleTest {
 	 * @param actrAgent
 	 *            the agent
 	 */
-	protected static void setup(IReality reality, ISensor sensor, IAgent actrAgent) {
-		new RealitySetup(reality, Arrays.asList(sensor), Arrays.asList(actrAgent)).run();
+	protected static void setup(IReality reality, List<ISensor> sensors, IAgent actrAgent) {
+		new RealitySetup(reality, sensors, Arrays.asList(actrAgent)).run();
 	}
 
 }
