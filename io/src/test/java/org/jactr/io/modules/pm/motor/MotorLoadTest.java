@@ -11,7 +11,7 @@
  * library; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package org.jactr.modules.pm.aural;
+package org.jactr.io.modules.pm.motor;
 
 import java.util.Collection;
 
@@ -27,13 +27,14 @@ import org.jactr.io.CommonIO;
 import org.jactr.io.antlr3.builder.JACTRBuilder;
 import org.jactr.io.antlr3.misc.ASTSupport;
 import org.jactr.io.generator.CodeGeneratorFactory;
+import org.jactr.modules.pm.motor.IMotorModule;
 
-public class AuralLoadTest extends TestCase
+public class MotorLoadTest extends TestCase
 {
   /**
    * logger definition
    */
-  static public final Log LOGGER = LogFactory.getLog(AuralLoadTest.class);
+  static public final Log LOGGER = LogFactory.getLog(MotorLoadTest.class);
 
   @Override
   protected void setUp() throws Exception
@@ -47,10 +48,12 @@ public class AuralLoadTest extends TestCase
     super.tearDown();
   }
 
+  	// TODO: This is not a test of the module but of IO, move to io/
+	// TODO: Don't forget to move motor-test.jactr and environment.xml over there, too.
   public void testLoad() throws Exception
   {
     CommonTree modelDescriptor = CommonIO.getModelDescriptor(CommonIO
-        .parseModel("org/jactr/modules/pm/aural/aural-test.jactr"));
+        .parseModel("org/jactr/modules/pm/motor/motor-test.jactr"));
     Collection<CommonTree> knownBuffers = ASTSupport.getTrees(modelDescriptor,
         JACTRBuilder.BUFFER);
 
@@ -59,17 +62,18 @@ public class AuralLoadTest extends TestCase
         .generate(modelDescriptor, true))
       LOGGER.debug(line.toString());
 
-    assertEquals("Not the right number of buffers " + knownBuffers, 7,
+    assertEquals("Not the right number of buffers " + knownBuffers, 4,
         knownBuffers.size());
 
-    CommonIO.compilerTest(modelDescriptor, true, true);
+    // we need to accept the warning for the bingind of =next
+    CommonIO.compilerTest(modelDescriptor, false, true);
   }
 
   public void testConstruction() throws Exception
   {
     CommonTree desc = CommonIO.getModelDescriptor(CommonIO
-        .parseModel("org/jactr/modules/pm/aural/aural-test.jactr"));
-    CommonIO.compilerTest(desc, true, true);
+        .parseModel("org/jactr/modules/pm/motor/motor-test.jactr"));
+    CommonIO.compilerTest(desc, false, true);
 
     IModel model = CommonIO.constructorTest(desc);
     assertNotNull(model);
@@ -77,12 +81,9 @@ public class AuralLoadTest extends TestCase
     IDeclarativeModule decM = model.getDeclarativeModule();
     assertNotNull(decM);
 
-    IChunkType audioEventType = decM.getChunkType(
-        IAuralModule.AUDIO_EVENT_CHUNK_TYPE).get();
-    assertNotNull(audioEventType);
+    IChunkType motorCommand = decM
+        .getChunkType(IMotorModule.MOVEMENT_CHUNK_TYPE).get();
+    assertNotNull(motorCommand);
 
-    IChunkType soundType = decM.getChunkType(IAuralModule.SOUND_CHUNK_TYPE)
-        .get();
-    assertNotNull(soundType);
   }
 }

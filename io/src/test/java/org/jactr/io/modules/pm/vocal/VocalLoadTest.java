@@ -11,7 +11,7 @@
  * library; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package org.jactr.modules.pm.visual;
+package org.jactr.io.modules.pm.vocal;
 
 import java.util.Collection;
 
@@ -28,12 +28,12 @@ import org.jactr.io.antlr3.builder.JACTRBuilder;
 import org.jactr.io.antlr3.misc.ASTSupport;
 import org.jactr.io.generator.CodeGeneratorFactory;
 
-public class VisualLoadTest extends TestCase
+public class VocalLoadTest extends TestCase
 {
   /**
    * logger definition
    */
-  static public final Log LOGGER = LogFactory.getLog(VisualLoadTest.class);
+  static public final Log LOGGER = LogFactory.getLog(VocalLoadTest.class);
 
   @Override
   protected void setUp() throws Exception
@@ -47,10 +47,12 @@ public class VisualLoadTest extends TestCase
     super.tearDown();
   }
 
+	// TODO: This is not a test of the module but of IO, move to io/
+	// TODO: Don't forget to move motor-test.jactr and environment.xml over there, too.
   public void testLoad() throws Exception
   {
     CommonTree modelDescriptor = CommonIO.getModelDescriptor(CommonIO
-        .parseModel("org/jactr/modules/pm/visual/visual-test.jactr"));
+        .parseModel("org/jactr/modules/pm/vocal/vocal-test.jactr"));
     Collection<CommonTree> knownBuffers = ASTSupport.getTrees(modelDescriptor,
         JACTRBuilder.BUFFER);
 
@@ -59,7 +61,7 @@ public class VisualLoadTest extends TestCase
         .generate(modelDescriptor, true))
       LOGGER.debug(line.toString());
 
-    assertEquals("Not the right number of buffers " + knownBuffers, 5,
+    assertEquals("Not the right number of buffers " + knownBuffers, 6,
         knownBuffers.size());
 
     CommonIO.compilerTest(modelDescriptor, true, true);
@@ -68,7 +70,7 @@ public class VisualLoadTest extends TestCase
   public void testConstruction() throws Exception
   {
     CommonTree desc = CommonIO.getModelDescriptor(CommonIO
-        .parseModel("org/jactr/modules/pm/visual/visual-test.jactr"));
+        .parseModel("org/jactr/modules/pm/vocal/vocal-test.jactr"));
     CommonIO.compilerTest(desc, true, true);
 
     IModel model = CommonIO.constructorTest(desc);
@@ -77,14 +79,5 @@ public class VisualLoadTest extends TestCase
     IDeclarativeModule decM = model.getDeclarativeModule();
     assertNotNull(decM);
 
-    IChunkType visualObject = decM
-        .getChunkType(IVisualModule.VISUAL_CHUNK_TYPE).get();
-    assertNotNull(visualObject);
-
-    IChunkType textObject = decM.getChunkType(IVisualModule.TEXT_CHUNK_TYPE)
-        .get();
-    assertNotNull(textObject);
-
-    assertTrue(textObject.isA(visualObject));
   }
 }

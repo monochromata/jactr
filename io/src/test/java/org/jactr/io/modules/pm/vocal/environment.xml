@@ -23,7 +23,7 @@
                         address="1400"/>
                 </services>
                 <property name="XMLSensor.DataURI"
-                    value="org/jactr/modules/pm/visual/sensorData.xml"/>
+                    value="org/jactr/io/modules/pm/visual/sensorData.xml"/>
             </sensor>
             
             <sensor class="org.commonreality.sensors.speech.DefaultSpeechSensor">
@@ -55,7 +55,7 @@
     <connector class="org.jactr.core.reality.connector.CommonRealityConnector"/>
     
     <models>
-        <model url="org/jactr/modules/pm/vocal/vocal-test.jactr"
+        <model url="org/jactr/io/modules/pm/vocal/vocal-test.jactr"
             alias="vocalTest"/>
     </models>
     

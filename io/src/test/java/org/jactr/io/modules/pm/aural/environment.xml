@@ -22,7 +22,7 @@
                         address="1400"/>
                 </services>
                 <property name="XMLSensor.DataURI"
-                    value="org/jactr/modules/pm/aural/sensorData.xml"/>
+                    value="org/jactr/io/modules/pm/aural/sensorData.xml"/>
             </sensor>
         </sensors>
         <agents>
@@ -44,7 +44,7 @@
     <connector class="org.jactr.core.reality.connector.CommonRealityConnector"/>
     
     <models>
-        <model url="org/jactr/modules/pm/aural/aural-test.jactr"
+        <model url="org/jactr/io/modules/pm/aural/aural-test.jactr"
             alias="auralTest"/>
     </models>
     

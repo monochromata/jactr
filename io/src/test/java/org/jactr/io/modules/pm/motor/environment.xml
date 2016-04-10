@@ -42,7 +42,7 @@
     <connector class="org.jactr.core.reality.connector.CommonRealityConnector"/>
     
     <models>
-        <model url="org/jactr/modules/pm/motor/motor-test.jactr"
+        <model url="org/jactr/io/modules/pm/motor/motor-test.jactr"
             alias="motorTest"/>
     </models>
     
