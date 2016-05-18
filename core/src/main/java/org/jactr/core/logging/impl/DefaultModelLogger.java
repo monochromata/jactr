@@ -101,7 +101,7 @@ public class DefaultModelLogger extends AbstractInstrument implements ILogger, I
   private void createCommonStreams()
   {
     _commonStreams.put("err", new PrintWriter(System.err, true));
-    _commonStreams.put("out", new PrintWriter(System.out));
+    _commonStreams.put("out", new PrintWriter(System.out, true));
   }
 
   public void log(LogEvent log)
@@ -202,7 +202,7 @@ public class DefaultModelLogger extends AbstractInstrument implements ILogger, I
     {
       Writer w = new RollingFileWriter(getRuntime()
           .getWorkingDirectory(), stream, _maxSize, _maxBackups);
-      pw = new PrintWriter(w);
+      pw = new PrintWriter(w, true);
       _commonStreams.put(stream, pw);
     }
 

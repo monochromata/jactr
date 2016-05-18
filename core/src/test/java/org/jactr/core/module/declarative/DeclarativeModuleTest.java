@@ -30,6 +30,7 @@ import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.module.ModuleTest;
 import org.jactr.core.module.declarative.search.filter.AcceptAllFilter;
+import org.jactr.core.module.declarative.search.filter.PartialMatchActivationFilter;
 import org.jactr.core.production.request.ChunkTypeRequest;
 import org.jactr.core.slot.BasicSlot;
 import org.jactr.core.slot.DefaultConditionalSlot;
@@ -55,6 +56,8 @@ public class DeclarativeModuleTest extends ModuleTest
   {
     IDeclarativeModule dm = getModel().getDeclarativeModule();
     assertNotNull(dm);
+
+    int existing = dm.getChunkTypes().get().size();
     
     /*
      * lets create a chunk type
@@ -78,7 +81,8 @@ public class DeclarativeModuleTest extends ModuleTest
     assertNotNull(added);
     
     assertEquals(testType, added.get());
-    
+
+    assertEquals(existing + 1, dm.getChunkTypes().get().size());
     assertTrue(dm.getChunkTypes().get().contains(testType));
     
     assertEquals(3, testType.getSymbolicChunkType().getSlots().size());
@@ -100,7 +104,8 @@ public class DeclarativeModuleTest extends ModuleTest
     assertNotNull(added);
     
     assertEquals(secondType, added.get());
-    
+
+    assertEquals(existing + 2, dm.getChunkTypes().get().size());
     assertTrue(dm.getChunkTypes().get().contains(secondType));
     
     assertEquals(4, secondType.getSymbolicChunkType().getSlots().size());
@@ -170,7 +175,7 @@ public class DeclarativeModuleTest extends ModuleTest
    * and chunks
    * @throws Exception
    */
-  @Ignore
+  @Test
   public void testExactMatch() throws Exception
   {
     IDeclarativeModule dm = getModel().getDeclarativeModule();
@@ -178,45 +183,52 @@ public class DeclarativeModuleTest extends ModuleTest
     /*
      * first we need some chunktypes
      */
-    IChunkType test1 = createChunkType(dm, "test1", null, "a","b","c");
+    IChunkType test1 = createChunkType(dm, "test1", null, "a", "b", "c");
     test1 = dm.addChunkType(test1).get();
     assertNotNull(test1);
-    
+
     IChunkType test2 = createChunkType(dm, "test2", test1, "d");
     test2 = dm.addChunkType(test2).get();
     assertNotNull(test2);
-    
-    IChunk t11 = dm.addChunk(createChunk(dm, "t11", test1, "a",1,"b","bee","c",false)).get();
-    IChunk t12 = dm.addChunk(createChunk(dm, "t12", test1, "a",4,"b",t11,"c",true)).get();
-    IChunk t13 = dm.addChunk(createChunk(dm, "t13", test1, "a",0,"b",t11,"c",t12)).get();
-    dm.addChunk(createChunk(dm, "t21", test2, "a",1,"b","bee","c", false,"d",t13)).get();
-    
+
+    IChunk t11 = dm.addChunk(
+        createChunk(dm, "t11", test1, "a", 1, "b", "bee", "c", false)).get();
+    IChunk t12 = dm.addChunk(
+        createChunk(dm, "t12", test1, "a", 4, "b", t11, "c", true)).get();
+    IChunk t13 = dm.addChunk(
+        createChunk(dm, "t13", test1, "a", 0, "b", t11, "c", t12)).get();
+    dm.addChunk(
+        createChunk(dm, "t21", test2, "a", 1, "b", "bee", "c", false, "d", t13))
+        .get();
+
     assertEquals(1, test1.getSymbolicChunkType().getChildren().size());
     assertEquals(4, test1.getSymbolicChunkType().getChunks().size());
     assertEquals(1, test2.getSymbolicChunkType().getChunks().size());
-    
-    ChunkTypeRequest pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",IConditionalSlot.LESS_THAN,4)}));
-    final Collection<IChunk> matches1 = dm.findExactMatches(pattern, null, new AcceptAllFilter()).get();
-	assertEquals("Unexpected chunks: "+matches1, 3, matches1.size());
-    
-    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",IConditionalSlot.LESS_THAN,4),
-    		new DefaultConditionalSlot("c",IConditionalSlot.NOT_EQUALS,false)}));
-    final Collection<IChunk> matches2 = dm.findExactMatches(pattern, null, new AcceptAllFilter()).get();
-	assertEquals("Unexpected chunks: "+matches2, 1, matches2.size());
-    
-    pattern = new ChunkTypeRequest(test2, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",1),
-    		new DefaultConditionalSlot("b","bee")}));
-    final Collection<IChunk> matches3 = dm.findExactMatches(pattern, null, new AcceptAllFilter()).get();
-	assertEquals("Unexpected chunks: "+matches3, 1, matches3.size());
-    
-    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",1),
-    		new DefaultConditionalSlot("b","bee")}));
-    final Collection<IChunk> matches4 = dm.findExactMatches(pattern, null, new AcceptAllFilter()).get();
-	assertEquals("Unexpected chunks: "+matches4, 2, matches4.size());
+
+    ChunkTypeRequest pattern = new ChunkTypeRequest(test1,
+        Arrays.asList(new IConditionalSlot[] { new DefaultConditionalSlot("a",
+            IConditionalSlot.LESS_THAN, 4) }));
+
+    assertEquals(3, dm.findExactMatches(pattern, null, new AcceptAllFilter())
+        .get().size());
+
+    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[] {
+        new DefaultConditionalSlot("a", IConditionalSlot.LESS_THAN, 4),
+        new DefaultConditionalSlot("c", IConditionalSlot.NOT_EQUALS, false) }));
+    assertEquals(1, dm.findExactMatches(pattern, null, new AcceptAllFilter())
+        .get().size());
+
+    pattern = new ChunkTypeRequest(test2, Arrays.asList(new IConditionalSlot[] {
+        new DefaultConditionalSlot("a", 1),
+        new DefaultConditionalSlot("b", "bee") }));
+    assertEquals(1, dm.findExactMatches(pattern, null, new AcceptAllFilter())
+        .get().size());
+
+    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[] {
+        new DefaultConditionalSlot("a", 1),
+        new DefaultConditionalSlot("b", "bee") }));
+    assertEquals(2, dm.findExactMatches(pattern, null, new AcceptAllFilter())
+        .get().size());
   }
   
   
@@ -225,7 +237,7 @@ public class DeclarativeModuleTest extends ModuleTest
    * and chunks
    * @throws Exception
    */
-  @Ignore
+  @Test
   public void testPartialMatch() throws Exception
   {
     IDeclarativeModule dm = getModel().getDeclarativeModule();
@@ -233,42 +245,71 @@ public class DeclarativeModuleTest extends ModuleTest
     /*
      * first we need some chunktypes
      */
-    IChunkType test1 = createChunkType(dm, "test1", null, "a","b","c");
+    IChunkType test1 = createChunkType(dm, "test1", null, "a", "b", "c");
     test1 = dm.addChunkType(test1).get();
     assertNotNull(test1);
-    
+
     IChunkType test2 = createChunkType(dm, "test2", test1, "d");
     test2 = dm.addChunkType(test2).get();
     assertNotNull(test2);
-    
-    IChunk t11 = dm.addChunk(createChunk(dm, "t11", test1, "a",1,"b","bee","c",false)).get();
-    IChunk t12 = dm.addChunk(createChunk(dm, "t12", test1, "a",4,"b",t11,"c",true)).get();
-    IChunk t13 = dm.addChunk(createChunk(dm, "t13", test1, "a",0,"b",t11,"c",t12)).get();
-    dm.addChunk(createChunk(dm, "t21", test2, "a",1,"b","bee","c", false,"d",t13)).get();
-    
+
+    IChunk t11 = dm.addChunk(
+        createChunk(dm, "t11", test1, "a", 1, "b", "bee", "c", false)).get();
+    IChunk t12 = dm.addChunk(
+        createChunk(dm, "t12", test1, "a", 4, "b", t11, "c", true)).get();
+    IChunk t13 = dm.addChunk(
+        createChunk(dm, "t13", test1, "a", 0, "b", t11, "c", t12)).get();
+    dm.addChunk(
+        createChunk(dm, "t21", test2, "a", 1, "b", "bee", "c", false, "d", t13))
+        .get();
+
     assertEquals(1, test1.getSymbolicChunkType().getChildren().size());
     assertEquals(4, test1.getSymbolicChunkType().getChunks().size());
     assertEquals(1, test2.getSymbolicChunkType().getChunks().size());
-    
-    
-    ChunkTypeRequest pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",IConditionalSlot.LESS_THAN,4)}));
-    assertEquals(3, dm.findPartialMatches(pattern, null, null).get().size());
-    
-    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",IConditionalSlot.LESS_THAN,4),
-    		new DefaultConditionalSlot("c",IConditionalSlot.NOT_EQUALS,true)}));
-    assertEquals(3, dm.findPartialMatches(pattern, null, null).get().size());
-    
-    pattern = new ChunkTypeRequest(test2, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",1),
-    		new DefaultConditionalSlot("b","bee")}));
-    assertEquals(1, dm.findPartialMatches(pattern, null, null).get().size());
-    
-    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[]{
-    		new DefaultConditionalSlot("a",1),
-    		new DefaultConditionalSlot("b","bee")}));
-    assertEquals(2, dm.findPartialMatches(pattern, null, null).get().size());
+
+    ChunkTypeRequest pattern = new ChunkTypeRequest(test1,
+        Arrays.asList(new IConditionalSlot[] { new DefaultConditionalSlot("a",
+            IConditionalSlot.LESS_THAN, 4) }));
+
+    // chunk filter for partial matching is important as it verifies that at
+    // least one feature matches.
+
+    Collection<IChunk> results = dm.findPartialMatches(pattern, null,
+        new PartialMatchActivationFilter(pattern, Double.NEGATIVE_INFINITY))
+        .get();
+
+    assertEquals(3, results.size());
+
+    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[] {
+        new DefaultConditionalSlot("a", IConditionalSlot.LESS_THAN, 4),
+        new DefaultConditionalSlot("c", IConditionalSlot.NOT_EQUALS, true) }));
+
+    assertEquals(
+        3,
+        dm.findPartialMatches(pattern, null,
+            new PartialMatchActivationFilter(pattern, Double.NEGATIVE_INFINITY))
+            .get()
+            .size());
+
+    pattern = new ChunkTypeRequest(test2, Arrays.asList(new IConditionalSlot[] {
+        new DefaultConditionalSlot("a", 1),
+        new DefaultConditionalSlot("b", "bee") }));
+
+    assertEquals(
+        1,
+        dm.findPartialMatches(pattern, null,
+            new PartialMatchActivationFilter(pattern, Double.NEGATIVE_INFINITY))
+            .get().size());
+
+    pattern = new ChunkTypeRequest(test1, Arrays.asList(new IConditionalSlot[] {
+        new DefaultConditionalSlot("a", 1),
+        new DefaultConditionalSlot("b", "bee") }));
+
+    assertEquals(
+        2,
+        dm.findPartialMatches(pattern, null,
+            new PartialMatchActivationFilter(pattern, Double.NEGATIVE_INFINITY))
+            .get().size());
   }
   
   
