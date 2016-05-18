@@ -27,7 +27,14 @@ public class PeckTranslator extends AbstractManualTranslator
    */
   static final transient Log LOGGER = LogFactory.getLog(PeckTranslator.class);
 
-  public boolean handles(ChunkTypeRequest request)
+  public PeckTranslator(ACTRRuntime runtime)
+  {
+	super(runtime);
+  }
+
+
+
+public boolean handles(ChunkTypeRequest request)
   {
     try
     {
@@ -90,7 +97,7 @@ public class PeckTranslator extends AbstractManualTranslator
   {
     try
     {
-      IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+      IAgent agent = getRuntime().getConnector().getAgent(model);
       IMotorModule motor = (IMotorModule) model.getModule(IMotorModule.class);
       /*
        * we need a compound, a press and a release

@@ -22,18 +22,19 @@
 		</site>
 	</distributionManagement>
 
-	<!-- Needs to be kept in sync with Require-Bundle and Eclipse-RegisterBuddy attributes for core in p2repo POM -->
+	<!-- Needs to be kept in sync with Require-Bundle and Eclipse-RegisterBuddy 
+		attributes for core in p2repo POM -->
 	<dependencies>
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr</artifactId>
 			<scope>test</scope>
 		</dependency>
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-math</artifactId>
-				<scope>test</scope>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -89,4 +90,20 @@
 			<artifactId>javolution-core-java</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

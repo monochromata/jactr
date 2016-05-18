@@ -14,6 +14,7 @@
 package org.jactr.core.module;
 
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.IAdaptable;
 import org.jactr.core.utils.IInitializable;
 import org.jactr.core.utils.IInstallable;
@@ -28,10 +29,22 @@ import org.jactr.core.utils.IInstallable;
  * intensive processes - hold these off for install() and initialize(), or by
  * listening the the model start event.
  * 
- * 
+ * <p>Classes implementing this interface need to provide a constructor that
+ * consumes an {@link ACTRRuntime} instance.</p>
  */
 public interface IModule extends IInstallable, IInitializable, IAdaptable
 {
+	
+  /**
+   * Provide access to the ACT-R runtime to whose models the module is intended to be added,
+   * is currently added or had previously been added.
+   * 
+   * <p>This method returns the same object reference over the entire lifetime
+   * of a module.</p>
+   * 
+   * @return the ACT-R runtime, never {@code null}.
+   */
+  public ACTRRuntime getRuntime();
 
   /**
    * called from the model during IModel.install(IModule). The module should

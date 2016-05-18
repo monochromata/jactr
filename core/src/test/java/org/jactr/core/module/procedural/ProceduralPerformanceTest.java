@@ -21,6 +21,9 @@ import org.jactr.core.runtime.controller.IController;
 import org.jactr.core.slot.BasicSlot;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.core.slot.IConditionalSlot;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class ProceduralPerformanceTest extends ModuleTest
 {
@@ -29,7 +32,8 @@ public class ProceduralPerformanceTest extends ModuleTest
    */
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(ProceduralPerformanceTest.class);
-
+  
+  @Test
   public void testProductionInstantiation() throws Exception
   {
     setUpProductionTest(getModel(), 100);
@@ -39,9 +43,9 @@ public class ProceduralPerformanceTest extends ModuleTest
     execute(getModel(), 1000);
   }
 
-  protected void attachLogger(IModel model)
+  protected void attachLogger(ACTRRuntime runtime, IModel model)
   {
-    DefaultModelLogger dml = new DefaultModelLogger();
+    DefaultModelLogger dml = new DefaultModelLogger(runtime);
 
     // dml.setParameter(Logger.CYCLE,"out");
     dml.setParameter(Logger.Stream.TIME.toString(), "out");
@@ -62,16 +66,16 @@ public class ProceduralPerformanceTest extends ModuleTest
     // make sure we are using profiling for maximum info
     System.setProperty("jactr.profiling", "true");
 
-    IController controller = new DefaultController();
-    ACTRRuntime.getRuntime().setController(controller);
-    ACTRRuntime.getRuntime().addModel(model);
+    IController controller = new DefaultController(_runtime);
+    _runtime.setController(controller);
+    _runtime.addModel(model);
 
     try
     {
       // start
       assertTrue(controller.start().get());
 
-      IClock clock = ACTRRuntime.getRuntime().getClock(model);
+      IClock clock = _runtime.getClock(model);
       for (double percent = 0; percent < 1; percent += 0.1)
       {
         clock.waitForTime(percent * seconds);
@@ -83,8 +87,8 @@ public class ProceduralPerformanceTest extends ModuleTest
     }
     finally
     {
-      ACTRRuntime.getRuntime().removeModel(model);
-      ACTRRuntime.getRuntime().setController(null);
+      _runtime.removeModel(model);
+      _runtime.setController(null);
     }
   }
 

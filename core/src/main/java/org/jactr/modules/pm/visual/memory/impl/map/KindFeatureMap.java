@@ -10,9 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javolution.util.FastList;
-import javolution.util.FastSet;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.identifier.IIdentifier;
@@ -22,9 +19,13 @@ import org.commonreality.object.UnknownPropertyNameException;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.BasicSlot;
 import org.jactr.core.slot.IConditionalSlot;
 import org.jactr.modules.pm.visual.IVisualModule;
+
+import javolution.util.FastList;
+import javolution.util.FastSet;
 
 public class KindFeatureMap extends AbstractVisualFeatureMap<String[]>
 {
@@ -42,9 +43,9 @@ public class KindFeatureMap extends AbstractVisualFeatureMap<String[]>
 
   private Map<IIdentifier, Set<IChunkType>>            _currentCTKindMap;
 
-  public KindFeatureMap()
+  public KindFeatureMap(ACTRRuntime runtime)
   {
-    super(IVisualModule.KIND_SLOT, IVisualPropertyHandler.TYPE);
+    super(runtime, IVisualModule.KIND_SLOT, IVisualPropertyHandler.TYPE);
     _kindMap = new TreeMap<String, Collection<IIdentifier>>();
     _currentKindMap = new HashMap<IIdentifier, String[]>();
     _ctKindMap = new HashMap<IChunkType, Collection<IIdentifier>>();

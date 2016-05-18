@@ -9,8 +9,6 @@ import java.util.TreeMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import javolution.util.FastList;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.util.LockUtilities;
@@ -19,6 +17,8 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.tracer.ITraceSink;
 import org.jactr.tools.tracer.sinks.trace.internal.TraceFileManager;
 import org.jactr.tools.tracer.transformer.ITransformedEvent;
+
+import javolution.util.FastList;
 
 /**
  * full trace sink saves events to a series of timestamped files that can be
@@ -34,6 +34,8 @@ public class ArchivalSink implements ITraceSink
   static private final transient Log    LOGGER        = LogFactory
                                                           .getLog(ArchivalSink.class);
 
+  private final ACTRRuntime 			_runtime;
+  
   private volatile boolean              _isActive     = true;
 
   private Executor                      _executor     = ExecutorServices.INLINE_EXECUTOR;
@@ -42,23 +44,15 @@ public class ArchivalSink implements ITraceSink
 
   private Map<String, TraceFileManager> _fileManagers = new TreeMap<String, TraceFileManager>();
 
-  public ArchivalSink()
+  public ArchivalSink(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     initializeCleanup();
-
-    // _executor = ExecutorServices.getExecutor("archivalSink");
-    // if (_executor == null)
-    // {
-    // _executor = Executors.newSingleThreadExecutor();
-    // ExecutorServices.addExecutor("archivalSink", (ExecutorService)
-    // _executor);
-    // }
-
   }
 
   public File getOutputDirectory()
   {
-    File outputDirectory = new File(ACTRRuntime.getRuntime()
+    File outputDirectory = new File(_runtime
         .getWorkingDirectory(), "sessionData");
     outputDirectory.mkdirs();
     return outputDirectory;

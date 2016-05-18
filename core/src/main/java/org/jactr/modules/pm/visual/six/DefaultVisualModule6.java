@@ -23,6 +23,7 @@ import org.jactr.core.concurrent.ModelCycleExecutor;
 import org.jactr.core.logging.Logger;
 import org.jactr.core.module.IllegalModuleStateException;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.common.memory.IPerceptualEncoder;
 import org.jactr.modules.pm.common.memory.PerceptualSearchResult;
 import org.jactr.modules.pm.visual.AbstractVisualModule;
@@ -67,9 +68,9 @@ public class DefaultVisualModule6 extends AbstractVisualModule implements
 
   private DefaultPerceptListener _perceptListener;
 
-  public DefaultVisualModule6()
+  public DefaultVisualModule6(ACTRRuntime runtime)
   {
-    super();
+    super(runtime);
   }
 
   @Override

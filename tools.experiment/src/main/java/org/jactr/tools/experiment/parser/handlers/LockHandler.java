@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,9 @@ public class LockHandler implements INodeHandler<IAction>
     return "lock";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new LockAction(element.getAttribute("name"), experiment);
+    return new LockAction(runtime, element.getAttribute("name"), experiment);
   }
 
   public boolean shouldDecend()

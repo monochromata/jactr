@@ -17,6 +17,9 @@ public class VariableBindingsFactory
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(VariableBindingsFactory.class);
 
+  /**
+   * TODO: Should not be static
+   */
   static private RecyclableFactory<VariableBindings> _factory = new AbstractThreadLocalRecyclableFactory<VariableBindings>(
                                                                   20) {
 

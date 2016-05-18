@@ -101,6 +101,7 @@ public class ProductionRewriter
 
           CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
           JACTRBuilder builder = new JACTRBuilder(nodes);
+          builder.setRuntime(_proceduralModule.getRuntime());
           builder.setModel(_proceduralModule.getModel());
           try
           {

@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,9 @@ public class FireNamedHandler implements INodeHandler<IAction>
     return "fire-named";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new FireAction(experiment, element.getAttribute("trigger"));
+    return new FireAction(runtime, experiment, element.getAttribute("trigger"));
   }
 
   public boolean shouldDecend()

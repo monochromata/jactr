@@ -15,6 +15,7 @@ import org.commonreality.net.service.IClientService;
 import org.commonreality.net.transport.ITransportProvider;
 import org.commonreality.netty.NettyNetworkingProvider;
 import org.commonreality.participant.impl.AbstractParticipant;
+import org.commonreality.reality.CommonReality;
 import org.commonreality.reality.IReality;
 import org.commonreality.reality.control.RealitySetup;
 import org.commonreality.reality.impl.DefaultReality;
@@ -41,34 +42,34 @@ public abstract class AbstractModuleTest {
 	protected static final boolean NO_CLOCK_CONTROL_DESIRED = false;
 	protected ACTRRuntime _runtime;
 	protected IReality _reality;
+	protected CommonReality _cr;
 	protected IController _controller;
 
 	@Before
 	public void setUp() throws Exception {
-		_runtime = ACTRRuntime.getRuntime(); // new ACTRRuntime();
-		_reality = getReality();
-		_runtime.setConnector(new CommonRealityConnector());
+		getReality();
+		_runtime = new ACTRRuntime(_cr, ACTRRuntime.DEFAULT_WORKING_DIRECTORY);
+		_runtime.setConnector(new CommonRealityConnector(_runtime));
 		_controller = createController();
 		_runtime.setController(_controller);
 		final IModel model = createModelFactory().createAndInitializeModel();
 		_runtime.addModel(model);
 
-		final DefaultModelLogger logger = new DefaultModelLogger();
+		final DefaultModelLogger logger = new DefaultModelLogger(_runtime);
 		logger.setParameter("all", "err");
 		model.install(logger);
 	}
 
 	protected IController createController() {
-		return new DebugController();
+		return new DebugController(_runtime);
 	}
 
-	protected IReality getReality() throws Exception {
+	protected void getReality() throws Exception {
 		final NettyNetworkingProvider netProvider = new NettyNetworkingProvider();
-		final IReality reality = createReality(netProvider);
+		createReality(netProvider);
 		final List<ISensor> sensor = createSensors(netProvider);
-		final IAgent actrAgent = createACTRAgent(netProvider, getModelName());
-		setup(reality, sensor, actrAgent);
-		return reality;
+		final IAgent actrAgent = createACTRAgent(_cr, netProvider, getModelName());
+		setup(_cr, sensor, actrAgent);
 	}
 
 	protected abstract IModelFactory createModelFactory();
@@ -88,15 +89,16 @@ public abstract class AbstractModuleTest {
 		_controller = null;
 	}
 
-	protected IReality createReality(INetworkingProvider netProvider) {
-		IReality reality = new DefaultReality();
+	protected void createReality(INetworkingProvider netProvider) {
+		_reality = DefaultReality.newInstanceThatNeedsToBePreparedWithACommonReality();
+		_cr = new CommonReality(_reality);
+		((DefaultReality)_reality).prepare(_cr);
 		final ITransportProvider transport = createTransport(netProvider);
 		final SocketAddress address = transport.createAddress("1400");
-		((AbstractParticipant) reality).addServerService(netProvider.newServer(), transport,
+		((AbstractParticipant)_reality).addServerService(netProvider.newServer(), transport,
 				createProtocol(netProvider), address);
-		reality.add(new PlainTextCredentials("sensor", "pass"), NO_CLOCK_CONTROL_DESIRED);
-		reality.add(new PlainTextCredentials("agent", "pass"), NO_CLOCK_CONTROL_DESIRED);
-		return reality;
+		_reality.add(new PlainTextCredentials("sensor", "pass"), NO_CLOCK_CONTROL_DESIRED);
+		_reality.add(new PlainTextCredentials("agent", "pass"), NO_CLOCK_CONTROL_DESIRED);
 	}
 
 	protected static SocketAddress createAddress(final ITransportProvider transport) {
@@ -111,8 +113,8 @@ public abstract class AbstractModuleTest {
 		return netProvider.getTransport("transport.noop");// LocalTransportProvider.class.getName());
 	}
 
-	protected static IAgent createACTRAgent(INetworkingProvider netProvider, String modelName) throws Exception {
-		IAgent actrAgent = new ACTRAgent();
+	protected static IAgent createACTRAgent(CommonReality cr, INetworkingProvider netProvider, String modelName) throws Exception {
+		IAgent actrAgent = new ACTRAgent(cr);
 		ITransportProvider transport = createTransport(netProvider);
 		((AbstractParticipant) actrAgent).addClientService(netProvider.newClient(), transport,
 				createProtocol(netProvider), createAddress(transport));
@@ -123,18 +125,18 @@ public abstract class AbstractModuleTest {
 		return actrAgent;
 	}
 
-	protected static ISensor createXMLSensor(INetworkingProvider netProvider, String sensorDataURI) throws Exception {
+	protected static ISensor createXMLSensor(CommonReality cr, INetworkingProvider netProvider, String sensorDataURI) throws Exception {
 		Map<String, String> properties = new HashMap<>();
 		properties.put("XMLSensor.DataURI", sensorDataURI);
-		return configureSensor(netProvider, new XMLSensor(), properties);
+		return configureSensor(netProvider, new XMLSensor(cr), properties);
 	}
 	
-	protected static ISensor createSpeechSensor(INetworkingProvider netProvider) throws Exception {
-		return configureSensor(netProvider, new DefaultSpeechSensor());
+	protected static ISensor createSpeechSensor(CommonReality cr, INetworkingProvider netProvider) throws Exception {
+		return configureSensor(netProvider, new DefaultSpeechSensor(cr));
 	}
 
-	protected static ISensor createKeyboardSensor(INetworkingProvider netProvider) throws Exception {
-		return configureSensor(netProvider, new DefaultKeyboardSensor());
+	protected static ISensor createKeyboardSensor(CommonReality cr, INetworkingProvider netProvider) throws Exception {
+		return configureSensor(netProvider, new DefaultKeyboardSensor(cr));
 	}
 
 	protected static ISensor configureSensor(INetworkingProvider netProvider, ISensor sensor) throws Exception {
@@ -162,7 +164,7 @@ public abstract class AbstractModuleTest {
 	 * @param actrAgent
 	 *            the agent
 	 */
-	protected static void setup(IReality reality, List<ISensor> sensors, IAgent actrAgent) {
+	protected static void setup(CommonReality reality, List<ISensor> sensors, IAgent actrAgent) {
 		new RealitySetup(reality, sensors, Arrays.asList(actrAgent)).run();
 	}
 

@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.module.procedural.IProductionSelector;
 import org.jactr.core.module.procedural.six.DefaultProceduralModule6;
+import org.jactr.core.runtime.ACTRRuntime;
 
 /**
  * We merely replace the {@link IProductionSelector} to bias those productions
@@ -21,8 +22,9 @@ public class DefaultThreadedProceduralModule6 extends DefaultProceduralModule6
                                           .getLog(DefaultThreadedProceduralModule6.class);
 
 
-  public DefaultThreadedProceduralModule6()
+  public DefaultThreadedProceduralModule6(ACTRRuntime runtime)
   {
+	super(runtime);
     setProductionSelector(new AlternatingProductionSelector());
     setProductionInstantiator(new CullingProductionInstantiator());
   }

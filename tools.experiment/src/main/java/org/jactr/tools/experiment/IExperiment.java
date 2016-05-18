@@ -3,6 +3,7 @@ package org.jactr.tools.experiment;
 import java.util.List;
 
 import org.commonreality.time.IClock;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.impl.VariableResolver;
 import org.jactr.tools.experiment.lock.LockManager;
@@ -19,12 +20,21 @@ import org.w3c.dom.Document;
 
 /**
  * experiment interface
+ * 
+ * <p>Classes implementing this interface must provide a 1-argument constructor
+ * consuming an ACTRRuntime instance.</p>
+ * 
  * @author harrison
  *
  */
 public interface IExperiment
 {
 
+  /**
+   * @return the runtime used for this experiment
+   */
+  public ACTRRuntime getRuntime();
+	
   public double getStartTime();
   public double getStopTime();
   public double getTime();

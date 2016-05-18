@@ -9,6 +9,7 @@ import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunk.ISymbolicChunk;
 import org.jactr.core.chunk.basic.BasicSymbolicChunk;
 import org.jactr.core.chunktype.IChunkType;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.IMutableSlot;
 import org.jactr.core.slot.ISlot;
 
@@ -20,9 +21,16 @@ public class DefaultSymbolicChunkFactory implements ISymbolicChunkFactory
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(DefaultSymbolicChunkFactory.class);
 
+  private final ACTRRuntime _runtime;
+  
+  public DefaultSymbolicChunkFactory(ACTRRuntime runtime)
+  {
+	_runtime = runtime;
+  }
+
   public ISymbolicChunk newSymbolicChunk()
   {
-    return new BasicSymbolicChunk();
+    return new BasicSymbolicChunk(_runtime);
   }
 
   public void bind(ISymbolicChunk symbolicChunk, IChunk chunkWrapper,

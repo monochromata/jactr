@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,7 +16,7 @@ public class TriggerHandler implements INodeHandler<ITrigger>
     return "trigger";
   }
 
-  public ITrigger process(Element element, IExperiment experiment)
+  public ITrigger process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     NamedTrigger trigger = new NamedTrigger(element.getAttribute("name"),
         experiment);

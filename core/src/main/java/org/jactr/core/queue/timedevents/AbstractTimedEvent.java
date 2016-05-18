@@ -39,9 +39,14 @@ public class AbstractTimedEvent implements ITimedEvent
 
   protected String                   _toString;
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private boolean             _shouldWarnOnSlippage = !Boolean
                                                                .getBoolean("jactr.ignoreTimeSlips");
-
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private double              _timeSlipThreshold    = 0.05;
   static
   {

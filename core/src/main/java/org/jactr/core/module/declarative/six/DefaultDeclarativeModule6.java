@@ -34,6 +34,7 @@ import org.jactr.core.module.declarative.four.IRandomActivationEquation;
 import org.jactr.core.module.declarative.four.ISpreadingActivationEquation;
 import org.jactr.core.module.declarative.four.learning.IDeclarativeLearningModule4;
 import org.jactr.core.module.random.IRandomModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
 import org.jactr.core.utils.references.IOptimizedReferences;
@@ -80,6 +81,9 @@ public class DefaultDeclarativeModule6 extends DefaultDeclarativeModule
   static final Log                     LOGGER                  = LogFactory
                                                                    .getLog(DefaultDeclarativeModule6.class);
 
+  /**
+   * TODO: Should not be static
+   */
   static private boolean               _subsymbolicWarning     = false;
 
   protected double                     _activationNoise;
@@ -106,9 +110,9 @@ public class DefaultDeclarativeModule6 extends DefaultDeclarativeModule
 
   private int                          _optimizationLevel      = 0;
 
-  public DefaultDeclarativeModule6()
+  public DefaultDeclarativeModule6(ACTRRuntime runtime)
   {
-    super();
+    super(runtime);
     _similarities = new HashMap<Pair, Double>();
   }
 

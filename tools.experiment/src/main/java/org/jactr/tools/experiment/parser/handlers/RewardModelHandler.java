@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,9 @@ public class RewardModelHandler implements INodeHandler<IAction>
     return "reward";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new RewardAction(element.getAttribute("model"), element
+    return new RewardAction(runtime, element.getAttribute("model"), element
         .getAttribute("value"), experiment);
   }
 

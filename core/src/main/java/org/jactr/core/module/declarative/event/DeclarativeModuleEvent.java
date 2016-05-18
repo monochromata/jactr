@@ -55,8 +55,7 @@ public class DeclarativeModuleEvent extends
   protected DeclarativeModuleEvent(IDeclarativeModule source)
   {
     super(source);
-    setSimulationTime(ACTRRuntime.getRuntime().getClock(source.getModel())
-        .getTime());
+    setSimulationTime(source.getRuntime().getClock(source.getModel()).getTime());
     _chunks = new ArrayList<IChunk>(5);
     _chunkTypes = new ArrayList<IChunkType>(5);
   }

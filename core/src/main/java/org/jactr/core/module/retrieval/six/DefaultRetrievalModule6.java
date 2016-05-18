@@ -51,6 +51,7 @@ import org.jactr.core.module.retrieval.time.DefaultRetrievalTimeEquation;
 import org.jactr.core.module.retrieval.time.IRetrievalTimeEquation;
 import org.jactr.core.production.request.ChunkRequest;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.IConditionalSlot;
 import org.jactr.core.slot.ISlot;
 import org.jactr.core.utils.collections.SkipListSetFactory;
@@ -104,16 +105,19 @@ public class DefaultRetrievalModule6 extends AbstractModule implements
 
   private IChunk                                                          _resetChunk;
 
+  /**
+   * TODO: Should not be static
+   */
   static final protected ChunkActivationComparator                        _activationSorter                = new ChunkActivationComparator();
 
-  public DefaultRetrievalModule6()
+  public DefaultRetrievalModule6(ACTRRuntime runtime)
   {
-    this(IActivationBuffer.RETRIEVAL);
+    this(runtime, IActivationBuffer.RETRIEVAL);
   }
 
-  protected DefaultRetrievalModule6(String moduleName)
+  protected DefaultRetrievalModule6(ACTRRuntime runtime, String moduleName)
   {
-    super(moduleName);
+    super(runtime, moduleName);
     _eventDispatcher = new ACTREventDispatcher<IRetrievalModule, IRetrievalModuleListener>();
     _retrievalTimeEquation = new DefaultRetrievalTimeEquation(this);
     setFINSTManager(new DeclarativeFINSTManager(this));

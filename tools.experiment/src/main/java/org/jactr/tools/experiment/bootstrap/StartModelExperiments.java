@@ -18,6 +18,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.model.IModel;
 import org.jactr.core.model.ModelTerminatedException;
 import org.jactr.core.model.event.ModelEvent;
@@ -60,6 +62,11 @@ public class StartModelExperiments implements Runnable
 
   public void run()
   {
+	final DefaultReality reality = DefaultReality.newInstanceThatNeedsToBePreparedWithACommonReality();
+	final CommonReality cr = new CommonReality(reality);
+	reality.prepare(cr);
+	final ACTRRuntime runtime = new ACTRRuntime(cr, ACTRRuntime.DEFAULT_WORKING_DIRECTORY);
+	  
     /*
      * exposes model's experiment as jactrExperiment
      */
@@ -70,31 +77,31 @@ public class StartModelExperiments implements Runnable
     /*
      * we create a separate experiment for each model
      */
-    for (IModel model : ACTRRuntime.getRuntime().getModels())
+    for (IModel model : runtime.getModels())
     {
       String subjectId = DataCollector.getSubjectId(model);
 
-      IExperiment experiment = loadExperiment(
+      IExperiment experiment = loadExperiment(runtime,
           System.getProperty(CONFIGURATION_FILE), (ex) -> {
             /*
              * always set the subjectId of the experiment
              */
             ex.getVariableContext().set(SUBJECT_ID, subjectId);
             // provisional clock setting
-          ex.setClock(ACTRRuntime.getRuntime().getClock(model));
+          ex.setClock(runtime.getClock(model));
           ex.getVariableContext().set(EXPERIMENT_MODEL, model);
           model.setMetaData(MODELS_EXPERIMENT, ex);
         });
 
       experiment.getVariableResolver().addAlias("actrWorkingDir",
-          ACTRRuntime.getRuntime().getWorkingDirectory().getAbsolutePath());
+          runtime.getWorkingDirectory().getAbsolutePath());
 
       model.addListener(new ModelListenerAdaptor() {
         @Override
         public void modelStarted(ModelEvent me)
         {
           // actual clock set
-          experiment.setClock(ACTRRuntime.getRuntime().getClock(model));
+          experiment.setClock(runtime.getClock(model));
         }
       }, null);
 
@@ -114,7 +121,7 @@ public class StartModelExperiments implements Runnable
    * @param location
    * @return
    */
-  static public IExperiment loadExperiment(String location,
+  static public IExperiment loadExperiment(ACTRRuntime runtime, String location,
       Consumer<IExperiment> config)
   {
     if (location == null)
@@ -128,22 +135,14 @@ public class StartModelExperiments implements Runnable
     try
     {
       IExperiment experiment = (IExperiment) StartModelExperiments.class
-          .getClassLoader().loadClass(className).newInstance();
+          .getClassLoader().loadClass(className).getConstructor(ACTRRuntime.class).newInstance(runtime);
 
       if (config != null) config.accept(experiment);
 
       experiment.configure(document);
       return experiment;
     }
-    catch (InstantiationException e)
-    {
-      throw new IllegalStateException(e);
-    }
-    catch (IllegalAccessException e)
-    {
-      throw new IllegalStateException(e);
-    }
-    catch (ClassNotFoundException e)
+    catch (Exception e)
     {
       throw new IllegalStateException(e);
     }

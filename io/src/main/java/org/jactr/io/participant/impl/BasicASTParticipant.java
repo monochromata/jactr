@@ -13,10 +13,13 @@
  */
 package org.jactr.io.participant.impl;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import org.antlr.runtime.tree.CommonTree;
@@ -47,12 +50,19 @@ public class BasicASTParticipant implements IASTParticipant
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(BasicASTParticipant.class);
 
+  /**
+   * Might be {@code null}.
+   */
   private URL                        _modelDescriptorURL;
 
   private Map<String, String>        _parameterMap;
 
   private Class< ? extends IInstallable>  _installableClass;
-
+  
+  public BasicASTParticipant()
+  {
+  }
+  
   public BasicASTParticipant(String location)
   {
     this(BasicASTParticipant.class.getClassLoader().getResource(location));
@@ -60,6 +70,7 @@ public class BasicASTParticipant implements IASTParticipant
 
   public BasicASTParticipant(URL modelDescriptor)
   {
+	requireNonNull(modelDescriptor, "Non-null model descriptor required");
     _modelDescriptorURL = modelDescriptor;
   }
 

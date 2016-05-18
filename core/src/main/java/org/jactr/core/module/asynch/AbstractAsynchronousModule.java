@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.module.AbstractModule;
 import org.jactr.core.queue.timedevents.BlockingTimedEvent;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 
 /**
@@ -29,9 +30,9 @@ public abstract class AbstractAsynchronousModule extends AbstractModule
 
   private boolean                    _strictSynchronization = true;
 
-  public AbstractAsynchronousModule(String name)
+  public AbstractAsynchronousModule(ACTRRuntime runtime, String name)
   {
-    super(name);
+    super(runtime, name);
   }
 
   public boolean isStrictSynchronizationEnabled()

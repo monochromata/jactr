@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,7 +16,7 @@ public class DataCollectorInitHandler implements INodeHandler<ITrial>
     return "data-collector-init";
   }
 
-  public ITrial process(Element element, IExperiment experiment)
+  public ITrial process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     //runnable
     String className = element.getAttribute("class");

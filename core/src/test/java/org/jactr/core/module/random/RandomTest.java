@@ -1,14 +1,18 @@
 package org.jactr.core.module.random;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.math.stat.descriptive.SummaryStatistics;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
+import org.jactr.core.module.random.six.DefaultRandomModule;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.TestUtils;
+
 /*
  * default logging
  */
 import junit.framework.TestCase;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.math.stat.descriptive.SummaryStatistics;
-import org.jactr.core.module.random.six.DefaultRandomModule;
 
 public class RandomTest extends TestCase
 {
@@ -20,7 +24,8 @@ public class RandomTest extends TestCase
 
   public void testLogistic()
   {
-    IRandomModule module = DefaultRandomModule.getInstance();
+    final ACTRRuntime runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+	IRandomModule module = new DefaultRandomModule(runtime);
 
     SummaryStatistics summary = new SummaryStatistics();
 

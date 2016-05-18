@@ -12,6 +12,7 @@ import org.commonreality.modalities.aural.IAuralPropertyHandler;
 import org.commonreality.object.IAfferentObject;
 import org.commonreality.object.UnknownPropertyNameException;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.ISlot;
 
 public class AudibleFeatureMap extends
@@ -23,9 +24,9 @@ public class AudibleFeatureMap extends
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(AudibleFeatureMap.class);
 
-  public AudibleFeatureMap()
+  public AudibleFeatureMap(ACTRRuntime runtime)
   {
-    super(null, IAuralPropertyHandler.IS_AUDIBLE);
+    super(runtime, null, IAuralPropertyHandler.IS_AUDIBLE);
   }
 
   @Override

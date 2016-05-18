@@ -6,14 +6,15 @@ import java.util.Collection;
 import org.jactr.core.buffer.IActivationBuffer;
 import org.jactr.core.buffer.misc.ProxyActivationBuffer;
 import org.jactr.core.module.goal.six.DefaultGoalModule6;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.threaded.goal.buffer.DefaultCapacityGoalBuffer6;
 
 public class DefaultThreadedGoalModule6 extends DefaultGoalModule6
 {
 
-  public DefaultThreadedGoalModule6()
+  public DefaultThreadedGoalModule6(ACTRRuntime runtime)
   {
-    
+    super(runtime);
   }
 
  

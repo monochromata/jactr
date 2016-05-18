@@ -32,6 +32,7 @@ import org.jactr.core.model.event.ModelListenerAdaptor;
 import org.jactr.core.module.IModule;
 import org.jactr.core.module.asynch.AbstractAsynchronousModule;
 import org.jactr.core.module.asynch.IAsynchronousModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.modules.pm.common.symbol.DefaultStringSymbolGrounder;
 import org.jactr.modules.pm.common.symbol.ISymbolGrounder;
@@ -60,9 +61,9 @@ public abstract class AbstractPerceptualModule extends
 
   private ISymbolGrounder _symbolGrounder;
 
-  public AbstractPerceptualModule(String name)
+  public AbstractPerceptualModule(ACTRRuntime runtime, String name)
   {
-    super(name);
+    super(runtime, name);
     _modelListener = new ModelListenerAdaptor() {
 
       @Override

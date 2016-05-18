@@ -13,6 +13,7 @@ import org.jactr.core.chunk.four.ISubsymbolicChunk4;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.module.declarative.associative.IAssociativeLinkageSystem;
 import org.jactr.core.module.declarative.four.associative.ChunkListener;
+import org.jactr.core.runtime.ACTRRuntime;
 
 public class DefaultSubsymbolicChunkFactory5 implements
     ISubsymbolicChunkFactory
@@ -23,12 +24,20 @@ public class DefaultSubsymbolicChunkFactory5 implements
   static private final transient Log LOGGER              = LogFactory
                                                              .getLog(DefaultSubsymbolicChunkFactory5.class);
 
+  // TODO: Why is this static?
   static private boolean             _warnedAboutMerging = false;
 
+  private final ACTRRuntime			 _runtime;
+  
   private boolean                    _copyInboundLinks   = true;
 
   private boolean                    _copyOutboundLinks  = false;
 
+  public DefaultSubsymbolicChunkFactory5(ACTRRuntime runtime)
+  {
+	  _runtime = runtime;
+  }
+  
   /**
    * @return true, if, when copying chunks, we want to duplicate the links that
    *         spread from original to other. creating copy to other. (default: false)
@@ -62,7 +71,7 @@ public class DefaultSubsymbolicChunkFactory5 implements
 
   public ISubsymbolicChunk newSubsymbolicChunk()
   {
-    return new DefaultSubsymbolicChunk5();
+    return new DefaultSubsymbolicChunk5(_runtime);
   }
 
   public void bind(ISubsymbolicChunk subsymbolic, IChunk wrapper,

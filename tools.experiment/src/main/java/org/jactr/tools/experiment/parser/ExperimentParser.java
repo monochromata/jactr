@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
 import org.jactr.tools.experiment.actions.IAction;
 import org.jactr.tools.experiment.actions.ICompositeAction;
@@ -62,6 +63,8 @@ public class ExperimentParser
   static final public transient Log          LOGGER = LogFactory
                                                          .getLog(ExperimentParser.class);
 
+  private final ACTRRuntime					  _runtime;
+  
   private Map<String, INodeHandler<ITrial>>   _trialProcessors;
 
   private Map<String, INodeHandler<IAction>>  _actionProcessors;
@@ -72,8 +75,9 @@ public class ExperimentParser
 
   private IExperiment                         _experiment;
 
-  public ExperimentParser()
+  public ExperimentParser(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _trialProcessors = new TreeMap<String, INodeHandler<ITrial>>();
     _triggerProcessors = new TreeMap<String, INodeHandler<ITrigger>>();
     _actionProcessors = new TreeMap<String, INodeHandler<IAction>>();
@@ -229,7 +233,7 @@ public class ExperimentParser
     INodeHandler<ITrial> tHandler = getTrialHandler(element.getTagName());
     if (tHandler != null)
     {
-      ITrial trial = tHandler.process(element, _experiment);
+      ITrial trial = tHandler.process(_runtime, element, _experiment);
       if (tHandler.shouldDecend())
         return processTrial(trial, element);
       else
@@ -239,7 +243,7 @@ public class ExperimentParser
     INodeHandler<ITrigger> trHandler = getTriggerHandler(element.getTagName());
     if (trHandler != null)
     {
-      ITrigger trigger = trHandler.process(element, _experiment);
+      ITrigger trigger = trHandler.process(_runtime, element, _experiment);
       if (trHandler.shouldDecend())
         return processTrigger(trigger, element);
       else
@@ -249,7 +253,7 @@ public class ExperimentParser
     INodeHandler<IAction> aHandler = getActionHandler(element.getTagName());
     if (aHandler != null)
     {
-      IAction action = aHandler.process(element, _experiment);
+      IAction action = aHandler.process(_runtime, element, _experiment);
       if (aHandler.shouldDecend())
         return processAction(action, element);
       else

@@ -32,6 +32,7 @@ import org.jactr.core.module.declarative.event.IDeclarativeModuleListener;
 import org.jactr.core.module.declarative.four.IBaseLevelActivationEquation;
 import org.jactr.core.module.declarative.four.associative.DefaultAssociativeLinkageSystem4;
 import org.jactr.core.module.procedural.IProceduralModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
 
@@ -75,9 +76,9 @@ public class DefaultDeclarativeLearningModule4 extends AbstractModule implements
   
   private DefaultAssociativeLinkageSystem _associativeLinkageSystem;
 
-  public DefaultDeclarativeLearningModule4()
+  public DefaultDeclarativeLearningModule4(ACTRRuntime runtime)
   {
-    super("DeclarativeLearningV4");
+    super(runtime, "DeclarativeLearningV4");
 
     _modelListener = new ModelListenerAdaptor() {
 

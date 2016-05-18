@@ -52,7 +52,7 @@ public class MotorCommandManager extends
   static private final String               PREPARE_ONLY = ":prepare-only";
 
   static private final String               ADJUSTMENT   = MotorRequestDelegate.ADJUSTMENT;
-
+  
   final private AbstractMotorModule         _module;
 
   /**
@@ -153,8 +153,7 @@ public class MotorCommandManager extends
        * clear out prep and last collections
        */
       _preparedMovements.clear();
-      double now = ACTRRuntime.getRuntime().getClock(_module.getModel())
-          .getTime();
+      double now = _module.getRuntime().getClock(_module.getModel()).getTime();
       FastList<IMovement> movements = FastList.newInstance();
       movements.addAll(_commandMovementMap.values());
       for (IMovement movement : movements)
@@ -576,7 +575,7 @@ public class MotorCommandManager extends
           MotorModuleEvent.Type.PREPARED));
 
     if (shouldExecute)
-      execute(movement, ACTRRuntime.getRuntime().getClock(model).getTime());
+      execute(movement, _module.getRuntime().getClock(model).getTime());
   }
 
   @Override
@@ -603,7 +602,7 @@ public class MotorCommandManager extends
           .getModel()
           .getTimedEventQueue()
           .enqueue(
-              new RunnableTimedEvent(ACTRRuntime.getRuntime()
+              new RunnableTimedEvent(_module.getRuntime()
                   .getClock(_module.getModel()).getTime(), reset, reset));
 
       remove(command);
@@ -846,7 +845,7 @@ public class MotorCommandManager extends
             .getModel()
             .getTimedEventQueue()
             .enqueue(
-                new RunnableTimedEvent(ACTRRuntime.getRuntime()
+                new RunnableTimedEvent(_module.getRuntime()
                     .getClock(_module.getModel()).getTime(), reset));
 
         getLock().writeLock().lock();
@@ -1047,7 +1046,7 @@ public class MotorCommandManager extends
             .getModel()
             .getTimedEventQueue()
             .enqueue(
-                new RunnableTimedEvent(ACTRRuntime.getRuntime()
+                new RunnableTimedEvent(_module.getRuntime()
                     .getClock(_module.getModel()).getTime(), reset));
 
         getLock().writeLock().lock();

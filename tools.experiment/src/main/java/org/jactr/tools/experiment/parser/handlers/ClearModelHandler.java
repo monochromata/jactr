@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,9 @@ public class ClearModelHandler implements INodeHandler<IAction>
     return "clear";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new ClearAction(element.getAttribute("models"), element
+    return new ClearAction(runtime, element.getAttribute("models"), element
         .getAttribute("buffers"), element.getAttribute("modules"),
         experiment);
   }

@@ -28,10 +28,8 @@ import org.commonreality.time.IClock;
 import org.commonreality.time.impl.BasicClock;
 import org.jactr.core.model.IModel;
 import org.jactr.core.reality.ACTRAgent;
+import org.jactr.core.runtime.ACTRRuntime;
 
-/**
- * 
- */
 public class CommonRealityConnector implements IConnector
 {
 
@@ -47,6 +45,8 @@ public class CommonRealityConnector implements IConnector
   static private final Log         LOGGER = LogFactory
                                               .getLog(CommonRealityConnector.class);
 
+  private final CommonReality 	   _cr;
+  
   protected Map<IModel, ACTRAgent> _agentInterfaces;
 
   // protected Map<IModel, IClock> _disconnectedModels;
@@ -57,9 +57,10 @@ public class CommonRealityConnector implements IConnector
 
   protected IClockConfigurator     _clockConfig;
 
-  public CommonRealityConnector()
+  public CommonRealityConnector(ACTRRuntime runtime)
   {
-    _defaultClock = new BasicClock();
+	_cr = runtime.getCommonReality();
+    _defaultClock = new BasicClock(runtime.getCommonReality());
     _agentInterfaces = new ConcurrentHashMap<IModel, ACTRAgent>();
     // _disconnectedModels = new ConcurrentHashMap<IModel, IClock>();
     _allClocks = new ConcurrentHashMap<IModel, IClock>();
@@ -94,20 +95,19 @@ public class CommonRealityConnector implements IConnector
    */
   public boolean isRunning()
   {
-    return CommonReality.getReality() != null
-        && CommonReality.getReality().stateMatches(State.STARTED,
-            State.SUSPENDED);
+    return _cr.getReality() != null
+        && _cr.getReality().stateMatches(State.STARTED, State.SUSPENDED);
   }
 
   public void start()
   {
-    IReality reality = CommonReality.getReality();
+    IReality reality = _cr.getReality();
     new RealityStartup(reality).run();
   }
 
   public void stop()
   {
-    IReality reality = CommonReality.getReality();
+    IReality reality = _cr.getReality();
 
     if (reality != null) new RealityShutdown(reality, true).run();
   }
@@ -126,7 +126,7 @@ public class CommonRealityConnector implements IConnector
     {
       ACTRAgent agentInterface = null;
 
-      for (IAgent a : CommonReality.getAgents())
+      for (IAgent a : _cr.getAgents())
         if (a instanceof ACTRAgent)
         {
           String idModelName = a.getIdentifier().getName();
@@ -212,7 +212,7 @@ public class CommonRealityConnector implements IConnector
     if (agentInterface != null)
       try
       {
-        CommonReality.removeAgent(agentInterface);
+        _cr.removeAgent(agentInterface);
         _agentInterfaces.remove(model);
         cleanDisconnect(agentInterface);
       }

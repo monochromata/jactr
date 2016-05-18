@@ -22,6 +22,7 @@ import org.jactr.core.production.action.AddAction;
 import org.jactr.core.production.action.ModifyAction;
 import org.jactr.core.production.action.OutputAction;
 import org.jactr.core.production.condition.ChunkTypeCondition;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.core.slot.DefaultVariableConditionalSlot;
 
@@ -34,8 +35,8 @@ public class AdditionModelFactory extends AbstractModelFactory {
 	private IChunkType chunkTypeCountOrder;
 	private IChunk secondGoal;
 
-	public AdditionModelFactory() {
-		super("addition");
+	public AdditionModelFactory(ACTRRuntime runtime) {
+		super(runtime, "addition");
 	}
 
 	@Override

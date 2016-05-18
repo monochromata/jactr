@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -28,7 +29,7 @@ public class TrialHandlerHandler implements INodeHandler<ITrial>
     return "trial-handler";
   }
 
-  public ITrial process(Element element, IExperiment experiment)
+  public ITrial process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     /*
      * instantiate a new action handler..

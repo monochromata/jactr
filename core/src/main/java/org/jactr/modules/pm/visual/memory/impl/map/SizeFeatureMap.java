@@ -12,6 +12,7 @@ import org.commonreality.object.IAfferentObject;
 import org.commonreality.object.UnknownPropertyNameException;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.BasicSlot;
 import org.jactr.core.slot.ISlot;
 import org.jactr.modules.pm.visual.IVisualModule;
@@ -25,9 +26,9 @@ public class SizeFeatureMap extends AbstractSortedVisualFeatureMap<Double>
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(SizeFeatureMap.class);
 
-  public SizeFeatureMap()
+  public SizeFeatureMap(ACTRRuntime runtime)
   {
-    super(IVisualModule.SIZE_SLOT, IVisualPropertyHandler.RETINAL_SIZE);
+    super(runtime, IVisualModule.SIZE_SLOT, IVisualPropertyHandler.RETINAL_SIZE);
   }
   
   @Override

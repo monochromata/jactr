@@ -40,6 +40,8 @@ public class ZipDataListener implements IIterativeRunListener, IParameterized
 
   static public final String   IGNORE_ROOT    = "IgnoreRootDir";
 
+  private final ACTRRuntime    _runtime;
+  
   private ZipOutputStream      _outputStream;
 
   private int                  _archiveCount  = 0;
@@ -63,6 +65,10 @@ public class ZipDataListener implements IIterativeRunListener, IParameterized
 
   private boolean              _ignoreRootDir = false;
 
+  public ZipDataListener(ACTRRuntime runtime) {
+	  _runtime = runtime;
+  }
+  
   public void exceptionThrown(int index, IModel model, Throwable thrown)
       throws TerminateIterativeRunException
   {
@@ -105,7 +111,7 @@ public class ZipDataListener implements IIterativeRunListener, IParameterized
     if (_outputStream != null)
     {
       File root = new File(System.getProperty("user.dir"));
-      File working = ACTRRuntime.getRuntime().getWorkingDirectory();
+      File working = _runtime.getWorkingDirectory();
       try
       {
         /*

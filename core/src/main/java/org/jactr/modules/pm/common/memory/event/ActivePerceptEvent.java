@@ -33,10 +33,10 @@ public class ActivePerceptEvent extends
 
   private IChunk            _oldEncoding;
 
-  public ActivePerceptEvent(IPerceptualMemory source, Type type,
+  public ActivePerceptEvent(ACTRRuntime runtime, IPerceptualMemory source, Type type,
       IIdentifier perceptIdentifier, IChunk currentEncoding)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(
+    super(source, runtime.getClock(
         source.getModule().getModel()).getTime());
     _perceptIdentifier = perceptIdentifier;
     _type = type;
@@ -51,10 +51,10 @@ public class ActivePerceptEvent extends
    * @param currentEncoding
    * @param oldEncoding
    */
-  public ActivePerceptEvent(IPerceptualMemory source,
+  public ActivePerceptEvent(ACTRRuntime runtime, IPerceptualMemory source,
       IIdentifier perceptIdentifier, IChunk currentEncoding, IChunk oldEncoding)
   {
-    this(source, Type.REENCODED, perceptIdentifier, currentEncoding);
+    this(runtime, source, Type.REENCODED, perceptIdentifier, currentEncoding);
     _oldEncoding = oldEncoding;
   }
 

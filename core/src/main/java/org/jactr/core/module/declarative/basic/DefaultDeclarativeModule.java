@@ -13,6 +13,7 @@
  */
 package org.jactr.core.module.declarative.basic;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -23,8 +24,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import javolution.text.TextBuilder;
+import java.util.function.Function;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,8 +50,6 @@ import org.jactr.core.module.declarative.basic.chunk.IChunkFactory;
 import org.jactr.core.module.declarative.basic.chunk.IChunkNamer;
 import org.jactr.core.module.declarative.basic.chunk.ISubsymbolicChunkFactory;
 import org.jactr.core.module.declarative.basic.chunk.ISymbolicChunkFactory;
-import org.jactr.core.module.declarative.basic.chunk.NoOpChunkConfigurator;
-import org.jactr.core.module.declarative.basic.chunk.NoOpChunkNamer;
 import org.jactr.core.module.declarative.basic.type.DefaultChunkTypeFactory;
 import org.jactr.core.module.declarative.basic.type.DefaultSubsymbolicChunkTypeFactory;
 import org.jactr.core.module.declarative.basic.type.DefaultSymbolicChunkTypeFactory;
@@ -60,18 +58,18 @@ import org.jactr.core.module.declarative.basic.type.IChunkTypeFactory;
 import org.jactr.core.module.declarative.basic.type.IChunkTypeNamer;
 import org.jactr.core.module.declarative.basic.type.ISubsymbolicChunkTypeFactory;
 import org.jactr.core.module.declarative.basic.type.ISymbolicChunkTypeFactory;
-import org.jactr.core.module.declarative.basic.type.NoOpChunkTypeConfigurator;
-import org.jactr.core.module.declarative.basic.type.NoOpChunkTypeNamer;
 import org.jactr.core.module.declarative.search.ISearchSystem;
 import org.jactr.core.module.declarative.search.filter.IChunkFilter;
 import org.jactr.core.module.declarative.search.filter.ILoggedChunkFilter;
 import org.jactr.core.module.declarative.search.local.DefaultSearchSystem;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.StringUtilities;
 import org.jactr.core.utils.collections.SkipListSetFactory;
-import org.jactr.core.utils.parameter.ClassNameParameterHandler;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
+
+import javolution.text.TextBuilder;
 
 /**
  * default declarative module that incorporates many useful features. This
@@ -142,9 +140,9 @@ public class DefaultDeclarativeModule extends AbstractDeclarativeModule
    */
   protected IActivationBufferListener _encodeChunksOnRemove;
 
-  public DefaultDeclarativeModule()
+  public DefaultDeclarativeModule(ACTRRuntime runtime)
   {
-    super("declarative");
+    super(runtime, "declarative");
 
     setAssociativeLinkageSystem(new DefaultAssociativeLinkageSystem());
 
@@ -157,11 +155,11 @@ public class DefaultDeclarativeModule extends AbstractDeclarativeModule
     _chunkTypeLock = new ReentrantReadWriteLock();
 
     setChunkFactory(new DefaultChunkFactory());
-    setSymbolicChunkFactory(new DefaultSymbolicChunkFactory());
-    setSubsymbolicChunkFactory(new DefaultSubsymbolicChunkFactory5());
+    setSymbolicChunkFactory(new DefaultSymbolicChunkFactory(runtime));
+    setSubsymbolicChunkFactory(new DefaultSubsymbolicChunkFactory5(runtime));
 
     setChunkTypeFactory(new DefaultChunkTypeFactory());
-    setSymbolicChunkTypeFactory(new DefaultSymbolicChunkTypeFactory());
+    setSymbolicChunkTypeFactory(new DefaultSymbolicChunkTypeFactory(runtime));
     setSubsymbolicChunkTypeFactory(new DefaultSubsymbolicChunkTypeFactory());
 
     _encodeChunksOnRemove = new IActivationBufferListener() {
@@ -687,112 +685,52 @@ public class DefaultDeclarativeModule extends AbstractDeclarativeModule
   {
     if (CHUNK_FACTORY_PARAM.equalsIgnoreCase(key))
     {
-      IChunkFactory factory = (IChunkFactory) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new DefaultChunkFactory();
-      }
+      IChunkFactory factory = instantiate(value);
       setChunkFactory(factory);
     }
     else if (SYMBOLIC_CHUNK_FACTORY_PARAM.equalsIgnoreCase(key))
     {
-      ISymbolicChunkFactory factory = (ISymbolicChunkFactory) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new DefaultSymbolicChunkFactory();
-      }
+      ISymbolicChunkFactory factory = instantiate(value, getRuntime());
       setSymbolicChunkFactory(factory);
     }
     else if (SUBSYMBOLIC_CHUNK_FACTORY_PARAM.equalsIgnoreCase(key))
     {
-      ISubsymbolicChunkFactory factory = (ISubsymbolicChunkFactory) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new DefaultSubsymbolicChunkFactory5();
-      }
+      ISubsymbolicChunkFactory factory = instantiate(value, getRuntime());
       setSubsymbolicChunkFactory(factory);
     }
     else if (CHUNK_TYPE_FACTORY_PARAM.equalsIgnoreCase(key))
     {
-      IChunkTypeFactory factory = (IChunkTypeFactory) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new DefaultChunkTypeFactory();
-      }
+      IChunkTypeFactory factory = instantiate(value);
       setChunkTypeFactory(factory);
     }
     else if (SYMBOLIC_CHUNK_TYPE_FACTORY_PARAM.equalsIgnoreCase(key))
     {
-      ISymbolicChunkTypeFactory factory = (ISymbolicChunkTypeFactory) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new DefaultSymbolicChunkTypeFactory();
-      }
+      ISymbolicChunkTypeFactory factory = instantiate(value, getRuntime());
       setSymbolicChunkTypeFactory(factory);
     }
     else if (SUBSYMBOLIC_CHUNK_TYPE_FACTORY_PARAM.equalsIgnoreCase(key))
     {
-      ISubsymbolicChunkTypeFactory factory = (ISubsymbolicChunkTypeFactory) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new DefaultSubsymbolicChunkTypeFactory();
-      }
+      ISubsymbolicChunkTypeFactory factory = instantiate(value);
       setSubsymbolicChunkTypeFactory(factory);
     }
     else if (CHUNK_NAMER_PARAM.equalsIgnoreCase(key))
     {
-      IChunkNamer factory = (IChunkNamer) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new NoOpChunkNamer();
-      }
+      IChunkNamer factory = instantiate(value);
       setChunkNamer(factory);
     }
     else if (CHUNK_CONFIGURATOR_PARAM.equalsIgnoreCase(key))
     {
-      IChunkConfigurator factory = (IChunkConfigurator) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new NoOpChunkConfigurator();
-      }
+      IChunkConfigurator factory = instantiate(value);
       setChunkConfigurator(factory);
     }
     else if (CHUNK_TYPE_NAMER_PARAM.equalsIgnoreCase(key))
     {
-      IChunkTypeNamer factory = (IChunkTypeNamer) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new NoOpChunkTypeNamer();
-      }
+      IChunkTypeNamer factory = instantiate(value);
       setChunkTypeNamer(factory);
     }
     else if (CHUNK_TYPE_CONFIGURATOR_PARAM.equalsIgnoreCase(key))
     {
-      IChunkTypeConfigurator factory = (IChunkTypeConfigurator) instantiate(value);
-      if (factory == null)
-      {
-        if (LOGGER.isWarnEnabled())
-          LOGGER.warn(String.format("Could not instantiate %s", value));
-        factory = new NoOpChunkTypeConfigurator();
-      }
+      IChunkTypeConfigurator factory = instantiate(value);
       setChunkTypeConfigurator(factory);
     }
 
@@ -801,17 +739,39 @@ public class DefaultDeclarativeModule extends AbstractDeclarativeModule
           "%s doesn't recognize %s. Available parameters : %s", getClass()
               .getSimpleName(), key, getSetableParameters()));
   }
-
-  private Object instantiate(String className)
+  
+  @SuppressWarnings("unchecked")
+  private <T> T instantiate(final String className, final ACTRRuntime runtime) {
+	  return (T) instantiateInternal(className, clazz -> {
+		  try {
+			  return (T)clazz.getConstructor(ACTRRuntime.class).newInstance(runtime);
+		  } catch(Exception e) {
+			  throw new RuntimeException("Could not instantiate "+className, e);
+		  }});
+  }
+  
+  @SuppressWarnings("unchecked")
+  private <T> T instantiate(final String className)
   {
-    ClassNameParameterHandler ph = ParameterHandler.classInstance();
+	return (T) instantiateInternal(className, clazz -> {
+		try {
+			return clazz.newInstance();
+		} catch(Exception e) {
+			throw new RuntimeException("Could not instantiate "+className, e);
+		}});
+  }
+  
+  @SuppressWarnings("unchecked")
+  private <T> T instantiateInternal(String className, Function<Class,?> constructorInvocation)
+  {
     try
     {
-      return ph.coerce(className).newInstance();
+      final Class clazz = ParameterHandler.classInstance().coerce(className);
+	  return (T)constructorInvocation.apply(clazz);
     }
     catch (Exception e)
     {
-      return null;
+      throw new IllegalArgumentException("Could not instantiate "+className, e);
     }
   }
 

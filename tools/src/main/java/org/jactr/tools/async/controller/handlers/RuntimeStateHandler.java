@@ -21,9 +21,6 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.IController;
 import org.jactr.tools.async.message.command.state.RuntimeStateCommand;
 
-/**
- * 
- */
 public class RuntimeStateHandler implements
     IMessageHandler<RuntimeStateCommand>
 {
@@ -33,8 +30,11 @@ public class RuntimeStateHandler implements
   static private final transient Log LOGGER = LogFactory
                                       .getLog(RuntimeStateHandler.class);
 
-  public RuntimeStateHandler()
+  private final ACTRRuntime _runtime;
+  
+  public RuntimeStateHandler(ACTRRuntime runtime)
   {
+	  _runtime = runtime;
   }
 
   @Override
@@ -42,7 +42,7 @@ public class RuntimeStateHandler implements
   {
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Got " + command);
 
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = _runtime.getController();
 
     switch (command.getState())
     {

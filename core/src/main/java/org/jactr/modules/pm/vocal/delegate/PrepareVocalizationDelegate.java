@@ -58,7 +58,7 @@ public class PrepareVocalizationDelegate extends AbstractVocalDelegate
     IChunk free = module.getFreeChunk();
     IChunk bufferState = error;
     Object failureMessage = null;
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = module.getRuntime().getConnector().getAgent(model);
 
     IEfferentCommand vocalizationCommand = agent.getEfferentCommandManager()
         .get(getCommandIdentifier());
@@ -113,7 +113,7 @@ public class PrepareVocalizationDelegate extends AbstractVocalDelegate
     String text = (String) parameters[0];
 
     IEfferentObject vocalizationSource = module.getVocalizationSource();
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = module.getRuntime().getConnector().getAgent(model);
 
     for (IEfferentCommandTemplate<?> template : vocalizationSource
         .getCommandTemplates())

@@ -39,7 +39,7 @@ public class ColorFeatureMap extends AbstractVisualFeatureMap<Color[]>
 
   public ColorFeatureMap(IModel model)
   {
-    super(IVisualModule.COLOR_SLOT, IVisualPropertyHandler.COLOR);
+    super(model.getRuntime(), IVisualModule.COLOR_SLOT, IVisualPropertyHandler.COLOR);
     _valueMap = new HashMap<Color, Set<IIdentifier>>();
     _currentValues = new HashMap<IIdentifier, Color[]>();
     _cache = new ColorChunkCache(model);

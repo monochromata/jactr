@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.commonreality.modalities.visual.DefaultVisualPropertyHandler;
 import org.commonreality.modalities.visual.IVisualPropertyHandler;
 import org.commonreality.object.IAfferentObject;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.common.memory.map.AbstractFeatureMap;
 
 public abstract class AbstractVisualFeatureMap<T> extends AbstractFeatureMap<T>
@@ -18,6 +19,9 @@ public abstract class AbstractVisualFeatureMap<T> extends AbstractFeatureMap<T>
   static private final transient Log                LOGGER           = LogFactory
                                                                          .getLog(AbstractVisualFeatureMap.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private final DefaultVisualPropertyHandler _propertyHandler = new DefaultVisualPropertyHandler();
 
   static protected IVisualPropertyHandler getHandler()
@@ -26,9 +30,9 @@ public abstract class AbstractVisualFeatureMap<T> extends AbstractFeatureMap<T>
   }
 
 
-  public AbstractVisualFeatureMap(String requestSlotName, String crPropertyName)
+  public AbstractVisualFeatureMap(ACTRRuntime runtime, String requestSlotName, String crPropertyName)
   {
-    super(requestSlotName, crPropertyName);
+    super(runtime, requestSlotName, crPropertyName);
   }
 
 

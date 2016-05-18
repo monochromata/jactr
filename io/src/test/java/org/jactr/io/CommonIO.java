@@ -14,17 +14,19 @@
 
 package org.jactr.io;
 
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import junit.framework.Assert;
-
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.io.antlr3.Support;
 import org.jactr.io.antlr3.builder.JACTRBuilder;
 import org.jactr.io.generator.CodeGeneratorFactory;
@@ -32,6 +34,8 @@ import org.jactr.io.generator.ICodeGenerator;
 import org.jactr.io.parser.IModelParser;
 import org.jactr.io.parser.ModelParserFactory;
 import org.jactr.io.resolver.ASTResolver;
+
+import junit.framework.Assert;
 
 public class CommonIO extends Assert
 {
@@ -69,7 +73,7 @@ public class CommonIO extends Assert
    * @param modelDescriptor
    * @return
    */
-  static public IModel constructorTest(CommonTree modelDescriptor)
+  static public IModel constructorTest(ACTRRuntime runtime, CommonTree modelDescriptor)
   {
     IModel model = null;
 
@@ -78,7 +82,7 @@ public class CommonIO extends Assert
       ArrayList<Exception> warnings = new ArrayList<Exception>();
       ArrayList<Exception> errors = new ArrayList<Exception>();
       long startTime = System.currentTimeMillis();
-      model = IOUtilities.constructModel(modelDescriptor, warnings, errors);
+      model = IOUtilities.constructModel(runtime, modelDescriptor, warnings, errors);
       LOGGER.info("Building took " + (System.currentTimeMillis() - startTime)
           + "ms");
 
@@ -157,7 +161,7 @@ public class CommonIO extends Assert
   static public IModelParser parseModel(String fileName) throws IOException
   {
     URL modelURL = CommonIO.class.getClassLoader().getResource(fileName);
-    assertNotNull(modelURL);
+    assertThat("Model resource not found: "+fileName, modelURL, notNullValue());
 
     IModelParser mp = ModelParserFactory.getModelParser(modelURL);
     assertNotNull(mp);
@@ -191,7 +195,7 @@ public class CommonIO extends Assert
     }
   }
 
-  static public IModel loadModel(String fileName)
+  static public IModel loadModel(ACTRRuntime runtime, String fileName)
   {
     LOGGER.info("Loading " + fileName);
     CommonTree md = CommonIO.parserTest(fileName, true, true);
@@ -203,17 +207,17 @@ public class CommonIO extends Assert
     // CommonIO.generateSource(md, "jactr");
 
     LOGGER.info("Constructing " + fileName);
-    IModel model = CommonIO.constructorTest(md);
+    IModel model = CommonIO.constructorTest(runtime, md);
     assertNotNull(model);
 
     return model;
   }
 
-  static public IModel mockModel()
+  static public IModel mockModel(ACTRRuntime runtime)
   {
     CommonTree modelDesc = IOUtilities.createModelDescriptor("mock");
 
     // compile & build
-    return constructorTest(compilerTest(modelDesc, false, true));
+    return constructorTest(runtime, compilerTest(modelDesc, false, true));
   }
 }

@@ -16,6 +16,9 @@ public class BindingFactory
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(BindingFactory.class);
 
+  /**
+   * TODO: Should not be static
+   */
   static private RecyclableFactory<Object[]> _factory = new AbstractThreadLocalRecyclableFactory<Object[]>(
                                                           100) {
 

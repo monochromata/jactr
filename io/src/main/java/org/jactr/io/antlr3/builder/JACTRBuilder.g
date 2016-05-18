@@ -106,6 +106,8 @@ import org.jactr.core.module.declarative.*;
 import org.jactr.core.module.declarative.six.*;
 import org.jactr.core.module.procedural.*;
 import org.jactr.core.module.procedural.six.*;
+import org.jactr.core.module.random.*;
+import org.jactr.core.module.random.six.*;
 import org.jactr.core.extensions.IExtension;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunktype.IChunkType;
@@ -116,6 +118,7 @@ import org.jactr.core.slot.*;
 import org.jactr.core.production.action.*;
 import org.jactr.core.production.condition.*;
 import org.jactr.core.utils.parameter.IParameterized;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.scripting.action.*;
 import org.jactr.scripting.condition.*;
 import org.jactr.scripting.*;
@@ -135,9 +138,14 @@ static private String NULL = "null";
 static private String NIL = "nil";
 static private String T = "t";
 
+private ACTRRuntime _runtime;
 private Collection<Exception> _warnings = new ArrayList<Exception>();
 private Collection<Exception> _errors = new ArrayList<Exception>();
 
+public void setRuntime(ACTRRuntime runtime)
+{
+ _runtime = runtime;
+}
 
 public void reportError(RecognitionException re)
 {
@@ -368,7 +376,7 @@ scope Model;
   LOGGER.debug("got model def for "+$name.text);
   
   String modelName = $name.text;
-  model = new BasicModel(modelName);
+  model = new BasicModel(_runtime, modelName);
   
   $Model::model = model;
   $Model::modelDescriptor = (CommonTree) $m;
@@ -498,19 +506,25 @@ modules :	(^(MODULES module+) | MODULES)
 		{
 		  /*
 		   check to see what modules have been installed
-		   we must have at least IDeclarativeModule and
+		   we must have at least IRandomModule, IDeclarativeModule and
 		   IProceduralModule
-		  */ 
+		  */
+		  if($Model::model.getModule(IRandomModule.class)==null)
+		   {
+		    reportException(new BuilderWarning("No IRandomModule was specified, installing DefaultRandomModule"));
+		    $Model::model.install(new DefaultRandomModule(_runtime));
+		   }
+		  
 		  if($Model::model.getModule(IDeclarativeModule.class)==null)
 		   {
 		    reportException(new BuilderWarning("No IDeclarativeModule was specified, installing DefaultDeclarativeModule6"));
-		    $Model::model.install(new DefaultDeclarativeModule6());
+		    $Model::model.install(new DefaultDeclarativeModule6(_runtime));
 		   }
 		  
 		  if($Model::model.getModule(IProceduralModule.class)==null)
 		   {
 		    reportException(new BuilderWarning("No IProceduralModule was specified, installing DefaultProceduralModule6"));
-		    $Model::model.install(new DefaultProceduralModule6());
+		    $Model::model.install(new DefaultProceduralModule6(_runtime));
 		   } 
 		   
 		}; //tp hack
@@ -525,7 +539,7 @@ module 	:	^(m=MODULE c=CLASS_SPEC p=parameters)
  {
   //load the class
   Class<IModule> moduleClass = (Class<IModule>)getClass().getClassLoader().loadClass(className);
-  IModule module = moduleClass.newInstance();
+  IModule module = moduleClass.getConstructor(ACTRRuntime.class).newInstance(_runtime);
   
   //apply parameters
   if(module instanceof IParameterized)

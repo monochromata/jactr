@@ -49,7 +49,7 @@ public class ExecutionVerifyTest extends TestCase
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Testing " + url);
 
     for (Throwable thrown : tester.test(url, "semantic", Arrays
-        .asList(sequence), Collections.EMPTY_LIST))
+        .asList(sequence), Collections.emptyList()))
     {
       LOGGER.error(thrown);
       fail(thrown.getMessage());
@@ -103,7 +103,7 @@ public class ExecutionVerifyTest extends TestCase
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Testing " + url);
 
     for (Throwable thrown : tester.test(url, "addition", Arrays
-        .asList(sequence), Collections.EMPTY_LIST))
+        .asList(sequence), Collections.emptyList()))
     {
       LOGGER.error(thrown);
       fail(thrown.getMessage());

@@ -1,28 +1,29 @@
 package org.jactr.tools.shell;
 
 import org.jactr.core.model.IModel;
-import org.jactr.instrument.IInstrument;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.instrument.AbstractInstrument;
 
-/*
- * default logging
- */
-
-public class BeanShellInterface implements IInstrument
+public class BeanShellInterface extends AbstractInstrument
 {
 
+  public BeanShellInterface(ACTRRuntime runtime)
+  {
+	  super(runtime);
+  }
+	
   public void initialize()
   {
-    
   }
 
   final public void install(IModel model)
   {
-    RuntimeListener.setEnabled(true);
+    RuntimeListener.setEnabled(model.getRuntime(), true);
   }
 
   final public void uninstall(IModel model)
   {
-    RuntimeListener.setEnabled(false);
+    RuntimeListener.setEnabled(model.getRuntime(), false);
   }
 
 }

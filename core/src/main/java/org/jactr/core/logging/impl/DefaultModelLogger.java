@@ -35,14 +35,14 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.RollingFileWriter;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 
 /**
  * demuxing logger
  * 
  * 
  */
-public class DefaultModelLogger implements IInstrument, ILogger, IParameterized
+public class DefaultModelLogger extends AbstractInstrument implements ILogger, IParameterized
 {
   /**
    * logger definition
@@ -55,7 +55,7 @@ public class DefaultModelLogger implements IInstrument, ILogger, IParameterized
   static public final String       BACKUPS     = "NumberOfBackups";
 
   static public final String       SIZE        = "MaxFileSize";
-
+  
   private Map<String, ILogger>     _outputStreams;
 
   private Collection<IModel>       _listeningTo;
@@ -73,9 +73,9 @@ public class DefaultModelLogger implements IInstrument, ILogger, IParameterized
 
   private int                      _maxBackups = 3;
 
-  public DefaultModelLogger()
+  public DefaultModelLogger(ACTRRuntime runtime)
   {
-    super();
+	super(runtime);
     _commonStreams = new TreeMap<String, PrintWriter>();
     _outputStreams = new TreeMap<String, ILogger>();
     _logToStream = new TreeMap<String, String>();
@@ -200,7 +200,7 @@ public class DefaultModelLogger implements IInstrument, ILogger, IParameterized
     PrintWriter pw = _commonStreams.get(stream);
     if (pw == null)
     {
-      Writer w = new RollingFileWriter(ACTRRuntime.getRuntime()
+      Writer w = new RollingFileWriter(getRuntime()
           .getWorkingDirectory(), stream, _maxSize, _maxBackups);
       pw = new PrintWriter(w);
       _commonStreams.put(stream, pw);
@@ -250,12 +250,9 @@ public class DefaultModelLogger implements IInstrument, ILogger, IParameterized
       logger.flush();
   }
 
-  /**
-   * @see org.jactr.instrument.IInstrument#initialize()
-   */
+  @Override
   public void initialize()
   {
-    // noop
   }
 
 }

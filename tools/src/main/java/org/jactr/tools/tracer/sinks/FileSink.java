@@ -44,10 +44,10 @@ public class FileSink implements ITraceSink
   private boolean                      _independentClocksEnabled = Boolean
                                                                      .getBoolean("connector.independentClocks");
 
-  public FileSink(URL file) throws IOException
+  public FileSink(ACTRRuntime runtime, URL file) throws IOException
   {
     if (_independentClocksEnabled
-        && ACTRRuntime.getRuntime().getModels().size() > 1)
+        && runtime.getModels().size() > 1)
       throw new IOException(
           "Cannot use the file sink with independentClocks and multiple models. Reduce to one model, or enable dependent clocks");
 

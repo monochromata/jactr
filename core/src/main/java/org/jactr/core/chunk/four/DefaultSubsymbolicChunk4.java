@@ -66,9 +66,9 @@ public class DefaultSubsymbolicChunk4 extends AbstractSubsymbolicChunk
 
   protected ISpreadingActivationEquation  _spreadingActivationEquation;
 
-  public DefaultSubsymbolicChunk4()
+  public DefaultSubsymbolicChunk4(ACTRRuntime runtime)
   {
-    super();
+    super(runtime);
 
     /*
      * the use of hashMap here is a problem if we get into the very large scale.
@@ -133,7 +133,7 @@ public class DefaultSubsymbolicChunk4 extends AbstractSubsymbolicChunk
     }
 
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), CREATION_CYCLE, old,
           cycle));
   }

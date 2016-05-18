@@ -11,8 +11,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javolution.util.FastList;
-
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,11 +35,14 @@ import org.jactr.core.module.procedural.event.IProceduralModuleListener;
 import org.jactr.core.module.procedural.event.ProceduralModuleEvent;
 import org.jactr.core.module.procedural.event.ProceduralModuleListenerAdaptor;
 import org.jactr.core.production.IProduction;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.generator.ICodeGenerator;
 import org.jactr.io.resolver.ASTResolver;
+
+import javolution.util.FastList;
 
 /**
  * general change tracker that logs chunk changes and production instantiations.
@@ -49,7 +50,7 @@ import org.jactr.io.resolver.ASTResolver;
  * 
  * @author harrison
  */
-public class ChangeTracker implements IInstrument, IParameterized
+public class ChangeTracker extends AbstractInstrument implements IParameterized
 {
   /**
    * Logger definition
@@ -66,7 +67,7 @@ public class ChangeTracker implements IInstrument, IParameterized
   static public final String                  TRACK_ACTIVE_CHUNKS  = "TrackActiveChunks";
 
   static public final String                  TRACK_INSTANTIATIONS = "TrackInstantiations";
-
+  
   /**
    * listen to the model for cycle start/stop
    */
@@ -113,8 +114,9 @@ public class ChangeTracker implements IInstrument, IParameterized
 
   private boolean                             _trackInstantitions  = false;
 
-  public ChangeTracker()
+  public ChangeTracker(ACTRRuntime runtime)
   {
+	super(runtime);
     _changedChunks = new HashMap<IModel, Set<IChunk>>();
     _astsToWrite = new HashMap<IModel, Collection<CommonTree>>();
 

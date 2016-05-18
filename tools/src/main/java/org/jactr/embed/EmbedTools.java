@@ -36,7 +36,7 @@ public class EmbedTools
    * @param when TODO
    * @return TODO
    */
-  static public CompletableFuture<Double> runUntil(DebugController controller,
+  static public CompletableFuture<Double> runUntil(final DebugController controller,
       double when)
   {
     CompletableFuture<Double> future = runUntil(controller, (be, w) -> {
@@ -55,7 +55,7 @@ public class EmbedTools
    * @param cycle TODO
    * @return TODO
    */
-  static public CompletableFuture<Long> runUntil(DebugController controller,
+  static public CompletableFuture<Long> runUntil(final DebugController controller,
       long cycle)
   {
     CompletableFuture<Long> future = runUntil(controller, (be, c) -> be
@@ -73,7 +73,7 @@ public class EmbedTools
    * @param controller TODO
    * @return TODO
    */
-  static public CompletableFuture<Long> runOneCycle(DebugController controller)
+  static public CompletableFuture<Long> runOneCycle(final DebugController controller)
   {
     CompletableFuture<Long> future = runUntil(controller, (be, c) -> be
         .getSource().getProceduralModule().getNumberOfProductionsFired() >= c,
@@ -97,7 +97,7 @@ public class EmbedTools
    * @return TODO
    */
   static protected <T> CompletableFuture<T> runUntil(
-      DebugController controller, BiPredicate<BreakpointEvent, T> hasReached,
+	  final DebugController controller, BiPredicate<BreakpointEvent, T> hasReached,
       Function<BreakpointEvent, T> completionValue,
       Function<IModel, T> triggerEvent, BreakpointType type)
   {
@@ -111,7 +111,7 @@ public class EmbedTools
     // retained for cleanup
     Collection<Object> triggerValues = new ArrayList<Object>();
 
-    for (IModel model : ACTRRuntime.getRuntime().getModels())
+    for (IModel model : controller.getRuntime().getModels())
     {
       // the test could be model specific
       T triggerValue = triggerEvent.apply(model);
@@ -150,7 +150,7 @@ public class EmbedTools
        * make sure we remove all the breakpoints after firing
        */
       // inefficient, but this shouldn't be run a bunch, at least not quickly
-        for (IModel model : ACTRRuntime.getRuntime().getModels())
+        for (IModel model : controller.getRuntime().getModels())
           for (Object triggerValue : triggerValues)
             controller.removeBreakpoint(model, type, triggerValue);
 

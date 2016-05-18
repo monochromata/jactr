@@ -96,7 +96,7 @@ public class DefaultCycleProcessor6 implements ICycleProcessor
     /*
      * what time is it?
      */
-    double now = ACTRRuntime.getRuntime().getClock(basicModel).getTime();
+    double now = model.getRuntime().getClock(basicModel).getTime();
 
     basicModel.setCycle(basicModel.getCycle() + 1);
     basicModel.dispatch(new ModelEvent(basicModel,

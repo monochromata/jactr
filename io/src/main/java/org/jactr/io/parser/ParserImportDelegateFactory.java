@@ -14,6 +14,9 @@ public class ParserImportDelegateFactory
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(ParserImportDelegateFactory.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private IParserImportDelegateFactoryImpl _factory;
 
   static public IParserImportDelegate createDelegate(Object... params)

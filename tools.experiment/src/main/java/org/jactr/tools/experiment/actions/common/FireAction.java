@@ -5,11 +5,12 @@ package org.jactr.tools.experiment.actions.common;
  */
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 
-public class FireAction implements IAction
+public class FireAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -20,8 +21,9 @@ public class FireAction implements IAction
   private IExperiment _experiment;
   
   
-  public FireAction(IExperiment experiment, String trigger)
+  public FireAction(ACTRRuntime runtime, IExperiment experiment, String trigger)
   {
+	super(runtime);
     _experiment = experiment;
     _triggerName = trigger;
   }

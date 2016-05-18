@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.NumericParameterHandler;
 import org.jactr.core.utils.parameter.ParameterHandler;
 import org.jactr.modules.pm.vocal.AbstractVocalModule;
@@ -50,9 +51,9 @@ public class DefaultVocalModule6 extends AbstractVocalModule
 
   private double                     _charactersPerSyllable           = 3;
 
-  public DefaultVocalModule6()
+  public DefaultVocalModule6(ACTRRuntime runtime)
   {
-    super();
+    super(runtime);
 
     setProcessingTimeEquation(new IVocalProcessingTimeEquation() {
 

@@ -199,7 +199,7 @@ public class DefaultPerceptListener implements IActivePerceptListener
       if (LOGGER.isDebugEnabled()) LOGGER.debug(msg);
     }
 
-    double start = ACTRRuntime.getRuntime().getClock(model).getTime();
+    double start = _module.getRuntime().getClock(model).getTime();
 
     /*
      * if the chunk is tracked, we need to update the visuallocation buffer

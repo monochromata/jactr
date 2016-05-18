@@ -47,7 +47,7 @@ public class ModelEvent extends AbstractACTREvent<IModel, IModelListener>
 
   public ModelEvent(IModel model, Type type)
   {
-    super(model, ACTRRuntime.getRuntime().getClock(model).getTime());
+    super(model, model.getRuntime().getClock(model).getTime());
     _type = type;
   }
 

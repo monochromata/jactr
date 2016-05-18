@@ -18,7 +18,10 @@ import org.commonreality.time.IClock;
 import org.jactr.core.model.IModel;
 
 /**
+ * TODO
  * 
+ * <p>Implementations of this interface must provide a 1-argument constructor that
+ * consumes a {@link org.jactr.core.runtime.ACTRRuntime}.</p>
  */
 public interface IConnector
 {

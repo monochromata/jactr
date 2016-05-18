@@ -25,6 +25,12 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.module.declarative.six.DefaultDeclarativeModule6;
+import org.jactr.core.module.goal.six.DefaultGoalModule6;
+import org.jactr.core.module.procedural.six.DefaultProceduralModule6;
+import org.jactr.core.module.random.six.DefaultRandomModule;
+import org.jactr.core.module.retrieval.six.DefaultRetrievalModule6;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.io.antlr3.builder.JACTRBuilder;
 import org.jactr.io.antlr3.compiler.CompilationWarning;
 import org.jactr.io.antlr3.misc.ASTSupport;
@@ -66,21 +72,11 @@ public class IOUtilities
             .createDelegate((Object[]) null);
         CommonTree modulesRoot = ASTSupport.getFirstDescendantWithType(
             modelDesc, JACTRBuilder.MODULES);
-        modulesRoot
-            .addChild(delegate
-                .importModuleInto(
-                    modelDesc,
-                    org.jactr.core.module.declarative.six.DefaultDeclarativeModule6.class
-                        .getName(), true));
-        modulesRoot.addChild(delegate.importModuleInto(modelDesc,
-            org.jactr.core.module.procedural.six.DefaultProceduralModule6.class
-                .getName(), true));
-        modulesRoot.addChild(delegate.importModuleInto(modelDesc,
-            org.jactr.core.module.goal.six.DefaultGoalModule6.class.getName(),
-            true));
-        modulesRoot.addChild(delegate.importModuleInto(modelDesc,
-            org.jactr.core.module.retrieval.six.DefaultRetrievalModule6.class
-                .getName(), true));
+        modulesRoot.addChild(delegate.importModuleInto(modelDesc, DefaultRandomModule.class.getName(), true));
+        modulesRoot.addChild(delegate.importModuleInto(modelDesc, DefaultDeclarativeModule6.class .getName(), true));
+        modulesRoot.addChild(delegate.importModuleInto(modelDesc, DefaultProceduralModule6.class.getName(), true));
+        modulesRoot.addChild(delegate.importModuleInto(modelDesc, DefaultGoalModule6.class.getName(), true));
+        modulesRoot.addChild(delegate.importModuleInto(modelDesc, DefaultRetrievalModule6.class.getName(), true));
       }
       catch (Exception e)
       {
@@ -94,6 +90,8 @@ public class IOUtilities
       throws IOException
   {
     URL url = IOUtilities.class.getClassLoader().getResource(modelFile);
+    if(url == null)
+    	throw new IllegalArgumentException("Model resource could not be found: "+modelFile);
     return loadModelFile(url, warnings, errors);
   }
 
@@ -187,7 +185,7 @@ public class IOUtilities
    * @param errors TODO
    * @return TODO
    */
-  static public IModel constructModel(CommonTree modelDescriptor,
+  static public IModel constructModel(ACTRRuntime runtime, CommonTree modelDescriptor,
       Collection<Exception> warnings, Collection<Exception> errors)
   {
     IModel model = null;
@@ -195,6 +193,7 @@ public class IOUtilities
     {
       CommonTreeNodeStream nodes = new CommonTreeNodeStream(modelDescriptor);
       JACTRBuilder builder = new JACTRBuilder(nodes);
+      builder.setRuntime(runtime);
       model = builder.model();
       errors.addAll(builder.getErrors());
       warnings.addAll(builder.getWarnings());

@@ -4,7 +4,6 @@ import java.util.concurrent.ExecutionException;
 
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunktype.IChunkType;
-import org.jactr.core.fluent.BuilderException;
 import org.jactr.core.fluent.IActionsBuilder;
 import org.jactr.core.fluent.IConditionsBuilder;
 import org.jactr.core.model.IModel;
@@ -12,6 +11,7 @@ import org.jactr.core.models.AbstractModelFactory;
 import org.jactr.core.module.declarative.IDeclarativeModule;
 import org.jactr.core.module.imaginal.six.DefaultImaginalModule6;
 import org.jactr.core.module.procedural.IProceduralModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.modules.pm.visual.six.DefaultVisualModule6;
 
@@ -22,19 +22,19 @@ public class VisualModuleTestFactory extends AbstractModelFactory {
 	private IChunkType goalCT, attendingTest;
 	private IChunk goalChunk;
 	
-	public VisualModuleTestFactory() {
-		this("visual-test");
+	public VisualModuleTestFactory(ACTRRuntime runtime) {
+		this(runtime, "visual-test");
 	}
 	
-	protected VisualModuleTestFactory(String name) {
-		super(name);
+	protected VisualModuleTestFactory(ACTRRuntime runtime, String name) {
+		super(runtime, name);
 	}
 
 	@Override
 	protected void installModules(IModel model) {
 		super.installModules(model);
-		model.install(new DefaultImaginalModule6());
-		model.install(configureVisualModule(new DefaultVisualModule6()));
+		model.install(new DefaultImaginalModule6(getRuntime()));
+		model.install(configureVisualModule(new DefaultVisualModule6(getRuntime())));
 	}
 
 	protected DefaultVisualModule6 configureVisualModule(DefaultVisualModule6 visualModule) {

@@ -13,9 +13,12 @@
  */
 package org.jactr.tools.async;
 
-import java.util.concurrent.ExecutorService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.TestCase;
+import java.util.concurrent.ExecutorService;
 
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
@@ -34,12 +37,17 @@ import org.jactr.core.logging.impl.DefaultModelLogger;
 import org.jactr.core.model.IModel;
 import org.jactr.core.production.IProduction;
 import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.core.runtime.controller.debug.BreakpointType;
 import org.jactr.core.runtime.controller.debug.DebugController;
 import org.jactr.io.CommonIO;
 import org.jactr.io.antlr3.misc.ASTSupport;
 import org.jactr.tools.async.controller.RemoteInterface;
 import org.jactr.tools.async.shadow.ShadowController;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * general MINA remote controller test. the ShadowController is the shadow copy
@@ -48,60 +56,38 @@ import org.jactr.tools.async.shadow.ShadowController;
  * 
  * TODO: This might be more of an integration test and might be named accordingly
  */
-public class MINATest extends TestCase
+public class MINATest
 {
   /**
    * logger definition
    */
   static private final Log   LOGGER         = LogFactory.getLog(MINATest.class);
 
-  static public final String MODEL_LOCATION = "org/jactr/core/runtime/semantic-model.jactr";
+  static public final String MODEL_LOCATION = "org/jactr/io/models/semantic-model.jactr";
 
+  private ACTRRuntime		 _runtime;
+  
   protected IModel           _model;
 
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  @Override
-  protected void setUp() throws Exception
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
-
-    _model = loadModel(MODEL_LOCATION);
-    configureModel(_model);
-    configureRuntime(_model);
+	_runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+    _model = loadModel(_runtime, MODEL_LOCATION);
+    configureModel(_runtime, _model);
+    configureRuntime(_runtime, _model);
   }
 
-  protected void configureRuntime(IModel model) throws Exception
-  {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    runtime.setController(new DebugController());
-    runtime.addModel(model);
-  }
-
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    runtime.setController(null);
-    runtime.removeModel(_model);
-    _model.dispose();
-  }
-
-  protected IModel loadModel(String location) throws Exception
+  protected IModel loadModel(ACTRRuntime runtime, String location) throws Exception
   {
     CommonTree descriptor = CommonIO.parserTest(MODEL_LOCATION, true, true);
     CommonIO.compilerTest(descriptor, true, true);
-    return CommonIO.constructorTest(descriptor);
+    return CommonIO.constructorTest(runtime, descriptor);
   }
 
-  protected void configureModel(IModel model)
+  protected void configureModel(ACTRRuntime runtime, IModel model)
   {
-    org.jactr.core.logging.impl.DefaultModelLogger dml = new DefaultModelLogger();
+    org.jactr.core.logging.impl.DefaultModelLogger dml = new DefaultModelLogger(runtime);
 
     // dml.setParameter(Logger.CYCLE,"out");
     dml.setParameter(Logger.Stream.TIME.toString(), "out");
@@ -118,6 +104,20 @@ public class MINATest extends TestCase
     model.install(dml);
   }
 
+  protected void configureRuntime(ACTRRuntime runtime, IModel model) throws Exception
+  {
+    runtime.setController(new DebugController(runtime));
+    runtime.addModel(model);
+  }
+
+  @After
+  public void tearDown() throws Exception
+  {
+    _runtime.setController(null);
+    _runtime.removeModel(_model);
+    _model.dispose();
+  }
+
 
   protected void connectAndTest(ITransportProvider transport,
       IProtocolConfiguration protocol, String addressInfo,
@@ -125,7 +125,7 @@ public class MINATest extends TestCase
       ExecutorService shadowExecutor, ExecutorService runtimeExecutor)
       throws Exception
   {
-    RemoteInterface controller = new RemoteInterface();
+    RemoteInterface controller = new RemoteInterface(_runtime);
     controller.setTransportProvider(transport);
     controller.setProtocol(protocol);
     controller.setAddressInfo(addressInfo);
@@ -287,6 +287,7 @@ public class MINATest extends TestCase
     assertFalse(controller.isRunning());
   }
 
+  @Test
   public void testLocalRuntimeServer() throws Exception
   {
     ExecutorService shadow = new OrderedThreadPoolExecutor();
@@ -297,6 +298,7 @@ public class MINATest extends TestCase
     runtime.shutdown();
   }
 
+  @Test
   public void testLocalControllerServer() throws Exception
   {
     ExecutorService shadow = new OrderedThreadPoolExecutor();
@@ -307,6 +309,8 @@ public class MINATest extends TestCase
     runtime.shutdown();
   }
 
+  @Ignore
+  @Test
   public void testNIORuntimeServer() throws Exception
   {
     ExecutorService shadow = new OrderedThreadPoolExecutor();
@@ -317,6 +321,8 @@ public class MINATest extends TestCase
     runtime.shutdown();
   }
 
+  @Ignore
+  @Test
   public void testNIOControllerServer() throws Exception
   {
     ExecutorService shadow = new OrderedThreadPoolExecutor();

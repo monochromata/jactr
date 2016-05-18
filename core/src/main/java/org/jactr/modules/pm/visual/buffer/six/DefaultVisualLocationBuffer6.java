@@ -300,7 +300,7 @@ public class DefaultVisualLocationBuffer6 extends AbstractPMActivationBuffer6
       Logger.log(model, Logger.Stream.VISUAL, "Attempting a stuff search with "
           + locationBufferStuffPattern);
 
-    request(locationBufferStuffPattern, ACTRRuntime.getRuntime().getClock(
+    request(locationBufferStuffPattern, getModule().getRuntime().getClock(
         getModel()).getTime());
   }
 

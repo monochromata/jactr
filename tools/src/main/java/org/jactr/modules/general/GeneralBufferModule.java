@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.buffer.IActivationBuffer;
 import org.jactr.core.buffer.six.BasicBuffer6;
 import org.jactr.core.module.AbstractModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 
 public class GeneralBufferModule extends AbstractModule implements
@@ -30,9 +31,9 @@ public class GeneralBufferModule extends AbstractModule implements
 
   private Set<String>                _buffersToContribute = new HashSet<String>();
 
-  public GeneralBufferModule()
+  public GeneralBufferModule(ACTRRuntime runtime)
   {
-    super("buffer");
+    super(runtime, "buffer");
   }
 
   @Override

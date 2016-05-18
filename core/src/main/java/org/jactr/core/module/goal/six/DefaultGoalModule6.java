@@ -22,6 +22,7 @@ import org.jactr.core.buffer.IActivationBuffer;
 import org.jactr.core.module.AbstractModule;
 import org.jactr.core.module.goal.IGoalModule;
 import org.jactr.core.module.goal.six.buffer.DefaultGoalBuffer6;
+import org.jactr.core.runtime.ACTRRuntime;
 
 /**
  * handles the goal and imaginal buffers
@@ -40,9 +41,9 @@ public class DefaultGoalModule6 extends AbstractModule implements IGoalModule
 
   private IActivationBuffer          _goalBuffer;
 
-  public DefaultGoalModule6()
+  public DefaultGoalModule6(ACTRRuntime runtime)
   {
-    super("goal");
+    super(runtime, "goal");
   }
 
   protected @Override

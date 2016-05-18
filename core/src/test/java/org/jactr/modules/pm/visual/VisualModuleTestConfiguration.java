@@ -8,6 +8,7 @@ import org.commonreality.net.provider.INetworkingProvider;
 import org.commonreality.reality.IReality;
 import org.commonreality.sensors.ISensor;
 import org.jactr.core.models.IModelFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.DefaultController;
 import org.jactr.core.runtime.controller.IController;
 import org.jactr.modules.AbstractModuleTest;
@@ -20,26 +21,25 @@ public abstract class VisualModuleTestConfiguration extends AbstractModuleTest {
 
 	@Override
 	protected IModelFactory createModelFactory() {
-		return new VisualModuleTestFactory();
+		return new VisualModuleTestFactory(_runtime);
 	}
 
 	@Override
 	protected IController createController() {
-		return new DefaultController();
+		return new DefaultController(_runtime);
 	}
 
 	@Override
-	protected IReality createReality(INetworkingProvider netProvider) {
-		final IReality reality = super.createReality(netProvider);
-		reality.add(new PlainTextCredentials("sensor2", "pass"), NO_CLOCK_CONTROL_DESIRED);
-		return reality;
+	protected void createReality(INetworkingProvider netProvider) {
+		super.createReality(netProvider);
+		_reality.add(new PlainTextCredentials("sensor2", "pass"), NO_CLOCK_CONTROL_DESIRED);
 	}
 
 	@Override
 	protected List<ISensor> createSensors(INetworkingProvider netProvider) throws Exception {
 		return Arrays.asList(
-				createXMLSensor(netProvider, "org/jactr/modules/pm/visual/sensorData.xml"),
-				setCredentials(createSpeechSensor(netProvider))); // using sensor:pass instead of sensor2:pass for the 2nd sensor, too
+				createXMLSensor(_cr, netProvider, "org/jactr/modules/pm/visual/sensorData.xml"),
+				setCredentials(createSpeechSensor(_cr, netProvider))); // using sensor:pass instead of sensor2:pass for the 2nd sensor, too
 	}
 
 	protected ISensor setCredentials(ISensor sensor) {

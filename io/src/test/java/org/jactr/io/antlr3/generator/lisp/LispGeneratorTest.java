@@ -13,33 +13,41 @@
  */
 package org.jactr.io.antlr3.generator.lisp;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import junit.framework.TestCase;
 
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.io.IOUtilities;
-import org.jactr.io.generator.ICodeGenerator;
 import org.jactr.io.generator.CodeGeneratorFactory;
+import org.jactr.io.generator.ICodeGenerator;
+import org.junit.Test;
 
-public class LispGeneratorTest extends TestCase
+public class LispGeneratorTest
 {
   /**
    * logger definition
    */
   static public final Log LOGGER = LogFactory.getLog(LispGeneratorTest.class);
 
+  @Test
   public void test() throws IOException
   {
-    CommonTree md = IOUtilities.loadModelFile(
-        "org/jactr/core/runtime/semantic-model.jactr",
-        new ArrayList<Exception>(), new ArrayList<Exception>());
+    final ArrayList<Exception> warnings = new ArrayList<Exception>();
+	final ArrayList<Exception> errors = new ArrayList<Exception>();
+	CommonTree md = IOUtilities.loadModelFile(
+        "org/jactr/io/models/semantic-model.jactr",
+        warnings, errors);
+	assertThat("There are warnings "+warnings, warnings.size(), equalTo(0));
+	assertThat("There are errors "+errors, errors.size(), equalTo(0));
     ICodeGenerator gen = CodeGeneratorFactory.getCodeGenerator("lisp");
     Collection<StringBuilder> code = gen.generate(md, true);
+    // TODO: Add assertions
     for (StringBuilder line : code)
       LOGGER.debug(line);
   }

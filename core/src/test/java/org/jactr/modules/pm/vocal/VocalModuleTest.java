@@ -51,12 +51,12 @@ public class VocalModuleTest extends VisualModuleTestConfiguration {
 
 	@Override
 	protected IController createController() {
-		return new DebugController();
+		return new DebugController(_runtime);
 	}
 
 	@Override
 	protected IModelFactory createModelFactory() {
-		return new VocalModuleTestFactory();
+		return new VocalModuleTestFactory(_runtime);
 	}
 
 	@Override

@@ -300,7 +300,7 @@ public class DefaultChunk extends DefaultAdaptable implements IChunk
      * notify
      */
     if (hasListeners())
-      dispatch(new ChunkEvent(this, ChunkEvent.Type.ENCODED));
+      dispatch(new ChunkEvent(_chunkData.getModel().getRuntime(), this, ChunkEvent.Type.ENCODED));
   }
 
   /**

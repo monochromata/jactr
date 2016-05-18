@@ -26,7 +26,7 @@ public class ExperimentUtilities
         .getMetaData(StartModelExperiments.MODELS_EXPERIMENT);
 
     if (exp == null) // stored in ACTRRuntime? by StartExperiment
-      exp = (IExperiment) ACTRRuntime.getRuntime().getApplicationData();
+      exp = (IExperiment) model.getRuntime().getApplicationData();
     return exp;
   }
 

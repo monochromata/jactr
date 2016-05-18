@@ -9,14 +9,15 @@ import java.util.Collections;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.impl.VariableResolver;
 import org.jactr.tools.experiment.misc.ExperimentUtilities;
 import org.jactr.tools.experiment.misc.ModelUtilities;
 
-public class RewardAction implements IAction
+public class RewardAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -30,8 +31,9 @@ public class RewardAction implements IAction
 
   private IExperiment                _experiment;
 
-  public RewardAction(String models, String reward, IExperiment experiment)
+  public RewardAction(ACTRRuntime runtime, String models, String reward, IExperiment experiment)
   {
+	super(runtime);
     _experiment = experiment;
     _models = models;
     _reward = reward;
@@ -43,7 +45,7 @@ public class RewardAction implements IAction
   {
     Collection<IModel> models = null;
     if (!_models.equals(""))
-      models = VariableResolver.getModels(_models,
+      models = VariableResolver.getModels(getRuntime(), _models,
           _experiment.getVariableResolver(), context);
     else
     {

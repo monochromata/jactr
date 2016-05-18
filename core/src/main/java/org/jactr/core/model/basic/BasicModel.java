@@ -78,6 +78,8 @@ public class BasicModel extends DefaultAdaptable implements IModel
 
   protected boolean                                                 _isInitialized        = false;
 
+  private final ACTRRuntime											_runtime;
+  
   protected TimedEventQueue                                         _timedEventQueue;
 
   protected IDeclarativeModule                                      _declarativeModule;
@@ -116,8 +118,9 @@ public class BasicModel extends DefaultAdaptable implements IModel
 
   protected ICycleProcessor                                         _cycleProcessor;
 
-  public BasicModel()
+  public BasicModel(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _timedEventQueue = new TimedEventQueue(this);
     _buffers = new CachedMap<String, IActivationBuffer>(
         new TreeMap<String, IActivationBuffer>());
@@ -130,6 +133,18 @@ public class BasicModel extends DefaultAdaptable implements IModel
     _metaData = new TreeMap<String, Object>();
     _parameterMap = new TreeMap<String, Object>();
     setCycleProcessor(createCycleProcessor());
+  }
+
+  public BasicModel(ACTRRuntime runtime, String name)
+  {
+    this(runtime);
+    setName(name);
+  }
+
+  @Override
+  public ACTRRuntime getRuntime()
+  {
+	return _runtime;
   }
 
   public void setCycleProcessor(ICycleProcessor processor)
@@ -145,12 +160,6 @@ public class BasicModel extends DefaultAdaptable implements IModel
   protected ICycleProcessor createCycleProcessor()
   {
     return new DefaultCycleProcessor6();
-  }
-
-  public BasicModel(String name)
-  {
-    this();
-    setName(name);
   }
 
   public void dispose()
@@ -405,7 +414,8 @@ public class BasicModel extends DefaultAdaptable implements IModel
   }
 
   public void install(IModule module)
-  {
+  {	if(module.getRuntime() != getRuntime())
+		throw new IllegalStateException("Cannot add module to model: the two were created for different runtime instances");
     boolean added = false;
     try
     {
@@ -495,6 +505,8 @@ public class BasicModel extends DefaultAdaptable implements IModel
 
   public void install(IInstrument instrument)
   {
+	if(instrument.getRuntime() != getRuntime())
+		throw new IllegalStateException("Cannot add instrument to model: the two were created for different runtime instances");
     if (!modulesAreInitialized()) initializeModules();
 
     boolean added = false;
@@ -815,7 +827,7 @@ public class BasicModel extends DefaultAdaptable implements IModel
       Object newValue)
   {
     if (hasParameterListeners())
-      dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime().getClock(this)
+      dispatch(new ParameterEvent(this, _runtime.getClock(this)
           .getTime(), parameterName, oldValue, newValue));
   }
 

@@ -19,6 +19,7 @@ import org.commonreality.object.manager.event.IAfferentListener;
 import org.commonreality.object.manager.event.IObjectEvent;
 import org.jactr.core.concurrent.ExecutorServices;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.IConditionalSlot;
 import org.jactr.modules.pm.IPerceptualModule;
 import org.jactr.modules.pm.aural.IAuralModule;
@@ -49,14 +50,14 @@ public class OffsetFeatureMap extends AbstractAuralFeatureMap<Double> implements
 
   private Set<IIdentifier>           _activeSounds;
 
-  public OffsetFeatureMap()
+  public OffsetFeatureMap(ACTRRuntime runtime)
   {
-    this(IAuralModule.OFFSET_SLOT);
+    this(runtime, IAuralModule.OFFSET_SLOT);
   }
 
-  public OffsetFeatureMap(String requestSlotName)
+  public OffsetFeatureMap(ACTRRuntime runtime, String requestSlotName)
   {
-    super(requestSlotName, null);
+    super(runtime, requestSlotName, null);
     _activeSounds = new HashSet<IIdentifier>();
     _completedSounds = new HashMap<IIdentifier, Double>();
     _trueRemoveListener = new IAfferentListener() {

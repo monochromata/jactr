@@ -11,10 +11,10 @@ import org.jactr.core.model.ModelTerminatedException;
 import org.jactr.core.queue.timedevents.RunnableTimedEvent;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.AbstractAction;
+import org.jactr.tools.experiment.actions.AbstractModelAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 
-public class StopModelAction extends AbstractAction
+public class StopModelAction extends AbstractModelAction
 {
   /**
    * Logger definition
@@ -22,9 +22,9 @@ public class StopModelAction extends AbstractAction
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(StopModelAction.class);
 
-  public StopModelAction(IExperiment experiment)
+  public StopModelAction(ACTRRuntime runtime, IExperiment experiment)
   {
-    super(experiment);
+    super(runtime, experiment);
   }
 
   @Override
@@ -37,7 +37,7 @@ public class StopModelAction extends AbstractAction
       return;
     }
 
-    double when = ACTRRuntime.getRuntime().getClock(model).getTime();
+    double when = getRuntime().getClock(model).getTime();
 
     RunnableTimedEvent stopEvent = new RunnableTimedEvent(when, () -> {
       if (LOGGER.isDebugEnabled()) LOGGER.debug(String.format("Stopping [%s]", model.getName()));

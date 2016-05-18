@@ -28,6 +28,9 @@ public class SystemPropertyCondition extends AbstractSlotCondition
                                                               .getLog(SystemPropertyCondition.class
                                                                   .getName());
 
+  /**
+   * TODO: Should not be static?
+   */
   static private SystemPropertySlotContainer _systemSlots = new SystemPropertySlotContainer();
 
   public SystemPropertyCondition()

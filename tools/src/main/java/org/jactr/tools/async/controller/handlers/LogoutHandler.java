@@ -22,9 +22,6 @@ import org.jactr.core.runtime.controller.IController;
 import org.jactr.tools.async.controller.RemoteInterface;
 import org.jactr.tools.async.message.command.login.LogoutCommand;
 
-/**
- * 
- */
 public class LogoutHandler implements IMessageHandler<LogoutCommand>
 {
   /**
@@ -33,7 +30,13 @@ public class LogoutHandler implements IMessageHandler<LogoutCommand>
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(LogoutHandler.class);
 
-  // /**
+  private final ACTRRuntime _runtime;
+  
+  public LogoutHandler(ACTRRuntime runtime) {
+	_runtime = runtime;
+  }
+
+// /**
   // * @see
   // org.apache.mina.handler.demux.MessageHandler#messageReceived(org.apache.mina.common.IoSession,
   // * java.lang.Object)
@@ -49,7 +52,7 @@ public class LogoutHandler implements IMessageHandler<LogoutCommand>
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Got a disconnect command");
     RemoteInterface ri = RemoteInterface.getActiveRemoteInterface();
 
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = _runtime.getController();
     if (controller == null || !controller.isRunning())
     {
       if (LOGGER.isDebugEnabled()) LOGGER.debug("disconnecting");

@@ -29,6 +29,9 @@ public class CSVDataLogger implements IDataLogger
 
   private String                     _path;
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private int                 _iterations;
 
   public CSVDataLogger()

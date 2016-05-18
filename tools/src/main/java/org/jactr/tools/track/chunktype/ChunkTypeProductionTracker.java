@@ -1,13 +1,10 @@
 package org.jactr.tools.track.chunktype;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -31,9 +28,9 @@ import org.jactr.core.utils.RollingFileWriter;
 import org.jactr.core.utils.StringUtilities;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 
-public class ChunkTypeProductionTracker implements IInstrument, IParameterized
+public class ChunkTypeProductionTracker extends AbstractInstrument implements IParameterized
 {
   /**
    * Logger definition
@@ -46,7 +43,7 @@ public class ChunkTypeProductionTracker implements IInstrument, IParameterized
   static public final String        MAX_FILE_SIZE = "MaxFileSize";
 
   static public final String        MAX_BACKUPS   = "NumberOfBackups";
-
+  
   private IModelListener            _modelListener;
 
   private IProceduralModuleListener _proceduralListener;
@@ -63,8 +60,9 @@ public class ChunkTypeProductionTracker implements IInstrument, IParameterized
 
   private Sequence                  _currentSequence;
 
-  public ChunkTypeProductionTracker()
+  public ChunkTypeProductionTracker(ACTRRuntime runtime)
   {
+	super(runtime);
     _proceduralListener = new ProceduralModuleListenerAdaptor() {
 
       @Override
@@ -215,7 +213,7 @@ public class ChunkTypeProductionTracker implements IInstrument, IParameterized
 
     try
     {
-      _output = new PrintWriter(new RollingFileWriter(ACTRRuntime.getRuntime()
+      _output = new PrintWriter(new RollingFileWriter(getRuntime()
           .getWorkingDirectory(), _fileName, _maxSize * 1024 * 1024,_backups));
     }
     catch (Exception e)

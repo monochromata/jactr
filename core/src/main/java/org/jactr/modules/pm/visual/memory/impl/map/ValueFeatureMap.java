@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javolution.util.FastSet;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.identifier.IIdentifier;
@@ -17,8 +15,11 @@ import org.commonreality.modalities.visual.IVisualPropertyHandler;
 import org.commonreality.object.IAfferentObject;
 import org.commonreality.object.UnknownPropertyNameException;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.IConditionalSlot;
 import org.jactr.modules.pm.visual.IVisualModule;
+
+import javolution.util.FastSet;
 
 public class ValueFeatureMap extends AbstractVisualFeatureMap<String>
 {
@@ -32,9 +33,9 @@ public class ValueFeatureMap extends AbstractVisualFeatureMap<String>
 
   private Map<IIdentifier, String>      _byIdenitifer;
 
-  public ValueFeatureMap()
+  public ValueFeatureMap(ACTRRuntime runtime)
   {
-    super(IVisualModule.VALUE_SLOT, IVisualPropertyHandler.TOKEN);
+    super(runtime, IVisualModule.VALUE_SLOT, IVisualPropertyHandler.TOKEN);
     _byToken = new TreeMap<String, Set<IIdentifier>>();
     _byIdenitifer = new HashMap<IIdentifier, String>();
   }

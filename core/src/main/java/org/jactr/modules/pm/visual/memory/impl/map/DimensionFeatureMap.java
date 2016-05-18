@@ -15,6 +15,7 @@ import org.commonreality.modalities.visual.geom.Dimension2D;
 import org.commonreality.object.IAfferentObject;
 import org.commonreality.object.UnknownPropertyNameException;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 
 /**
  * meta-map with dimensional info
@@ -31,9 +32,9 @@ public class DimensionFeatureMap extends AbstractVisualFeatureMap<Dimension2D>
   
   private Map<IIdentifier, Dimension2D> _currentValues;
 
-  public DimensionFeatureMap()
+  public DimensionFeatureMap(ACTRRuntime runtime)
   {
-    super(null, IVisualPropertyHandler.RETINAL_SIZE);
+    super(runtime, null, IVisualPropertyHandler.RETINAL_SIZE);
     _currentValues = new HashMap<IIdentifier, Dimension2D>();
   }
 

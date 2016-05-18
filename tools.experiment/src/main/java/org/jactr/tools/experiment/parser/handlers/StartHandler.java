@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,7 +16,7 @@ public class StartHandler implements INodeHandler<ITrigger>
     return "start";
   }
 
-  public ITrigger process(Element element, IExperiment experiment)
+  public ITrigger process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     return new StartTrigger(experiment);
   }

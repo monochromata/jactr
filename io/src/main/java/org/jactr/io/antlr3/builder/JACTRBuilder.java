@@ -16,6 +16,8 @@ import org.jactr.core.module.declarative.*;
 import org.jactr.core.module.declarative.six.*;
 import org.jactr.core.module.procedural.*;
 import org.jactr.core.module.procedural.six.*;
+import org.jactr.core.module.random.*;
+import org.jactr.core.module.random.six.*;
 import org.jactr.core.extensions.IExtension;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunktype.IChunkType;
@@ -26,6 +28,7 @@ import org.jactr.core.slot.*;
 import org.jactr.core.production.action.*;
 import org.jactr.core.production.condition.*;
 import org.jactr.core.utils.parameter.IParameterized;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.scripting.action.*;
 import org.jactr.scripting.condition.*;
 import org.jactr.scripting.*;
@@ -138,9 +141,14 @@ public class JACTRBuilder extends TreeParser {
     static private String NIL = "nil";
     static private String T = "t";
 
+    private ACTRRuntime _runtime;
     private Collection<Exception> _warnings = new ArrayList<Exception>();
     private Collection<Exception> _errors = new ArrayList<Exception>();
 
+    public void setRuntime(ACTRRuntime runtime)
+    {
+    	_runtime = runtime;
+    }
 
     public void reportError(RecognitionException re)
     {
@@ -394,7 +402,7 @@ public class JACTRBuilder extends TreeParser {
               LOGGER.debug("got model def for "+(name!=null?name.getText():null));
               
               String modelName = (name!=null?name.getText():null);
-              model = new BasicModel(modelName);
+              model = new BasicModel(_runtime, modelName);
               
               ((Model_scope)Model_stack.peek()).model = model;
               ((Model_scope)Model_stack.peek()).modelDescriptor = (CommonTree) m;
@@ -887,19 +895,26 @@ public class JACTRBuilder extends TreeParser {
 
             		  /*
             		   check to see what modules have been installed
-            		   we must have at least IDeclarativeModule and
+            		   we must have at least IRandomModule, IDeclarativeModule and
             		   IProceduralModule
             		  */ 
+			  		  if(((Model_scope)Model_stack.peek()).model.getModule(IRandomModule.class)==null)
+					   {
+					    reportException(new BuilderWarning("No IRandomModule was specified, installing DefaultRandomModule6"));
+					    ((Model_scope)Model_stack.peek()).model.install(new DefaultRandomModule(_runtime));
+					   }
+            
+            	
             		  if(((Model_scope)Model_stack.peek()).model.getModule(IDeclarativeModule.class)==null)
             		   {
             		    reportException(new BuilderWarning("No IDeclarativeModule was specified, installing DefaultDeclarativeModule6"));
-            		    ((Model_scope)Model_stack.peek()).model.install(new DefaultDeclarativeModule6());
+            		    ((Model_scope)Model_stack.peek()).model.install(new DefaultDeclarativeModule6(_runtime));
             		   }
             		  
             		  if(((Model_scope)Model_stack.peek()).model.getModule(IProceduralModule.class)==null)
             		   {
             		    reportException(new BuilderWarning("No IProceduralModule was specified, installing DefaultProceduralModule6"));
-            		    ((Model_scope)Model_stack.peek()).model.install(new DefaultProceduralModule6());
+            		    ((Model_scope)Model_stack.peek()).model.install(new DefaultProceduralModule6(_runtime));
             		   } 
             		   
             		
@@ -950,7 +965,7 @@ public class JACTRBuilder extends TreeParser {
              {
               //load the class
               Class<IModule> moduleClass = (Class<IModule>)getClass().getClassLoader().loadClass(className);
-              IModule module = moduleClass.newInstance();
+              IModule module = moduleClass.getConstructor(ACTRRuntime.class).newInstance(_runtime);
               
               //apply parameters
               if(module instanceof IParameterized)

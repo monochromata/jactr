@@ -167,7 +167,7 @@ public class PerceptualEncoderBridge implements IAfferentObjectListener
         _onsetTime.put(id, chunk.getModel().getAge());
         add(id, chunk);
         if (_memory.hasListeners())
-          _memory.dispatch(new ActivePerceptEvent(_memory,
+          _memory.dispatch(new ActivePerceptEvent(_declarativeModule.getRuntime(), _memory,
               ActivePerceptEvent.Type.NEW, id, chunk));
       }
     }
@@ -197,7 +197,7 @@ public class PerceptualEncoderBridge implements IAfferentObjectListener
         if (BufferUtilities.getContainingBuffers(oldChunk, true).size() != 0)
           if (_memory.hasListeners())
           {
-            _memory.dispatch(new ActivePerceptEvent(_memory,
+            _memory.dispatch(new ActivePerceptEvent(_declarativeModule.getRuntime(), _memory,
                 ActivePerceptEvent.Type.REMOVED, identifier, oldChunk));
             removedFired = true;
           }
@@ -233,7 +233,7 @@ public class PerceptualEncoderBridge implements IAfferentObjectListener
           {
             result.setErrorCode(_removedErrorChunk);
             if (!removedFired && _memory.hasListeners())
-              _memory.dispatch(new ActivePerceptEvent(_memory,
+              _memory.dispatch(new ActivePerceptEvent(_declarativeModule.getRuntime(), _memory,
                   ActivePerceptEvent.Type.REMOVED, identifier, oldChunk));
             break;
           }
@@ -311,7 +311,7 @@ public class PerceptualEncoderBridge implements IAfferentObjectListener
             if (!oldChunk.isEncoded()
                 && BufferUtilities.getContainingBuffers(oldChunk, true).size() != 0)
               if (_memory.hasListeners())
-                _memory.dispatch(new ActivePerceptEvent(_memory, id, updated,
+                _memory.dispatch(new ActivePerceptEvent(_declarativeModule.getRuntime(), _memory, id, updated,
                     oldChunk));
 
             _onsetTime.put(id, updated.getModel().getAge());
@@ -331,7 +331,7 @@ public class PerceptualEncoderBridge implements IAfferentObjectListener
 
             if (BufferUtilities.getContainingBuffers(oldChunk, true).size() != 0)
               if (_memory.hasListeners())
-                _memory.dispatch(new ActivePerceptEvent(_memory,
+                _memory.dispatch(new ActivePerceptEvent(_declarativeModule.getRuntime(), _memory,
                     ActivePerceptEvent.Type.UPDATED, id, oldChunk));
           }
         }
@@ -439,7 +439,7 @@ public class PerceptualEncoderBridge implements IAfferentObjectListener
 
     if (chunk == null && createIfAbsent)
     {
-      IAgent agent = ACTRRuntime.getRuntime().getConnector()
+      IAgent agent = _declarativeModule.getRuntime().getConnector()
           .getAgent(_memory.getModule().getModel());
 
       if (agent == null) return null;

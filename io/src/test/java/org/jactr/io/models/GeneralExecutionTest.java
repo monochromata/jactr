@@ -13,6 +13,10 @@
  */
 package org.jactr.io.models;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +28,18 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.DefaultController;
 import org.jactr.core.runtime.controller.IController;
 import org.jactr.io.CommonIO;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.resolver.ASTResolver;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * Identical to {@link org.jactr.core.runtime.GeneralExecutionTest}, but using the IO system to load models.
  */
-public class GeneralExecutionTest extends TestCase
+public class GeneralExecutionTest
 {
   /**
    * logger definition
@@ -40,28 +47,24 @@ public class GeneralExecutionTest extends TestCase
   static private final Log LOGGER       = LogFactory
                                             .getLog(GeneralExecutionTest.class);
 
+  private ACTRRuntime      _runtime;
+  
   private boolean          _dumpOnStart = true;
 
   private boolean          _dumpOnStop  = true;
 
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  @Override
-  protected void setUp() throws Exception
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
-    ACTRRuntime.getRuntime().setController(new DefaultController());
+    _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+    _runtime.setController(new DefaultController(_runtime));
   }
 
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  @Override
-  protected void tearDown() throws Exception
+  @After
+  public void tearDown() throws Exception
   {
-    ACTRRuntime.getRuntime().setController(null);
-    super.tearDown();
+    _runtime.setController(null);
+    _runtime = null;
   }
 
   protected IModel load(String fileName)
@@ -76,7 +79,7 @@ public class GeneralExecutionTest extends TestCase
     // CommonIO.generateSource(md, "jactr");
 
     LOGGER.info("Constructing " + fileName);
-    IModel model = CommonIO.constructorTest(md);
+    IModel model = CommonIO.constructorTest(_runtime, md);
     assertNotNull(model);
 
     return model;
@@ -109,9 +112,9 @@ public class GeneralExecutionTest extends TestCase
         dump(model);
     }
     for (IModel model : models)
-      ACTRRuntime.getRuntime().addModel(model);
+      _runtime.addModel(model);
 
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = _runtime.getController();
 
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Running");
     controller.start().get();
@@ -125,7 +128,7 @@ public class GeneralExecutionTest extends TestCase
 
     for (IModel model : models)
     {
-      ACTRRuntime.getRuntime().removeModel(model);
+      _runtime.removeModel(model);
       if (_dumpOnStop) dump(model);
       model.dispose();
     }
@@ -149,26 +152,32 @@ public class GeneralExecutionTest extends TestCase
   // test("org/jactr/core/runtime/semantic-lisp.lisp");
   // }
 
+  @Test
   public void testBasicSemantic() throws Exception
   {
     test("org/jactr/io/models/semantic-model.jactr");
   }
 
+  @Test
   public void testFullSemantic() throws Exception
   {
     test("org/jactr/io/models/semantic-full.jactr");
   }
 
+  @Test
   public void testAddition() throws Exception
   {
     test("org/jactr/io/models/addition.jactr");
   }
 
+  @Test
   public void testCount() throws Exception
   {
     test("org/jactr/io/models/count.jactr");
   }
 
+  @Ignore
+  @Test
   public void testMultiple() throws Exception
   {
     test("org/jactr/io/models/count.jactr",

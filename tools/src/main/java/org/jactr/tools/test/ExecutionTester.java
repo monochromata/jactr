@@ -132,10 +132,11 @@ public class ExecutionTester
       Map<String, Collection<String>> productionSequenceMap,
       Map<String, Collection<String>> failedProductionMap)
   {
+	ACTRRuntime runtime;
     try
     {
       EnvironmentParser envP = new EnvironmentParser();
-      envP.parse(url);
+      runtime = envP.parse(url);
     }
     catch (Exception e)
     {
@@ -152,7 +153,7 @@ public class ExecutionTester
       }
     };
 
-    for (IModel model : ACTRRuntime.getRuntime().getModels())
+    for (IModel model : runtime.getModels())
     {
       String modelName = model.getName();
       if (productionSequenceMap.containsKey(modelName))
@@ -191,7 +192,7 @@ public class ExecutionTester
     /*
      * all set up - let's execute..
      */
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = runtime.getController();
     try
     {
       controller.start().get();
@@ -205,11 +206,10 @@ public class ExecutionTester
     }
     finally
     {
-      for (IModel model : new ArrayList<IModel>(ACTRRuntime.getRuntime()
-          .getModels()))
+      for (IModel model : new ArrayList<IModel>(runtime.getModels()))
         try
         {
-          ACTRRuntime.getRuntime().removeModel(model);
+          runtime.removeModel(model);
           model.dispose();
         }
         catch (Exception e2)

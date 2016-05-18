@@ -13,6 +13,9 @@
  */
 package org.jactr.core.runtime;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
@@ -22,13 +25,12 @@ import org.jactr.core.models.FullSemanticModelFactory;
 import org.jactr.core.models.SemanticModelFactory;
 import org.jactr.core.runtime.controller.DefaultController;
 import org.jactr.core.runtime.controller.IController;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
-import junit.framework.TestCase;
-
-/**
- * 
- */
-public class GeneralExecutionTest extends TestCase
+public class GeneralExecutionTest
 {
   /**
    * logger definition
@@ -36,24 +38,20 @@ public class GeneralExecutionTest extends TestCase
   static private final Log LOGGER       = LogFactory
                                             .getLog(GeneralExecutionTest.class);
 
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  @Override
-  protected void setUp() throws Exception
+  private ACTRRuntime _runtime;
+  
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
-    ACTRRuntime.getRuntime().setController(new DefaultController());
+    _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+    _runtime.setController(new DefaultController(_runtime));
   }
 
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  @Override
-  protected void tearDown() throws Exception
+  @After
+  public void tearDown() throws Exception
   {
-    ACTRRuntime.getRuntime().setController(null);
-    super.tearDown();
+    _runtime.setController(null);
+    _runtime = null;
   }
 
   protected IModel configureModel(IModel model)
@@ -69,9 +67,9 @@ public class GeneralExecutionTest extends TestCase
   protected void execute(IModel... models) throws Exception
   {
     for (IModel model : models)
-      ACTRRuntime.getRuntime().addModel(model);
+      _runtime.addModel(model);
 
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = _runtime.getController();
 
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Running");
     controller.start().get();
@@ -85,7 +83,7 @@ public class GeneralExecutionTest extends TestCase
 
     for (IModel model : models)
     {
-      ACTRRuntime.getRuntime().removeModel(model);
+      _runtime.removeModel(model);
       model.dispose();
     }
 
@@ -100,30 +98,36 @@ public class GeneralExecutionTest extends TestCase
     execute(models);
   }
 
+  @Test
   public void testBasicSemantic() throws Exception
   {
-    test(new SemanticModelFactory().createAndInitializeModel());
+    test(new SemanticModelFactory(_runtime).createAndInitializeModel());
   }
 
+  @Test
   public void testFullSemantic() throws Exception
   {
-    test(new FullSemanticModelFactory().createAndInitializeModel());
+    test(new FullSemanticModelFactory(_runtime).createAndInitializeModel());
   }
 
+  @Test
   public void testAddition() throws Exception
   {
-    test(new AdditionModelFactory().createAndInitializeModel());
+    test(new AdditionModelFactory(_runtime).createAndInitializeModel());
   }
 
+  @Test
   public void testCount() throws Exception
   {
-    test(new CountModelFactory().createAndInitializeModel());
+    test(new CountModelFactory(_runtime).createAndInitializeModel());
   }
 
+  @Ignore
+  @Test
   public void testMultiple() throws Exception
   {
-    test(new CountModelFactory().createAndInitializeModel(),
-        new AdditionModelFactory().createAndInitializeModel());
+    test(new CountModelFactory(_runtime).createAndInitializeModel(),
+        new AdditionModelFactory(_runtime).createAndInitializeModel());
   }
 
 }

@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,9 @@ public class StopModelHandler implements INodeHandler<IAction>
     return "stop-model";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new StopModelAction(experiment);
+    return new StopModelAction(runtime, experiment);
   }
 
   public boolean shouldDecend()

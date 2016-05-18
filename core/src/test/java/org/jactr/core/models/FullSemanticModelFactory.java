@@ -2,27 +2,30 @@ package org.jactr.core.models;
 
 import static java.lang.String.format;
 
-import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import org.jactr.core.buffer.IActivationBuffer;
 import org.jactr.core.chunk.IChunk;
-import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.model.IModel;
-import org.jactr.core.model.basic.BasicModel;
 import org.jactr.core.module.declarative.IDeclarativeModule;
 import org.jactr.core.module.declarative.six.DefaultDeclarativeModule6;
 import org.jactr.core.module.goal.six.DefaultGoalModule6;
 import org.jactr.core.module.procedural.six.DefaultProceduralModule6;
+import org.jactr.core.module.random.six.DefaultRandomModule;
 import org.jactr.core.module.retrieval.six.DefaultRetrievalModule6;
 import org.jactr.core.production.IProduction;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 
 public class FullSemanticModelFactory extends SemanticModelFactory {
 
 	protected IChunk empty, _new, error, free, busy, unrequested, full, requested;
+
+	public FullSemanticModelFactory(ACTRRuntime runtime) {
+		super(runtime);
+	}
 
 	@Override
 	protected void installModules(IModel model) {
@@ -31,10 +34,11 @@ public class FullSemanticModelFactory extends SemanticModelFactory {
 		installProceduralModule(model);
 		installGoalModule(model);
 		installRetrievalModule(model);
+		model.install(new DefaultRandomModule(getRuntime()));
 	}
 
 	protected void installDeclarativeModule(IModel model) {
-		DefaultDeclarativeModule6 dm = new DefaultDeclarativeModule6();
+		DefaultDeclarativeModule6 dm = new DefaultDeclarativeModule6(getRuntime());
 		dm.setParameter("EnablePartialMatching", "false"); // TODO: Might previously have been configured as: dm.setParameter("PartialMatchingEnabled", "false"); 
 		dm.setParameter("BaseLevelConstant", "0.0");
 		dm.setParameter("ActivationNoise", "0.0");
@@ -46,7 +50,7 @@ public class FullSemanticModelFactory extends SemanticModelFactory {
 	}
 
 	protected void installProceduralModule(IModel model) {
-		DefaultProceduralModule6 pm = new DefaultProceduralModule6();
+		DefaultProceduralModule6 pm = new DefaultProceduralModule6(getRuntime());
 		pm.setParameter("ExpectedUtilityNoise", "0.0"); // TODO: Might previously have been configured as: pm.setParameter("ExpectedGainNoise", "0.0");
 		pm.setParameter("DefaultProductionFiringTime", "0.05");
 		pm.setParameter("NumberOfProductionsFired", "0");
@@ -54,11 +58,11 @@ public class FullSemanticModelFactory extends SemanticModelFactory {
 	}
 
 	protected void installGoalModule(IModel model) {
-		model.install(new DefaultGoalModule6());
+		model.install(new DefaultGoalModule6(getRuntime()));
 	}
 
 	protected void installRetrievalModule(IModel model) {
-		DefaultRetrievalModule6 rm = new DefaultRetrievalModule6();
+		DefaultRetrievalModule6 rm = new DefaultRetrievalModule6(getRuntime());
 		rm.setParameter("RetrievalThreshold", "-Infinity");
 		rm.setParameter("LatencyExponent", "1.0");
 		rm.setParameter("LatencyFactor", "0.5");

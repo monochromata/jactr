@@ -18,6 +18,9 @@ public class FastSetFactory
   static private final transient Log        LOGGER   = LogFactory
                                                          .getLog(FastSetFactory.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private RecyclableFactory<FastSet> _factory = new AbstractThreadLocalRecyclableFactory<FastSet>() {
 
                                                        @SuppressWarnings({

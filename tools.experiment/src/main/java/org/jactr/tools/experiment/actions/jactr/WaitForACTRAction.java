@@ -9,10 +9,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.IController;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 
-public class WaitForACTRAction implements IAction
+public class WaitForACTRAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -26,14 +26,15 @@ public class WaitForACTRAction implements IAction
    * @param waitForStart
    *          false if waiting for completion
    */
-  public WaitForACTRAction(boolean waitForStart)
+  public WaitForACTRAction(ACTRRuntime runtime, boolean waitForStart)
   {
+	super(runtime);
     _waitForStart = waitForStart;
   }
 
   public void fire(IVariableContext context)
   {
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = getRuntime().getController();
     if (controller == null)
       throw new IllegalStateException(
           "No runtime controller available to wait on");

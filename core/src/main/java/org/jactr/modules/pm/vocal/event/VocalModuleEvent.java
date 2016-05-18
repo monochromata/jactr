@@ -25,7 +25,7 @@ public class VocalModuleEvent extends AbstractACTREvent<IVocalModule, IVocalModu
   
   public VocalModuleEvent(IVocalModule source, Type type, VocalizationCommand vocalization)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel()).getTime());
+    super(source, source.getRuntime().getClock(source.getModel()).getTime());
     _type = type;
     _vocalization = vocalization;
   }

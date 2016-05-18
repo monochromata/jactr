@@ -231,7 +231,7 @@ public class SceneChangeExtension implements IExtension
            * to common reality.. so, we need to defer install/uninstall until a
            * specific model event
            */
-          IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(
+          IAgent agent = getModel().getRuntime().getConnector().getAgent(
               _model);
           /*
            * attach the listener to the afferent object manager. we use the CR
@@ -354,7 +354,7 @@ public class SceneChangeExtension implements IExtension
        * queue up the reset. We want to reset the scene-changed flag after
        * visual onset duration.
        */
-      double now = ACTRRuntime.getRuntime().getClock(_model).getTime();
+      double now = getModel().getRuntime().getClock(_model).getTime();
       double resetTime = _visualModule.getVisualMemory().getNewFINSTOnsetDuration();
       _resetTimedEvent = new AbstractTimedEvent(now, now + resetTime) {
         @Override

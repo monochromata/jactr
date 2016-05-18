@@ -44,7 +44,19 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jactr</groupId>
+			<artifactId>core</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jactr</groupId>
 			<artifactId>io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jactr</groupId>
+			<artifactId>io</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

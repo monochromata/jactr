@@ -58,8 +58,7 @@ public class ActivationBufferEvent extends
   @SuppressWarnings("unchecked")
   protected ActivationBufferEvent(IActivationBuffer buffer, Type type)
   {
-    super(buffer, ACTRRuntime.getRuntime().getClock(buffer.getModel())
-        .getTime());
+    super(buffer, buffer.getModule().getRuntime().getClock(buffer.getModel()).getTime());
     _type = type;
     _sourceChunks = Collections.EMPTY_LIST;
   }

@@ -15,8 +15,9 @@ import org.jactr.core.model.IModel;
 import org.jactr.core.module.IModule;
 import org.jactr.core.queue.ITimedEvent;
 import org.jactr.core.queue.timedevents.IBufferBasedTimedEvent;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.impl.VariableResolver;
 import org.jactr.tools.experiment.misc.ExperimentUtilities;
@@ -28,7 +29,7 @@ import org.jactr.tools.experiment.misc.ModelUtilities;
  * 
  * @author harrison
  */
-public class ClearAction implements IAction
+public class ClearAction extends AbstractAction
 {
 
   /**
@@ -45,9 +46,10 @@ public class ClearAction implements IAction
 
   private IExperiment                _experiment;
 
-  public ClearAction(String models, String buffers, String modules,
+  public ClearAction(ACTRRuntime runtime, String models, String buffers, String modules,
       IExperiment experiment)
   {
+	super(runtime);
     _experiment = experiment;
     _models = models;
     _buffers = buffers;
@@ -58,7 +60,7 @@ public class ClearAction implements IAction
   {
     Collection<IModel> models = null;
     if (!_models.equals(""))
-      models = VariableResolver.getModels(_models,
+      models = VariableResolver.getModels(getRuntime(), _models,
           _experiment.getVariableResolver(), context);
     else
     {

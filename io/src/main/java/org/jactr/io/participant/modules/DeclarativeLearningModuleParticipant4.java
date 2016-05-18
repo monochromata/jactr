@@ -13,25 +13,17 @@
  */
 package org.jactr.io.participant.modules;
 
-import java.net.URL;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.jactr.core.module.declarative.five.IDeclarativeModule5;
-import org.jactr.core.module.declarative.four.IDeclarativeModule4;
 import org.jactr.core.module.declarative.four.learning.DefaultDeclarativeLearningModule4;
 import org.jactr.core.module.declarative.four.learning.IDeclarativeLearningModule4;
-import org.jactr.core.module.declarative.six.DefaultDeclarativeModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
-/**
- * 
- */
 public class DeclarativeLearningModuleParticipant4 extends BasicASTParticipant
 {
   public DeclarativeLearningModuleParticipant4()
   {
-    super((URL)null);
     setInstallableClass(DefaultDeclarativeLearningModule4.class);
 
     Map<String, String> parameters = new TreeMap<String, String>();

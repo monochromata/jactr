@@ -139,7 +139,7 @@ public class MotorTimedEvent extends AbstractTimedEvent
   protected IEfferentCommand getMotorCommand()
   {
     IIdentifier commandId = _movement.getCommandIdentifier();
-    IEfferentCommand command = ACTRRuntime.getRuntime().getConnector()
+    IEfferentCommand command = _motor.getRuntime().getConnector()
         .getAgent(_motor.getModel()).getEfferentCommandManager().get(commandId);
     return command;
   }

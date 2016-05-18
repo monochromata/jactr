@@ -113,9 +113,9 @@ public abstract class AbstractMotorModule extends AbstractPerceptualModule
 
   private ACTREventDispatcher<IMotorModule, IMotorModuleListener> _listener;
 
-  public AbstractMotorModule(String name)
+  public AbstractMotorModule(ACTRRuntime runtime, String name)
   {
-    super(name);
+    super(runtime, name);
     _listener = new ACTREventDispatcher<IMotorModule, IMotorModuleListener>();
     setCommandTranslator(new DefaultCommandTranslator());
     addListener(new IMotorModuleListener() {
@@ -238,7 +238,7 @@ public abstract class AbstractMotorModule extends AbstractPerceptualModule
     _muscleManager = new MuscleStateManager(this);
     _motorCommandManager = new MotorCommandManager(this);
 
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(getModel());
+    IAgent agent = getRuntime().getConnector().getAgent(getModel());
 
     if (LOGGER.isDebugEnabled())
       LOGGER.debug("Attaching translator to common reality");
@@ -252,7 +252,7 @@ public abstract class AbstractMotorModule extends AbstractPerceptualModule
   {
     super.disconnectFromCommonReality();
 
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(getModel());
+    IAgent agent = getRuntime().getConnector().getAgent(getModel());
 
     _muscleManager.uninstall(agent);
     _motorCommandManager.uninstall(agent);
@@ -467,7 +467,7 @@ public abstract class AbstractMotorModule extends AbstractPerceptualModule
 
   public void reset(boolean stopActiveMovements)
   {
-    double now = ACTRRuntime.getRuntime().getClock(getModel()).getTime();
+    double now = getRuntime().getClock(getModel()).getTime();
 
     final FutureTask<Object> clearIt = new FutureTask<Object>(new Runnable() {
       public void run()
@@ -502,7 +502,7 @@ public abstract class AbstractMotorModule extends AbstractPerceptualModule
 
   public void reset(final String muscleName)
   {
-    double now = ACTRRuntime.getRuntime().getClock(getModel()).getTime();
+    double now = getRuntime().getClock(getModel()).getTime();
     ITimedEvent ite = new AbstractTimedEvent(now, now + 0.05) {
       @Override
       public void fire(double now)
@@ -576,7 +576,7 @@ public abstract class AbstractMotorModule extends AbstractPerceptualModule
            * try to add
            */
           ICommandTranslatorDelegate delegate = (ICommandTranslatorDelegate) getClass()
-              .getClassLoader().loadClass(key).newInstance();
+              .getClassLoader().loadClass(key).getConstructor(ACTRRuntime.class).newInstance(getRuntime());
           ((DefaultCommandTranslator) getCommandTranslator()).add(delegate);
         }
         catch (Exception e)

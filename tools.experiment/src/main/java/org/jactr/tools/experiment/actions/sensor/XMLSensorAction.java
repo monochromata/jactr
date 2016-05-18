@@ -8,14 +8,13 @@ import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import javolution.util.FastList;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.reality.CommonReality;
 import org.commonreality.sensors.ISensor;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.impl.VariableResolver;
 import org.w3c.dom.Document;
@@ -24,7 +23,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class XMLSensorAction implements IAction
+import javolution.util.FastList;
+
+public class XMLSensorAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -41,14 +42,15 @@ public class XMLSensorAction implements IAction
   
   private String _forWhom ="";
 
-  public XMLSensorAction(String location, boolean executeImmediately, IExperiment experiment)
+  public XMLSensorAction(ACTRRuntime runtime, String location, boolean executeImmediately, IExperiment experiment)
   {
-    this(location, executeImmediately, experiment, "");
+    this(runtime, location, executeImmediately, experiment, "");
   }
   
-  public XMLSensorAction(String location, boolean executeImmediately,
+  public XMLSensorAction(ACTRRuntime runtime, String location, boolean executeImmediately,
       IExperiment experiment, String forWhom)
   {
+	super(runtime);
     _location = location;
     _experiment = experiment;
     _immediateExecution = executeImmediately;
@@ -143,7 +145,7 @@ public class XMLSensorAction implements IAction
 
   private org.commonreality.sensors.xml.XMLSensor getSensor()
   {
-    for (ISensor sensor : CommonReality.getSensors())
+    for (ISensor sensor : getRuntime().getCommonReality().getSensors())
       if (sensor instanceof org.commonreality.sensors.xml.XMLSensor)
         return (org.commonreality.sensors.xml.XMLSensor) sensor;
     return null;
@@ -151,7 +153,7 @@ public class XMLSensorAction implements IAction
 
   private org.commonreality.sensors.xml2.XMLSensor getSensor2()
   {
-    for (ISensor sensor : CommonReality.getSensors())
+    for (ISensor sensor : getRuntime().getCommonReality().getSensors())
       if (sensor instanceof org.commonreality.sensors.xml2.XMLSensor)
         return (org.commonreality.sensors.xml2.XMLSensor) sensor;
     return null;

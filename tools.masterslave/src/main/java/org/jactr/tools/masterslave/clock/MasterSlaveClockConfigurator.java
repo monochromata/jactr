@@ -75,7 +75,7 @@ public class MasterSlaveClockConfigurator implements IClockConfigurator
       // wrap the agent's clock with the masterslave clock
       // and wrap the master slave
 
-      MasterSlaveClock msc = new MasterSlaveClock(defaultClock,
+      MasterSlaveClock msc = new MasterSlaveClock(model.getRuntime().getCommonReality(), defaultClock,
           Thread.currentThread());
       WrappedClock wrapped = new WrappedClock(msc);
 
@@ -98,7 +98,7 @@ public class MasterSlaveClockConfigurator implements IClockConfigurator
       // and wrap the master slave
       MasterExtension mExt = sExt.getMaster();
 
-      WrappedClock wc = (WrappedClock) ACTRRuntime.getRuntime().getClock(
+      WrappedClock wc = (WrappedClock) model.getRuntime().getClock(
           mExt.getModel());
 
       // MasterSlaveClock master = (MasterSlaveClock) wc.getMasterClock();

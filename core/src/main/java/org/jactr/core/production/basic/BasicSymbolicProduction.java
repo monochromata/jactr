@@ -25,6 +25,7 @@ import org.jactr.core.production.IllegalProductionStateException;
 import org.jactr.core.production.action.IAction;
 import org.jactr.core.production.condition.ICondition;
 import org.jactr.core.production.event.ProductionEvent;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.DefaultAdaptable;
 import org.jactr.core.utils.collections.CachedCollection;
 

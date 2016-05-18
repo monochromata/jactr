@@ -31,14 +31,14 @@ import org.jactr.core.production.IProduction;
 import org.jactr.core.production.six.ISubsymbolicProduction6;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 
 /**
  * tracks the expected utility of a set of productions over time
  * 
  * @author harrison
  */
-public class UtilityTracker implements IInstrument, IParameterized
+public class UtilityTracker extends AbstractInstrument implements IParameterized
 {
   /**
    * Logger definition
@@ -74,8 +74,9 @@ public class UtilityTracker implements IInstrument, IParameterized
    */
   private boolean                    _logInstantiationUtility   = true;
 
-  public UtilityTracker()
+  public UtilityTracker(ACTRRuntime runtime)
   {
+	super(runtime);
     _productionColumnIndices = new HashMap<IProduction, Integer>();
     _productionNamePatterns = new ArrayList<Pattern>();
     _utilities = new ArrayList<Double>();
@@ -233,7 +234,7 @@ public class UtilityTracker implements IInstrument, IParameterized
     try
     {
       _outputStream = new PrintWriter(new BufferedWriter(new FileWriter(
-          new File(ACTRRuntime.getRuntime().getWorkingDirectory(), _fileName))));
+          new File(UtilityTracker.this.getRuntime().getWorkingDirectory(), _fileName))));
 
       /*
        * output the header

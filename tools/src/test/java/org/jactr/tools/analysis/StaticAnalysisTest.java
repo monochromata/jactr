@@ -26,12 +26,12 @@ public class StaticAnalysisTest extends TestCase
   
   public void testAddition() throws Exception
   {
-    analyze("org/jactr/core/models/addition.jactr");
+    analyze("org/jactr/io/models/addition.jactr");
   }
   
   public void testSemantic() throws Exception
   {
-    analyze("org/jactr/core/runtime/semantic-model.jactr");
+    analyze("org/jactr/io/models/semantic-model.jactr");
   }
   
   private void analyze(String modelName) throws Exception

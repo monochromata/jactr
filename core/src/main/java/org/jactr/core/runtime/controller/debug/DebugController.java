@@ -72,12 +72,12 @@ public class DebugController extends DefaultController implements
   private IProceduralModuleListener                            _proceduralListener;
 
   private IModelListener                                       _modelListener;
-
+  
   private IACTRRuntimeListener                                 _runtimeListener;
 
-  public DebugController()
+  public DebugController(ACTRRuntime runtime)
   {
-    super();
+    super(runtime);
     _disabledProductions = new HashSet<IProduction>();
     _breakpoints = new HashMap<IModel, Map<BreakpointType, Collection<Object>>>();
 
@@ -273,7 +273,7 @@ public class DebugController extends DefaultController implements
   public void attach()
   {
     super.attach();
-    ACTRRuntime.getRuntime().addListener(_runtimeListener,
+    getRuntime().addListener(_runtimeListener,
         ExecutorServices.INLINE_EXECUTOR);
   }
 

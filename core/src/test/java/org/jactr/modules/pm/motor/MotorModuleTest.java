@@ -58,11 +58,11 @@ public class MotorModuleTest extends AbstractModuleTest
   int                        _productionFireCount = 0;
 
 	protected IModelFactory createModelFactory() {
-		return new MotorTestModelFactory();
+		return new MotorTestModelFactory(_runtime);
 	}
 	
 	protected ISensor createSensor(final INetworkingProvider netProvider) throws Exception {
-		return createKeyboardSensor(netProvider);
+		return createKeyboardSensor(_cr, netProvider);
 	}
 	
 	protected String getModelName() {

@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import org.commonreality.identifier.IIdentifier;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.IConditionalSlot;
 import org.jactr.core.slot.ISlot;
 import org.jactr.modules.pm.IPerceptualModule;
@@ -34,9 +35,9 @@ public abstract class AbstractSortedFeatureMap<T> extends AbstractFeatureMap<T>
 
   private Map<IIdentifier, T>            _currentValues;
 
-  public AbstractSortedFeatureMap(String requestSlotName, String crPropertyName)
+  public AbstractSortedFeatureMap(ACTRRuntime runtime, String requestSlotName, String crPropertyName)
   {
-    super(requestSlotName, crPropertyName);
+    super(runtime, requestSlotName, crPropertyName);
     _valueMap = new TreeMap<T, Set<IIdentifier>>();
     _currentValues = new HashMap<IIdentifier, T>();
   }

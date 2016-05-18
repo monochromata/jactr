@@ -23,6 +23,7 @@ import org.jactr.core.production.action.OutputAction;
 import org.jactr.core.production.action.RemoveAction;
 import org.jactr.core.production.condition.ChunkTypeCondition;
 import org.jactr.core.production.condition.QueryCondition;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.core.slot.DefaultVariableConditionalSlot;
 
@@ -36,8 +37,8 @@ public class SemanticModelFactory extends AbstractModelFactory {
 
 	protected IChunk g1, g2, g3;
 
-	public SemanticModelFactory() {
-		super("semantic");
+	public SemanticModelFactory(ACTRRuntime runtime) {
+		super(runtime, "semantic");
 	}
 
 	@Override

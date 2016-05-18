@@ -14,31 +14,25 @@
 package org.jactr.instrument;
 
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.IInitializable;
 import org.jactr.core.utils.IInstallable;
 
 /**
- * Description of the Interface
+ * An interface for instruments that can be added to models.
  * 
- * @author harrison
+ * <p>Classes implementing this interface need to provide a 1-argument
+ * constructor consuming an {@link org.jactr.core.runtime.ACTRRuntime} instance.</p>
  */
 public interface IInstrument extends IInstallable, IInitializable
 {
-
   /**
-   * Description of the Method
-   * 
-   * @param model
-   *          Description of the Parameter
+   * @return the runtime the instrument was created for.
    */
+  public ACTRRuntime getRuntime();
+	
   public void install(IModel model);
 
-  /**
-   * Description of the Method
-   * 
-   * @param model
-   *          Description of the Parameter
-   */
   public void uninstall(IModel model);
   
   
@@ -47,8 +41,7 @@ public interface IInstrument extends IInstallable, IInitializable
    * on the model thread. All model data will be available at this time. this 
    * method should excecute as quickly as possible so that all the model can start
    * running sooner. Any long running actions should likely be started during install
-   * and harvested by initialize()
-   *
+   * and harvested by initialize().
    */
   public void initialize();
 

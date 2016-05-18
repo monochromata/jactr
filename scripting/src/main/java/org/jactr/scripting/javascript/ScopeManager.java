@@ -30,8 +30,14 @@ import org.mozilla.javascript.ScriptableObject;
 public class ScopeManager
 {
 
+	/**
+	 * TODO: Should not be static because there might be more than one ACTRRuntime
+	 */
   private static Scriptable              _publicScope;
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   private static Map<IModel, Scriptable> _scopeMap = Collections
                                                        .synchronizedMap(new WeakHashMap<IModel, Scriptable>());
 

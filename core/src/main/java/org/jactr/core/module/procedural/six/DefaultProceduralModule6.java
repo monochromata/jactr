@@ -66,6 +66,7 @@ import org.jactr.core.production.condition.IBufferCondition;
 import org.jactr.core.production.condition.ICondition;
 import org.jactr.core.production.condition.VariableCondition;
 import org.jactr.core.production.six.DefaultProduction6;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
 
@@ -128,9 +129,9 @@ public class DefaultProceduralModule6 extends AbstractModule implements
 
   // private Collection<Map<String, Object>> _provisionalBindings;
 
-  public DefaultProceduralModule6()
+  public DefaultProceduralModule6(ACTRRuntime runtime)
   {
-    super("procedural");
+    super(runtime, "procedural");
     _allProductionsByName = new TreeMap<String, IProduction>();
     // _allProductionsByChunkType = new HashMap<IChunkType,
     // Collection<IProduction>>();
@@ -840,7 +841,7 @@ public class DefaultProceduralModule6 extends AbstractModule implements
      */
     _randomModule = (IRandomModule) getModel().getModule(IRandomModule.class);
     if (_randomModule == null)
-      _randomModule = DefaultRandomModule.getInstance();
+    	throw new IllegalStateException("The model must contain an "+IRandomModule.class.getName());
 
     /**
      * attach a little something to the buffers so we know when to clear

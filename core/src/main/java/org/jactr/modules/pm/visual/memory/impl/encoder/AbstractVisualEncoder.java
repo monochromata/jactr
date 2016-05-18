@@ -48,6 +48,9 @@ public abstract class AbstractVisualEncoder implements IPerceptualEncoder
   static private final transient Log          LOGGER   = LogFactory
                                                            .getLog(AbstractVisualEncoder.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private DefaultVisualPropertyHandler _handler = new DefaultVisualPropertyHandler();
 
   private final String                        _chunkTypeName;

@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.module.AbstractModule;
 import org.jactr.core.module.random.IRandomModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
 
@@ -40,22 +41,15 @@ public class DefaultRandomModule extends AbstractModule implements
   static private final Log     LOGGER   = LogFactory
                                             .getLog(DefaultRandomModule.class);
 
-  static private IRandomModule _default = new DefaultRandomModule();
-
-  static public IRandomModule getInstance()
-  {
-    return _default;
-  }
-
   private long   _seed;
 
   private Random _random;
 
   private double _timeRandomizer = 3;
 
-  public DefaultRandomModule()
+  public DefaultRandomModule(ACTRRuntime runtime)
   {
-    super("random");
+    super(runtime, "random");
     setSeed(System.currentTimeMillis());
   }
 

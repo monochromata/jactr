@@ -44,7 +44,7 @@ public class SerializerTest extends TestCase
     ArrayList<Exception> errors = new ArrayList<Exception>();
 
     CommonTree modelDesc = IOUtilities.loadModelFile(
-        "org/jactr/core/runtime/semantic-model.jactr", warnings, errors);
+        "org/jactr/io/models/semantic-model.jactr", warnings, errors);
 
     assertEquals(0, warnings.size());
     assertEquals(0, errors.size());

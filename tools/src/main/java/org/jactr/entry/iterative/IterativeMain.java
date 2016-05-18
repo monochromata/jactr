@@ -99,7 +99,7 @@ public class IterativeMain
     return doc;
   }
 
-  public void iteration(final int index, int total, Document environment,
+  public void iteration(final File workingDir, final int index, int total, Document environment,
       URL envURL, final Collection<IIterativeRunListener> listeners,
       final PrintWriter log) throws TerminateIterativeRunException
   {
@@ -150,11 +150,9 @@ public class IterativeMain
      * now we actually do that vodoo that we do to set up the environment this
      * will build the models, instruments, and set up common reality..
      */
-    ep.process(environment, modelDescriptors);
+    ACTRRuntime runtime = ep.process(workingDir, environment, modelDescriptors);
 
     modelDescriptors.clear();
-
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
 
     Collection<IModel> models = runtime.getModels();
 
@@ -226,7 +224,7 @@ public class IterativeMain
              * from here we try to stop the runtime, but do not block.. that
              * would be disasterous
              */
-            IController controller = ACTRRuntime.getRuntime().getController();
+            IController controller = runtime.getController();
             controller.stop();
           }
         }
@@ -399,7 +397,7 @@ public class IterativeMain
     }
   }
 
-  public void run(URL url)
+  public void run(final URL url, final File rootDir)
   {
     Collection<IIterativeRunListener> listeners = Collections.EMPTY_LIST;
 
@@ -415,7 +413,6 @@ public class IterativeMain
       else
         id = "-" + id;
 
-      File rootDir = ACTRRuntime.getRuntime().getWorkingDirectory();
       PrintWriter log = new PrintWriter(new FileWriter("iterative-log" + id
           + ".xml"));
       log.println("<iterative-run total=\"" + iterations + "\">");
@@ -449,10 +446,8 @@ public class IterativeMain
         /*
          * create a new working directory
          */
-        File workingDir = new File(rootDir, "run-" + i);
+        final File workingDir = new File(rootDir, "run-" + i);
         workingDir.mkdirs();
-
-        ACTRRuntime.getRuntime().setWorkingDirectory(workingDir);
 
         log.println(" <run itr=\"" + i + "\" start=\""
             + format.format(new Date()) + "\">");
@@ -460,11 +455,11 @@ public class IterativeMain
         try
         {
           /*
-           * let's do it.
+           * let's do it.ACTRRuntime.getRuntime()
            */
           if (_aggressiveGC) System.gc();
 
-          iteration(i, iterations, environment, url, listeners, log);
+          iteration(workingDir, i, iterations, environment, url, listeners, log);
 
           if (_aggressiveGC) System.gc();
         }
@@ -549,7 +544,7 @@ public class IterativeMain
     {
       URL url = new URL(args[0]);
       IterativeMain entryPoint = new IterativeMain();
-      entryPoint.run(url);
+      entryPoint.run(url, ACTRRuntime.DEFAULT_WORKING_DIRECTORY);
     }
     catch (Exception e)
     {

@@ -16,6 +16,7 @@ import org.jactr.core.production.IInstantiation;
 import org.jactr.core.production.VariableBindings;
 import org.jactr.core.production.action.DefaultSlotAction;
 import org.jactr.core.production.action.IAction;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.ISlot;
 
 public class InjectPerceptsAction extends DefaultSlotAction
@@ -28,21 +29,25 @@ public class InjectPerceptsAction extends DefaultSlotAction
 
   static private final String        RESOURCE_SLOT = "resource";
 
+  private final ACTRRuntime			 _runtime;
+  
   private final XMLSensor            _sensor;
 
   private final URL                  _resource;
 
-  public InjectPerceptsAction()
+  public InjectPerceptsAction(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _sensor = null;
     _resource = null;
   }
 
-  public InjectPerceptsAction(VariableBindings variableBindings,
+  public InjectPerceptsAction(ACTRRuntime runtime, VariableBindings variableBindings,
       Collection<? extends ISlot> slots, URL resource, XMLSensor sensor)
       throws CannotInstantiateException
   {
     super(variableBindings, slots);
+    _runtime = runtime;
     _sensor = sensor;
     _resource = resource;
   }
@@ -84,7 +89,7 @@ public class InjectPerceptsAction extends DefaultSlotAction
      */
 
     XMLSensor xmlSensor = null;
-    for (ISensor sensor : CommonReality.getSensors())
+    for (ISensor sensor : _runtime.getCommonReality().getSensors())
       if (sensor instanceof XMLSensor)
       {
         xmlSensor = (XMLSensor) sensor;
@@ -94,7 +99,7 @@ public class InjectPerceptsAction extends DefaultSlotAction
     if (xmlSensor == null)
       throw new CannotInstantiateException("No XMLSensor installed");
 
-    return new InjectPerceptsAction(variableBindings, getSlots(), resourceURL,
+    return new InjectPerceptsAction(_runtime, variableBindings, getSlots(), resourceURL,
         xmlSensor);
   }
 

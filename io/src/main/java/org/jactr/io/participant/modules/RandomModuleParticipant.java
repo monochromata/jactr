@@ -13,7 +13,6 @@
  */
 package org.jactr.io.participant.modules;
 
-import java.net.URL;
 import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
@@ -22,9 +21,6 @@ import org.jactr.core.module.random.IRandomModule;
 import org.jactr.core.module.random.six.DefaultRandomModule;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
-/**
- * 
- */
 public class RandomModuleParticipant extends BasicASTParticipant
 {
   /**
@@ -35,7 +31,6 @@ public class RandomModuleParticipant extends BasicASTParticipant
 
   public RandomModuleParticipant()
   {
-    super((URL) null);
     setInstallableClass(DefaultRandomModule.class);
     TreeMap<String, String> parameters = new TreeMap<String, String>();
     // can't use this to set a random value since this is a singleton object

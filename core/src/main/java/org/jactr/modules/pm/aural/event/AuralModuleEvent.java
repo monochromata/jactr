@@ -61,7 +61,7 @@ public class AuralModuleEvent extends
 
   public AuralModuleEvent(IAuralModule source, Type type)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel())
+    super(source, source.getRuntime().getClock(source.getModel())
         .getTime());
     _type = type;
   }

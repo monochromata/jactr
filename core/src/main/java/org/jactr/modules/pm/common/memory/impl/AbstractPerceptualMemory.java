@@ -595,7 +595,7 @@ public abstract class AbstractPerceptualMemory implements IPerceptualMemory
     FastList<IIdentifier> candidateIdentifiers = FastList.newInstance();
     getCandidateIdentifiers(request, featureMaps, candidateIdentifiers);
 
-    IAgent agent = ACTRRuntime.getRuntime().getConnector()
+    IAgent agent = getModule().getRuntime().getConnector()
         .getAgent(getModule().getModel());
 
     if (agent == null)

@@ -55,7 +55,7 @@ public class RetrievalModuleEvent extends
 
   public RetrievalModuleEvent(IRetrievalModule source, ChunkTypeRequest pattern)
   {
-    this(source, ACTRRuntime.getRuntime().getClock(source.getModel()).getTime());
+    this(source, source.getRuntime().getClock(source.getModel()).getTime());
     _type = Type.INITIATED;
     _request = pattern;
   }
@@ -88,7 +88,7 @@ public class RetrievalModuleEvent extends
       ChunkTypeRequest pattern, IChunk chunk, double retrievalTime,
       Collection<IChunk> allCandidates)
   {
-    this(source, ACTRRuntime.getRuntime().getClock(source.getModel()).getTime());
+    this(source, source.getRuntime().getClock(source.getModel()).getTime());
     _type = Type.COMPLETED;
     _request = pattern;
     _chunk = chunk;

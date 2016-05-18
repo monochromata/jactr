@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.commonreality.modalities.visual.DefaultVisualPropertyHandler;
 import org.commonreality.modalities.visual.IVisualPropertyHandler;
 import org.commonreality.object.IAfferentObject;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.common.memory.map.AbstractSortedFeatureMap;
 
 public abstract class AbstractSortedVisualFeatureMap<T> extends
@@ -20,6 +21,9 @@ public abstract class AbstractSortedVisualFeatureMap<T> extends
   static private final transient Log     LOGGER = LogFactory
                                                     .getLog(AbstractSortedVisualFeatureMap.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private final DefaultVisualPropertyHandler _propertyHandler = new DefaultVisualPropertyHandler();
 
   static protected IVisualPropertyHandler getHandler()
@@ -27,10 +31,10 @@ public abstract class AbstractSortedVisualFeatureMap<T> extends
     return _propertyHandler;
   }
 
-  public AbstractSortedVisualFeatureMap(String requestSlotName,
+  public AbstractSortedVisualFeatureMap(ACTRRuntime runtime, String requestSlotName,
       String crPropertyName)
   {
-    super(requestSlotName, crPropertyName);
+    super(runtime, requestSlotName, crPropertyName);
   }
 
   public boolean isInterestedIn(IAfferentObject object)

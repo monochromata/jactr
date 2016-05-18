@@ -171,7 +171,7 @@ public class DefaultPerceptListener implements IActivePerceptListener
       if (LOGGER.isDebugEnabled()) LOGGER.debug(msg);
     }
 
-    double start = ACTRRuntime.getRuntime().getClock(model).getTime();
+    double start = _module.getRuntime().getClock(model).getTime();
 
     /*
      * now we need to set the buffer as busy for 50ms

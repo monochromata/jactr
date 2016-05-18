@@ -13,8 +13,16 @@
  */
 package org.jactr.core.runtime;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.function.Function;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.logging.Logger;
 import org.jactr.core.logging.impl.DefaultModelLogger;
@@ -24,11 +32,9 @@ import org.jactr.core.models.SemanticModelFactory;
 import org.jactr.core.runtime.controller.DefaultController;
 import org.jactr.core.runtime.controller.IController;
 import org.jactr.core.slot.ISlot;
+import org.junit.Test;
 
-import junit.framework.AssertionFailedError;
-import junit.framework.TestCase;
-
-public class ModelExecutionTest extends TestCase
+public class ModelExecutionTest
 {
 
   /**
@@ -38,23 +44,11 @@ public class ModelExecutionTest extends TestCase
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(ModelExecutionTest.class);
 
-  @Override
-  protected void setUp() throws Exception
-  {
-    super.setUp();
-  }
-
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-  }
-
-  protected IModel configureModel(IModel model)
+  protected IModel configureModel(ACTRRuntime runtime, IModel model)
   {
 
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Attaching logger");
-    org.jactr.core.logging.impl.DefaultModelLogger dml = new DefaultModelLogger();
+    org.jactr.core.logging.impl.DefaultModelLogger dml = new DefaultModelLogger(runtime);
 
     // dml.setParameter(Logger.CYCLE,"out");
     dml.setParameter(Logger.Stream.TIME.toString(), "out");
@@ -75,14 +69,13 @@ public class ModelExecutionTest extends TestCase
     return model;
   }
 
-  protected void testModel(IModel model, String goalName, String slotToCheck,
+  private void testModel(ACTRRuntime runtime, IModel model, String goalName, String slotToCheck,
       IChunk slotValue) throws Exception
   {
     LOGGER
         .debug("======================================================================");
     LOGGER.debug("Testing model for goal " + goalName);
 
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
     IController controller = runtime.getController();
 
     IChunk goal = model.getDeclarativeModule().getChunk(goalName).get();
@@ -120,50 +113,52 @@ public class ModelExecutionTest extends TestCase
         .getSymbolicChunk().getSlot(slotToCheck);
     LOGGER.debug("Comparing " + slot.getValue() + " to " + slotValue);
 
-    try
-    {
-      assertTrue("Comparing " + slot.getValue() + " to " + slotValue, slot
-          .equalValues(slotValue));
-    }
-    catch (AssertionFailedError afe)
-    {
-      throw afe;
-    }
+    assertTrue("Comparing " + slot.getValue() + " to " + slotValue, slot
+      .equalValues(slotValue));
   }
 
-  private void testSemanticModel(IModel model, String slotToCheck)
+  private void testSemanticModel(Function<ACTRRuntime,IModel> modelSupplier, String slotToCheck)
       throws Exception
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    runtime.setController(new DefaultController());
-
-    configureModel(model);
-
-    IChunk yes = model.getDeclarativeModule().getChunk("yes").get();
-    IChunk no = model.getDeclarativeModule().getChunk("no").get();
-    assertNotNull(yes);
-    assertNotNull(no);
-
     String[] goalNames = { "g1", "g2", "g3" };
-    IChunk[] slotValues = { yes, yes, no };
+    String[] slotValues = { "yes", "yes", "no" };
 
     for (int i = 0; i < goalNames.length; i++)
     {
+      ACTRRuntime runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+      runtime.setController(new DefaultController(runtime));
+    	
+      IModel model = modelSupplier.apply(runtime);
+      configureModel(runtime, model);
+
+      IChunk yes = model.getDeclarativeModule().getChunk("yes").get();
+      IChunk no = model.getDeclarativeModule().getChunk("no").get();
+      assertNotNull(yes);
+      assertNotNull(no);
+    	
       runtime.addModel(model);
       assertTrue(runtime.getModels().size() == 1);
 
-      testModel(model, goalNames[i], slotToCheck, slotValues[i]);
+      testModel(runtime, model, goalNames[i], slotToCheck, slotValues[i]=="yes"?yes:no);
 
       runtime.removeModel(model);
-    }
 
-    model.dispose();
-    runtime.setController(null);
+      model.dispose();
+      runtime.setController(null);
+      runtime = null;
+    }
   }
 
+  @Test
   public void testJactrSemanticModel() throws Exception
   {
-    testSemanticModel(new SemanticModelFactory().createAndInitializeModel(),
+    testSemanticModel(runtime -> { 
+	    	try {
+				return new SemanticModelFactory(runtime).createAndInitializeModel();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+    	},
         "judgement");
   }
 

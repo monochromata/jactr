@@ -5,18 +5,20 @@ package org.jactr.tools.experiment.parser.handlers;
  */
 import java.util.function.Consumer;
 
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
 import org.jactr.tools.experiment.actions.IAction;
 import org.jactr.tools.experiment.actions.common.LogAction;
 import org.w3c.dom.Element;
 
 /**
- * checks for <log message="....."/>, with an optional attribute,
+ * checks for {@code <log message="....."/>}, with an optional attribute,
  * destination="out|err|null". The system property "LogAction.destination" can
  * be set to out, err, or null, and will override the log tag defined
- * definition.<br/>
- * out and err redirect to stdout and stderr. null will silently consume all the
- * log messages.
+ * definition.
+ * 
+ * <p>out and err redirect to stdout and stderr. null will silently consume all the
+ * log messages.</p>
  * 
  * @author harrison
  */
@@ -27,14 +29,14 @@ public class LogHandler implements INodeHandler<IAction>
     return "log";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     String message = element.getAttribute("message");
     boolean hasDestination = element.hasAttribute("destination")
         || System.getProperty("LogAction.destination") != null;
 
     if (!hasDestination)
-      return new LogAction(message, experiment);
+      return new LogAction(runtime, message, experiment);
     else
     {
       String destination = System.getProperty("LogAction.destination", "");
@@ -49,7 +51,7 @@ public class LogHandler implements INodeHandler<IAction>
         consumer = LogAction.STDERR;
       else if (destination.equalsIgnoreCase("null")) consumer = LogAction.NULL;
 
-      return new LogAction(message, experiment, consumer);
+      return new LogAction(runtime, message, experiment, consumer);
     }
   }
 

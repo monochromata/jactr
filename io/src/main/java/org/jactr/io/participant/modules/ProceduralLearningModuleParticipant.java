@@ -13,7 +13,6 @@
  */
 package org.jactr.io.participant.modules;
 
-import java.net.URL;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,14 +23,10 @@ import org.jactr.core.module.procedural.six.learning.DefaultProceduralLearningMo
 import org.jactr.core.module.procedural.six.learning.IProceduralLearningModule6;
 import org.jactr.io.participant.impl.BasicASTParticipant;
 
-/**
- * 
- */
 public class ProceduralLearningModuleParticipant extends BasicASTParticipant
 {
   public ProceduralLearningModuleParticipant()
   {
-    super((URL) null);
     setInstallableClass(DefaultProceduralLearningModule6.class);
     Map<String, String> parameters = new TreeMap<String, String>();
     parameters.put(IProceduralLearningModule.PARAMETER_LEARNING_RATE, "0.2");

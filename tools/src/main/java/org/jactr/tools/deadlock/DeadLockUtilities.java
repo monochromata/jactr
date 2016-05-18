@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.time.impl.ClockInterrogator;
 import org.commonreality.util.LockUtilities;
+import org.jactr.core.runtime.ACTRRuntime;
 
 public class DeadLockUtilities
 {
@@ -79,7 +80,7 @@ public class DeadLockUtilities
    * 
    * @param output TODO
    */
-  public static void dumpThreads(String output)
+  public static void dumpThreads(ACTRRuntime runtime, String output)
   {
 
     try
@@ -128,7 +129,7 @@ public class DeadLockUtilities
 
       pw.println();
       pw.println("Clock information: ");
-      pw.println(ClockInterrogator.getAllClockDetails());
+      pw.println(ClockInterrogator.getAllClockDetails(runtime.getCommonReality()));
 
       pw.println();
       pw.println(LockUtilities.getLockInfo());

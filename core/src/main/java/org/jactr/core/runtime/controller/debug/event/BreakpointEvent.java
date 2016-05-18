@@ -33,7 +33,7 @@ public class BreakpointEvent extends
 
   public BreakpointEvent(IModel model, BreakpointType type, Object details)
   {
-    super(model, ACTRRuntime.getRuntime().getClock(model).getTime());
+    super(model, model.getRuntime().getClock(model).getTime());
     _type = type;
     _details = details;
   }

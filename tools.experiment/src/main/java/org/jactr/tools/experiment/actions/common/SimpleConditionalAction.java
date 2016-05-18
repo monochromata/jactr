@@ -8,13 +8,15 @@ import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.actions.IAction;
 import org.jactr.tools.experiment.actions.ICompositeAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.w3c.dom.Element;
 
-public class SimpleConditionalAction implements ICompositeAction
+public class SimpleConditionalAction extends AbstractAction implements ICompositeAction
 {
   /**
    * Logger definition
@@ -34,8 +36,9 @@ public class SimpleConditionalAction implements ICompositeAction
 
   private ComparisonType _comparison = ComparisonType.EQUAL;
 
-  public SimpleConditionalAction(Element element, IExperiment experiment)
+  public SimpleConditionalAction(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
+	super(runtime);
     _experiment = experiment;
     if (element.hasAttribute("equals"))
       _comparisonValue = element.getAttribute("equals");

@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.agents.IAgent;
 import org.commonreality.agents.ThinAgent;
+import org.commonreality.reality.CommonReality;
 import org.commonreality.time.IClock;
 import org.commonreality.util.LockUtilities;
 import org.jactr.core.model.IModel;
@@ -25,18 +26,22 @@ public class EmbedConnector extends LocalConnector
 
   static private final String        EMBED_AGENT_KEY = "embedConnector.thinAgent";
 
+  private final ACTRRuntime          _runtime;
+  
   private boolean                    _running        = false;
 
   private ReentrantReadWriteLock     _lock           = new ReentrantReadWriteLock();
 
-  public EmbedConnector()
+  public EmbedConnector(ACTRRuntime runtime)
   {
-    super();
+    super(runtime);
+    _runtime=runtime;
   }
 
-  public EmbedConnector(boolean useIndependentClocks)
+  public EmbedConnector(ACTRRuntime runtime, boolean useIndependentClocks)
   {
-    super(useIndependentClocks);
+    super(runtime, useIndependentClocks);
+    _runtime = runtime;
   }
 
   @Override
@@ -119,14 +124,13 @@ public class EmbedConnector extends LocalConnector
     {
       LockUtilities.runLocked(_lock.writeLock(), () -> {
         if (!_running)
-          for (IModel model : ACTRRuntime.getRuntime().getModels())
+          for (IModel model : _runtime.getModels())
             connect(model);
         _running = true;
       });
     }
     catch (InterruptedException e)
     {
-      // TODO Auto-generated catch block
       LOGGER.error("EmbedConnector.start threw InterruptedException : ", e);
     }
   }
@@ -137,7 +141,7 @@ public class EmbedConnector extends LocalConnector
     try
     {
       LockUtilities.runLocked(_lock.writeLock(), () -> {
-        if (_running) for (IModel model : ACTRRuntime.getRuntime().getModels())
+        if (_running) for (IModel model : _runtime.getModels())
           disconnect(model);
         _running = false;
       });
@@ -151,7 +155,7 @@ public class EmbedConnector extends LocalConnector
 
   protected void startThinAgent(IModel model, IClock clock)
   {
-    ThinAgent agent = new ThinAgent(model.getName(), clock);
+    ThinAgent agent = new ThinAgent(model.getRuntime().getCommonReality(), model.getName(), clock);
 
     try
     {

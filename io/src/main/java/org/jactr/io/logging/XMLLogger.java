@@ -25,15 +25,16 @@ import org.jactr.core.logging.ILogger;
 import org.jactr.core.logging.LogEvent;
 import org.jactr.core.logging.Logger;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 
 /**
  * dumps model log information to an xml fiile
  * 
  * 
  */
-public class XMLLogger implements IInstrument, ILogger, IParameterized
+public class XMLLogger extends AbstractInstrument implements ILogger, IParameterized
 {
   /**
    * logger definition
@@ -48,31 +49,26 @@ public class XMLLogger implements IInstrument, ILogger, IParameterized
 
   private Collection<IModel> _models;
 
-  public XMLLogger()
+  public XMLLogger(ACTRRuntime runtime)
   {
+	super(runtime);
     setParameter(FILE_NAME, "log.xml");
     _models = new ArrayList<IModel>();
   }
 
-  /**
-   * @see org.jactr.instrument.IInstrument#initialize()
-   */
+  @Override
   public void initialize()
   {
   }
 
-  /**
-   * @see org.jactr.instrument.IInstrument#install(org.jactr.core.model.IModel)
-   */
+  @Override
   public void install(IModel model)
   {
     Logger.addLogger(model, this);
     _models.add(model);
   }
 
-  /**
-   * @see org.jactr.instrument.IInstrument#uninstall(org.jactr.core.model.IModel)
-   */
+  @Override
   public void uninstall(IModel model)
   {
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Uninstalling logger");
@@ -86,9 +82,7 @@ public class XMLLogger implements IInstrument, ILogger, IParameterized
     }
   }
 
-  /**
-   * @see org.jactr.core.logging.ILogger#log(org.jactr.core.logging.LogEvent)
-   */
+  @Override
   public void log(LogEvent logEvent)
   {
     try
@@ -106,40 +100,32 @@ public class XMLLogger implements IInstrument, ILogger, IParameterized
     }
   }
   
+  @Override
   public void flush()
   {
     _output.flush();
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getParameter(java.lang.String)
-   */
+  @Override
   public String getParameter(String key)
   {
     if (FILE_NAME.equalsIgnoreCase(key)) return _fileName;
     return null;
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getPossibleParameters()
-   */
+  @Override
   public Collection<String> getPossibleParameters()
   {
     return Collections.singleton(FILE_NAME);
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#getSetableParameters()
-   */
+  @Override
   public Collection<String> getSetableParameters()
   {
     return getPossibleParameters();
   }
 
-  /**
-   * @see org.jactr.core.utils.parameter.IParameterized#setParameter(java.lang.String,
-   *      java.lang.String)
-   */
+  @Override
   public void setParameter(String key, String value)
   {
     if (FILE_NAME.equalsIgnoreCase(key)) try

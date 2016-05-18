@@ -25,7 +25,12 @@ public class PunchTranslator extends AbstractManualTranslator
    */
   static final transient Log LOGGER = LogFactory.getLog(PunchTranslator.class);
 
-  public boolean handles(ChunkTypeRequest request)
+  public PunchTranslator(ACTRRuntime runtime)
+  {
+	super(runtime);
+  }
+
+public boolean handles(ChunkTypeRequest request)
   {
     try
     {
@@ -51,7 +56,7 @@ public class PunchTranslator extends AbstractManualTranslator
   {
     try
     {
-      IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+      IAgent agent = getRuntime().getConnector().getAgent(model);
       IMotorModule motor = (IMotorModule) model.getModule(IMotorModule.class);
       /*
        * we need a compound, a press and a release

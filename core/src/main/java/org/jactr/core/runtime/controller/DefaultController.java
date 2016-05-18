@@ -38,6 +38,8 @@ public class DefaultController implements IController
 
   final private RuntimeState         _state;
 
+  final private ACTRRuntime 		 _runtime;
+  
   final private RuntimeListener      _runtimeListener;
 
   final private ModelListener        _modelListener;
@@ -48,9 +50,10 @@ public class DefaultController implements IController
 
   final private Set<ExecutorService> _executors     = new HashSet<ExecutorService>();
 
-  public DefaultController()
+  public DefaultController(ACTRRuntime runtime)
   {
-    _state = new RuntimeState();
+	_runtime = runtime;
+    _state = new RuntimeState(runtime);
     _runtimeListener = new RuntimeListener(_state) {
       @Override
       public void modelAdded(ACTRRuntimeEvent event)
@@ -89,15 +92,21 @@ public class DefaultController implements IController
     _modelListener = new ModelListener(_state);
   }
 
+  @Override
+  public ACTRRuntime getRuntime()
+  {
+	return _runtime;
+  }
+  
   public void attach()
   {
-    ACTRRuntime.getRuntime().addListener(_runtimeListener,
+    _runtime.addListener(_runtimeListener,
         ExecutorServices.INLINE_EXECUTOR);
   }
 
   public void detach()
   {
-    ACTRRuntime.getRuntime().removeListener(_runtimeListener);
+    _runtime.removeListener(_runtimeListener);
   }
 
   public Collection<IModel> getRunningModels()
@@ -140,8 +149,7 @@ public class DefaultController implements IController
   {
     if (_state.isRunning()) return _runtimeListener.getStartFuture();
 
-    ArrayList<IModel> models = new ArrayList<IModel>(ACTRRuntime.getRuntime()
-        .getModels());
+    ArrayList<IModel> models = new ArrayList<IModel>(_runtime.getModels());
 
     if (models.size() == 0 && LOGGER.isWarnEnabled())
       LOGGER.warn("No models to execute");
@@ -177,7 +185,6 @@ public class DefaultController implements IController
     Runnable actual = new Runnable() {
       public void run()
       {
-        ACTRRuntime runtime = ACTRRuntime.getRuntime();
         try
         {
           _lock.lock();
@@ -204,8 +211,8 @@ public class DefaultController implements IController
         }
         finally
         {
-          if (runtime.hasListeners())
-            runtime.dispatch(new ACTRRuntimeEvent(model,
+          if (_runtime.hasListeners())
+            _runtime.dispatch(new ACTRRuntimeEvent(model,
                 ACTRRuntimeEvent.Type.MODEL_STOPPED, null));
 
           destroyModelRunnable(model, runner);

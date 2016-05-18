@@ -4,19 +4,20 @@ import org.jactr.core.fluent.IActionSlotsBuilder;
 import org.jactr.core.fluent.IActionsBuilder;
 import org.jactr.core.fluent.IConditionsBuilder;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.visual.VisualModuleTestFactory;
 import org.jactr.modules.pm.vocal.six.DefaultVocalModule6;
 
 public class VocalModuleTestFactory extends VisualModuleTestFactory {
 
-	public VocalModuleTestFactory() {
-		super("vocal-test");
+	public VocalModuleTestFactory(ACTRRuntime runtime) {
+		super(runtime, "vocal-test");
 	}
 
 	@Override
 	protected void installModules(IModel model) {
 		super.installModules(model);
-		model.install(new DefaultVocalModule6());
+		model.install(new DefaultVocalModule6(getRuntime()));
 	}
 	
 	@Override

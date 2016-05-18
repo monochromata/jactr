@@ -5,6 +5,7 @@ package org.jactr.tools.masterslave.clock;
  */
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
 import org.commonreality.time.IClock;
 import org.commonreality.time.impl.OwnedClock;
 
@@ -25,9 +26,9 @@ public class MasterSlaveClock extends OwnedClock// SharedClock
 
   private volatile boolean           _firstOut = true;
 
-  public MasterSlaveClock(IClock primary, Thread primaryOwner)
+  public MasterSlaveClock(CommonReality cr, IClock primary, Thread primaryOwner)
   {
-    super(0.05);
+    super(cr, 0.05);
     _primaryClock = primary;
     _primaryOwner = primaryOwner;
     // addOwner(primaryOwner);

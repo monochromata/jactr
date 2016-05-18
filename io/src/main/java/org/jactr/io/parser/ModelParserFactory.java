@@ -28,6 +28,9 @@ import org.apache.commons.logging.LogFactory;
 public class ModelParserFactory
 {
 
+	/**
+	 * TODO: Should not be static because there might be more than one ACTRRuntime
+	 */
   static private Map<String, Class< ? extends IModelParser>> _parsers;
 
   static private Log                                         LOGGER = LogFactory

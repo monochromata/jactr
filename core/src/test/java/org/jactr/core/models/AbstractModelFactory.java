@@ -18,8 +18,10 @@ import org.jactr.core.module.goal.six.DefaultGoalModule6;
 import org.jactr.core.module.imaginal.six.DefaultImaginalModule6;
 import org.jactr.core.module.procedural.IProceduralModule;
 import org.jactr.core.module.procedural.six.DefaultProceduralModule6;
+import org.jactr.core.module.random.six.DefaultRandomModule;
 import org.jactr.core.module.retrieval.six.DefaultRetrievalModule6;
 import org.jactr.core.production.IProduction;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.modules.pm.aural.six.DefaultAuralModule6;
@@ -39,17 +41,23 @@ import org.jactr.modules.pm.vocal.six.DefaultVocalModule6;
  */
 public abstract class AbstractModelFactory implements IModelFactory {
 
+	private final ACTRRuntime runtime;
 	private final String modelName;
 
 	private IChunkType chunk, command, color;
 
-	protected AbstractModelFactory(String modelName) {
+	protected AbstractModelFactory(ACTRRuntime runtime, String modelName) {
+		this.runtime = runtime;
 		this.modelName = modelName;
+	}
+	
+	protected ACTRRuntime getRuntime() {
+		return runtime;
 	}
 
 	@Override
 	public IModel createAndInitializeModel() throws Exception {
-		IModel model = new BasicModel(modelName);
+		IModel model = new BasicModel(getRuntime(), modelName);
 		installModules(model);
 		populateDeclarativeMemory(model);
 		populateProceduralMemory(model);
@@ -60,10 +68,11 @@ public abstract class AbstractModelFactory implements IModelFactory {
 	}
 
 	protected void installModules(IModel model) {
-		model.install(new DefaultDeclarativeModule6());
-		model.install(new DefaultProceduralModule6());
-		model.install(new DefaultGoalModule6());
-		model.install(new DefaultRetrievalModule6());
+		model.install(new DefaultDeclarativeModule6(getRuntime()));
+		model.install(new DefaultProceduralModule6(getRuntime()));
+		model.install(new DefaultGoalModule6(getRuntime()));
+		model.install(new DefaultRetrievalModule6(getRuntime()));
+		model.install(new DefaultRandomModule(getRuntime()));
 	}
 
 	protected void populateDeclarativeMemory(IModel model) throws InterruptedException, ExecutionException {

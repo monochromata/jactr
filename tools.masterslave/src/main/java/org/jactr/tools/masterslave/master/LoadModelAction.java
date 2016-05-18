@@ -101,7 +101,7 @@ public class LoadModelAction extends DefaultSlotAction
     try
     {
       MasterExtension me = MasterExtension.getMaster(instantiation.getModel());
-      me.loadModelAs(_location, _alias);
+      me.loadModelAs(instantiation.getModel().getRuntime(), _location, _alias);
     }
     catch (Exception e)
     {

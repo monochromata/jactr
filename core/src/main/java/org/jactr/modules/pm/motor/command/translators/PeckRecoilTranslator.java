@@ -25,6 +25,11 @@ public class PeckRecoilTranslator extends PeckTranslator
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(PeckRecoilTranslator.class);
 
+  public PeckRecoilTranslator(ACTRRuntime runtime)
+  {
+	super(runtime);
+  }
+
   @Override
   public boolean handles(ChunkTypeRequest request)
   {
@@ -53,7 +58,7 @@ public class PeckRecoilTranslator extends PeckTranslator
   {
     try
     {
-      IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+      IAgent agent = getRuntime().getConnector().getAgent(model);
       IMotorModule motor = (IMotorModule) model.getModule(IMotorModule.class);
 
       /*

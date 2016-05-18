@@ -66,11 +66,11 @@ public class DefaultAuralMemory extends AbstractPerceptualMemory implements
     addFilter(new NumericIndexFilter(IAuralModule.ELEVATION_SLOT, true));
     addFilter(new AttendedAudioEventFilter());
     
-    addFeatureMap(new OnsetFeatureMap());
-    addFeatureMap(new OffsetFeatureMap());
-    addFeatureMap(new KindFeatureMap());
-    addFeatureMap(new DurationFeatureMap());
-    addFeatureMap(new AudibleFeatureMap());
+    addFeatureMap(new OnsetFeatureMap(module.getRuntime()));
+    addFeatureMap(new OffsetFeatureMap(module.getRuntime()));
+    addFeatureMap(new KindFeatureMap(module.getRuntime()));
+    addFeatureMap(new DurationFeatureMap(module.getRuntime()));
+    addFeatureMap(new AudibleFeatureMap(module.getRuntime()));
     addFeatureMap(new FINSTAuralFeatureMap(module.getModel()));
 
     addEncoder(new SpeechAuralEncoder());

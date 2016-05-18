@@ -19,18 +19,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.agents.IAgent;
+import org.commonreality.reality.CommonReality;
 import org.commonreality.time.IClock;
 import org.commonreality.time.impl.BasicClock;
 import org.commonreality.time.impl.OwnedClock;
 import org.commonreality.time.impl.OwnedClock.OwnedAuthoritativeClock;
 import org.commonreality.time.impl.WrappedClock;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 
 /**
  * local connector responsible for providing the clocks to the models, and any
  * and all attachment handling for the non-existant perceptual interfaces.
- * 
- * 
  */
 public class LocalConnector implements IConnector
 {
@@ -39,10 +39,15 @@ public class LocalConnector implements IConnector
    */
   static private final Log     LOGGER                        = LogFactory
                                                                  .getLog(LocalConnector.class);
-
+	/**
+	 * TODO: Should not be static because there might be more than one ACTRRuntime 
+	 */
   static private final boolean _enableIndependentClocks      = Boolean
                                                                  .getBoolean("connector.independentClocks");
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private boolean       _warnedAboutIndependentClocks = false;
 
   private final OwnedClock     _defaultClock;
@@ -58,12 +63,12 @@ public class LocalConnector implements IConnector
    * effectively new
    * LocalConnector(Boolean.getBoolean("connector.independentClocks"))
    */
-  public LocalConnector()
+  public LocalConnector(final ACTRRuntime runtime)
   {
-    this(_enableIndependentClocks);
+    this(runtime, _enableIndependentClocks);
   }
 
-  public LocalConnector(boolean useIndependentClocks)
+  public LocalConnector(final ACTRRuntime runtime, boolean useIndependentClocks)
   {
     if (!_warnedAboutIndependentClocks && useIndependentClocks)
     {
@@ -74,7 +79,7 @@ public class LocalConnector implements IConnector
     }
     _useIndependentClocks = useIndependentClocks;
 
-    _defaultClock = new OwnedClock(0.05);
+    _defaultClock = new OwnedClock(runtime.getCommonReality(), 0.05);
     _clocks = new ConcurrentHashMap<IModel, IClock>();
     setClockConfigurator(new IClockConfigurator() {
 
@@ -88,7 +93,7 @@ public class LocalConnector implements IConnector
         if (!_useIndependentClocks)
           return new WrappedClock(defaultClock);
         else
-          return new BasicClock(true, model.getProceduralModule()
+          return new BasicClock(runtime.getCommonReality(), true, model.getProceduralModule()
               .getDefaultProductionFiringTime());
       }
 

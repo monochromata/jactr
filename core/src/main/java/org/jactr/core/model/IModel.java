@@ -27,6 +27,7 @@ import org.jactr.core.module.IModule;
 import org.jactr.core.module.declarative.IDeclarativeModule;
 import org.jactr.core.module.procedural.IProceduralModule;
 import org.jactr.core.queue.TimedEventQueue;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.IAdaptable;
 import org.jactr.core.utils.IInitializable;
 import org.jactr.core.utils.IMetaContainer;
@@ -39,11 +40,23 @@ import org.jactr.instrument.IInstrument;
  * IProceduralModule at minimal to run. IModules and IExtensions can only be
  * installed, never removed - at least at this level of abstraction.
  * 
- * 
+ * <p>Classes implementing this interface need to provide a constructor that
+ * consumes an {@link ACTRRuntime} instance.</p>
  */
 public interface IModel extends IParameterized, IMetaContainer, IInitializable,
     IAdaptable
 {
+	
+  /**
+   * Provide access to the ACT-R runtime to which the model is intended to be added,
+   * is currently added or had previously been added.
+   * 
+   * <p>This method returns the same object reference over the entire lifetime
+   * of a model.</p>
+   * 
+   * @return the ACT-R runtime, never {@code null}.
+   */
+  public ACTRRuntime getRuntime();
 
   /**
    * initialize the model. This will call the initialize methods on all

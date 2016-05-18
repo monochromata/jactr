@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.identifier.IIdentifier;
 import org.commonreality.object.IAfferentObject;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.aural.IAuralModule;
 
 public class DurationFeatureMap extends OffsetFeatureMap
@@ -23,9 +24,9 @@ public class DurationFeatureMap extends OffsetFeatureMap
 
   private Map<IIdentifier, Double>   _onsetMap;
 
-  public DurationFeatureMap()
+  public DurationFeatureMap(ACTRRuntime runtime)
   {
-    super(IAuralModule.DURATION_SLOT);
+    super(runtime, IAuralModule.DURATION_SLOT);
     _onsetMap = new HashMap<IIdentifier, Double>();
   }
 

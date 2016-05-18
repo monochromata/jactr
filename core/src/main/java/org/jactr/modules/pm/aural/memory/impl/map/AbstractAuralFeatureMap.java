@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.commonreality.modalities.aural.DefaultAuralPropertyHandler;
 import org.commonreality.modalities.aural.IAuralPropertyHandler;
 import org.commonreality.object.IAfferentObject;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.common.memory.map.AbstractFeatureMap;
 
 public abstract class AbstractAuralFeatureMap<T> extends AbstractFeatureMap<T>
@@ -18,6 +19,9 @@ public abstract class AbstractAuralFeatureMap<T> extends AbstractFeatureMap<T>
   static private final transient Log                LOGGER           = LogFactory
                                                                          .getLog(AbstractAuralFeatureMap.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private final DefaultAuralPropertyHandler _propertyHandler = new DefaultAuralPropertyHandler();
 
   static protected IAuralPropertyHandler getHandler()
@@ -26,9 +30,9 @@ public abstract class AbstractAuralFeatureMap<T> extends AbstractFeatureMap<T>
   }
 
 
-  public AbstractAuralFeatureMap(String requestSlotName, String crPropertyName)
+  public AbstractAuralFeatureMap(ACTRRuntime runtime, String requestSlotName, String crPropertyName)
   {
-    super(requestSlotName, crPropertyName);
+    super(runtime, requestSlotName, crPropertyName);
   }
 
 

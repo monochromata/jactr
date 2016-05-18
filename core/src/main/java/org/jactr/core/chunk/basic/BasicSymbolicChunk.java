@@ -22,6 +22,7 @@ import org.jactr.core.chunk.ISymbolicChunk;
 import org.jactr.core.chunk.IllegalChunkStateException;
 import org.jactr.core.chunk.event.ChunkEvent;
 import org.jactr.core.chunktype.IChunkType;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.BasicSlot;
 import org.jactr.core.slot.IMutableSlot;
 import org.jactr.core.slot.ISlot;
@@ -41,6 +42,8 @@ public class BasicSymbolicChunk extends NotifyingSlotContainer implements
                                                    .getLog(BasicSymbolicChunk.class
                                                        .getName());
 
+  private final ACTRRuntime 	   _runtime;
+  
   protected IChunkType             _chunkType;
   
   protected String                 _chunkName;
@@ -50,10 +53,14 @@ public class BasicSymbolicChunk extends NotifyingSlotContainer implements
   private ISlot                _chunkTypeSlot;                 // for
                                                                 // efficiency
 
+  /**
+   * TODO: Cannot be static if multiple models shall not interfere
+   */
   private static int               TOTAL_COUNT = 0;
 
-  public BasicSymbolicChunk()
+  public BasicSymbolicChunk(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     TOTAL_COUNT++;
   }
 
@@ -244,7 +251,7 @@ public class BasicSymbolicChunk extends NotifyingSlotContainer implements
     super.valueChanged(slot, oldValue, newValue);
 
     if (_parentChunk.hasListeners())
-      _parentChunk.dispatch(new ChunkEvent(_parentChunk, slot, oldValue));
+      _parentChunk.dispatch(new ChunkEvent(_runtime, _parentChunk, slot, oldValue));
   }
 
   /**

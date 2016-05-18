@@ -56,6 +56,9 @@ public class ASTParticipantRegistry
   static private final transient Log          LOGGER           = LogFactory
                                                                    .getLog(ASTParticipantRegistry.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private Map<String, IASTParticipant> _astParticipants = new HashMap<String, IASTParticipant>();
 
   static

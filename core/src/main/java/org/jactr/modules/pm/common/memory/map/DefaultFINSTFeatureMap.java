@@ -353,7 +353,7 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
     _model.getTimedEventQueue().enqueue(fao);
 
     if (hasListeners())
-      dispatch(new FeatureMapEvent(this, ACTRRuntime.getRuntime()
+      dispatch(new FeatureMapEvent(this, _model.getRuntime()
           .getClock(getPerceptualMemory().getModule().getModel()).getTime(),
           FeatureMapEvent.Type.UPDATED, Collections.singleton(identifier)));
   }
@@ -396,7 +396,7 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
     _model.getTimedEventQueue().enqueue(fao);
 
     if (hasListeners())
-      dispatch(new FeatureMapEvent(this, ACTRRuntime.getRuntime()
+      dispatch(new FeatureMapEvent(this, _model.getRuntime()
           .getClock(getPerceptualMemory().getModule().getModel()).getTime(),
           FeatureMapEvent.Type.UPDATED, Collections.singleton(identifier)));
   }
@@ -435,7 +435,7 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
     }
 
     if (hasListeners())
-      dispatch(new FeatureMapEvent(this, ACTRRuntime.getRuntime()
+      dispatch(new FeatureMapEvent(this, _model.getRuntime()
           .getClock(getPerceptualMemory().getModule().getModel()).getTime(),
           FeatureMapEvent.Type.UPDATED, Collections.singleton(identifier)));
   }
@@ -682,7 +682,7 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
     {
       _identifier = identifier;
       _afferentChunk = afferentChunk;
-      double start = ACTRRuntime.getRuntime().getClock(_model).getTime();
+      double start = _model.getRuntime().getClock(_model).getTime();
       double end = start + offset;
       setTimes(start, end);
     }
@@ -754,7 +754,7 @@ public class DefaultFINSTFeatureMap implements IFINSTFeatureMap
     public void setAfferentChunk(IChunk afferentChunk)
     {
       _afferentChunk = afferentChunk;
-      _time = ACTRRuntime.getRuntime().getClock(_model).getTime();
+      _time = _model.getRuntime().getClock(_model).getTime();
     }
 
     public IIdentifier getIdentifier()

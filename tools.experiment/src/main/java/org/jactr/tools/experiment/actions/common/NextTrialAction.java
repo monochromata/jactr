@@ -5,12 +5,13 @@ package org.jactr.tools.experiment.actions.common;
  */
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.trial.ITrial;
 
-public class NextTrialAction implements IAction
+public class NextTrialAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -22,8 +23,9 @@ public class NextTrialAction implements IAction
 
   private String                     _trialName;
 
-  public NextTrialAction(IExperiment experiment, String trialName)
+  public NextTrialAction(ACTRRuntime runtime, IExperiment experiment, String trialName)
   {
+	super(runtime);
     _experiment = experiment;
     _trialName = trialName;
   }

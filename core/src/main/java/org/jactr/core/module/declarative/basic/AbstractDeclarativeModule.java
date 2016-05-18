@@ -173,9 +173,9 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
 
   protected ChunkActivationComparator                                         _activationSorter = new ChunkActivationComparator();
 
-  public AbstractDeclarativeModule(String name)
+  public AbstractDeclarativeModule(ACTRRuntime runtime, String name)
   {
-    super(name);
+    super(runtime, name);
     _eventDispatcher = new ACTREventDispatcher<IDeclarativeModule, IDeclarativeModuleListener>();
     _chunksToDispose = FastList.newInstance();
     _deferredEncodings = FastList.newInstance();
@@ -957,10 +957,10 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
           + originalChunk);
 
 
-    originalChunk.dispatch(new ChunkEvent(originalChunk,
+    originalChunk.dispatch(new ChunkEvent(getRuntime(), originalChunk,
         ChunkEvent.Type.MERGING_WITH, newChunk));
 
-    newChunk.dispatch(new ChunkEvent(newChunk, ChunkEvent.Type.MERGING_INTO,
+    newChunk.dispatch(new ChunkEvent(getRuntime(), newChunk, ChunkEvent.Type.MERGING_INTO,
         originalChunk));
 
     mergeChunksInternal(originalChunk, newChunk);
@@ -1166,7 +1166,7 @@ public abstract class AbstractDeclarativeModule extends AbstractModule
 
     if (chunkContainer.size() == 0) return;
 
-    double currentTime = ACTRRuntime.getRuntime().getClock(getModel())
+    double currentTime = getRuntime().getClock(getModel())
         .getTime();
 
     if (LOGGER.isDebugEnabled())

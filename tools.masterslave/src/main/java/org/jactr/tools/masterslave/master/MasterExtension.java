@@ -93,7 +93,7 @@ public class MasterExtension implements IExtension
      * the masterslave also requires some tricky clock control, we need the
      * IConnector to do taht.
      */
-    IConnector connector = ACTRRuntime.getRuntime().getConnector();
+    IConnector connector = model.getRuntime().getConnector();
     IClockConfigurator original = connector.getClockConfigurator();
     if (!(original instanceof MasterSlaveClockConfigurator))
     {
@@ -140,14 +140,14 @@ public class MasterExtension implements IExtension
       }
     };
 
-    ACTRRuntime.getRuntime().addListener(_runtimeListener, null);
+    model.getRuntime().addListener(_runtimeListener, null);
   }
 
   public void uninstall(IModel model)
   {
     _model = null;
 
-    ACTRRuntime.getRuntime().removeListener(_runtimeListener);
+    model.getRuntime().removeListener(_runtimeListener);
   }
 
   public String getParameter(String key)
@@ -202,7 +202,7 @@ public class MasterExtension implements IExtension
     return container;
   }
 
-  protected IModel loadModelAs(URL modelFile, String alias) throws Exception
+  protected IModel loadModelAs(ACTRRuntime runtime, URL modelFile, String alias) throws Exception
   {
     Collection<Exception> warnings = new HashSet<Exception>();
     Collection<Exception> errors = new HashSet<Exception>();
@@ -214,7 +214,7 @@ public class MasterExtension implements IExtension
     if (errors.size() != 0) throw errors.iterator().next();
 
     if (IOUtilities.compileModelDescriptor(modelDescriptor, warnings, errors))
-      model = IOUtilities.constructModel(modelDescriptor, warnings, errors);
+      model = IOUtilities.constructModel(runtime, modelDescriptor, warnings, errors);
 
     if (errors.size() != 0) throw errors.iterator().next();
 
@@ -253,7 +253,7 @@ public class MasterExtension implements IExtension
      * since we can be certain the master is already running, we should just
      * need to add the model..
      */
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
+    ACTRRuntime runtime = model.getRuntime();
     IController controller = runtime.getController();
 
     if (controller.getRunningModels().contains(model))
@@ -279,7 +279,7 @@ public class MasterExtension implements IExtension
 
   protected void stopModel(IModel model)
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
+    ACTRRuntime runtime = model.getRuntime();
     IController controller = runtime.getController();
 
     if (controller.getRunningModels().contains(model))
@@ -313,7 +313,7 @@ public class MasterExtension implements IExtension
 
       public void run()
       {
-        ACTRRuntime runtime = ACTRRuntime.getRuntime();
+        ACTRRuntime runtime = model.getRuntime();
         Collection<IModel> allModels = runtime.getModels();
         Collection<IModel> terminated = runtime.getController()
             .getTerminatedModels();
@@ -349,7 +349,7 @@ public class MasterExtension implements IExtension
                         "%s is not in the terminated set %s, but is in the active set. Not completely terminated, will try again later.",
                         model, terminated));
           _model.getTimedEventQueue().enqueue(
-              new RunnableTimedEvent(ACTRRuntime.getRuntime().getClock(_model)
+              new RunnableTimedEvent(model.getRuntime().getClock(_model)
                   .getTime() + 0.05, this));
         }
       }
@@ -357,7 +357,7 @@ public class MasterExtension implements IExtension
     };
 
     _model.getTimedEventQueue().enqueue(
-        new RunnableTimedEvent(ACTRRuntime.getRuntime().getClock(_model)
+        new RunnableTimedEvent(model.getRuntime().getClock(_model)
             .getTime() + 0.05, cleanUpRunner));
   }
 

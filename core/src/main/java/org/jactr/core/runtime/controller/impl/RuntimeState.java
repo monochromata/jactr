@@ -26,6 +26,8 @@ public class RuntimeState
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(RuntimeState.class);
 
+  final private ACTRRuntime  		 _runtime;
+  
   final private Collection<IModel>   _startingModels;
 
   final private Collection<IModel>   _activeModels;
@@ -36,12 +38,18 @@ public class RuntimeState
 
   final private Lock                 _lock  = new ReentrantLock();
 
-  public RuntimeState()
+  public RuntimeState(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _startingModels = new HashSet<IModel>();
     _activeModels = new HashSet<IModel>();
     _inactiveModels = new HashSet<IModel>();
     _suspendedModels = new HashSet<IModel>();
+  }
+  
+  public ACTRRuntime getRuntime()
+  {
+	  return _runtime;
   }
 
   public void clear()
@@ -137,17 +145,15 @@ public class RuntimeState
    */
   public void starting()
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-
     /*
      * connect to CR or local
      */
-    runtime.getConnector().start();
+    _runtime.getConnector().start();
 
     /*
      * and the custom start up
      */
-    Runnable runnable = runtime.getOnStart();
+    Runnable runnable = _runtime.getOnStart();
     if (runnable != null) runnable.run();
   }
 
@@ -160,9 +166,8 @@ public class RuntimeState
      * if there is any model, runtime start will be called once the first once
      * starts. If there are no models, we need to call it ourselves
      */
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    if (runtime.hasListeners() && runtime.getModels().size() == 0)
-      runtime.dispatch(new ACTRRuntimeEvent(ACTRRuntimeEvent.Type.STARTED));
+    if (_runtime.hasListeners() && _runtime.getModels().size() == 0)
+      _runtime.dispatch(new ACTRRuntimeEvent(_runtime, ACTRRuntimeEvent.Type.STARTED));
   }
 
   /**
@@ -240,9 +245,8 @@ public class RuntimeState
 
     if (shouldFireEvent)
     {
-      ACTRRuntime runtime = ACTRRuntime.getRuntime();
-      if (runtime.hasListeners())
-        runtime.dispatch(new ACTRRuntimeEvent(ACTRRuntimeEvent.Type.STARTED));
+      if (_runtime.hasListeners())
+        _runtime.dispatch(new ACTRRuntimeEvent(_runtime, ACTRRuntimeEvent.Type.STARTED));
     }
   }
 
@@ -319,7 +323,6 @@ public class RuntimeState
 
   public void stopped(IModel model)
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
     boolean fireStopped = false;
     try
     {
@@ -328,7 +331,7 @@ public class RuntimeState
       {
         _inactiveModels.add(model);
 
-        fireStopped = _inactiveModels.containsAll(runtime.getModels());
+        fireStopped = _inactiveModels.containsAll(_runtime.getModels());
       }
       else if (LOGGER.isWarnEnabled())
         LOGGER.warn(String.format(
@@ -351,7 +354,7 @@ public class RuntimeState
        */
       try
       {
-        if (runtime.getOnStop() != null) runtime.getOnStop().run();
+        if (_runtime.getOnStop() != null) _runtime.getOnStop().run();
       }
       catch (Exception e)
       {
@@ -362,7 +365,7 @@ public class RuntimeState
       try
       {
         if (LOGGER.isDebugEnabled()) LOGGER.debug("Stopping connector");
-        runtime.getConnector().stop();
+        _runtime.getConnector().stop();
       }
       catch (Exception e)
       {
@@ -370,15 +373,17 @@ public class RuntimeState
         deferred = e;
       }
 
-      if (runtime.hasListeners())
-        runtime.dispatch(new ACTRRuntimeEvent(null,
+      if (_runtime.hasListeners())
+      {
+    	  // TODO: the event was previously constructed with a null model
+        _runtime.dispatch(new ACTRRuntimeEvent(model,
             ACTRRuntimeEvent.Type.STOPPED, deferred));
+      }
     }
   }
 
   public void suspended(IModel model)
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
     boolean fireSuspended = false;
     try
     {
@@ -391,13 +396,12 @@ public class RuntimeState
       _lock.unlock();
     }
 
-    if (fireSuspended && runtime.hasListeners())
-      runtime.dispatch(new ACTRRuntimeEvent(ACTRRuntimeEvent.Type.SUSPENDED));
+    if (fireSuspended && _runtime.hasListeners())
+      _runtime.dispatch(new ACTRRuntimeEvent(_runtime, ACTRRuntimeEvent.Type.SUSPENDED));
   }
 
   public void resumed(IModel model)
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
     boolean fireResumed = false;
     try
     {
@@ -410,7 +414,7 @@ public class RuntimeState
       _lock.unlock();
     }
 
-    if (fireResumed && runtime.hasListeners())
-      runtime.dispatch(new ACTRRuntimeEvent(ACTRRuntimeEvent.Type.RESUMED));
+    if (fireResumed && _runtime.hasListeners())
+      _runtime.dispatch(new ACTRRuntimeEvent(_runtime, ACTRRuntimeEvent.Type.RESUMED));
   }
 }

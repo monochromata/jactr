@@ -21,11 +21,14 @@ import java.util.concurrent.Executor;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.commonreality.time.IClock;
 import org.jactr.core.event.ACTREventDispatcher;
 import org.jactr.core.model.IModel;
 import org.jactr.core.reality.connector.IConnector;
 import org.jactr.core.reality.connector.LocalConnector;
+import org.jactr.core.runtime.controller.DefaultController;
 import org.jactr.core.runtime.controller.IController;
 import org.jactr.core.runtime.event.ACTRRuntimeEvent;
 import org.jactr.core.runtime.event.IACTRRuntimeListener;
@@ -38,8 +41,15 @@ public class ACTRRuntime
   static public final Log                                LOGGER = LogFactory
                                                                     .getLog(ACTRRuntime.class);
 
-  static private ACTRRuntime                             _instance;
-
+  /**
+   * The default working directory, the directory where {@code System.getProperty("user.dir")} points to.
+   * 
+   * @see System#getProperty(String)
+   */
+  public static final File								 DEFAULT_WORKING_DIRECTORY = new File(System.getProperty("user.dir"));
+  
+  private final CommonReality							 _cr;
+  
   private Collection<IModel>                             _allModels;
 
   private Runnable                                       _onStart;
@@ -57,27 +67,27 @@ public class ACTRRuntime
   private File                                           _workingDirectory;
 
   /**
-   * return the ACTRRuntime singleton
+   * Creates a new ACT-R runtime.
    * 
-   * @return The ACTRRuntime singleton
+   * @param cr the common reality to be used by the ACT-R runtime
+   * @param workingDirectory the working directory of the ACT-R runtime
    */
-  static public ACTRRuntime getRuntime()
-  {
-    synchronized (ACTRRuntime.class)
-    {
-      if (_instance == null) _instance = new ACTRRuntime();
-      return _instance;
-    }
-  }
-
-  protected ACTRRuntime()
-  {
+  public ACTRRuntime(CommonReality cr, File workingDirectory) {
+	_cr = cr;
     _allModels = Collections.synchronizedList(new ArrayList<IModel>());
     _eventDispatcher = new ACTREventDispatcher<ACTRRuntime, IACTRRuntimeListener>();
-    setConnector(new LocalConnector());
-    setWorkingDirectory(new File(System.getProperty("user.dir")));
+    setConnector(new LocalConnector(this));
+	setWorkingDirectory(workingDirectory);
   }
-
+  
+  /**
+   * @return The common reality used by this runtime. The return value will never change
+   * 	over the lifetime of the runtime.
+   */
+  public CommonReality getCommonReality() {
+	  return _cr;
+  }
+  
   /**
    * Get the working directory for this instance of the runtime. By default this
    * is user.dir, however, the iterative entry point will override this to a
@@ -167,6 +177,8 @@ public class ACTRRuntime
    */
   public void addModel(IModel model)
   {
+	if(model.getRuntime() != this)
+		throw new IllegalStateException("The given model was not constructed for addition to this runtime.");
     _allModels.add(model);
 
     /*
@@ -178,7 +190,7 @@ public class ACTRRuntime
 
   /**
    * remove this model, assuming that it is not running. If it is, a runtime
-   * excepiton will be thrown
+   * exception will be thrown
    * 
    * @param model the model to remove
    */
@@ -192,8 +204,7 @@ public class ACTRRuntime
        * runtime
        */
       if (hasListeners())
-        dispatch(new ACTRRuntimeEvent(model,
-            ACTRRuntimeEvent.Type.MODEL_REMOVED));
+        dispatch(new ACTRRuntimeEvent(model, ACTRRuntimeEvent.Type.MODEL_REMOVED));
 
       _allModels.remove(model);
     }

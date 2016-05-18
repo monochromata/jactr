@@ -21,11 +21,20 @@ public class Controller
   static private final transient Log LOGGER               = LogFactory
                                                               .getLog(Controller.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private ReentrantLock       _sessionLock         = new ReentrantLock();
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private Condition           _shouldBlockDisposal = _sessionLock
                                                               .newCondition();
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private Interpreter         _interpreter;
 
   static Interpreter getInterpreter()

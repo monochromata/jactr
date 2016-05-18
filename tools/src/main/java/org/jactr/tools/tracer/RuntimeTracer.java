@@ -23,8 +23,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javolution.util.FastList;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.concurrent.ExecutorServices;
@@ -40,17 +38,19 @@ import org.jactr.core.runtime.controller.debug.event.IBreakpointListener;
 import org.jactr.core.runtime.event.ACTRRuntimeAdapter;
 import org.jactr.core.runtime.event.ACTRRuntimeEvent;
 import org.jactr.core.utils.parameter.IParameterized;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 import org.jactr.tools.misc.ModelsLock;
 import org.jactr.tools.tracer.listeners.ITraceListener;
 import org.jactr.tools.tracer.sinks.ChainedSink;
+
+import javolution.util.FastList;
 
 /**
  * tracer that can listen and record the actions of all running models. At the
  * start of the run (via ACTRRuntimeEvent.STARTED), the runtime tracer snags the
  * current controller, which must be NetworkedIOHandler
  */
-public class RuntimeTracer implements IInstrument, IParameterized
+public class RuntimeTracer extends AbstractInstrument implements IParameterized
 {
   /**
    * logger definition
@@ -79,6 +79,9 @@ public class RuntimeTracer implements IInstrument, IParameterized
   private Executor                   _executor             = ExecutorServices
                                                                .getExecutor(_executorName);
 
+  /**
+   * TODO: Should not be static - or be static final - because there might be more than one ACTRRuntime
+   */
   private static long                SYNCHRONIZATION_THRESHOLD;
 
   static
@@ -96,10 +99,12 @@ public class RuntimeTracer implements IInstrument, IParameterized
 
   private AtomicLong                 _synchronizationCount = new AtomicLong(0);
 
-  private ModelsLock                 _modelsLock           = new ModelsLock();
+  private ModelsLock                 _modelsLock;
 
-  public RuntimeTracer()
+  public RuntimeTracer(ACTRRuntime runtime)
   {
+	super(runtime);
+	_modelsLock = new ModelsLock(runtime);
 
     _listeners = new ArrayList<ITraceListener>();
 
@@ -221,8 +226,7 @@ public class RuntimeTracer implements IInstrument, IParameterized
   public void initialize()
   {
     _modelsLock.initialize();
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    runtime.addListener(new ACTRRuntimeAdapter() {
+    getRuntime().addListener(new ACTRRuntimeAdapter() {
 
       @Override
       public void modelAdded(ACTRRuntimeEvent event)
@@ -240,9 +244,12 @@ public class RuntimeTracer implements IInstrument, IParameterized
       {
         try
         {
-          if (LOGGER.isDebugEnabled())
-            LOGGER.debug("Flushing data to data sink");
-          _dataSink.flush();
+          if (_dataSink != null)
+          {
+	          if (LOGGER.isDebugEnabled())
+	            LOGGER.debug("Flushing data to data sink");
+	          _dataSink.flush();
+          }
         }
         catch (Exception e)
         {
@@ -252,7 +259,7 @@ public class RuntimeTracer implements IInstrument, IParameterized
 
     }, getExecutor());
 
-    IController controller = runtime.getController();
+    IController controller = getRuntime().getController();
     if (controller instanceof IDebugController)
       ((IDebugController) controller).addListener(new IBreakpointListener() {
 
@@ -260,7 +267,10 @@ public class RuntimeTracer implements IInstrument, IParameterized
         {
           try
           {
-            _dataSink.flush();
+        	if (_dataSink != null)
+        	{
+        		_dataSink.flush();
+        	}
           }
           catch (Exception e)
           {

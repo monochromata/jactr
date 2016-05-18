@@ -50,45 +50,45 @@ public class ChunkTypeEvent extends
 
   final private Type       _type;
 
-  public ChunkTypeEvent(IChunkType source, Type type)
+  public ChunkTypeEvent(ACTRRuntime runtime, IChunkType source, Type type)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel())
+    super(source, runtime.getClock(source.getModel())
         .getTime());
     _type = type;
   }
 
-  public ChunkTypeEvent(IChunkType source, IChunkType child)
+  public ChunkTypeEvent(ACTRRuntime runtime, IChunkType source, IChunkType child)
   {
-    this(source, Type.CHILD_ADDED);
+    this(runtime, source, Type.CHILD_ADDED);
     _addedChild = child;
   }
 
-  public ChunkTypeEvent(IChunkType source, IChunk chunk)
+  public ChunkTypeEvent(ACTRRuntime runtime, IChunkType source, IChunk chunk)
   {
-    this(source, Type.CHUNK_ADDED);
+    this(runtime, source, Type.CHUNK_ADDED);
     _addedChunk = chunk;
   }
 
-  public ChunkTypeEvent(IChunkType source, ISlot slot, Object oldValue)
+  public ChunkTypeEvent(ACTRRuntime runtime, IChunkType source, ISlot slot, Object oldValue)
   {
-    this(source, Type.SLOT_CHANGED);
+    this(runtime, source, Type.SLOT_CHANGED);
     _itemName = slot.getName();
     _oldValue = oldValue;
     _newValue = slot.getValue();
   }
 
-  public ChunkTypeEvent(IChunkType source, Type type, ISlot slot)
+  public ChunkTypeEvent(ACTRRuntime runtime, IChunkType source, Type type, ISlot slot)
   {
-    this(source, type);
+    this(runtime, source, type);
     _itemName = slot.getName();
     _oldValue = slot.getValue();
     _newValue = slot.getValue();
   }
 
-  public ChunkTypeEvent(IChunkType source, String parameterName,
+  public ChunkTypeEvent(ACTRRuntime runtime, IChunkType source, String parameterName,
       Object newValue, Object oldValue)
   {
-    this(source, Type.PARAMETER_CHANGED);
+    this(runtime, source, Type.PARAMETER_CHANGED);
     _itemName = parameterName;
     _oldValue = oldValue;
     _newValue = newValue;

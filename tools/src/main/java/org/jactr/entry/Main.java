@@ -123,7 +123,7 @@ public class Main
       /*
        * route all the named logs to System.out
        */
-      DefaultModelLogger dml = new DefaultModelLogger();
+      DefaultModelLogger dml = new DefaultModelLogger(runtime);
       // and attach to the available models
       model.install(dml);
 
@@ -162,7 +162,7 @@ public class Main
     IController controller = runtime.getController();
     if (controller == null)
     {
-      controller = new DefaultController();
+      controller = new DefaultController(runtime);
       runtime.setController(controller);
     }
 
@@ -243,8 +243,7 @@ public class Main
   public ACTRRuntime createRuntime(URL environmentConfigFile) throws Exception
   {
     EnvironmentParser parser = new EnvironmentParser();
-    parser.parse(environmentConfigFile);
-    return ACTRRuntime.getRuntime();
+    return parser.parse(environmentConfigFile);
   }
 
   public ACTRRuntime createRuntime(CommandLine cmd) throws Exception
@@ -350,7 +349,7 @@ public class Main
           IOUtilities.compileModelDescriptor(md, warnings, errors);
 
           // construct
-          IModel model = IOUtilities.constructModel(md, warnings, errors);
+          IModel model = IOUtilities.constructModel(runtime, md, warnings, errors);
 
           if (warnings.size() != 0)
           {
@@ -418,8 +417,14 @@ public class Main
       {
         ExecutorServices.initialize();
 
-        ACTRRuntime runtime = env.configureLogging(env.loadModels(
-            env.configureRuntime(env.createRuntime(cmd), cmd), cmd), cmd);
+        ACTRRuntime runtime =
+        	env.configureLogging(
+        		env.loadModels(
+        			env.configureRuntime(
+        				env.createRuntime(cmd),
+        			cmd),
+        		cmd),
+        	cmd);
 
         if (cmd.hasOption('r')) env.run(runtime);
 

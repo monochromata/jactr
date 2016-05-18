@@ -5,6 +5,7 @@ package org.jactr.tools.experiment.actions.sensor;
  */
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
 import org.jactr.tools.experiment.actions.IAction;
 import org.jactr.tools.experiment.parser.handlers.INodeHandler;
@@ -23,9 +24,12 @@ public class XMLSensorHandler implements INodeHandler<IAction>
     return "xml-sensor";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new XMLSensorAction(element.getAttribute("url"), Boolean.parseBoolean(element.getAttribute("immediate")), experiment);
+    return new XMLSensorAction(runtime,
+    		element.getAttribute("url"),
+    		Boolean.parseBoolean(element.getAttribute("immediate")),
+    		experiment);
   }
 
   public boolean shouldDecend()

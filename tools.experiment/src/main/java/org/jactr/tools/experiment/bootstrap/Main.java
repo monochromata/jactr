@@ -5,6 +5,9 @@ package org.jactr.tools.experiment.bootstrap;
  */
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
 
 public class Main
@@ -19,7 +22,11 @@ public class Main
    */
   public static void main(String[] args)
   {
-    IExperiment experiment = StartModelExperiments.loadExperiment(args[0], null);
+	final DefaultReality reality = DefaultReality.newInstanceThatNeedsToBePreparedWithACommonReality();
+	final CommonReality cr = new CommonReality(reality);
+	reality.prepare(cr);
+	final ACTRRuntime runtime = new ACTRRuntime(cr, ACTRRuntime.DEFAULT_WORKING_DIRECTORY);
+    final IExperiment experiment = StartModelExperiments.loadExperiment(runtime, args[0], null);
     experiment.start();
   }
 

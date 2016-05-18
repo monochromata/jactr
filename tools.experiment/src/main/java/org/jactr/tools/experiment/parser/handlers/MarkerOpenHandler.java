@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,13 @@ public class MarkerOpenHandler implements INodeHandler<IAction>
     return "marker-open";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new MarkerAction(element.getAttribute("models"), element.getAttribute("type"), element.getAttribute("name"), true, experiment);
+    return new MarkerAction(runtime,
+    		element.getAttribute("models"),
+    		element.getAttribute("type"),
+    		element.getAttribute("name"),
+    		true, experiment);
   }
 
   public boolean shouldDecend()

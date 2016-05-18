@@ -25,13 +25,20 @@ import org.jactr.modules.pm.motor.command.ICommandTranslatorDelegate;
 public abstract class AbstractTranslator implements ICommandTranslatorDelegate
 {
 
+  private final ACTRRuntime 				_runtime;
   private Map<IIdentifier, IEfferentObject> _muscleCache;
-  private Map<String, IIdentifier> _muscleNameCache;
+  private Map<String, IIdentifier> 			_muscleNameCache;
 
-  public AbstractTranslator()
+  public AbstractTranslator(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _muscleCache = new HashMap<IIdentifier, IEfferentObject>();
     _muscleNameCache = new HashMap<String, IIdentifier>();
+  }
+  
+  protected ACTRRuntime getRuntime()
+  {
+	  return _runtime;
   }
   
   protected Collection<String> getCachedMuscleNames()
@@ -53,7 +60,7 @@ public abstract class AbstractTranslator implements ICommandTranslatorDelegate
   public IEfferentObject getMuscle(String muscleName, IModel model)
       throws IllegalArgumentException
   {
-    IEfferentObjectManager manager = ACTRRuntime.getRuntime().getConnector()
+    IEfferentObjectManager manager = _runtime.getConnector()
         .getAgent(model).getEfferentObjectManager();
     muscleName = muscleName.toLowerCase();
   

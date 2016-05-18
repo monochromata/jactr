@@ -26,6 +26,7 @@ import org.jactr.core.chunktype.IRemovableSymbolicChunkType;
 import org.jactr.core.chunktype.IllegalChunkTypeStateException;
 import org.jactr.core.chunktype.event.ChunkTypeEvent;
 import org.jactr.core.module.declarative.IDeclarativeModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.IMutableSlot;
 import org.jactr.core.slot.ISlot;
 import org.jactr.core.slot.NotifyingSlotContainer;
@@ -46,7 +47,12 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
                                                      .getLog(BasicSymbolicChunkType.class
                                                          .getName());
 
+  /**
+   * Must not be static in order to avoid intereference between multiple models
+   */
   private static int                 TOTAL_COUNT = 0;
+  
+  private final ACTRRuntime 		 _runtime;
 
   protected Collection<IChunkType>   _children;
 
@@ -66,8 +72,9 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
   /**
    * Constructor for the DefaultSymbolicChunkType5 object
    */
-  public BasicSymbolicChunkType()
+  public BasicSymbolicChunkType(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _children = new TreeSet<IChunkType>();
     // _chunks = new FastSet<IChunk>(); // was array list, behold perf
     // improvments
@@ -233,7 +240,7 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
     if (!_children.contains(ct)) _children.add(ct);
 
     if (_parentChunkType.hasListeners())
-      _parentChunkType.dispatch(new ChunkTypeEvent(_parentChunkType, ct));
+      _parentChunkType.dispatch(new ChunkTypeEvent(_runtime, _parentChunkType, ct));
   }
 
   /**
@@ -261,7 +268,7 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
         parent.getSymbolicChunkType().addChunk(c);
 
     if (_parentChunkType.hasListeners())
-      _parentChunkType.dispatch(new ChunkTypeEvent(_parentChunkType, c));
+      _parentChunkType.dispatch(new ChunkTypeEvent(_runtime, _parentChunkType, c));
   }
 
   /**
@@ -341,7 +348,7 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
       super.addSlot(s);
 
     if (_parentChunkType.hasListeners())
-      _parentChunkType.dispatch(new ChunkTypeEvent(_parentChunkType,
+      _parentChunkType.dispatch(new ChunkTypeEvent(_runtime, _parentChunkType,
           ChunkTypeEvent.Type.SLOT_ADDED, s));
   }
 
@@ -363,7 +370,7 @@ public class BasicSymbolicChunkType extends NotifyingSlotContainer implements
     super.removeSlot(s);
 
     if (_parentChunkType.hasListeners())
-      _parentChunkType.dispatch(new ChunkTypeEvent(_parentChunkType,
+      _parentChunkType.dispatch(new ChunkTypeEvent(_runtime, _parentChunkType,
           ChunkTypeEvent.Type.SLOT_REMOVED, s));
   }
 

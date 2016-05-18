@@ -67,7 +67,7 @@ public class ProfilingModelRunner extends DefaultModelRunner
   protected void startUp()
   {
     super.startUp();
-    _simulatedClockStartTime = ACTRRuntime.getRuntime().getClock(_model).getTime();
+    _simulatedClockStartTime = _model.getRuntime().getClock(_model).getTime();
     if(Double.isInfinite(_simulatedClockStartTime) || Double.isNaN(_simulatedClockStartTime))
       _simulatedClockStartTime = 0;
   }
@@ -99,7 +99,7 @@ public class ProfilingModelRunner extends DefaultModelRunner
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Cycle took "+delta+"ns");
     
     _totalActualTimeSpentProcessing += delta;
-    _totalSimulatedTime = ACTRRuntime.getRuntime().getClock(_model).getTime();
+    _totalSimulatedTime = _model.getRuntime().getClock(_model).getTime();
   }
   
   protected void preClock()

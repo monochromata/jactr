@@ -9,6 +9,8 @@ import java.util.function.Supplier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.model.IModel;
 import org.jactr.core.reality.connector.IConnector;
 import org.jactr.core.runtime.ACTRRuntime;
@@ -21,9 +23,9 @@ import org.jactr.scripting.ScriptingManager;
 
 /**
  * The start of a runtime builder to better support embedding. If running
- * outside of the Eclipse environment and are using externally contributed
+ * outside of the Eclipse environment and using externally contributed
  * modules, you must ensure that classpaths are accessible. This is not
- * reusable, and assumes no one else is attempting to conifugre the runtime
+ * reusable, and assumes no one else is attempting to configure the runtime.
  * 
  * @author harrison
  */
@@ -35,6 +37,8 @@ public class RuntimeBuilder
   static private final transient Log LOGGER          = LogFactory
                                                          .getLog(RuntimeBuilder.class);
 
+  private ACTRRuntime                _runtime;
+  
   private Collection<Runnable>       _parserInitializers;
 
   private Collection<Runnable>       _astInitializers;
@@ -54,12 +58,16 @@ public class RuntimeBuilder
 
   protected RuntimeBuilder()
   {
+	final DefaultReality reality = DefaultReality.newInstanceThatNeedsToBePreparedWithACommonReality();
+	final CommonReality cr = new CommonReality(reality);
+	reality.prepare(cr);
+	_runtime = new ACTRRuntime(cr, ACTRRuntime.DEFAULT_WORKING_DIRECTORY);
     _parserInitializers = new ArrayList<Runnable>();
     _astInitializers = new ArrayList<Runnable>();
     _scriptInitializers = new ArrayList<Runnable>();
     _models = new ArrayList<IModel>();
   }
-
+  
   /**
    * add the model to the runtime to be built. This model must have all it's
    * instruments installed already.
@@ -151,17 +159,15 @@ public class RuntimeBuilder
 
   protected DefaultController defaultController()
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    DefaultController controller = new DefaultController();
-    runtime.setController(controller);
+    DefaultController controller = new DefaultController(_runtime);
+    _runtime.setController(controller);
     return controller;
   }
 
   protected DebugController debugController()
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    DebugController controller = new DebugController();
-    runtime.setController(controller);
+    DebugController controller = new DebugController(_runtime);
+    _runtime.setController(controller);
     return controller;
   }
 
@@ -174,8 +180,7 @@ public class RuntimeBuilder
 
   protected void resetRuntime()
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-    IController controller = runtime.getController();
+    IController controller = _runtime.getController();
     if (controller != null)
     {
       if (controller.isRunning()) try
@@ -186,21 +191,21 @@ public class RuntimeBuilder
       {
         LOGGER.error("Failed to terminate runtime, forcing forward ", e);
       }
-      runtime.setController(null);
+      _runtime.setController(null);
     }
 
-    runtime.setConnector(null);
+    _runtime.setConnector(null);
 
     /*
      * zero our application data
      */
-    runtime.setApplicationData(null);
+    _runtime.setApplicationData(null);
 
-    Collection<IModel> models = runtime.getModels();
+    Collection<IModel> models = _runtime.getModels();
 
     // cleanup any existing models
     models.forEach((m) -> {
-      runtime.removeModel(m);
+      _runtime.removeModel(m);
       m.dispose();
     });
 
@@ -221,18 +226,23 @@ public class RuntimeBuilder
       init.run();
 
     if (_applicationDataSupplier != null)
-      ACTRRuntime.getRuntime().setApplicationData(
-          _applicationDataSupplier.get());
+      _runtime.setApplicationData(_applicationDataSupplier.get());
   }
 
   protected void initialize()
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-
-    runtime.setConnector(_connector);
+    _runtime.setConnector(_connector);
 
     for (IModel model : _models)
-      runtime.addModel(model);
+      _runtime.addModel(model);
+  }
+  
+  /**
+   * @return The runtime after bootstrapping and initialization.
+   */
+  public ACTRRuntime getRuntime()
+  {
+	  return _runtime;
   }
 
 }

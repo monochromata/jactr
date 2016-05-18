@@ -20,7 +20,7 @@ import org.jactr.core.model.event.ModelEvent;
 import org.jactr.core.model.event.ModelListenerAdaptor;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 
 /**
  * stat tracker that records the number of chunks, types and productions, as
@@ -29,7 +29,7 @@ import org.jactr.instrument.IInstrument;
  * 
  * @author harrison
  */
-public class StatTracker implements IInstrument, IParameterized
+public class StatTracker extends AbstractInstrument implements IParameterized
 {
   /**
    * Logger definition
@@ -45,8 +45,9 @@ public class StatTracker implements IInstrument, IParameterized
   
   private Map<IModel, StatTrackingListener> _listeners;
 
-  public StatTracker()
+  public StatTracker(ACTRRuntime runtime)
   {
+	super(runtime);
     _listeners = new HashMap<IModel, StatTrackingListener>();
   }
 
@@ -61,7 +62,7 @@ public class StatTracker implements IInstrument, IParameterized
     try
     {
       PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter(
-          new File(ACTRRuntime.getRuntime().getWorkingDirectory(), model
+          new File(model.getRuntime().getWorkingDirectory(), model
               .getName()
               + "-stats.txt"))));
       

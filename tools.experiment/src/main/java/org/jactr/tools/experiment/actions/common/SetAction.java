@@ -6,11 +6,12 @@ package org.jactr.tools.experiment.actions.common;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 
-public class SetAction implements IAction
+public class SetAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -22,8 +23,9 @@ public class SetAction implements IAction
   private String _name;
   private String _value;
   
-  public SetAction(String variableName, String value, IExperiment experiment)
+  public SetAction(ACTRRuntime runtime, String variableName, String value, IExperiment experiment)
   {
+	super(runtime);
     _experiment = experiment;
     _name = variableName;
     _value = value;

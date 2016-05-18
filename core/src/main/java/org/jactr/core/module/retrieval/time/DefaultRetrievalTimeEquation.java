@@ -54,6 +54,9 @@ public class DefaultRetrievalTimeEquation implements IRetrievalTimeEquation
 
   boolean                      _warned                     = false;
 
+  /**
+   * TODO: Should not be static
+   */
   static private boolean       _allowInfiniteRetrievalTime = false;
 
   static

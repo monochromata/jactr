@@ -59,7 +59,7 @@ public class ProceduralModuleEvent extends
   protected ProceduralModuleEvent(IProceduralModule source)
   {
     super(source);
-    setSimulationTime(ACTRRuntime.getRuntime().getClock(source.getModel())
+    setSimulationTime(source.getRuntime().getClock(source.getModel())
         .getTime());
     _productions = Collections.EMPTY_LIST;
   }

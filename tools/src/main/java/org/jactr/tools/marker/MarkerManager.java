@@ -29,6 +29,9 @@ public class MarkerManager
   static private final transient Log                                LOGGER    = LogFactory
                                                                                   .getLog(MarkerManager.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static final MarkerManager                                        _instance = new MarkerManager();
 
   private final ACTREventDispatcher<MarkerManager, IMarkerListener> _dispatcher;

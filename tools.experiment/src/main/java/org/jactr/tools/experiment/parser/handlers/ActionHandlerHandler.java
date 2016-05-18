@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -30,7 +31,7 @@ public class ActionHandlerHandler implements INodeHandler<ITrial>
     return "action-handler";
   }
 
-  public ITrial process(Element element, IExperiment experiment)
+  public ITrial process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     /*
      * instantiate a new action handler..
@@ -40,7 +41,8 @@ public class ActionHandlerHandler implements INodeHandler<ITrial>
     {
       @SuppressWarnings("unchecked")
       INodeHandler<IAction> handler = (INodeHandler<IAction>) getClass()
-          .getClassLoader().loadClass(className).newInstance();
+          .getClassLoader().loadClass(className).getConstructor(ACTRRuntime.class)
+          .newInstance(runtime);
       this.experimentParser.addActionHandler(handler);
     }
     catch (Exception e)

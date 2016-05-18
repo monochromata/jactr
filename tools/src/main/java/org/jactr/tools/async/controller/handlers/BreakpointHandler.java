@@ -42,10 +42,11 @@ public class BreakpointHandler implements IMessageHandler<BreakpointCommand>
   static private final transient Log LOGGER = LogFactory
                                               .getLog(BreakpointHandler.class);
 
+  private final ACTRRuntime _runtime;
 
-
-  public BreakpointHandler()
+  public BreakpointHandler(ACTRRuntime runtime)
   {
+	  _runtime = runtime;
   }
 
   // /**
@@ -64,7 +65,7 @@ public class BreakpointHandler implements IMessageHandler<BreakpointCommand>
   {
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Got " + command);
 
-    IDebugController controller = (IDebugController) ACTRRuntime.getRuntime()
+    IDebugController controller = (IDebugController) _runtime
         .getController();
     switch (command.getAction())
     {
@@ -84,7 +85,7 @@ public class BreakpointHandler implements IMessageHandler<BreakpointCommand>
   protected IModel getModel(String modelName, IDebugController controller)
   {
     IModel rtn = null;
-    for (IModel model : ACTRRuntime.getRuntime().getModels())
+    for (IModel model : _runtime.getModels())
       if (model.getName().equals(modelName))
       {
         rtn = model;
@@ -103,7 +104,7 @@ public class BreakpointHandler implements IMessageHandler<BreakpointCommand>
     Collection<IModel> models = new ArrayList<IModel>();
 
     if (modelName.equals("all"))
-      models.addAll(ACTRRuntime.getRuntime().getModels());
+      models.addAll(_runtime.getModels());
     else
       models.add(getModel(modelName, controller));
 
@@ -119,7 +120,7 @@ public class BreakpointHandler implements IMessageHandler<BreakpointCommand>
     Collection<IModel> models = new ArrayList<IModel>();
 
     if (modelName.equals("all"))
-      models.addAll(ACTRRuntime.getRuntime().getModels());
+      models.addAll(_runtime.getModels());
     else
       models.add(getModel(modelName, controller));
 
@@ -160,7 +161,7 @@ public class BreakpointHandler implements IMessageHandler<BreakpointCommand>
     Collection<IModel> models = new ArrayList<IModel>();
 
     if (modelName.equals("all"))
-      models.addAll(ACTRRuntime.getRuntime().getModels());
+      models.addAll(_runtime.getModels());
     else
       models.add(getModel(modelName, controller));
     BreakpointType type = command.getType();

@@ -63,9 +63,9 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
 
   static private boolean                              _warnedSimilarity     = false;
 
-  public DefaultSubsymbolicChunk5()
+  public DefaultSubsymbolicChunk5(ACTRRuntime runtime)
   {
-    super();
+    super(runtime);
     // _similarityMap = new HashMap<IChunk, Double>(); //make this lazy
   }
 
@@ -116,7 +116,7 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
       writeLock().unlock();
     }
     if (_parentChunk.hasListeners())
-      _parentChunk.dispatch(new ChunkEvent(_parentChunk, c, oldValue, value));
+      _parentChunk.dispatch(new ChunkEvent(getRuntime(), _parentChunk, c, oldValue, value));
   }
 
   public void setSimilarityActivation(double act)
@@ -134,7 +134,7 @@ public class DefaultSubsymbolicChunk5 extends DefaultSubsymbolicChunk4
     }
 
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), SIMILARITY_ACTIVATION,
           oldSim, _similarityActivation));
   }

@@ -75,7 +75,7 @@ public class VisualModuleEvent extends
 
   public VisualModuleEvent(IVisualModule source, Type type)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel())
+    super(source, source.getRuntime().getClock(source.getModel())
         .getTime());
     _type = type;
   }

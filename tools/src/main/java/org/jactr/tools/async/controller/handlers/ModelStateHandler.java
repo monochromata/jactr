@@ -37,15 +37,17 @@ public class ModelStateHandler implements IMessageHandler<ModelStateCommand>
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(ModelStateHandler.class);
 
+  private final ACTRRuntime _runtime;
 
-  public ModelStateHandler()
+  public ModelStateHandler(ACTRRuntime runtime)
   {
+	_runtime = runtime;
   }
 
   @Override
   public void accept(ISessionInfo session, ModelStateCommand command)
   {
-    IDebugController controller = (IDebugController) ACTRRuntime.getRuntime()
+    IDebugController controller = (IDebugController) _runtime
         .getController();
     IModel model = getModel(controller, command.getModelName());
     if (model == null)

@@ -13,14 +13,21 @@
  */
 package org.jactr.core.module;
 
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.model.IModel;
 import org.jactr.core.models.BootstrapModelFactory;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.TestUtils;
+import org.junit.After;
+import org.junit.Before;
 
 import junit.framework.TestCase;
 
-public abstract class ModuleTest extends TestCase
+public abstract class ModuleTest
 {
 
+  protected ACTRRuntime _runtime;
   private IModel _model;
 
   public ModuleTest()
@@ -28,23 +35,22 @@ public abstract class ModuleTest extends TestCase
     super();
   }
 
-  @Override
-  protected void setUp() throws Exception
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
     _model = loadBootstrapModel();
   }
 
-  @Override
-  protected void tearDown() throws Exception
+  @After
+  public void tearDown() throws Exception
   {
     _model.dispose();
-    super.tearDown();
   }
   
   protected IModel loadBootstrapModel() throws Exception
   {
-	  return new BootstrapModelFactory().createAndInitializeModel();
+	  _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+	  return new BootstrapModelFactory(_runtime).createAndInitializeModel();
   }
 
   public IModel getModel()

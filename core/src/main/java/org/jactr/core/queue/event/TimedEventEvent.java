@@ -46,7 +46,7 @@ public class TimedEventEvent extends
 
   public TimedEventEvent(TimedEventQueue queue, ITimedEvent te, Type type)
   {
-    super(queue, ACTRRuntime.getRuntime().getClock(queue.getModel()).getTime());
+    super(queue, queue.getRuntime().getClock(queue.getModel()).getTime());
     _type = type;
     _timedEvent = te;
   }

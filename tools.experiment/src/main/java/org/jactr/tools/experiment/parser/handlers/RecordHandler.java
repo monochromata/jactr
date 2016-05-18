@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,9 @@ public class RecordHandler implements INodeHandler<IAction>
     return "record";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new RecordAction(element, experiment);
+    return new RecordAction(runtime, element, experiment);
   }
 
   public boolean shouldDecend()

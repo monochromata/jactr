@@ -30,8 +30,14 @@ public class BlockingTimedEvent extends AbstractTimedEvent
   static private transient final Log LOGGER = LogFactory
                                                 .getLog(BlockingTimedEvent.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private long                _totalSleepTime;
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private long                _totalSleepInstances;
 
   private Object _owner;

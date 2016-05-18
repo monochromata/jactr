@@ -56,11 +56,11 @@ public class ExecutionUtilities
       final Runnable onFire, final Runnable onAbort)
       throws IllegalStateException
   {
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = model.getRuntime().getController();
     if (controller == null || !controller.isRunning())
       throw new IllegalStateException("Model is not running");
 
-    double now = ACTRRuntime.getRuntime().getClock(model).getTime();
+    double now = model.getRuntime().getClock(model).getTime();
     final ExecuteLater<Boolean> future = new ExecuteLater<Boolean>();
 
     Runnable fire = new Runnable() {
@@ -117,7 +117,7 @@ public class ExecutionUtilities
    */
   static public Future<Boolean> executeNow(IModel model, final Runnable onFire)
   {
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = model.getRuntime().getController();
     if (controller == null || !controller.isRunning())
       throw new IllegalStateException("Model is not running");
 

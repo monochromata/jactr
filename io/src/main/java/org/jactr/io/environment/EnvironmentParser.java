@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.function.Function;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,6 +30,8 @@ import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.parser.RealityParser;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.model.IModel;
 import org.jactr.core.reality.connector.IConnector;
 import org.jactr.core.runtime.ACTRRuntime;
@@ -87,29 +90,29 @@ public class EnvironmentParser
    */
   static public final Log LOGGER = LogFactory.getLog(EnvironmentParser.class);
 
-  public void parse(URL input) throws IOException, SAXException,
+  public ACTRRuntime parse(URL input) throws IOException, SAXException,
       ParserConfigurationException
   {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder parser = factory.newDocumentBuilder();
     Document doc = parser.parse(input.openStream());
-    process(doc, getModelDescriptors(doc, input));
+    return process(ACTRRuntime.DEFAULT_WORKING_DIRECTORY, doc, getModelDescriptors(doc, input));
   }
 
   /**
    * process the environment descriptor.
    * 
+   * @param workingDirectory the working directory of the ACT-R runtime
    * @param document TODO
    * @param modelDescriptors TODO
    */
-  public void process(Document document, Collection<CommonTree> modelDescriptors)
+  public ACTRRuntime process(File workingDirectory, Document document, Collection<CommonTree> modelDescriptors)
   {
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
-
     /*
      * first things first.. if there are reality tags, proccess them
      */
-    configureReality(document);
+    CommonReality cr = configureReality(document);
+    ACTRRuntime runtime = new ACTRRuntime(cr, workingDirectory);
 
     instantiateConnector(document, runtime);
 
@@ -117,13 +120,15 @@ public class EnvironmentParser
 
     instantiateOnStartStop(document, runtime);
 
-    Collection<IModel> models = buildModels(modelDescriptors);
+    Collection<IModel> models = buildModels(runtime, modelDescriptors);
 
     // now let's actually add all the models
     for (IModel model : models)
       runtime.addModel(model);
 
-    instantiateAttachments(document, models);
+    instantiateAttachments(runtime, document, models);
+    
+    return runtime;
   }
 
   /**
@@ -132,7 +137,7 @@ public class EnvironmentParser
    * @param modelDescriptors TODO
    * @return TODO
    */
-  protected Collection<IModel> buildModels(
+  protected Collection<IModel> buildModels(ACTRRuntime runtime,
       Collection<CommonTree> modelDescriptors)
   {
     Collection<IModel> models = new ArrayList<IModel>();
@@ -144,7 +149,7 @@ public class EnvironmentParser
       if (LOGGER.isDebugEnabled())
         LOGGER.debug("Building " + ASTSupport.getName(modelDescriptor));
 
-      IModel model = IOUtilities.constructModel(modelDescriptor, warnings,
+      IModel model = IOUtilities.constructModel(runtime, modelDescriptor, warnings,
           errors);
 
       if (errors.size() != 0)
@@ -222,7 +227,7 @@ public class EnvironmentParser
     return models;
   }
 
-  protected void configureReality(Document env)
+  protected CommonReality configureReality(Document env)
   {
     NodeList nl = env.getElementsByTagName("commonreality");
     if (nl.getLength() == 1)
@@ -231,17 +236,51 @@ public class EnvironmentParser
         LOGGER.debug("configuring reality interface");
       // pass it on to the RealityParser
       RealityParser rp = new RealityParser();
-      rp.parse((Element) nl.item(0));
+      return rp.parse((Element) nl.item(0));
+    } else {
+      final DefaultReality reality = DefaultReality.newInstanceThatNeedsToBePreparedWithACommonReality();
+      CommonReality cr = new CommonReality(reality);
+      reality.prepare(cr);
+      return cr;
     }
   }
 
+  static public Object instantiate(ACTRRuntime runtime, Element element, String objectType)
+  {
+	  return createInstance(element, objectType,
+			  className -> {
+				  try {
+					return EnvironmentParser.class.getClassLoader()
+							  .loadClass(className).getConstructor(runtime.getClass()).newInstance(runtime);
+				} catch (Exception e) {
+					throw new RuntimeException("Could not instantiate "+objectType+" from "+className, e);
+				}
+			  }
+		  );
+  }
+  
   static public Object instantiate(Element element, String objectType)
+  {
+	  return createInstance(element, objectType,
+			  className -> {
+				  try {
+					return EnvironmentParser.class.getClassLoader()
+							  .loadClass(className).newInstance();
+				} catch (Exception e) {
+					throw new RuntimeException("Could not instantiate "+objectType+" from "+className, e);
+				}
+				  
+			  }
+		  );
+  }
+  
+  static public Object createInstance(Element element, String objectType,
+		  Function<String,Object> constructor)
   {
     String className = element.getAttribute("class");
     try
     {
-      Object rtn = EnvironmentParser.class.getClassLoader()
-          .loadClass(className).newInstance();
+      Object rtn = constructor.apply(className);
 
       if (rtn instanceof IParameterized)
       {
@@ -254,14 +293,11 @@ public class EnvironmentParser
     }
     catch (Exception e)
     {
-      String message = new String("Could not instantiate " + objectType
-          + " from " + className);
-      LOGGER.error(message, e);
-      throw new RuntimeException(message, e);
+      throw new RuntimeException("Could not instantiate "+objectType+" from "+className, e);
     }
   }
 
-  protected Collection<IInstallable> instantiateAttachments(Document env,
+  protected Collection<IInstallable> instantiateAttachments(ACTRRuntime runtime, Document env,
       Collection<IModel> models)
   {
     Collection<IInstallable> attachments = new ArrayList<IInstallable>();
@@ -270,7 +306,7 @@ public class EnvironmentParser
     {
       Element attachment = (Element) nl.item(i);
       String[] modelNames = attachment.getAttribute("attach").split(",");
-      IInstallable installable = (IInstallable) instantiate(attachment,
+      IInstallable installable = (IInstallable) instantiate(runtime, attachment,
           "installable");
       for (String modelName : modelNames)
       {
@@ -303,7 +339,7 @@ public class EnvironmentParser
     if (nl.getLength() == 1)
     {
       Element contEl = (Element) nl.item(0);
-      connector = (IConnector) instantiate(contEl, "connector");
+      connector = (IConnector) instantiate(runtime, contEl, "connector");
       runtime.setConnector(connector);
     }
 
@@ -324,13 +360,13 @@ public class EnvironmentParser
     if (nl.getLength() == 1)
     {
       Element contEl = (Element) nl.item(0);
-      controller = (IController) instantiate(contEl, "controller");
+      controller = (IController) instantiate(runtime, contEl, "controller");
       runtime.setController(controller);
     }
 
     if (controller == null)
     {
-      controller = new DefaultController();
+      controller = new DefaultController(runtime);
       runtime.setController(controller);
     }
 

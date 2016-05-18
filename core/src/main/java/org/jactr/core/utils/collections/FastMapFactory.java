@@ -18,6 +18,9 @@ public class FastMapFactory
   static private final transient Log        LOGGER   = LogFactory
                                                          .getLog(FastMapFactory.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private RecyclableFactory<FastMap> _factory = new AbstractThreadLocalRecyclableFactory<FastMap>() {
 
                                                        @SuppressWarnings({

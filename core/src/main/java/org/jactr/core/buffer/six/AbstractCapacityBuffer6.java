@@ -208,7 +208,7 @@ public abstract class AbstractCapacityBuffer6 extends
        */
       ensureCapacity();
 
-      double now = ACTRRuntime.getRuntime().getClock(getModel()).getTime();
+      double now = getModule().getRuntime().getClock(getModel()).getTime();
 
       double time = Double.MIN_VALUE;
 
@@ -418,7 +418,7 @@ public abstract class AbstractCapacityBuffer6 extends
      * now we can tweak the access time, but only if the policy is LRU or LRM
      */
     double oldTime = _times.get(chunk);
-    double newTime = ACTRRuntime.getRuntime().getClock(getModel()).getTime();
+    double newTime = getModule().getRuntime().getClock(getModel()).getTime();
 
     _sourceChunks.remove(oldTime);
     /*

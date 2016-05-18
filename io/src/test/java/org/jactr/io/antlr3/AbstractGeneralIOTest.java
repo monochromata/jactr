@@ -13,9 +13,9 @@
  */
 package org.jactr.io.antlr3;
 
-import java.util.Collection;
+import static org.junit.Assert.fail;
 
-import junit.framework.TestCase;
+import java.util.Collection;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CharStream;
@@ -27,11 +27,15 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.io.antlr3.builder.JACTRBuilder;
 import org.jactr.io.antlr3.compiler.JACTRCompiler;
 import org.jactr.io.antlr3.misc.CommonTreeException;
+import org.junit.Before;
 
-public abstract class AbstractGeneralIOTest extends TestCase
+// TODO: Is this used anywhere?
+public abstract class AbstractGeneralIOTest
 {
   /**
    * logger definition
@@ -39,6 +43,13 @@ public abstract class AbstractGeneralIOTest extends TestCase
   static public final Log LOGGER = LogFactory
                                      .getLog(AbstractGeneralIOTest.class);
 
+  private ACTRRuntime _runtime;
+  
+  @Before
+  public void setUp() {
+	  _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+  }
+  
   public void checkForExceptions(String fileName,
       Collection<Exception> exceptions, boolean failOnException)
   {
@@ -117,12 +128,13 @@ public abstract class AbstractGeneralIOTest extends TestCase
     }
   }
 
-  public IModel build(String fileName, CommonTree modelTree)
+  public IModel build(ACTRRuntime runtime, String fileName, CommonTree modelTree)
   {
     try
     {
       CommonTreeNodeStream nodes = new CommonTreeNodeStream(modelTree);
       JACTRBuilder builder = new JACTRBuilder(nodes);
+      builder.setRuntime(runtime);
       IModel rtn = builder.model();
       checkForExceptions(fileName, builder.getWarnings(), false);
       checkForExceptions(fileName, builder.getErrors(), true);
@@ -138,6 +150,6 @@ public abstract class AbstractGeneralIOTest extends TestCase
 
   public IModel fullTest(String fileName)
   {
-    return build(fileName, compile(fileName, parseFile(fileName)));
+    return build(_runtime, fileName, compile(fileName, parseFile(fileName)));
   }
 }

@@ -22,6 +22,7 @@ import org.jactr.core.module.declarative.associative.IAssociativeLinkageSystem;
 import org.jactr.core.module.declarative.event.IDeclarativeModuleListener;
 import org.jactr.core.module.declarative.search.filter.IChunkFilter;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
 
@@ -75,7 +76,12 @@ public class DelegatedDeclarativeModule implements IDeclarativeModule,
     _delegate.initialize();
   }
 
-  public String getName()
+  @Override
+  public ACTRRuntime getRuntime() {
+	return _delegate.getRuntime();
+  }
+
+public String getName()
   {
     return _delegate.getName();
   }

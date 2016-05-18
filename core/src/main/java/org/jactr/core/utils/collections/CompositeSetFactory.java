@@ -22,6 +22,9 @@ public class CompositeSetFactory
   static private final transient Log             LOGGER   = LogFactory
                                                               .getLog(CompositeSetFactory.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private RecyclableFactory<CompositeSet> _factory = new AbstractThreadLocalRecyclableFactory<CompositeSet>() {
 
                                                             @SuppressWarnings({

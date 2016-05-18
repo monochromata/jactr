@@ -29,7 +29,6 @@ public class ProceduralModuleParticipant extends BasicASTParticipant
 {
   public ProceduralModuleParticipant()
   {
-    super((URL) null);
     setInstallableClass(DefaultProceduralModule6.class);
     Map<String, String> parameters = new TreeMap<String, String>();
     parameters.put(IProceduralModule.DEFAULT_PRODUCTION_FIRING_TIME, "0.05");

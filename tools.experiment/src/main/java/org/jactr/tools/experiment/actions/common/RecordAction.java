@@ -8,15 +8,16 @@ import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IDataLogger;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-public class RecordAction implements IAction
+public class RecordAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -31,8 +32,9 @@ public class RecordAction implements IAction
   private final Map<String, String> _attributes;
   private final IExperiment _experiment;
   
-  public RecordAction(Element element, IExperiment experiment)
+  public RecordAction(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
+	super(runtime);
     _experiment = experiment;
     Type type = Type.OPEN;
     String tagName = null;
@@ -67,8 +69,9 @@ public class RecordAction implements IAction
     }
   }
   
-  public RecordAction(Type type, String tagName, Map<String, String> attributes, IExperiment experiment)
+  public RecordAction(ACTRRuntime runtime, Type type, String tagName, Map<String, String> attributes, IExperiment experiment)
   {
+	super(runtime);
     _experiment =experiment;
     _type  = type;
     _tagName = tagName;

@@ -26,7 +26,7 @@ public class ProceduralLearningEvent
   public ProceduralLearningEvent(IProceduralLearningModule6 source, Type type,
       double reward)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel())
+    super(source, source.getRuntime().getClock(source.getModel())
         .getTime());
     _type = type;
     _production = null;
@@ -36,7 +36,7 @@ public class ProceduralLearningEvent
   public ProceduralLearningEvent(IProceduralLearningModule6 source,
       IProduction production, double reward)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel())
+    super(source, source.getRuntime().getClock(source.getModel())
         .getTime());
     _type = Type.REWARDED;
     _production = production;

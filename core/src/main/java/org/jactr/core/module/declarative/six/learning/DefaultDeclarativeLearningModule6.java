@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.module.declarative.basic.DefaultAssociativeLinkageSystem;
 import org.jactr.core.module.declarative.four.learning.DefaultDeclarativeLearningModule4;
 import org.jactr.core.module.declarative.six.associative.DefaultAssociativeLinkageSystem6;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.ParameterHandler;
 
 /**
@@ -33,8 +34,9 @@ public class DefaultDeclarativeLearningModule6 extends
 
   private double                     _maximumStrength;
 
-  public DefaultDeclarativeLearningModule6()
+  public DefaultDeclarativeLearningModule6(ACTRRuntime runtime)
   {
+	  super(runtime);
   }
 
   @Override

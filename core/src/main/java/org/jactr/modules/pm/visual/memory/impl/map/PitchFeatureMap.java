@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.commonreality.modalities.visual.IVisualPropertyHandler;
 import org.commonreality.object.IAfferentObject;
 import org.commonreality.object.UnknownPropertyNameException;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.ISlot;
 import org.jactr.modules.pm.visual.IVisualModule;
 
@@ -19,9 +20,9 @@ public class PitchFeatureMap extends AbstractSortedVisualFeatureMap<Double>
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(PitchFeatureMap.class);
 
-  public PitchFeatureMap()
+  public PitchFeatureMap(ACTRRuntime runtime)
   {
-    super(IVisualModule.SCREEN_Y_SLOT, IVisualPropertyHandler.RETINAL_LOCATION);
+    super(runtime, IVisualModule.SCREEN_Y_SLOT, IVisualPropertyHandler.RETINAL_LOCATION);
   }
 
   @Override

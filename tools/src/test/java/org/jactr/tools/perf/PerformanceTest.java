@@ -15,22 +15,22 @@ package org.jactr.tools.perf;
 
 import java.net.URL;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.entry.iterative.IterativeMain;
+import org.junit.Ignore;
+import org.junit.Test;
 
-/**
- * 
- */
-public class PerformanceTest extends TestCase
+public class PerformanceTest
 {
   /**
    * logger definition
    */
   static private final Log LOGGER = LogFactory.getLog(PerformanceTest.class);
 
+  @Ignore
+  @Test
   public void testSemantic1() throws Exception
   {
     System.setProperty("iterative-id", "1");
@@ -38,6 +38,8 @@ public class PerformanceTest extends TestCase
         "org/jactr/tools/perf/semantic x 1.xml"));
   }
 
+  @Ignore
+  @Test
   public void testSemantic2() throws Exception
   {
     System.setProperty("iterative-id", "2");
@@ -45,6 +47,8 @@ public class PerformanceTest extends TestCase
         "org/jactr/tools/perf/semantic x 2.xml"));
   }
   
+  @Ignore
+  @Test
   public void testVisual1() throws Exception
   {
     System.setProperty("iterative-id", "1");
@@ -52,6 +56,8 @@ public class PerformanceTest extends TestCase
         "org/jactr/tools/perf/visual x 1.xml"));
   }
   
+  @Ignore
+  @Test
   public void testVisual2() throws Exception
   {
     System.setProperty("iterative-id", "2");
@@ -63,7 +69,7 @@ public class PerformanceTest extends TestCase
   {
     IterativeMain main = new IterativeMain();
     long start = System.currentTimeMillis();
-    main.run(url);
+    main.run(url, ACTRRuntime.DEFAULT_WORKING_DIRECTORY);
     long delta = System.currentTimeMillis() - start;
     if (LOGGER.isDebugEnabled()) LOGGER.debug("[" + delta + "ms]");
   }

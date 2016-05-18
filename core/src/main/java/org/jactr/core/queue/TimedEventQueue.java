@@ -30,6 +30,7 @@ import org.jactr.core.queue.collection.IPrioritizer;
 import org.jactr.core.queue.collection.PrioritizedQueue;
 import org.jactr.core.queue.event.ITimedEventListener;
 import org.jactr.core.queue.event.TimedEventEvent;
+import org.jactr.core.runtime.ACTRRuntime;
 
 /**
  * Tracks TimedEvents within the model. A TimedEvent is any event that must
@@ -75,7 +76,7 @@ public class TimedEventQueue
    * events that are currently (at this precise moment) being fired
    */
   Collection<ITimedEvent>                                   _firingEvents;
-
+  
   IModel                                                    _model;
 
   final Lock                                                _lock   = new ReentrantLock();
@@ -125,6 +126,11 @@ public class TimedEventQueue
   public IModel getModel()
   {
     return _model;
+  }
+  
+  public ACTRRuntime getRuntime()
+  {
+	return getModel().getRuntime();
   }
 
   /**

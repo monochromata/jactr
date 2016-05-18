@@ -13,9 +13,10 @@
  */
 package org.jactr.io.modules.pm.aural;
 
-import java.util.Collection;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import junit.framework.TestCase;
+import java.util.Collection;
 
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
@@ -23,37 +24,40 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.model.IModel;
 import org.jactr.core.module.declarative.IDeclarativeModule;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.io.CommonIO;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.io.antlr3.builder.JACTRBuilder;
 import org.jactr.io.antlr3.misc.ASTSupport;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.modules.pm.aural.IAuralModule;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class AuralLoadTest extends TestCase
+public class AuralLoadTest
 {
   /**
    * logger definition
    */
   static public final Log LOGGER = LogFactory.getLog(AuralLoadTest.class);
 
-  @Override
-  protected void setUp() throws Exception
+  private ACTRRuntime _runtime;
+  
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
+	  _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
   }
 
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-  }
-
+  @Ignore
+  @Test
   public void testLoad() throws Exception
   {
 	  // TODO: This is not a test of the module but of IO, move to io/
 	  // TODO: Don't forget to move aural-test.jactr and environment.xml over there, too.
     CommonTree modelDescriptor = CommonIO.getModelDescriptor(CommonIO
-        .parseModel("org/jactr/modules/pm/aural/aural-test.jactr"));
+        .parseModel("org/jactr/io/modules/pm/aural/aural-test.jactr"));
     Collection<CommonTree> knownBuffers = ASTSupport.getTrees(modelDescriptor,
         JACTRBuilder.BUFFER);
 
@@ -68,14 +72,16 @@ public class AuralLoadTest extends TestCase
     CommonIO.compilerTest(modelDescriptor, true, true);
   }
 
+  @Ignore
+  @Test
   public void testConstruction() throws Exception
   {
 	// TODO: This is not a test of the module but of IO, move to io/
     CommonTree desc = CommonIO.getModelDescriptor(CommonIO
-        .parseModel("org/jactr/modules/pm/aural/aural-test.jactr"));
+        .parseModel("org/jactr/io/modules/pm/aural/aural-test.jactr"));
     CommonIO.compilerTest(desc, true, true);
 
-    IModel model = CommonIO.constructorTest(desc);
+    IModel model = CommonIO.constructorTest(_runtime, desc);
     assertNotNull(model);
 
     IDeclarativeModule decM = model.getDeclarativeModule();

@@ -8,12 +8,13 @@ import java.util.function.Consumer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.impl.VariableResolver;
 
-public class LogAction implements IAction
+public class LogAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -45,8 +46,9 @@ public class LogAction implements IAction
    * @param message
    * @param experiment
    */
-  public LogAction(String message, IExperiment experiment)
+  public LogAction(ACTRRuntime runtime, String message, IExperiment experiment)
   {
+	super(runtime);
     _message = message;
     _experiment = experiment;
 
@@ -59,14 +61,15 @@ public class LogAction implements IAction
     _logMessageConsumer = consumer;
   }
 
-  public LogAction(String message, IExperiment experiment, boolean logError)
+  public LogAction(ACTRRuntime runtime, String message, IExperiment experiment, boolean logError)
   {
-    this(message, experiment, logError ? ERROR_LOG : STDOUT);
+    this(runtime, message, experiment, logError ? ERROR_LOG : STDOUT);
   }
 
-  public LogAction(String message, IExperiment experiment,
+  public LogAction(ACTRRuntime runtime, String message, IExperiment experiment,
       Consumer<String> logConsumer)
   {
+	super(runtime);
     _message = message;
     _experiment = experiment;
     _logMessageConsumer = logConsumer;

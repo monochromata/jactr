@@ -21,6 +21,9 @@ public class SkipListSetFactory
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(SkipListSetFactory.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private final Map<Comparator, RecyclableFactory<ConcurrentSkipListSet>> _factoriesByComparator = new HashMap<Comparator, RecyclableFactory<ConcurrentSkipListSet>>();
 
   @SuppressWarnings("rawtypes")

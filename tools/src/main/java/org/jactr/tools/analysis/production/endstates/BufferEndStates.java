@@ -23,6 +23,9 @@ public class BufferEndStates
   static private final transient Log              LOGGER       = LogFactory
                                                                    .getLog(BufferEndStates.class);
 
+  /**
+   * TODO: Should not be static - or be static final -- because there might be more than one ACTRRuntime
+   */
   static int[]                                    _commonTypes = new int[] {
       JACTRBuilder.QUERY_CONDITION, JACTRBuilder.MATCH_CONDITION,
       JACTRBuilder.ADD_ACTION, JACTRBuilder.MODIFY_ACTION,

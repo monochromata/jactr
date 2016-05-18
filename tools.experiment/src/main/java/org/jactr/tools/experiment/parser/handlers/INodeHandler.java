@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -11,7 +12,7 @@ public interface INodeHandler<T>
 
   public String getTagName();
   
-  public T process(Element element, IExperiment experiment);
+  public T process(ACTRRuntime runtime, Element element, IExperiment experiment);
   
   public boolean shouldDecend();
 }

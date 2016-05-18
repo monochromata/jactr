@@ -27,11 +27,11 @@ public class ReencodingTimedEvent extends AbstractTimedEvent implements
 
   IVisualActivationBuffer            _buffer;
 
-  public ReencodingTimedEvent(IVisualActivationBuffer buffer,
+  public ReencodingTimedEvent(ACTRRuntime runtime, IVisualActivationBuffer buffer,
       IChunk visualChunk, double reencodingTime)
   {
     IModel model = buffer.getModel();
-    double now = ACTRRuntime.getRuntime().getClock(model).getTime();
+    double now = runtime.getClock(model).getTime();
     setTimes(now, now + reencodingTime);
     _chunk = visualChunk;
     _buffer = buffer;

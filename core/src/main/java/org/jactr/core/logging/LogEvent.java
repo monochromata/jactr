@@ -39,7 +39,7 @@ public class LogEvent extends AbstractACTREvent<IModel, ILogger>
 
   public LogEvent(IModel model, String streamName, String message)
   {
-    super(model, ACTRRuntime.getRuntime().getClock(model).getTime());
+    super(model, model.getRuntime().getClock(model).getTime());
     _model = model;
     _streamName = streamName;
     _message = message;

@@ -73,11 +73,11 @@ public class AuralModuleTest extends AbstractModuleTest {
 
 	@Override
 	protected IModelFactory createModelFactory() {
-		return new AuralTestModelFactory();
+		return new AuralTestModelFactory(_runtime);
 	}
 
 	protected ISensor createSensor(INetworkingProvider netProvider) throws Exception {
-		return createXMLSensor(netProvider, "org/jactr/modules/pm/aural/sensorData.xml");
+		return createXMLSensor(_cr, netProvider, "org/jactr/modules/pm/aural/sensorData.xml");
 	}
 
 	protected String getModelName() {

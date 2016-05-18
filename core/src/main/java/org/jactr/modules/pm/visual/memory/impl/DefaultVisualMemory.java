@@ -106,18 +106,18 @@ public class DefaultVisualMemory extends AbstractPerceptualMemory implements
     addEncoder(new EmptySpaceEncoder());
     addEncoder(new CursorEncoder());
 
-    addFeatureMap(new HeadingFeatureMap());
-    addFeatureMap(new PitchFeatureMap());
-    addFeatureMap(new DistanceFeatureMap());
-    addFeatureMap(new KindFeatureMap());
-    addFeatureMap(new SizeFeatureMap());
-    addFeatureMap(new DimensionFeatureMap());
+    addFeatureMap(new HeadingFeatureMap(module.getRuntime()));
+    addFeatureMap(new PitchFeatureMap(module.getRuntime()));
+    addFeatureMap(new DistanceFeatureMap(module.getRuntime()));
+    addFeatureMap(new KindFeatureMap(module.getRuntime()));
+    addFeatureMap(new SizeFeatureMap(module.getRuntime()));
+    addFeatureMap(new DimensionFeatureMap(module.getRuntime()));
     ColorFeatureMap cfm = new ColorFeatureMap(module.getModel());
     _colorChunkCache = cfm.getColorChunkCache();
     addFeatureMap(cfm);
-    addFeatureMap(new VisibilityFeatureMap());
+    addFeatureMap(new VisibilityFeatureMap(module.getRuntime()));
     addFeatureMap(new FINSTVisualFeatureMap(module.getModel()));
-    addFeatureMap(new ValueFeatureMap());
+    addFeatureMap(new ValueFeatureMap(module.getRuntime()));
   }
 
   public ColorChunkCache getColorChunkCache()
@@ -488,7 +488,8 @@ public class DefaultVisualMemory extends AbstractPerceptualMemory implements
       // grab one at random
       IRandomModule rand = (IRandomModule) getVisualModule().getModel()
           .getModule(IRandomModule.class);
-      if (rand == null) rand = DefaultRandomModule.getInstance();
+      if (rand == null)
+    	  throw new IllegalStateException("The model must contain an "+IRandomModule.class.getName());
 
       Iterator<PerceptualSearchResult> itr = results.iterator();
       int which = (int) Math.floor(rand.getGenerator().nextDouble()

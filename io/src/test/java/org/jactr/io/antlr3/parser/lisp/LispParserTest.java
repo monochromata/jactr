@@ -1,25 +1,31 @@
 package org.jactr.io.antlr3.parser.lisp;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 /*
  * default logging
  */
 import java.util.ArrayList;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.io.CommonIO;
 import org.jactr.io.IOUtilities;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.io.antlr3.compiler.JACTRCompiler;
 import org.jactr.io.antlr3.misc.ASTSupport;
 import org.jactr.io.parser.IModelParser;
 import org.jactr.io.parser.ModelParserFactory;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class LispParserTest extends TestCase
+public class LispParserTest
 {
   /**
    * Logger definition
@@ -27,54 +33,57 @@ public class LispParserTest extends TestCase
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(LispParserTest.class);
 
-  @Override
-  protected void setUp() throws Exception
+  private ACTRRuntime _runtime;
+  
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
+	_runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
     ModelParserFactory.addParser("lisp",
         org.jactr.io.antlr3.parser.lisp.LispModelParser.class);
   }
-
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-  }
   
-
+  @Ignore
+  @Test
   public void testAddition() throws Exception
   {
-    CommonTree mDesc = parserTest("org/jactr/tutorial/unit1/addition.lisp", 6,
+    CommonTree mDesc = parserTest("org/jactr/io/models/addition.lisp", 6,
         22, 4, 3);
     mDesc = compilerTest(mDesc);
     IModel model = builderTest(mDesc, 6, 21, 4, 3);
     model.dispose();
   }
   
+  @Ignore
+  @Test
   public void testVisual() throws Exception
   {
-    CommonTree mDesc = parserTest("org/jactr/tutorial/unit1/visual.lisp", 19,
+    CommonTree mDesc = parserTest("org/jactr/io/models/visual.lisp", 19,
         28, 4, 3);
     mDesc = compilerTest(mDesc);
     IModel model = builderTest(mDesc, 6, 21, 4, 3);
     model.dispose();
   }
   
+  @Ignore
+  @Test
   public void testCount() throws Exception
   {
     /*
      * 6 chunktypes, 16 chunks, 3 prod, 3 buffers
      */
-    CommonTree mDesc = parserTest("org/jactr/tutorial/unit1/count.lisp", 6, 17,
+    CommonTree mDesc = parserTest("org/jactr/io/models/count.lisp", 6, 17,
         3, 3);
     mDesc = compilerTest(mDesc);
     IModel model = builderTest(mDesc, 6, 16, 3, 3);
     model.dispose();
   }
   
+  @Ignore
+  @Test
   public void testSemantic() throws Exception
   {
-    CommonTree mDesc = parserTest("org/jactr/tutorial/unit1/semantic.lisp", 6,
+    CommonTree mDesc = parserTest("org/jactr/io/models/semantic.lisp", 6,
         63, 4, 3);
     mDesc = compilerTest(mDesc);
     IModel model = builderTest(mDesc, 6, 62, 4, 3);
@@ -107,7 +116,7 @@ public class LispParserTest extends TestCase
     ArrayList<Exception> warnings = new ArrayList<Exception>();
     ArrayList<Exception> errors = new ArrayList<Exception>();
 
-    IModel model = IOUtilities.constructModel(modelDesc, warnings, errors);
+    IModel model = IOUtilities.constructModel(_runtime, modelDesc, warnings, errors);
 
     String name = ASTSupport.getName(modelDesc);
 

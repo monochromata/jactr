@@ -21,6 +21,9 @@ public class BufferEndState
   static private final transient Log LOGGER   = LogFactory
                                                   .getLog(BufferEndState.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static protected ASTSupport        _support = new ASTSupport();
 
   static public ASTSupport getSupport()

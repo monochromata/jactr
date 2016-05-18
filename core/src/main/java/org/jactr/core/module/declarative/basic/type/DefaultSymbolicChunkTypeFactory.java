@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.chunktype.ISymbolicChunkType;
 import org.jactr.core.chunktype.basic.BasicSymbolicChunkType;
+import org.jactr.core.runtime.ACTRRuntime;
 
 public class DefaultSymbolicChunkTypeFactory implements
     ISymbolicChunkTypeFactory
@@ -21,9 +22,16 @@ public class DefaultSymbolicChunkTypeFactory implements
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(DefaultSymbolicChunkTypeFactory.class);
 
+  private final ACTRRuntime _runtime;
+  
+  public DefaultSymbolicChunkTypeFactory(ACTRRuntime runtime)
+  {
+	_runtime = runtime;
+  }
+
   public ISymbolicChunkType newSymbolicChunkType()
   {
-    return new BasicSymbolicChunkType();
+    return new BasicSymbolicChunkType(_runtime);
   }
 
   public void bind(ISymbolicChunkType symbolic, IChunkType wrapper,

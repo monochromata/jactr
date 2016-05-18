@@ -13,34 +13,43 @@
  */
 package org.jactr.io.antlr3.builder;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Collection;
 import java.util.Map;
-
-import junit.framework.TestCase;
 
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.io.CommonIO;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.io.antlr3.misc.ASTSupport;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class BuilderTest extends TestCase
+public class BuilderTest
 {
   /**
    * logger definition
    */
   static public final Log LOGGER = LogFactory.getLog(BuilderTest.class);
 
+  @Ignore
+  @Test
   public void testConstruction() throws Exception
   {
+	ACTRRuntime runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
     IModel model = CommonIO
-        .loadModel("org/jactr/core/runtime/semantic-model.jactr");
+        .loadModel(runtime, "org/jactr/io/models/semantic-model.jactr");
 
     // check the chunktypes
-    assertEquals("Incorrect number of chunktypes", 5, model
-        .getDeclarativeModule().getChunkTypes().get().size());
+    final Collection<IChunkType> chunkTypes = model
+        .getDeclarativeModule().getChunkTypes().get();
+	assertEquals("Incorrect number of chunktypes: "+chunkTypes, 5, chunkTypes.size());
     IChunkType chunk = model.getDeclarativeModule().getChunkType("chunk").get();
     assertNotNull("chunktype chunk is missing", chunk);
     IChunkType property = model.getDeclarativeModule().getChunkType("property")
@@ -62,16 +71,19 @@ public class BuilderTest extends TestCase
         .getSourceChunk().getSymbolicChunk().getName());
   }
 
+  @Test
   public void test2() throws Exception
   {
+	ACTRRuntime runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
     CommonTree modelDescriptor = CommonIO.parserTest(
-        "org/jactr/core/runtime/semantic-model.jactr", true, true);
+        "org/jactr/io/models/semantic-model.jactr", true, true);
     Map<String, CommonTree> buffers = ASTSupport.getMapOfTrees(modelDescriptor,
         JACTRBuilder.BUFFER);
     assertEquals("not the right number of buffers", 2, buffers.size());
     // goal had better have a chunk in it
-    Collection<CommonTree> source = ASTSupport.getAllDescendantsWithType(
-        buffers.get("goal"), JACTRBuilder.IDENTIFIER);
+    final CommonTree goalBuffer = buffers.get("goal");
+	Collection<CommonTree> source = ASTSupport.getAllDescendantsWithType(
+        goalBuffer, JACTRBuilder.CHUNK_IDENTIFIER);
     assertEquals("missing source chunk", 1, source.size());
   }
 

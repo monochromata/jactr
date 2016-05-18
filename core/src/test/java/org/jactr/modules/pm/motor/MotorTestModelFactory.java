@@ -2,34 +2,20 @@ package org.jactr.modules.pm.motor;
 
 import static java.lang.String.format;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.commons.collections.list.SetUniqueList;
 import org.jactr.core.chunk.IChunk;
-import org.jactr.core.chunk.ISymbolicChunk;
 import org.jactr.core.chunktype.IChunkType;
-import org.jactr.core.chunktype.ISymbolicChunkType;
 import org.jactr.core.model.IModel;
 import org.jactr.core.models.AbstractModelFactory;
 import org.jactr.core.module.asynch.IAsynchronousModule;
 import org.jactr.core.module.declarative.IDeclarativeModule;
 import org.jactr.core.module.imaginal.six.DefaultImaginalModule6;
 import org.jactr.core.module.procedural.IProceduralModule;
-import org.jactr.core.production.IProduction;
-import org.jactr.core.production.ISymbolicProduction;
 import org.jactr.core.production.VariableBindings;
-import org.jactr.core.production.action.AddAction;
-import org.jactr.core.production.action.ModifyAction;
-import org.jactr.core.production.action.OutputAction;
-import org.jactr.core.production.action.RemoveAction;
-import org.jactr.core.production.action.StopAction;
 import org.jactr.core.production.condition.CannotMatchException;
-import org.jactr.core.production.condition.ChunkTypeCondition;
 import org.jactr.core.production.condition.ICondition;
-import org.jactr.core.production.condition.QueryCondition;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultConditionalSlot;
 import org.jactr.modules.pm.motor.command.translators.AbstractManualTranslator;
 import org.jactr.modules.pm.motor.command.translators.PeckRecoilTranslator;
@@ -45,15 +31,15 @@ public class MotorTestModelFactory extends AbstractModelFactory {
 	private IChunk index, left, right;
 	private IChunk g1;
 	
-	public MotorTestModelFactory() {
-		super("motor-test");
+	public MotorTestModelFactory(ACTRRuntime runtime) {
+		super(runtime, "motor-test");
 	}
 
 	@Override
 	protected void installModules(IModel model) {
 		super.installModules(model);
-		model.install(new DefaultImaginalModule6());
-		model.install(configureMotorModule(new DefaultMotorModule6()));
+		model.install(new DefaultImaginalModule6(getRuntime()));
+		model.install(configureMotorModule(new DefaultMotorModule6(getRuntime())));
 	}
 	
 	protected DefaultMotorModule6 configureMotorModule(DefaultMotorModule6 motorModule) {

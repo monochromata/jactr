@@ -9,8 +9,8 @@ import java.util.Collections;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.buffer.IActivationBuffer;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.motor.AbstractMotorModule;
-import org.jactr.modules.pm.motor.IMotorModule;
 import org.jactr.modules.pm.motor.buffer.IMotorActivationBuffer;
 import org.jactr.modules.pm.motor.buffer.six.DefaultMotorActivationBuffer6;
 import org.jactr.modules.pm.motor.command.IMotorTimeEquation;
@@ -25,14 +25,14 @@ public class DefaultMotorModule6 extends AbstractMotorModule
 
   private IMotorActivationBuffer     _buffer;
 
-  public DefaultMotorModule6()
+  public DefaultMotorModule6(ACTRRuntime runtime)
   {
-    this("motor");
+    this(runtime, "motor");
   }
 
-  public DefaultMotorModule6(String name)
+  public DefaultMotorModule6(ACTRRuntime runtime, String name)
   {
-    super(name);
+    super(runtime, name);
   }
 
   /**

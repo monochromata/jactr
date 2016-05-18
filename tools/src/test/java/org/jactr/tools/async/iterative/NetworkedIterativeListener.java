@@ -15,9 +15,12 @@ package org.jactr.tools.async.iterative;
 
 import junit.framework.TestCase;
 
+import java.io.File;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.mina.service.ServerService;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.entry.iterative.IterativeMain;
 import org.jactr.tools.async.iterative.tracker.IterativeRunTracker;
 
@@ -68,7 +71,8 @@ public class NetworkedIterativeListener extends TestCase
     _tracker.start();
 
     _main.run(getClass().getClassLoader().getResource(
-        "org/jactr/tools/async/iterative/environment.xml"));
+        "org/jactr/tools/async/iterative/environment.xml"),
+    		ACTRRuntime.DEFAULT_WORKING_DIRECTORY);
 
     /*
      * and stop

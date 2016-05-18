@@ -1,7 +1,5 @@
 package org.jactr.core.models;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 
 import org.jactr.core.chunk.IChunk;
@@ -9,15 +7,8 @@ import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.model.IModel;
 import org.jactr.core.module.declarative.IDeclarativeModule;
 import org.jactr.core.module.procedural.IProceduralModule;
-import org.jactr.core.production.IProduction;
-import org.jactr.core.production.action.AddAction;
-import org.jactr.core.production.action.ModifyAction;
-import org.jactr.core.production.action.OutputAction;
-import org.jactr.core.production.action.RemoveAction;
-import org.jactr.core.production.condition.ChunkTypeCondition;
-import org.jactr.core.production.condition.QueryCondition;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultConditionalSlot;
-import org.jactr.core.slot.DefaultVariableConditionalSlot;
 
 public class CountModelFactory extends AbstractModelFactory {
 
@@ -28,8 +19,8 @@ public class CountModelFactory extends AbstractModelFactory {
 	private IChunk counting;
 	private IChunk stop;
 
-	public CountModelFactory() {
-		super("count");
+	public CountModelFactory(ACTRRuntime runtime) {
+		super(runtime, "count");
 	}
 
 	@Override

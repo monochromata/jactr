@@ -1,5 +1,7 @@
 package org.jactr.core.models;
 
+import org.jactr.core.runtime.ACTRRuntime;
+
 /**
  * A factory for a model that contains only the modules defined by
  * {@link AbstractModelFactory}, with empty declarative memory and
@@ -7,8 +9,8 @@ package org.jactr.core.models;
  */
 public class BootstrapModelFactory extends AbstractModelFactory {
 
-	public BootstrapModelFactory() {
-		super("bootstrap");
+	public BootstrapModelFactory(ACTRRuntime runtime) {
+		super(runtime, "bootstrap");
 	}
 
 }

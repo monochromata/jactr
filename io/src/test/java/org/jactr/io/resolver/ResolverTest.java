@@ -16,16 +16,22 @@
 
 package org.jactr.io.resolver;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.io.CommonIO;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
-public class ResolverTest extends TestCase
+public class ResolverTest
 {
 
   /**
@@ -35,19 +41,24 @@ public class ResolverTest extends TestCase
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(ResolverTest.class);
   
-  String[] _cleanModels = {"org/jactr/core/runtime/semantic-model.jactr",
-      "org/jactr/core/models/semantic-full.jactr"};
+  private ACTRRuntime _runtime;
   
-  protected void setUp() throws Exception
+  String[] _cleanModels = {"org/jactr/io/models/semantic-model.jactr",
+      "org/jactr/io/models/semantic-full.jactr"};
+  
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
+	  _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
   }
 
-  protected void tearDown() throws Exception
+  @After
+  public void tearDown() throws Exception
   {
-    super.tearDown();
   }
   
+  
+  @Test
   public void testGenerator()
   {
     for(int i=0;i<_cleanModels.length;i++)
@@ -57,7 +68,7 @@ public class ResolverTest extends TestCase
       
   }
 
-  static public void resolverTest(String fileName)
+  protected void resolverTest(String fileName)
   {
     LOGGER.info("Parsing "+fileName);
     CommonTree md = CommonIO.parserTest(fileName, true, true);
@@ -66,7 +77,7 @@ public class ResolverTest extends TestCase
     CommonIO.compilerTest(md, true, true);
     
     LOGGER.info("Constructing "+fileName);
-    IModel model = CommonIO.constructorTest(md);
+    IModel model = CommonIO.constructorTest(_runtime, md);
     
     assertNotNull(model);
     

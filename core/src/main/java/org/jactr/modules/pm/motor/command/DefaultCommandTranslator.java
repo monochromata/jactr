@@ -88,7 +88,7 @@ public class DefaultCommandTranslator implements ICommandTranslator
   public IEfferentObject getMuscle(String muscleName, IModel model)
       throws IllegalArgumentException
   {
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = model.getRuntime().getConnector().getAgent(model);
     IEfferentObjectManager manager = agent.getEfferentObjectManager();
     IEfferentObject rtn = null;
     IIdentifier mid = _muscleCache.get(muscleName.toLowerCase());

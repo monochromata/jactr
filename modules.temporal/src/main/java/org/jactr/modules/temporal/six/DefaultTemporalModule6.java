@@ -84,9 +84,9 @@ public class DefaultTemporalModule6 extends AbstractModule implements
 
   private long                       _currentTicks         = 0;
 
-  public DefaultTemporalModule6()
+  public DefaultTemporalModule6(ACTRRuntime runtime)
   {
-    super("temporal");
+    super(runtime, "temporal");
   }
 
   /**
@@ -116,7 +116,7 @@ public class DefaultTemporalModule6 extends AbstractModule implements
      */
     _randomModule = (IRandomModule) getModel().getModule(IRandomModule.class);
     if (_randomModule == null)
-      _randomModule = DefaultRandomModule.getInstance();
+    	throw new IllegalStateException("The model must contain an "+IRandomModule.class.getName());
   }
 
   /**
@@ -211,7 +211,7 @@ public class DefaultTemporalModule6 extends AbstractModule implements
        */
       double previousDuration = 0;
 
-      nextTickTimedEvent(ACTRRuntime.getRuntime().getClock(getModel())
+      nextTickTimedEvent(getRuntime().getClock(getModel())
           .getTime(), previousDuration);
     }
     catch (Exception e)

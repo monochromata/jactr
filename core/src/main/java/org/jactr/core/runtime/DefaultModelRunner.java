@@ -50,6 +50,9 @@ public class DefaultModelRunner implements Runnable
   static private final Log  LOGGER = LogFactory
                                        .getLog(DefaultModelRunner.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static boolean            _enableTimeDiagnostics = Boolean
                                                        .getBoolean("jactr.enableTimeDiagnostics");
 
@@ -86,7 +89,7 @@ public class DefaultModelRunner implements Runnable
      * common reality, it will call model.initialize(). we then block until it
      * gets the start command
      */
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
+    ACTRRuntime runtime = _model.getRuntime();
     runtime.getConnector().connect(_model);
 
     IClock clock = runtime.getClock(_model);
@@ -121,11 +124,11 @@ public class DefaultModelRunner implements Runnable
       _model
           .dispatch(new ModelEvent(_model, ModelEvent.Type.STOPPED, deferred));
 
-      double age = ACTRRuntime.getRuntime().getClock(_model).getTime();
+      double age = _model.getRuntime().getClock(_model).getTime();
       if (LOGGER.isDebugEnabled()) LOGGER.debug("Set model age to " + age);
       _model.setAge(age);
 
-      ACTRRuntime.getRuntime().getConnector().disconnect(_model);
+      _model.getRuntime().getConnector().disconnect(_model);
       Thread.currentThread().setName("dead-" + _model.getName());
     }
     catch (Exception e)
@@ -191,7 +194,7 @@ public class DefaultModelRunner implements Runnable
       return 0;
     }
 
-    IClock clock = ACTRRuntime.getRuntime().getClock(_model);
+    IClock clock = _model.getRuntime().getClock(_model);
     double now = clock.getTime();
     if (waitForTime <= now && !_firstRun)
     {

@@ -19,6 +19,7 @@ import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.entry.iterative.IIterativeRunListener;
 import org.jactr.entry.iterative.TerminateIterativeRunException;
@@ -43,12 +44,15 @@ public class NetworkedIterativeRunListener extends NetworkedEndpoint implements
 
   static public final String DEADLOCK_TIMEOUT_PARAM = "DeadlockTimeout";
 
+  private final ACTRRuntime  _runtime;
+  
   private DeadLockDetector   _detector;
 
   private long               _timeout               = 10000;
 
-  public NetworkedIterativeRunListener()
+  public NetworkedIterativeRunListener(ACTRRuntime runtime)
   {
+	_runtime = runtime;
   }
 
   /**
@@ -144,7 +148,7 @@ public class NetworkedIterativeRunListener extends NetworkedEndpoint implements
   public void start(int totalRuns) throws TerminateIterativeRunException
   {
 
-    _detector = new DeadLockDetector(new IDeadLockListener() {
+    _detector = new DeadLockDetector(_runtime, new IDeadLockListener() {
 
       public void deadlockDetected()
       {

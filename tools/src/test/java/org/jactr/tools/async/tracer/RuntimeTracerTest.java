@@ -16,12 +16,10 @@ package org.jactr.tools.async.tracer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.async.MINATest;
 import org.jactr.tools.tracer.RuntimeTracer;
 
-/**
- * 
- */
 public class RuntimeTracerTest extends MINATest
 {
   /**
@@ -31,20 +29,14 @@ public class RuntimeTracerTest extends MINATest
 
   private RuntimeTracer    _tracer;
 
-  @Override
-  protected void setUp() throws Exception
-  {
-    super.setUp();
-  }
-
   /**
    * install the runtimeTracer
    * @see org.jactr.tools.async.MINATest#configureModel(org.jactr.core.model.IModel)
    */
   @Override
-  protected void configureModel(IModel model)
+  protected void configureModel(ACTRRuntime runtime, IModel model)
   {
-    _tracer = new RuntimeTracer();
+    _tracer = new RuntimeTracer(runtime);
     //super.configureModel(model);
     
     if (LOGGER.isDebugEnabled()) LOGGER.debug("installing tracer");

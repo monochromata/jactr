@@ -15,6 +15,8 @@ package org.jactr.core.runtime;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.logging.Logger;
 import org.jactr.core.logging.impl.DefaultModelLogger;
 import org.jactr.core.model.IModel;
@@ -32,36 +34,38 @@ public class DefaultControllerTest extends TestCase
 
   static private final transient Log LOGGER = LogFactory
       .getLog(DefaultControllerTest.class);
+  
+  private ACTRRuntime _runtime;
   IController _controller;
   IModel _model;
   
   protected void setUp() throws Exception
   {
     super.setUp();
-    ACTRRuntime runtime = ACTRRuntime.getRuntime();
+    _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
     
-    _controller = new DefaultController();
-    runtime.setController(_controller);
+    _controller = new DefaultController(_runtime);
+    _runtime.setController(_controller);
     
-    _model = new SemanticModelFactory().createAndInitializeModel();
+    _model = new SemanticModelFactory(_runtime).createAndInitializeModel();
     
-   configureModel(_model);
+    configureModel(_model);
     
-    runtime.addModel(_model);
+    _runtime.addModel(_model);
   }
 
   protected void tearDown() throws Exception
   {
     super.tearDown();
-    ACTRRuntime.getRuntime().removeModel(_model);
+    _runtime.removeModel(_model);
     _model.dispose();
     _model = null;
-    ACTRRuntime.getRuntime().setController(null);
+    _runtime.setController(null);
   }
   
   protected IModel configureModel(IModel model)
   {
-    org.jactr.core.logging.impl.DefaultModelLogger dml = new DefaultModelLogger();
+    org.jactr.core.logging.impl.DefaultModelLogger dml = new DefaultModelLogger(_runtime);
     
     //dml.setParameter(Logger.CYCLE,"out");
     dml.setParameter(Logger.Stream.TIME.toString(), "err");

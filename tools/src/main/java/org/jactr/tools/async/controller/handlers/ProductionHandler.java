@@ -38,10 +38,11 @@ public class ProductionHandler implements IMessageHandler<ProductionCommand>
   static private final transient Log LOGGER = LogFactory
                                               .getLog(ProductionHandler.class);
 
+  private final ACTRRuntime _runtime;
 
-
-  public ProductionHandler()
+  public ProductionHandler(ACTRRuntime runtime)
   {
+	_runtime = runtime;
   }
 
   @Override
@@ -50,7 +51,7 @@ public class ProductionHandler implements IMessageHandler<ProductionCommand>
 
     if (LOGGER.isDebugEnabled()) LOGGER.debug("Got " + command);
 
-    IDebugController controller = (IDebugController) ACTRRuntime.getRuntime()
+    IDebugController controller = (IDebugController) _runtime
         .getController();
     switch (command.getAction())
     {
@@ -66,7 +67,7 @@ public class ProductionHandler implements IMessageHandler<ProductionCommand>
   protected IModel getModel(String modelName, IDebugController controller)
   {
     IModel rtn = null;
-    for (IModel model : ACTRRuntime.getRuntime().getModels())
+    for (IModel model : _runtime.getModels())
       if (model.getName().equals(modelName))
       {
         rtn = model;

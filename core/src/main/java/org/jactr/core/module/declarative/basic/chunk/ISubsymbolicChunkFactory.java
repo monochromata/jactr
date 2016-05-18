@@ -9,7 +9,10 @@ import org.jactr.core.chunktype.IChunkType;
 
 /**
  * factory for the creation, binding, and destruction of theoretically motivated
- * subsymbolic chunk components
+ * subsymbolic chunk components.
+ * 
+ * <p>Classes implementing this interface need to supply a 1-argument constructor
+ * that consumes an instance of {@link org.jactr.core.runtime.ACTRRuntime}.</p>
  * 
  * @author harrison
  */

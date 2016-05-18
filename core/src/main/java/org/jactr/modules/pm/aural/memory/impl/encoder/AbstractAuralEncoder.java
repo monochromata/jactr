@@ -47,6 +47,9 @@ public abstract class AbstractAuralEncoder implements IPerceptualEncoder
     }
   }
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private final IAuralPropertyHandler _propertyHandler = new DefaultAuralPropertyHandler();
 
   private final String                       _chunkTypeName;

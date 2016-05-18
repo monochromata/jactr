@@ -23,6 +23,7 @@ import org.jactr.core.buffer.IActivationBuffer;
 import org.jactr.core.module.AbstractModule;
 import org.jactr.core.module.imaginal.IImaginalModule;
 import org.jactr.core.module.imaginal.six.buffer.DefaultImaginalBuffer;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
 
@@ -51,9 +52,9 @@ public class DefaultImaginalModule6 extends AbstractModule implements
 
   private double            _modifyDelay     = 0.2;
 
-  public DefaultImaginalModule6()
+  public DefaultImaginalModule6(ACTRRuntime runtime)
   {
-    super(IMAGINAL_BUFFER);
+    super(runtime, IMAGINAL_BUFFER);
   }
 
   /**

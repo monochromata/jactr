@@ -6,10 +6,11 @@ package org.jactr.tools.instantiation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
-import org.jactr.instrument.IInstrument;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.instrument.AbstractInstrument;
 
 @Deprecated
-public class InstantiationTracker implements IInstrument
+public class InstantiationTracker extends AbstractInstrument
 {
   /**
    * Logger definition
@@ -17,22 +18,21 @@ public class InstantiationTracker implements IInstrument
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(InstantiationTracker.class);
 
+  public InstantiationTracker(ACTRRuntime runtime)
+  {
+	  super(runtime);
+  }
+  
   public void initialize()
   {
-    // TODO Auto-generated method stub
-
   }
 
   public void install(IModel model)
   {
-    // TODO Auto-generated method stub
-
   }
 
   public void uninstall(IModel model)
   {
-    // TODO Auto-generated method stub
-
   }
 
 }

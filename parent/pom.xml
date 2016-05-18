@@ -285,8 +285,20 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>
+				<artifactId>core</artifactId>
+				<version>${jactr.version}</version>
+				<type>test-jar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jactr</groupId>
 				<artifactId>io</artifactId>
 				<version>${jactr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jactr</groupId>
+				<artifactId>io</artifactId>
+				<version>${jactr.version}</version>
+				<type>test-jar</type>
 			</dependency>
 			<dependency>
 				<groupId>org.jactr</groupId>

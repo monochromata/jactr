@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -16,7 +17,7 @@ public class AliasesHandler implements INodeHandler<ITrial>
     return "aliases";
   }
 
-  public ITrial process(Element element, IExperiment experiment)
+  public ITrial process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     VariableResolver resolver = experiment.getVariableResolver();
     NodeList children = element.getElementsByTagName("alias");

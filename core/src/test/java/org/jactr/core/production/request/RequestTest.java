@@ -15,9 +15,13 @@ package org.jactr.core.production.request;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.reality.CommonReality;
+import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.model.IModel;
 import org.jactr.core.models.SemanticModelFactory;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.TestUtils;
 
 import junit.framework.TestCase;
 
@@ -37,8 +41,8 @@ public class RequestTest extends TestCase
   protected void setUp() throws Exception
   {
     super.setUp();
-
-    _model = new SemanticModelFactory().createAndInitializeModel();
+    ACTRRuntime runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
+    _model = new SemanticModelFactory(runtime).createAndInitializeModel();
 
   }
 

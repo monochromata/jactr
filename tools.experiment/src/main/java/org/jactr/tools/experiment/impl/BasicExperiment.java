@@ -36,6 +36,8 @@ public class BasicExperiment implements IExperiment
   static private final transient Log LOGGER           = LogFactory
                                                           .getLog(BasicExperiment.class);
 
+  private final ACTRRuntime			 _runtime;
+  
   private List<ITrial>               _allTrials;
 
   private List<ITrial>               _pendingTrials;
@@ -68,8 +70,9 @@ public class BasicExperiment implements IExperiment
 
   private IClock                     _clock           = null;
 
-  public BasicExperiment()
+  public BasicExperiment(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _lockManager = new LockManager();
     _manager = new NamedTriggerManager();
     _resolver = new VariableResolver();
@@ -185,8 +188,7 @@ public class BasicExperiment implements IExperiment
         try
         {
           IModel model = (IModel) context.get("=model");
-          ArrayList<IModel> models = new ArrayList<IModel>(ACTRRuntime
-              .getRuntime().getModels());
+          ArrayList<IModel> models = new ArrayList<IModel>(_runtime.getModels());
           models.remove(model);
 
           StringBuilder sb = new StringBuilder();
@@ -214,8 +216,7 @@ public class BasicExperiment implements IExperiment
       {
         try
         {
-          ArrayList<IModel> models = new ArrayList<IModel>(ACTRRuntime
-              .getRuntime().getModels());
+          ArrayList<IModel> models = new ArrayList<IModel>(_runtime.getModels());
 
           StringBuilder sb = new StringBuilder();
           for (IModel m : models)
@@ -232,6 +233,11 @@ public class BasicExperiment implements IExperiment
     });
   }
 
+  public ACTRRuntime getRuntime()
+  {
+	return _runtime;
+  }
+  
   public IVariableContext getVariableContext()
   {
     return _variableContext;
@@ -284,7 +290,7 @@ public class BasicExperiment implements IExperiment
     try
     {
       ExperimentParser parser = (ExperimentParser) getClass().getClassLoader()
-          .loadClass(parserClass).newInstance();
+          .loadClass(parserClass).getConstructor(ACTRRuntime.class).newInstance(_runtime);
 
       configureParser(parser);
 

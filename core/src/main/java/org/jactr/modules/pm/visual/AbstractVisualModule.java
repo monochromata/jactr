@@ -126,9 +126,9 @@ public abstract class AbstractVisualModule extends AbstractPerceptualModule
 
   private IVisualMemory                                             _visualMemory;
 
-  public AbstractVisualModule()
+  public AbstractVisualModule(ACTRRuntime runtime)
   {
-    super("visual");
+    super(runtime, "visual");
     _searchTimeEquation = new DefaultSearchTimeEquation();
     _encodingTimeEquation = new DefaultEncodingTimeEquation();
     _parameterMap = new LinkedHashMap<String, String>();
@@ -568,7 +568,7 @@ public abstract class AbstractVisualModule extends AbstractPerceptualModule
     /*
      * attach the visual memory
      */
-    _visualMemory.attach(ACTRRuntime.getRuntime().getConnector()
+    _visualMemory.attach(getRuntime().getConnector()
         .getAgent(getModel()));
   }
 

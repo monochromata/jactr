@@ -51,8 +51,14 @@ public class AddAction extends DefaultAction implements IBufferAction,
                                                         .getLog(AddAction.class
                                                             .getName());
 
+  /**
+   * TODO: Should not be static
+   */
   static private AddChunkTypeRequestDelegate _chunkTypeDelegate;
 
+  /**
+   * TODO: Should not be static
+   */
   static private AddChunkRequestDelegate     _chunkDelegate;
 
   static

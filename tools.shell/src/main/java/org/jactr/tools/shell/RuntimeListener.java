@@ -19,9 +19,12 @@ public class RuntimeListener extends ACTRRuntimeAdapter
   static private final transient Log LOGGER   = LogFactory
                                                   .getLog(RuntimeListener.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private RuntimeListener     _default = null;
 
-  static public void setEnabled(boolean enable)
+  static public void setEnabled(ACTRRuntime runtime, boolean enable)
   {
     synchronized (RuntimeListener.class)
     {
@@ -31,7 +34,7 @@ public class RuntimeListener extends ACTRRuntimeAdapter
         /*
          * remove and null
          */
-        ACTRRuntime.getRuntime().removeListener(_default);
+        runtime.removeListener(_default);
         _default = null;
       }
       else if (enable && _default == null)
@@ -39,8 +42,7 @@ public class RuntimeListener extends ACTRRuntimeAdapter
         if (LOGGER.isDebugEnabled())
           LOGGER.debug("Installing runtime listener");
         _default = new RuntimeListener();
-        ACTRRuntime.getRuntime().addListener(_default,
-            ExecutorServices.INLINE_EXECUTOR);
+        runtime.addListener(_default, ExecutorServices.INLINE_EXECUTOR);
       }
     }
   }

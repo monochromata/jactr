@@ -124,7 +124,7 @@ public abstract class AbstractVocalDelegate extends
      * we need to push the timed event back by creating a new one
      */
     VocalTimedEvent vte = (VocalTimedEvent) _currentTimedEvent;
-    double now = ACTRRuntime.getRuntime().getClock(getModule().getModel())
+    double now = getModule().getRuntime().getClock(getModule().getModel())
         .getTime();
     synchronized (vte)
     {
@@ -163,7 +163,7 @@ public abstract class AbstractVocalDelegate extends
   {
     AbstractVocalModule module = getModule();
     IModel model = module.getModel();
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
 
     IEfferentCommand vocalizationCommand = agent.getEfferentCommandManager()
         .get(getCommandIdentifier());

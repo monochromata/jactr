@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jactr.core.buffer.IActivationBuffer;
 import org.jactr.core.concurrent.ExecutorServices;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.DefaultAdaptable;
 
 public abstract class AbstractModule extends DefaultAdaptable implements
@@ -36,15 +37,23 @@ public abstract class AbstractModule extends DefaultAdaptable implements
    */
   static public final Log LOGGER    = LogFactory.getLog(AbstractModule.class);
 
-  private IModel          _model;
+  private final ACTRRuntime _runtime;
+  
+  private IModel            _model;
 
-  private String          _name;
+  private String            _name;
 
-  private Executor        _executor = ExecutorServices.INLINE_EXECUTOR;
+  private Executor          _executor = ExecutorServices.INLINE_EXECUTOR;
 
-  public AbstractModule(String name)
+  public AbstractModule(ACTRRuntime runtime, String name)
   {
+	_runtime = runtime;
     _name = name;
+  }
+  
+  public ACTRRuntime getRuntime()
+  {
+	  return _runtime;
   }
 
   /**

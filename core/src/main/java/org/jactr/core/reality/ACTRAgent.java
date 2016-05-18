@@ -21,6 +21,7 @@ import org.commonreality.agents.AbstractAgent;
 import org.commonreality.identifier.IIdentifier;
 import org.commonreality.object.IAgentObject;
 import org.commonreality.object.manager.impl.AgentObject;
+import org.commonreality.reality.CommonReality;
 
 public class ACTRAgent extends AbstractAgent
 {
@@ -44,9 +45,9 @@ public class ACTRAgent extends AbstractAgent
   //
   // protected GeneralThreadFactory _commonRealityThreadFactory;
 
-  public ACTRAgent()
+  public ACTRAgent(CommonReality cr)
   {
-    super();
+    super(cr);
   }
 
   public void setModelName(String modelName)

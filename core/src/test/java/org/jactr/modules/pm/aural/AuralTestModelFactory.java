@@ -1,8 +1,5 @@
 package org.jactr.modules.pm.aural;
 
-import static org.jactr.core.slot.IConditionalSlot.NOT_EQUALS;
-
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import org.jactr.core.chunk.IChunk;
@@ -12,15 +9,8 @@ import org.jactr.core.models.AbstractModelFactory;
 import org.jactr.core.module.declarative.IDeclarativeModule;
 import org.jactr.core.module.imaginal.six.DefaultImaginalModule6;
 import org.jactr.core.module.procedural.IProceduralModule;
-import org.jactr.core.production.action.AddAction;
-import org.jactr.core.production.action.ModifyAction;
-import org.jactr.core.production.action.OutputAction;
-import org.jactr.core.production.action.RemoveAction;
-import org.jactr.core.production.action.StopAction;
-import org.jactr.core.production.condition.ChunkTypeCondition;
-import org.jactr.core.production.condition.QueryCondition;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultConditionalSlot;
-import org.jactr.core.slot.DefaultVariableConditionalSlot;
 import org.jactr.modules.pm.aural.six.DefaultAuralModule6;
 import org.jactr.modules.pm.visual.six.DefaultVisualModule6;
 
@@ -30,16 +20,16 @@ public class AuralTestModelFactory extends AbstractModelFactory {
 	protected IChunk searching, encoding, starting, testing, failed, succeeded;
 	protected IChunk goal;
 
-	public AuralTestModelFactory() {
-		super("aural-test");
+	public AuralTestModelFactory(ACTRRuntime runtime) {
+		super(runtime, "aural-test");
 	}
 
 	@Override
 	protected void installModules(IModel model) {
 		super.installModules(model);
-		model.install(new DefaultImaginalModule6());
-		model.install(new DefaultVisualModule6());
-		DefaultAuralModule6 auralModule = new DefaultAuralModule6();
+		model.install(new DefaultImaginalModule6(getRuntime()));
+		model.install(new DefaultVisualModule6(getRuntime()));
+		DefaultAuralModule6 auralModule = new DefaultAuralModule6(getRuntime());
 		auralModule.setParameter("EnableBufferStuff", "false");
 		model.install(auralModule);
 	}

@@ -10,9 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javolution.util.FastList;
-import javolution.util.FastSet;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.identifier.IIdentifier;
@@ -22,9 +19,13 @@ import org.commonreality.object.UnknownPropertyNameException;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.chunktype.IChunkType;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.BasicSlot;
 import org.jactr.core.slot.IConditionalSlot;
 import org.jactr.modules.pm.aural.IAuralModule;
+
+import javolution.util.FastList;
+import javolution.util.FastSet;
 
 public class KindFeatureMap extends AbstractAuralFeatureMap<String[]>
 {
@@ -38,9 +39,9 @@ public class KindFeatureMap extends AbstractAuralFeatureMap<String[]>
 
   private Map<IIdentifier, String[]>               _currentKindMap;
 
-  public KindFeatureMap()
+  public KindFeatureMap(ACTRRuntime runtime)
   {
-    super(IAuralModule.KIND_SLOT, IAuralPropertyHandler.TYPE);
+    super(runtime, IAuralModule.KIND_SLOT, IAuralPropertyHandler.TYPE);
     _kindMap = new TreeMap<String, Collection<IIdentifier>>();
     _currentKindMap = new HashMap<IIdentifier, String[]>();
   }

@@ -28,8 +28,9 @@ public class TraceFileManagerTest {
 		}};
 		
 		context.checking(expectations);
-		
-		File outputDirectory = File.createTempFile("output", "dir");
+		String dirName = System.getProperty("java.io.tmpdir")+File.separator+"test"+System.currentTimeMillis();
+		File outputDirectory = new File(dirName);
+		outputDirectory.mkdirs();
 		try {
 			TraceFileManager manager = new TraceFileManager(outputDirectory);
 			manager.flush();

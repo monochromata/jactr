@@ -22,7 +22,7 @@ public class VariableResolver
    */
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(VariableResolver.class);
-
+  
   private Collection<IResolver>      _resolvers;
 
   private Map<String, String>        _aliases;
@@ -43,11 +43,11 @@ public class VariableResolver
    * @param context
    * @return
    */
-  static public Collection<IModel> getModels(String modelNames,
+  static public Collection<IModel> getModels(ACTRRuntime runtime, String modelNames,
       VariableResolver resolver, IVariableContext context)
   {
     modelNames = resolver.resolve(modelNames, context).toString();
-    Collection<IModel> allModels = ACTRRuntime.getRuntime().getModels();
+    Collection<IModel> allModels = runtime.getModels();
     Collection<IModel> models = new ArrayList<IModel>();
     for (String modelName : modelNames.split(","))
     {

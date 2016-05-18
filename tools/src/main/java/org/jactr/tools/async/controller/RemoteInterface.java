@@ -83,10 +83,12 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
 
   static public final String     SEND_MODEL_ON_SUSPEND_PARAM = "SendModelOnSuspend";
 
+  protected ACTRRuntime 		 _runtime;
+  
   /*
    * for start, stop, etc
    */
-  protected IACTRRuntimeListener _runtimeListener;
+  protected final IACTRRuntimeListener _runtimeListener;
 
   protected IBreakpointListener  _breakpointListener;
 
@@ -103,6 +105,9 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
 
   private Collection<IModel>     _installedModels;
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime, but then there might need to be different ports, too.
+   */
   static private RemoteInterface _activeInterface;
 
   static public RemoteInterface getActiveRemoteInterface()
@@ -123,12 +128,10 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
     }
   }
 
-  /**
-   * 
-   */
-  public RemoteInterface()
+  public RemoteInterface(ACTRRuntime runtime)
   {
-    ACTRRuntime.getRuntime();
+	_runtime = runtime;
+	createAdditionalDefaultHandlers();
 
     _installedModels = new ArrayList<IModel>();
 
@@ -238,7 +241,7 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
         try
         {
           getSession().writeAndWait(
-              new RuntimeStateEvent(ACTRRuntime.getRuntime().getModels(), event
+              new RuntimeStateEvent(_runtime.getModels(), event
                   .getSimulationTime()));
         }
         catch (Exception e)
@@ -362,24 +365,29 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
      * we can't install just yet because we need the executor
      */
   }
+  
+  
 
   @Override
-  protected void createDefaultHandlers()
+  public ACTRRuntime getRuntime() {
+	return _runtime;
+  }
+  
+  protected void createAdditionalDefaultHandlers()
   {
-    super.createDefaultHandlers();
     /**
      * and our default handlers..
      */
     _defaultHandlers.put(LoginCommand.class, new LoginHandler());
-    _defaultHandlers.put(RuntimeStateCommand.class, new RuntimeStateHandler());
-    _defaultHandlers.put(ModelStateCommand.class, new ModelStateHandler());
-    _defaultHandlers.put(LogoutCommand.class, new LogoutHandler());
+    _defaultHandlers.put(RuntimeStateCommand.class, new RuntimeStateHandler(_runtime));
+    _defaultHandlers.put(ModelStateCommand.class, new ModelStateHandler(_runtime));
+    _defaultHandlers.put(LogoutCommand.class, new LogoutHandler(_runtime));
 
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = _runtime.getController();
     if (controller instanceof IDebugController)
     {
-      _defaultHandlers.put(BreakpointCommand.class, new BreakpointHandler());
-      _defaultHandlers.put(ProductionCommand.class, new ProductionHandler());
+      _defaultHandlers.put(BreakpointCommand.class, new BreakpointHandler(_runtime));
+      _defaultHandlers.put(ProductionCommand.class, new ProductionHandler(_runtime));
     }
 
     /*
@@ -508,9 +516,8 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
     {
       if (LOGGER.isDebugEnabled())
         LOGGER.debug("Disconnecting remote interface");
-      ACTRRuntime runtime = ACTRRuntime.getRuntime();
-      runtime.removeListener(_runtimeListener);
-      IController controller = runtime.getController();
+      _runtime.removeListener(_runtimeListener);
+      IController controller = _runtime.getController();
       if (controller instanceof IDebugController)
         ((IDebugController) controller).removeListener(_breakpointListener);
 
@@ -571,9 +578,8 @@ public class RemoteInterface extends NetworkedEndpoint implements IInstrument,
       /*
        * now we can install the listeners
        */
-      ACTRRuntime runtime = ACTRRuntime.getRuntime();
-      runtime.addListener(_runtimeListener, getExecutor());
-      IController controller = runtime.getController();
+      _runtime.addListener(_runtimeListener, getExecutor());
+      IController controller = _runtime.getController();
       if (controller instanceof IDebugController)
         ((IDebugController) controller).addListener(_breakpointListener,
             getExecutor());

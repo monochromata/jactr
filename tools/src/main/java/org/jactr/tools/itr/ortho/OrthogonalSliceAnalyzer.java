@@ -44,6 +44,8 @@ public class OrthogonalSliceAnalyzer implements IIterativeRunListener,
 
   static public final String                    URI             = "ConfigURL";
 
+  final private ACTRRuntime						_runtime;  
+  
   final private Collection<ISliceAnalyzer>      _analyzers;
 
   final private Collection<ISliceIntegrator>    _integrators;
@@ -64,8 +66,9 @@ public class OrthogonalSliceAnalyzer implements IIterativeRunListener,
 
   private LongitudinalParameterSetModifier      _longitudinalModifier;
 
-  public OrthogonalSliceAnalyzer()
+  public OrthogonalSliceAnalyzer(ACTRRuntime runtime)
   {
+	_runtime = runtime;
     _analyzers = new ArrayList<ISliceAnalyzer>();
     _parameterModifiers = new LinkedHashMap<String, IParameterModifier>();
     _analyses = new ArrayList<SliceAnalysis>();
@@ -263,7 +266,7 @@ public class OrthogonalSliceAnalyzer implements IIterativeRunListener,
      * current run working directory, during iterative runs, this is a sub
      * directory of user dir.
      */
-    File workingDir = ACTRRuntime.getRuntime().getWorkingDirectory();
+    File workingDir = _runtime.getWorkingDirectory();
 
     Slice slice = (Slice) getSlice(currentRunIndex);
     slice.addWorkingDirectory(workingDir.getName());

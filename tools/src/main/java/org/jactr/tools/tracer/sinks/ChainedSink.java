@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import javolution.util.FastList;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.tools.tracer.ITraceSink;
 import org.jactr.tools.tracer.transformer.ITransformedEvent;
+
+import javolution.util.FastList;
 
 public class ChainedSink implements ITraceSink, IParameterized
 {
@@ -24,7 +25,6 @@ public class ChainedSink implements ITraceSink, IParameterized
                                                 .getLog(ChainedSink.class);
 
   private Collection<ITraceSink>     _sinks = FastList.newInstance();
-
 
   public void add(ITraceSink sink)
   {

@@ -53,33 +53,33 @@ public class ChunkEvent extends AbstractACTREvent<IChunk, IChunkListener>
 
   private Type   _type;
 
-  public ChunkEvent(IChunk source, Type type)
+  public ChunkEvent(ACTRRuntime runtime, IChunk source, Type type)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel())
+    super(source, runtime.getClock(source.getModel())
         .getTime());
     _type = type;
   }
 
-  public ChunkEvent(IChunk source, ISlot slot, Object oldValue)
+  public ChunkEvent(ACTRRuntime runtime, IChunk source, ISlot slot, Object oldValue)
   {
-    this(source, Type.SLOT_VALUE_CHANGED);
+    this(runtime, source, Type.SLOT_VALUE_CHANGED);
     _itemName = slot.getName();
     _oldValue = oldValue;
     _newValue = slot.getValue();
   }
 
-  public ChunkEvent(IChunk source, IChunk similarChunk, double oldSim,
+  public ChunkEvent(ACTRRuntime runtime, IChunk source, IChunk similarChunk, double oldSim,
       double newSim)
   {
-    this(source, Type.SIMILARITY_CHANGED);
+    this(runtime, source, Type.SIMILARITY_CHANGED);
     _otherChunk = similarChunk;
     _oldSimiliarity = oldSim;
     _newSimilarity = newSim;
   }
 
-  public ChunkEvent(IChunk sourceAndOriginalChunk, Type type, IChunk mergie)
+  public ChunkEvent(ACTRRuntime runtime, IChunk sourceAndOriginalChunk, Type type, IChunk mergie)
   {
-    this(sourceAndOriginalChunk, type);
+    this(runtime, sourceAndOriginalChunk, type);
     _otherChunk = mergie;
   }
 

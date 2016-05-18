@@ -35,16 +35,24 @@ public abstract class AbstractFeatureMap<T> implements IFeatureMap<T>
 
   private IPerceptualMemory                                     _memory;
 
+  private ACTRRuntime											_runtime;
+  
   private final String                                          _crPropertyName;
 
   private final String                                          _requestSlotName;
 
   private Lock                                                  _lock       = new ReentrantLock();
 
-  public AbstractFeatureMap(String requestSlotName, String crPropertyName)
+  public AbstractFeatureMap(ACTRRuntime runtime, String requestSlotName, String crPropertyName)
   {
+	_runtime = runtime;
     _crPropertyName = crPropertyName;
     _requestSlotName = requestSlotName;
+  }
+  
+  protected ACTRRuntime getRuntime()
+  {
+	  return _runtime;
   }
 
   protected String getRelevantSlotName()
@@ -189,7 +197,7 @@ public abstract class AbstractFeatureMap<T> implements IFeatureMap<T>
     {
       objectAdded(object, data);
       if (hasListeners())
-        dispatch(new FeatureMapEvent(this, ACTRRuntime.getRuntime().getClock(
+        dispatch(new FeatureMapEvent(this, _runtime.getClock(
             getPerceptualMemory().getModule().getModel()).getTime(),
             FeatureMapEvent.Type.ADDED, Collections.singleton(identifier)));
     }
@@ -226,7 +234,7 @@ public abstract class AbstractFeatureMap<T> implements IFeatureMap<T>
     {
       objectRemoved(object, data);
       if (hasListeners())
-        dispatch(new FeatureMapEvent(this, ACTRRuntime.getRuntime().getClock(
+        dispatch(new FeatureMapEvent(this, _runtime.getClock(
             getPerceptualMemory().getModule().getModel()).getTime(),
             FeatureMapEvent.Type.REMOVED, Collections.singleton(identifier)));
     }
@@ -268,7 +276,7 @@ public abstract class AbstractFeatureMap<T> implements IFeatureMap<T>
     objectUpdated(object, oldData, data);
 
     if (data != null && !data.equals(oldData) && hasListeners())
-      dispatch(new FeatureMapEvent(this, ACTRRuntime.getRuntime().getClock(
+      dispatch(new FeatureMapEvent(this, _runtime.getClock(
           getPerceptualMemory().getModule().getModel()).getTime(),
           FeatureMapEvent.Type.UPDATED, Collections.singleton(identifier)));
   }

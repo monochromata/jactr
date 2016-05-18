@@ -20,7 +20,7 @@ import org.jactr.core.runtime.event.ACTRRuntimeEvent;
 import org.jactr.core.runtime.event.IACTRRuntimeListener;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 import org.jactr.tools.async.controller.RemoteInterface;
 import org.jactr.tools.misc.ModelsLock;
 
@@ -33,7 +33,7 @@ import org.jactr.tools.misc.ModelsLock;
  * <p>TODO: BUG: we should time out for waiting for the synchronization reply.</p>
  * @author harrison
  */
-public class SynchronizationManager implements IInstrument, IParameterized
+public class SynchronizationManager extends AbstractInstrument implements IParameterized
 {
   /**
    * Logger definition
@@ -44,7 +44,7 @@ public class SynchronizationManager implements IInstrument, IParameterized
   // static public final String SYNC_AT_START = "SynchronizeOnStartUp";
 
   static public final String         INTERVAL = "SynchronizationDelayInMS";
-
+  
   private ModelsLock                 _modelsLock;
 
   private double                     _delay   = 30;                                     // s
@@ -57,9 +57,10 @@ public class SynchronizationManager implements IInstrument, IParameterized
 
   private IACTRRuntimeListener       _runtimeListener;
 
-  public SynchronizationManager()
+  public SynchronizationManager(ACTRRuntime runtime)
   {
-    _modelsLock = new ModelsLock();
+	super(runtime);
+    _modelsLock = new ModelsLock(runtime);
     _modelsLock.initialize();
   }
 
@@ -136,7 +137,7 @@ public class SynchronizationManager implements IInstrument, IParameterized
         }
 
       };
-      ACTRRuntime.getRuntime().addListener(_runtimeListener, null);
+      getRuntime().addListener(_runtimeListener, null);
     }
 
   }
@@ -150,7 +151,7 @@ public class SynchronizationManager implements IInstrument, IParameterized
   {
     // this will stop the processor from rescheduling
     _blockProcessor = null;
-    ACTRRuntime.getRuntime().removeListener(_runtimeListener);
+    model.getRuntime().removeListener(_runtimeListener);
     _modelsLock.uninstall(model);
   }
 
@@ -190,7 +191,7 @@ public class SynchronizationManager implements IInstrument, IParameterized
        */
       try
       {
-        IModel model = ACTRRuntime.getRuntime().getController()
+        IModel model = getRuntime().getController()
             .getRunningModels().iterator().next();
         double when = model.getAge() + _delay;
         RunnableTimedEvent rte = new RunnableTimedEvent(when, _blockProcessor);

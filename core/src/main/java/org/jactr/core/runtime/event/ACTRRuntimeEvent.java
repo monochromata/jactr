@@ -15,6 +15,7 @@ package org.jactr.core.runtime.event;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.commonreality.time.IClock;
 import org.jactr.core.event.AbstractACTREvent;
 import org.jactr.core.model.IModel;
 import org.jactr.core.runtime.ACTRRuntime;
@@ -37,22 +38,26 @@ public class ACTRRuntimeEvent extends
   
   private Exception _exception;
 
-  public ACTRRuntimeEvent(IModel model, Type type)
+  protected ACTRRuntimeEvent(ACTRRuntime runtime, Type type, IClock clock)
   {
-    this(model, type, null);
+	super(runtime, clock.getTime());
+	_type = type;
+  }
+  
+  public ACTRRuntimeEvent(ACTRRuntime runtime, Type type)
+  {
+    this(runtime, type, runtime.getClock(null));
   }
 
-  public ACTRRuntimeEvent(Type type)
+  public ACTRRuntimeEvent(IModel model, Type type)
   {
-    this(null, type, null);
+    this(model.getRuntime(), type, model.getRuntime().getClock(model));
+    _model = model;
   }
   
   public ACTRRuntimeEvent(IModel model, Type type, Exception exception)
   {
-    super(ACTRRuntime.getRuntime(), ACTRRuntime.getRuntime().getClock(model)
-        .getTime());
-    _model = model;
-    _type = type;
+	this(model, type);
     _exception = exception;
   }
   

@@ -34,6 +34,8 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
   static private final transient Log          LOGGER         = LogFactory
                                                                  .getLog(ModelsLock.class);
 
+  private final ACTRRuntime					  _runtime;
+  
   private ReentrantLock                       _lock          = new ReentrantLock();
 
   private Condition                           _lockCondition = _lock
@@ -55,14 +57,23 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
 
   private volatile CompletableFuture<Boolean> _currentRequest;
 
-  /*
+  public ModelsLock(ACTRRuntime runtime)
+  {
+	  _runtime = runtime;
+  }
+  
+  @Override
+  public ACTRRuntime getRuntime() {
+	return _runtime;
+  }
+
+/*
    * we actually block at the start of the next cycle. We do it at the start,
    * because the normal cycle blocks on the clock after the cycle stops (since
    * that is when we now the next timestep). It is also safe if the close()
    * calls are received at different points in related models. (non-Javadoc)
    * @see org.jactr.instrument.IInstrument#initialize()
    */
-
   public void initialize()
   {
   }
@@ -97,7 +108,7 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
     if (LOGGER.isDebugEnabled())
       LOGGER.debug(String.format(
           "%s has stopped, removing from lock set @ %.2f", me.getSource(),
-          ACTRRuntime.getRuntime().getClock(me.getSource()).getTime()));
+          _runtime.getClock(me.getSource()).getTime()));
     try
     {
       _lock.lock();
@@ -296,8 +307,8 @@ public class ModelsLock extends ModelListenerAdaptor implements IInstrument
         while (shouldBlock() && _modelsToLock.contains(model))
         {
           if (LOGGER.isDebugEnabled())
-            LOGGER.debug(String.format("Blocking %s @ %.2f", model, ACTRRuntime
-                .getRuntime().getClock(model).getTime()));
+            LOGGER.debug(String.format("Blocking %s @ %.2f", model,
+            		_runtime.getClock(model).getTime()));
           _lockCondition.await(250, TimeUnit.MILLISECONDS);
         }
 

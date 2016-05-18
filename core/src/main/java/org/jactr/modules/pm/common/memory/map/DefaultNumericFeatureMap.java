@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.object.IAfferentObject;
 import org.commonreality.object.IPropertyHandler;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.ISlot;
 
 /**
@@ -42,10 +43,10 @@ public class DefaultNumericFeatureMap extends AbstractSortedFeatureMap<Double>
 
   private final double               _defaultValue;
 
-  public DefaultNumericFeatureMap(String requestSlotName, String modalityName,
+  public DefaultNumericFeatureMap(ACTRRuntime runtime, String requestSlotName, String modalityName,
       String crPropertyName, IPropertyHandler handler, double defaultValue)
   {
-    super(requestSlotName, crPropertyName);
+    super(runtime, requestSlotName, crPropertyName);
     _propertyHandler = handler;
     _modalityName = modalityName;
     _defaultValue = defaultValue;

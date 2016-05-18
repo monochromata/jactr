@@ -54,7 +54,7 @@ public class ExecuteVocalizationDelegate extends AbstractVocalDelegate
     IChunk free = module.getFreeChunk();
     IChunk bufferState = error;
     Object failureMessage = null;
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
 
     IEfferentCommand vocalizationCommand = agent.getEfferentCommandManager()
         .get(getCommandIdentifier());
@@ -107,7 +107,7 @@ public class ExecuteVocalizationDelegate extends AbstractVocalDelegate
     AbstractVocalModule module = getModule();
     IModel model = module.getModel();
 
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
     VocalizationCommand command = (VocalizationCommand) agent
         .getEfferentCommandManager().get(commandIdentifier);
 
@@ -165,7 +165,7 @@ public class ExecuteVocalizationDelegate extends AbstractVocalDelegate
     IModel model = module.getModel();
     IChunk busy = module.getBusyChunk();
     IIdentifier commandIdentifier = (IIdentifier) parameters[0];
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
 
     if (vBuffer.isExecutionBusy())
     {

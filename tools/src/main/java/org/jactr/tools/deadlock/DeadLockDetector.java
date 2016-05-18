@@ -16,16 +16,16 @@ import org.jactr.core.model.event.ModelEvent;
 import org.jactr.core.model.event.ModelListenerAdaptor;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.IController;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 
-public class DeadLockDetector implements IInstrument
+public class DeadLockDetector extends AbstractInstrument
 {
   /**
    * Logger definition
    */
   static private final transient Log LOGGER       = LogFactory
                                                       .getLog(DeadLockDetector.class);
-
+  
   final private Runnable             _detector;
 
   final private IModelListener       _modelListener;
@@ -50,13 +50,14 @@ public class DeadLockDetector implements IInstrument
   /**
    * zero arg for installing straight into models
    */
-  public DeadLockDetector()
+  public DeadLockDetector(ACTRRuntime runtime)
   {
-    this(null, 100000);
+    this(runtime, null, 100000);
   }
 
-  public DeadLockDetector(IDeadLockListener listener, long checkIntervalMS)
+  public DeadLockDetector(ACTRRuntime runtime, IDeadLockListener listener, long checkIntervalMS)
   {
+	super(runtime);
     _listener = listener;
     _inactivityTime = checkIntervalMS;
     _delay = _inactivityTime / 10;
@@ -107,7 +108,7 @@ public class DeadLockDetector implements IInstrument
 
   private void check()
   {
-    IController controller = ACTRRuntime.getRuntime().getController();
+    IController controller = getRuntime().getController();
     if (controller == null || !controller.isRunning()
         || controller.isSuspended())
     {
@@ -154,7 +155,7 @@ public class DeadLockDetector implements IInstrument
 
     if (deadlocked)
     {
-      DeadLockUtilities.dumpThreads("deadlock-threads.txt");
+      DeadLockUtilities.dumpThreads(getRuntime(), "deadlock-threads.txt");
       DeadLockUtilities.dumpHeap("deadlock-heap.hprof", true);
 
       if (_listener != null) _listener.deadlockDetected();

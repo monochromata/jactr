@@ -47,6 +47,8 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
   static private final Log                   LOGGER                         = LogFactory
                                                                                 .getLog(AbstractSubsymbolicChunk.class);
 
+  private final ACTRRuntime					 _runtime;
+  
   protected IChunk                           _parentChunk;
 
   protected IReferences                      _referenceList;
@@ -79,15 +81,18 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
 
   static private boolean                     _setSourceWarned               = false;
 
-  public AbstractSubsymbolicChunk()
+  public AbstractSubsymbolicChunk(ACTRRuntime runtime)
   {
-    // factory? really. this should be changed
+	_runtime = runtime;
+    // TODO: factory? really. this should be changed
     _referenceList = IReferences.Factory.get().newInstance();
     _unknownParameters = new TreeMap<String, String>();
     initializeParameters();
   }
 
-
+  protected ACTRRuntime getRuntime() {
+	  return _runtime;
+  }
 
   public void bind(IChunk wrapper)
   {
@@ -118,7 +123,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
     }
 
     if (_parentChunk.hasListeners())
-      _parentChunk.dispatch(new ChunkEvent(_parentChunk,
+      _parentChunk.dispatch(new ChunkEvent(getRuntime(), _parentChunk,
           ChunkEvent.Type.ACCESSED));
   }
 
@@ -332,7 +337,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
     }
 
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), ACTIVATION, old, act));
   }
 
@@ -352,7 +357,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
     }
 
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), BASE_LEVEL_ACTIVATION,
           old, base));
   }
@@ -391,7 +396,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
     }
 
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), CREATION_TIME, old,
           time));
   }
@@ -427,7 +432,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
     }
 
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), SOURCE_ACTIVATION, old,
           source));
   }
@@ -448,7 +453,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
       l.unlock();
     }
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), SPREADING_ACTIVATION,
           old, spread));
 
@@ -471,7 +476,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
     }
 
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), TIMES_IN_CONTEXT, old,
           context));
   }
@@ -492,7 +497,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
       l.unlock();
     }
     if (_parentChunk.hasParameterListeners())
-      _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+      _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
           .getClock(_parentChunk.getModel()).getTime(), TIMES_NEEDED, old,
           needed));
   }
@@ -613,10 +618,10 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
 
       if (_parentChunk.hasParameterListeners())
       {
-        _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+        _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
             .getClock(_parentChunk.getModel()).getTime(), REFERENCE_COUNT,
             oldCount, referenceCount));
-        _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+        _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
             .getClock(_parentChunk.getModel()).getTime(), REFERENCE_TIMES,
             oldTimes, references.getTimes(null)));
       }
@@ -654,7 +659,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
       _lastActivationComputationTime = -1;
 
       if (_parentChunk.hasParameterListeners())
-        _parentChunk.dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+        _parentChunk.dispatch(new ParameterEvent(this, getRuntime()
             .getClock(_parentChunk.getModel()).getTime(), REFERENCE_TIMES,
             oldTimes, references.getTimes(null)));
     }
@@ -689,7 +694,7 @@ public abstract class AbstractSubsymbolicChunk extends DefaultAdaptable
       String oldValue = _unknownParameters.put(key, value);
       if (_parentChunk.hasParameterListeners())
         _parentChunk
-            .dispatch(new ParameterEvent(this, ACTRRuntime.getRuntime()
+            .dispatch(new ParameterEvent(this, getRuntime()
                 .getClock(_parentChunk.getModel()).getTime(), key, oldValue,
                 value));
     }

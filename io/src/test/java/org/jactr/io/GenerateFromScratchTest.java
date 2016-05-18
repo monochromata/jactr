@@ -13,17 +13,19 @@
  */
 package org.jactr.io;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
+import org.jactr.core.runtime.TestUtils;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.generator.ICodeGenerator;
 import org.jactr.io.resolver.ASTResolver;
+import org.junit.Before;
+import org.junit.Test;
 
-public class GenerateFromScratchTest extends TestCase
+public class GenerateFromScratchTest
 {
   /**
    * logger definition
@@ -31,18 +33,15 @@ public class GenerateFromScratchTest extends TestCase
   static public final Log LOGGER = LogFactory
                                      .getLog(GenerateFromScratchTest.class);
 
-  @Override
-  protected void setUp() throws Exception
+  private ACTRRuntime _runtime;
+  
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
+    _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
   }
 
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-  }
-
+  @Test
   public void testRaw() throws Exception
   {
     CommonTree ct = IOUtilities.createModelDescriptor("raw-test", true);
@@ -55,7 +54,7 @@ public class GenerateFromScratchTest extends TestCase
     // compile
     CommonIO.compilerTest(ct, true, true);
 
-    IModel model = CommonIO.constructorTest(ct);
+    IModel model = CommonIO.constructorTest(_runtime, ct);
 
     ct = ASTResolver.toAST(model, true);
 

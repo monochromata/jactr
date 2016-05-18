@@ -31,7 +31,7 @@ import org.jactr.core.model.event.ModelListenerAdaptor;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHandler;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.generator.ICodeGenerator;
 import org.jactr.io.resolver.ASTResolver;
@@ -42,7 +42,7 @@ import org.jactr.io.resolver.ASTResolver;
  * 
  * 
  */
-public class ModelRecorder implements IInstrument, IParameterized
+public class ModelRecorder extends AbstractInstrument implements IParameterized
 {
   /**
    * logger definition
@@ -79,8 +79,9 @@ public class ModelRecorder implements IInstrument, IParameterized
   /**
    * IInstruments should always have a zero arg constructor
    */
-  public ModelRecorder()
+  public ModelRecorder(ACTRRuntime runtime)
   {
+	  super(runtime);
   }
 
   /**
@@ -208,7 +209,7 @@ public class ModelRecorder implements IInstrument, IParameterized
       LOGGER.warn("No clue what to do with " + key + "=" + value);
   }
 
-  static public void saveModel(IModel model, String directory,
+  public void saveModel(IModel model, String directory,
       String extension, boolean trim)
   {
     saveModel(model, ASTResolver.toAST(model, true), directory, extension, trim);
@@ -217,7 +218,7 @@ public class ModelRecorder implements IInstrument, IParameterized
   /*
    * here is where we actually save the model
    */
-  static public void saveModel(IModel model, CommonTree modelDescriptor,
+  public void saveModel(IModel model, CommonTree modelDescriptor,
       String directory, String extension, boolean trim)
   {
 
@@ -236,7 +237,7 @@ public class ModelRecorder implements IInstrument, IParameterized
       /*
        * ok, now let's create the directory
        */
-      File root = new File(ACTRRuntime.getRuntime().getWorkingDirectory(),
+      File root = new File(getRuntime().getWorkingDirectory(),
           directory);
       destination = root.getCanonicalPath();
 

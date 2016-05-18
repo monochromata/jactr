@@ -150,7 +150,7 @@ public class SpeechRequestDelegate extends AbstractRequestDelegate
      */
     Future<VocalizationCommand> executeFuture = _vocal.execute(command);
 
-    double start = ACTRRuntime.getRuntime().getClock(model).getTime();
+    double start = _vocal.getRuntime().getClock(model).getTime();
     double procEnd = model.getProceduralModule()
         .getDefaultProductionFiringTime()
         + start;

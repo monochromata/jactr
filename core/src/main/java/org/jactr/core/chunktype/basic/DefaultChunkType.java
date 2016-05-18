@@ -61,7 +61,7 @@ public class DefaultChunkType extends DefaultAdaptable implements
     _isEncoded = true;
 
     if (hasListeners())
-      dispatch(new ChunkTypeEvent(this, ChunkTypeEvent.Type.ENCODED));
+      dispatch(new ChunkTypeEvent(_model.getRuntime(), this, ChunkTypeEvent.Type.ENCODED));
   }
 
   public IModel getModel()

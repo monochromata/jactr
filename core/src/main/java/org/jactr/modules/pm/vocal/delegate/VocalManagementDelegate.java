@@ -118,7 +118,7 @@ public class VocalManagementDelegate
 
     DeltaTracker<VocalizationCommand> tracker = new DeltaTracker<VocalizationCommand>(
         vCommand);
-    tracker.setProperty(IEfferentCommand.REQUESTED_START_TIME, ACTRRuntime
+    tracker.setProperty(IEfferentCommand.REQUESTED_START_TIME, getModule()
         .getRuntime().getClock(_module.getModel()).getTime());
 
     // ensure that we have a duration, no matter what

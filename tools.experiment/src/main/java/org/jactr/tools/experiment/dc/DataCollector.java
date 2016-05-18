@@ -28,6 +28,9 @@ public class DataCollector
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(DataCollector.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private DataCollector       _default;
 
   static public void set(DataCollector collector)

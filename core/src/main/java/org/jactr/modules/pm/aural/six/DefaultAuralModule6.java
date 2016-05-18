@@ -21,6 +21,7 @@ import org.jactr.core.chunk.IChunk;
 import org.jactr.core.concurrent.ModelCycleExecutor;
 import org.jactr.core.logging.Logger;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.modules.pm.aural.AbstractAuralModule;
 import org.jactr.modules.pm.aural.buffer.IAuralActivationBuffer;
 import org.jactr.modules.pm.aural.buffer.IAuralLocationBuffer;
@@ -51,15 +52,13 @@ public class DefaultAuralModule6 extends AbstractAuralModule
   private AuralAttendingDelegate _attendingDelegate;
 
   private AuralSearchDelegate    _searchDelegate;
+  
+  public DefaultAuralModule6(ACTRRuntime runtime) 
+  {
+	super(runtime);
+  }
 
-  /**
-   * @see org.jactr.modules.pm.aural.AbstractAuralModule#createAudicon()
-   */
-
-  /**
-   * @see org.jactr.modules.pm.aural.AbstractAuralModule#createAuralBuffer(org.jactr.modules.pm.aural.buffer.IAuralLocationBuffer)
-   */
-  @Override
+@Override
   protected IAuralActivationBuffer createAuralBuffer(
       IAuralLocationBuffer locationBuffer)
   {

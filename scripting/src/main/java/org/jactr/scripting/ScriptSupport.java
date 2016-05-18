@@ -84,7 +84,7 @@ public class ScriptSupport
 
   public double getTime()
   {
-    return ACTRRuntime.getRuntime().getClock(_model).getTime();
+    return getModel().getRuntime().getClock(_model).getTime();
   }
 
 
@@ -184,7 +184,7 @@ public class ScriptSupport
 
   public ACTRRuntime getRuntime()
   {
-    return ACTRRuntime.getRuntime();
+    return getModel().getRuntime();
   }
 
   public void output(String string)

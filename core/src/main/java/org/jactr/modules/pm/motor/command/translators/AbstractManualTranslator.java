@@ -12,6 +12,7 @@ import org.commonreality.object.IEfferentObject;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.model.IModel;
 import org.jactr.core.production.request.ChunkTypeRequest;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.slot.DefaultMutableSlot;
 import org.jactr.core.slot.IMutableSlot;
 import org.jactr.core.slot.ISlot;
@@ -42,12 +43,11 @@ public abstract class AbstractManualTranslator extends AbstractTranslator
   
   private Collection<ISlot> _recycledSlotContainer = new ArrayList<ISlot>(4);
 
-  public AbstractManualTranslator()
-  {
-    
+  public AbstractManualTranslator(ACTRRuntime runtime) {
+	super(runtime);
   }
 
-  /**
+/**
    * translates a set of slot values into a {@link IEfferentObject} that
    * represents a muscle defined within the pattern. Since many ACT-R movement
    * commands use multiple slots to define a muscle, this collapses them. (i.e.

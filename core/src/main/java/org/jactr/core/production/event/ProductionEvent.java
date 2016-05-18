@@ -46,7 +46,7 @@ public class ProductionEvent extends
 
   protected ProductionEvent(IProduction source, Type type)
   {
-    super(source, ACTRRuntime.getRuntime().getClock(source.getModel())
+    super(source, source.getModel().getRuntime().getClock(source.getModel())
         .getTime());
     _type = type;
   }

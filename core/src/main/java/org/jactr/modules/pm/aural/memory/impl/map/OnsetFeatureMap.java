@@ -19,9 +19,9 @@ public class OnsetFeatureMap extends AbstractSortedAuralFeatureMap<Double>
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(OnsetFeatureMap.class);
 
-  public OnsetFeatureMap()
+  public OnsetFeatureMap(ACTRRuntime runtime)
   {
-    super(IAuralModule.ONSET_SLOT, IAuralPropertyHandler.ONSET);
+    super(runtime, IAuralModule.ONSET_SLOT, IAuralPropertyHandler.ONSET);
   }
 
   @Override
@@ -47,7 +47,7 @@ public class OnsetFeatureMap extends AbstractSortedAuralFeatureMap<Double>
     {
       LOGGER.warn("could not extract " + IAuralPropertyHandler.ONSET
           + " using current time", e);
-      return ACTRRuntime.getRuntime()
+      return getRuntime()
           .getClock(getPerceptualMemory().getModule().getModel()).getTime();
     }
   }

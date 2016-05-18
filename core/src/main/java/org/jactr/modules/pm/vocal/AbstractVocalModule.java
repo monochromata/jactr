@@ -78,9 +78,9 @@ public class AbstractVocalModule extends AbstractPerceptualModule implements
 
   final private ACTREventDispatcher<IVocalModule, IVocalModuleListener> _dispatcher           = new ACTREventDispatcher<IVocalModule, IVocalModuleListener>();
 
-  public AbstractVocalModule()
+  public AbstractVocalModule(ACTRRuntime runtime)
   {
-    super("vocal");
+    super(runtime, "vocal");
     /*
      * we listen to ourselves for the prepared vocalization
      */
@@ -221,7 +221,7 @@ public class AbstractVocalModule extends AbstractPerceptualModule implements
      * first we snag the agent that corresponds to the model. this is the
      * gateway into common reality
      */
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(getModel());
+    IAgent agent = getRuntime().getConnector().getAgent(getModel());
 
 
 
@@ -318,7 +318,7 @@ public class AbstractVocalModule extends AbstractPerceptualModule implements
   protected void disconnectFromCommonReality()
   {
     super.disconnectFromCommonReality();
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(getModel());
+    IAgent agent = getRuntime().getConnector().getAgent(getModel());
     _vocalManager.getManager().uninstall(agent);
     /*
      * we dont bother unregistering the listener since the agent will be

@@ -15,19 +15,20 @@ import org.jactr.core.model.ModelTerminatedException;
 import org.jactr.core.module.procedural.IProceduralModule;
 import org.jactr.core.production.IInstantiation;
 import org.jactr.core.production.IProduction;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.utils.parameter.BooleanParameterProcessor;
 import org.jactr.core.utils.parameter.IParameterized;
 import org.jactr.core.utils.parameter.ParameterHelper;
-import org.jactr.instrument.IInstrument;
+import org.jactr.instrument.AbstractInstrument;
 
-public class ProductionLoopDetector implements IInstrument, IParameterized
+public class ProductionLoopDetector extends AbstractInstrument implements IParameterized
 {
   /**
    * Logger definition
    */
   static private final transient Log LOGGER                = LogFactory
                                                                .getLog(ProductionLoopDetector.class);
-
+  
   private IProduction                _lastProductionFired;
 
   private double                     _lastFiringTime;
@@ -40,8 +41,9 @@ public class ProductionLoopDetector implements IInstrument, IParameterized
 
   private ParameterHelper            _parameters           = new ParameterHelper();
 
-  public ProductionLoopDetector()
+  public ProductionLoopDetector(ACTRRuntime runtime)
   {
+	super(runtime);
     _sequenceListener = new FiringSequenceListener(this);
     _parameters.addProcessor(new BooleanParameterProcessor(
         "TerminateOnDetection", this::setTerminateOnDetectionEnabled,

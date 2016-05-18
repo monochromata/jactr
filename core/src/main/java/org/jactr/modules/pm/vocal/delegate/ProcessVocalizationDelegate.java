@@ -58,7 +58,7 @@ public class ProcessVocalizationDelegate extends AbstractVocalDelegate
     IChunk free = module.getFreeChunk();
     IChunk bufferState = error;
     Object failureMessage = null;
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
 
     IEfferentCommand vocalizationCommand = agent.getEfferentCommandManager()
         .get(getCommandIdentifier());
@@ -117,7 +117,7 @@ public class ProcessVocalizationDelegate extends AbstractVocalDelegate
     AbstractVocalModule module = getModule();
     IModel model = module.getModel();
 
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
     VocalizationCommand command = (VocalizationCommand) agent
         .getEfferentCommandManager().get(commandIdentifier);
     return startTime
@@ -132,7 +132,7 @@ public class ProcessVocalizationDelegate extends AbstractVocalDelegate
     IModel model = module.getModel();
     Boolean isVocalization = (Boolean) parameters[1];
 
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
 
     IIdentifier commandIdentifier = getCommandIdentifier();
 
@@ -151,7 +151,7 @@ public class ProcessVocalizationDelegate extends AbstractVocalDelegate
           command);
       tracker.setProperty(IEfferentCommand.REQUESTED_STATE,
           IEfferentCommand.RequestedState.START);
-      tracker.setProperty(IEfferentCommand.REQUESTED_START_TIME, ACTRRuntime
+      tracker.setProperty(IEfferentCommand.REQUESTED_START_TIME, getModule()
           .getRuntime().getClock(model).getTime());
 
       /*
@@ -180,7 +180,7 @@ public class ProcessVocalizationDelegate extends AbstractVocalDelegate
     IModel model = module.getModel();
     IChunk busy = module.getBusyChunk();
     IIdentifier commandIdentifier = (IIdentifier) parameters[0];
-    IAgent agent = ACTRRuntime.getRuntime().getConnector().getAgent(model);
+    IAgent agent = getModule().getRuntime().getConnector().getAgent(model);
 
     if (vBuffer.isProcessorBusy())
     {

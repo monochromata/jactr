@@ -28,6 +28,7 @@ import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.net.session.ISessionInfo;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.controller.debug.BreakpointType;
 import org.jactr.tools.async.common.NetworkedEndpoint;
 import org.jactr.tools.async.message.command.breakpoint.BreakpointCommand;
@@ -131,6 +132,7 @@ public class ShadowController extends NetworkedEndpoint
     {
       /*
        * horrible exception handler..
+       * TODO: Make it less horrible
        */
       session.addExceptionHandler((s, t) -> {
         try

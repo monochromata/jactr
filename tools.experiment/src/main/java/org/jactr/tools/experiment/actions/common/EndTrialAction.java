@@ -6,12 +6,13 @@ package org.jactr.tools.experiment.actions.common;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.trial.ITrial;
 
-public class EndTrialAction implements IAction
+public class EndTrialAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -21,8 +22,9 @@ public class EndTrialAction implements IAction
 
   private IExperiment                _experiment;
 
-  public EndTrialAction(IExperiment experiment)
+  public EndTrialAction(ACTRRuntime runtime, IExperiment experiment)
   {
+	super(runtime);
     _experiment = experiment;
   }
 

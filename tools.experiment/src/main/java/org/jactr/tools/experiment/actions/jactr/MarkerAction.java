@@ -11,8 +11,9 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.tools.experiment.IExperiment;
-import org.jactr.tools.experiment.actions.IAction;
+import org.jactr.tools.experiment.actions.AbstractAction;
 import org.jactr.tools.experiment.impl.IVariableContext;
 import org.jactr.tools.experiment.impl.VariableResolver;
 import org.jactr.tools.experiment.misc.ExperimentUtilities;
@@ -20,7 +21,7 @@ import org.jactr.tools.marker.IMarker;
 import org.jactr.tools.marker.MarkerManager;
 import org.jactr.tools.marker.impl.DefaultMarker;
 
-public class MarkerAction implements IAction
+public class MarkerAction extends AbstractAction
 {
   /**
    * Logger definition
@@ -38,9 +39,10 @@ public class MarkerAction implements IAction
 
   private final boolean              _shouldOpen;
 
-  public MarkerAction(String modelNames, String typeName, String name,
+  public MarkerAction(ACTRRuntime runtime, String modelNames, String typeName, String name,
       boolean open, IExperiment experiment)
   {
+	super(runtime);
     _modelNames = modelNames;
     _typeName = typeName;
     _name = name;
@@ -52,7 +54,7 @@ public class MarkerAction implements IAction
   {
     Collection<IModel> models = null;
     if (!_modelNames.equals(""))
-      models = VariableResolver.getModels(_modelNames,
+      models = VariableResolver.getModels(getRuntime(), _modelNames,
           _experiment.getVariableResolver(), context);
     else
     {

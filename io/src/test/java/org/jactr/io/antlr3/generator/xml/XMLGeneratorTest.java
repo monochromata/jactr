@@ -17,31 +17,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.io.IOUtilities;
 import org.jactr.io.generator.CodeGeneratorFactory;
 import org.jactr.io.generator.ICodeGenerator;
+import org.junit.Test;
 
-public class XMLGeneratorTest extends TestCase
+public class XMLGeneratorTest
 {
   /**
    * logger definition
    */
   static public final Log LOGGER = LogFactory.getLog(XMLGeneratorTest.class);
 
+  @Test
   public void test() throws IOException
   {
     CommonTree md = IOUtilities.loadModelFile(
-//        "org/jactr/core/runtime/semantic-model.jactr",
-        "org/jactr/modules/pm/visual/visual-test.jactr",
+        "org/jactr/io/modules/pm/visual/visual-test.jactr",
         new ArrayList<Exception>(), new ArrayList<Exception>());
     ICodeGenerator gen = CodeGeneratorFactory.getCodeGenerator("jactr");
     Collection<StringBuilder> code = gen.generate(md, true);
-    for (StringBuilder line : code)
-      System.out.println(line);
+    // TODO: Without assertions, this is not a test, yet
+//    for (StringBuilder line : code)
+//      System.out.println(line);
   }
 }

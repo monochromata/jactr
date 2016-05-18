@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,9 +16,9 @@ public class NextTrialHandler implements INodeHandler<IAction>
     return "next-trial";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
-    return new NextTrialAction(experiment, element.getAttribute("id"));
+    return new NextTrialAction(runtime, experiment, element.getAttribute("id"));
   }
 
   public boolean shouldDecend()

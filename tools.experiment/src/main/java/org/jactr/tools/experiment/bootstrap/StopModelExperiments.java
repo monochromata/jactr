@@ -11,7 +11,7 @@ import org.jactr.tools.experiment.IExperiment;
 import org.jactr.tools.experiment.misc.ExperimentUtilities;
 
 /**
- * starts the experiment
+ * Stops the experiment
  * 
  * @author harrison
  */
@@ -34,13 +34,20 @@ public class StopModelExperiments implements Runnable
    */
   static public final String         MODELS_EXPERIMENT  = "models.experiment";
 
+  private final ACTRRuntime _runtime;
+  
+  public StopModelExperiments(ACTRRuntime runtime)
+  {
+	  _runtime = runtime;
+  }
+  
   public void run()
   {
 
     /*
      * we create a separate experiment for each model
      */
-    for (IModel model : ACTRRuntime.getRuntime().getModels())
+    for (IModel model : _runtime.getModels())
     {
 
       IExperiment experiment = ExperimentUtilities.getModelsExperiment(model);

@@ -8,12 +8,21 @@ import java.util.Collection;
 import java.util.concurrent.Future;
 
 import org.jactr.core.model.IModel;
+import org.jactr.core.runtime.ACTRRuntime;
 
 /**
- * Controls the behavior of the ACTRRuntime
+ * Controls the behavior of the ACTRRuntime.
+ * 
+ * <p>Implementations of this interface need to provide a 1-argument
+ * constructor that consumes an {@link ACTRRuntime}.</p>
  */
 public interface IController
 {
+
+  /**
+   * @return the runtime to which this controller is meant to be attached.
+   */
+  public ACTRRuntime getRuntime();
   
   /**
    * attach to the runtime - called by the runtime during

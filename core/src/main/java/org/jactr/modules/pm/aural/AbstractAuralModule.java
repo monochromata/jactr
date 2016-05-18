@@ -106,9 +106,9 @@ public abstract class AbstractAuralModule extends AbstractPerceptualModule
 
   private IAuralEncodingTimeEquation                              _encodingTime                = new DefaultAuralEncodingTimeEquation();
 
-  public AbstractAuralModule()
+  public AbstractAuralModule(ACTRRuntime runtime)
   {
-    super("aural");
+    super(runtime, "aural");
     _deferredParameters = new TreeMap<String, String>();
     _recodeTimes = new TreeMap<IChunkType, Double>();
     _listener = new ACTREventDispatcher<IAuralModule, IAuralModuleListener>();
@@ -301,7 +301,7 @@ public abstract class AbstractAuralModule extends AbstractPerceptualModule
     /*
      * attach the visual memory
      */
-    _auralMemory.attach(ACTRRuntime.getRuntime().getConnector()
+    _auralMemory.attach(getRuntime().getConnector()
         .getAgent(getModel()));
   }
 

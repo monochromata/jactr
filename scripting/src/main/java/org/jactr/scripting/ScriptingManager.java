@@ -26,8 +26,14 @@ public class ScriptingManager
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(ScriptingManager.class);
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private final Collection<IScriptableFactory> _factories = new ArrayList<IScriptableFactory>();
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private final Collection<IScriptConfigurator> _configurators = new ArrayList<IScriptConfigurator>();
 
   static

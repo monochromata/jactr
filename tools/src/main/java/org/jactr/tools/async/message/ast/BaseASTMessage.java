@@ -49,8 +49,14 @@ public class BaseASTMessage extends BaseMessage implements Serializable,
 
   private transient boolean    _compress;
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private transient ThreadLocal<ByteArrayOutputStream> _localBAOS       = new ThreadLocal<ByteArrayOutputStream>();
 
+  /**
+   * TODO: Should not be static because there might be more than one ACTRRuntime
+   */
   static private transient ThreadLocal<byte[]>                _localInput      = new ThreadLocal<byte[]>();
 
   public BaseASTMessage(CommonTree ast)

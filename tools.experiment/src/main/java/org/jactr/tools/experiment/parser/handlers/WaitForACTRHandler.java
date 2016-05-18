@@ -1,5 +1,6 @@
 package org.jactr.tools.experiment.parser.handlers;
 
+import org.jactr.core.runtime.ACTRRuntime;
 /*
  * default logging
  */
@@ -15,13 +16,13 @@ public class WaitForACTRHandler implements INodeHandler<IAction>
     return "wait-for-actr";
   }
 
-  public IAction process(Element element, IExperiment experiment)
+  public IAction process(ACTRRuntime runtime, Element element, IExperiment experiment)
   {
     boolean waitForStart = true;
     if (element.hasAttribute("start"))
       waitForStart = Boolean.parseBoolean(element.getAttribute("start"));
 
-    return new WaitForACTRAction(waitForStart);
+    return new WaitForACTRAction(runtime, waitForStart);
   }
 
   public boolean shouldDecend()

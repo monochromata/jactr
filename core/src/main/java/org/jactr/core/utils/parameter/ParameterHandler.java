@@ -16,6 +16,9 @@ import java.util.Map;
 public abstract class ParameterHandler<T> implements IParameterHandler<T>
 {
 
+	/**
+	 * TODO: Should not be static because there might be more than one ACTRRuntime
+	 */
   @SuppressWarnings("unchecked")
   static private Map<Class, IParameterHandler> _handlerMap = Collections.synchronizedMap(new HashMap<Class, IParameterHandler>());
   
