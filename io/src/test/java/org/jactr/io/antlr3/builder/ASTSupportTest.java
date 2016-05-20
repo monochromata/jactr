@@ -13,7 +13,7 @@
  */
 package org.jactr.io.antlr3.builder;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.fail;
 
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
@@ -22,8 +22,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.io.antlr3.compiler.JACTRCompiler;
 import org.jactr.io.antlr3.misc.ASTSupport;
+import org.junit.Before;
+import org.junit.Test;
 
-public class ASTSupportTest extends TestCase
+public class ASTSupportTest
 {
   /**
    * logger definition
@@ -32,17 +34,10 @@ public class ASTSupportTest extends TestCase
 
   ASTSupport              _support;
 
-  @Override
-  protected void setUp() throws Exception
+  @Before
+  public void setUp() throws Exception
   {
     _support = new ASTSupport();
-    super.setUp();
-  }
-
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
   }
 
   protected void compile(Tree modelTree) throws Exception
@@ -52,6 +47,7 @@ public class ASTSupportTest extends TestCase
     compiler.model();
   }
 
+  @Test
   public void testModel()
   {
     CommonTree modelTree = _support.createModelTree("testModel");

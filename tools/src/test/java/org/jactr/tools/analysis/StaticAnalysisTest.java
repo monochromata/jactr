@@ -6,16 +6,15 @@ package org.jactr.tools.analysis;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.io.CommonIO;
 import org.jactr.io.compiler.DefaultCompiler;
 import org.jactr.tools.analysis.production.ProductionAnaysisUnitCompiler;
+import org.junit.Test;
 
-public class StaticAnalysisTest extends TestCase
+public class StaticAnalysisTest
 {
   /**
    * Logger definition
@@ -23,12 +22,13 @@ public class StaticAnalysisTest extends TestCase
   static private final transient Log LOGGER = LogFactory
                                                 .getLog(StaticAnalysisTest.class);
 
-  
+  @Test
   public void testAddition() throws Exception
   {
     analyze("org/jactr/io/models/addition.jactr");
   }
   
+  @Test
   public void testSemantic() throws Exception
   {
     analyze("org/jactr/io/models/semantic-model.jactr");

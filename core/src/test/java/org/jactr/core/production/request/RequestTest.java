@@ -13,19 +13,21 @@
  */
 package org.jactr.core.production.request;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.commonreality.reality.CommonReality;
-import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.chunk.IChunk;
 import org.jactr.core.model.IModel;
 import org.jactr.core.models.SemanticModelFactory;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.TestUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class RequestTest extends TestCase
+public class RequestTest
 {
 
   /**
@@ -37,24 +39,22 @@ public class RequestTest extends TestCase
 
   IModel                             _model;
 
-  @Override
-  protected void setUp() throws Exception
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
     ACTRRuntime runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
     _model = new SemanticModelFactory(runtime).createAndInitializeModel();
 
   }
 
-  @Override
-  protected void tearDown() throws Exception
+  @After
+  public void tearDown() throws Exception
   {
     _model.dispose();
     _model = null;
-
-    super.tearDown();
   }
 
+  @Test
   public void testRequestComparison() throws Exception
   {
     IChunk p1 = _model.getDeclarativeModule().getChunk("p1").get();

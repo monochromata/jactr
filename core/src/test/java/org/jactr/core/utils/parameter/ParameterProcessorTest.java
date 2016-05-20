@@ -1,17 +1,19 @@
 package org.jactr.core.utils.parameter;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /*
  * default logging
  */
 import java.util.Arrays;
 import java.util.Collection;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
-public class ParameterProcessorTest extends TestCase
+public class ParameterProcessorTest
 {
   /**
    * Logger definition
@@ -25,6 +27,7 @@ public class ParameterProcessorTest extends TestCase
 
   private Collection<Double>         _collection;
 
+  @Test
   public void testNumeric() throws Exception
   {
     DoubleParameterProcessor npp = new DoubleParameterProcessor("number",
@@ -47,6 +50,7 @@ public class ParameterProcessorTest extends TestCase
     return (Double) _number;
   }
 
+  @Test
   public void testClassName() throws Exception
   {
     ClassNameParameterProcessor cnpp = new ClassNameParameterProcessor("class",
@@ -70,6 +74,7 @@ public class ParameterProcessorTest extends TestCase
     return _class;
   }
 
+  @Test
   public void testCollection() throws Exception
   {
     // the lack of setter/getter is intentional, as it is only needed by the

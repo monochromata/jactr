@@ -13,6 +13,9 @@
  */
 package org.jactr.io.antlr3.serialization;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -24,20 +27,20 @@ import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.tree.CommonTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jactr.io.IOUtilities;
+import org.junit.Test;
 
-public class SerializerTest extends TestCase
+public class SerializerTest
 {
   /**
    * logger definition
    */
   static public final Log LOGGER = LogFactory.getLog(SerializerTest.class);
 
+  @Test
   public void testSaveAndLoad() throws Exception
   {
     ArrayList<Exception> warnings = new ArrayList<Exception>();

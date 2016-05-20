@@ -13,11 +13,11 @@
  */
 package org.jactr.tools.test;
 
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
-
-import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,11 +26,9 @@ import org.jactr.core.chunk.IChunk;
 import org.jactr.core.model.IModel;
 import org.jactr.core.production.IInstantiation;
 import org.jactr.core.utils.StringUtilities;
+import org.junit.Test;
 
-/**
- * 
- */
-public class ExecutionVerifyTest extends TestCase
+public class ExecutionVerifyTest
 {
   /**
    * logger definition
@@ -38,6 +36,7 @@ public class ExecutionVerifyTest extends TestCase
   static private final Log LOGGER = LogFactory
                                       .getLog(ExecutionVerifyTest.class);
 
+  @Test
   public void testSemanticRun() throws Exception
   {
     URL url = getClass().getClassLoader().getResource(
@@ -56,6 +55,7 @@ public class ExecutionVerifyTest extends TestCase
     }
   }
 
+  @Test
   public void testCountRun() throws Exception
   {
     URL url = getClass().getClassLoader().getResource(
@@ -74,6 +74,7 @@ public class ExecutionVerifyTest extends TestCase
     }
   }
 
+  @Test
   public void testAdditionRun() throws Exception
   {
     URL url = getClass().getClassLoader().getResource(

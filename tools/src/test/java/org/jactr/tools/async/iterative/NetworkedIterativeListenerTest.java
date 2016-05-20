@@ -13,39 +13,30 @@
  */
 package org.jactr.tools.async.iterative;
 
-import junit.framework.TestCase;
-
-import java.io.File;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.commonreality.mina.service.ServerService;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.entry.iterative.IterativeMain;
 import org.jactr.tools.async.iterative.tracker.IterativeRunTracker;
+import org.junit.Before;
+import org.junit.Test;
 
-/**
- * 
- */
-public class NetworkedIterativeListener extends TestCase
+public class NetworkedIterativeListenerTest
 {
   /**
    * logger definition
    */
   static private final Log LOGGER = LogFactory
-                                      .getLog(NetworkedIterativeListener.class);
+                                      .getLog(NetworkedIterativeListenerTest.class);
 
   IterativeRunTracker      _tracker;
 
   IterativeMain            _main;
 
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  @Override
-  protected void setUp() throws Exception
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
     _main = new IterativeMain();
     _tracker = new IterativeRunTracker();
     _tracker.setAddressInfo("localhost:6969");
@@ -53,16 +44,8 @@ public class NetworkedIterativeListener extends TestCase
     _tracker.setService(new ServerService());
   }
 
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-
-  @Override
-  protected void tearDown() throws Exception
-  {
-    super.tearDown();
-  }
-
+  // TODO: Add assertions
+  @Test
   public void test() throws Exception
   {
     /*

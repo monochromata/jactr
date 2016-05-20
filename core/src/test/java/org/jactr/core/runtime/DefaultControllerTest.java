@@ -13,19 +13,21 @@
  */
 package org.jactr.core.runtime;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.commonreality.reality.CommonReality;
-import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.logging.Logger;
 import org.jactr.core.logging.impl.DefaultModelLogger;
 import org.jactr.core.model.IModel;
 import org.jactr.core.models.SemanticModelFactory;
 import org.jactr.core.runtime.controller.DefaultController;
 import org.jactr.core.runtime.controller.IController;
-
-import junit.framework.TestCase;
-public class DefaultControllerTest extends TestCase
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+public class DefaultControllerTest
 {
 
   /**
@@ -39,9 +41,9 @@ public class DefaultControllerTest extends TestCase
   IController _controller;
   IModel _model;
   
-  protected void setUp() throws Exception
+  @Before
+  public void setUp() throws Exception
   {
-    super.setUp();
     _runtime = TestUtils.getRuntimeWithEmptyDefaultReality();
     
     _controller = new DefaultController(_runtime);
@@ -54,9 +56,9 @@ public class DefaultControllerTest extends TestCase
     _runtime.addModel(_model);
   }
 
-  protected void tearDown() throws Exception
+  @After
+  public void tearDown() throws Exception
   {
-    super.tearDown();
     _runtime.removeModel(_model);
     _model.dispose();
     _model = null;
@@ -84,6 +86,7 @@ public class DefaultControllerTest extends TestCase
     return model;
   }
   
+  @Test
   public void testSuspendAndResume() throws Exception
   {
 

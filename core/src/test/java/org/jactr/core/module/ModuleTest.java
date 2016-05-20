@@ -13,16 +13,12 @@
  */
 package org.jactr.core.module;
 
-import org.commonreality.reality.CommonReality;
-import org.commonreality.reality.impl.DefaultReality;
 import org.jactr.core.model.IModel;
 import org.jactr.core.models.BootstrapModelFactory;
 import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.core.runtime.TestUtils;
 import org.junit.After;
 import org.junit.Before;
-
-import junit.framework.TestCase;
 
 public abstract class ModuleTest
 {
