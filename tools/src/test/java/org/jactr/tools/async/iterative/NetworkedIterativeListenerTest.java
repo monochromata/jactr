@@ -20,6 +20,7 @@ import org.jactr.core.runtime.ACTRRuntime;
 import org.jactr.entry.iterative.IterativeMain;
 import org.jactr.tools.async.iterative.tracker.IterativeRunTracker;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class NetworkedIterativeListenerTest
@@ -45,6 +46,7 @@ public class NetworkedIterativeListenerTest
   }
 
   // TODO: Add assertions
+  @Ignore
   @Test
   public void test() throws Exception
   {
