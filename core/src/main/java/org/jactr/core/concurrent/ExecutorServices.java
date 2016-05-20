@@ -45,6 +45,7 @@ public class ExecutorServices
 
   static final public String                  POOL            = "Pool";
 
+  // TODO: Should not be static, likely move to ACTRRuntime or make ExecutorServices a part of ACTRRuntime
   static final public ExecutorService         INLINE_EXECUTOR = new InlineExecutor();
 
   static final public Runnable                NOOP_RUNNABLE   = new Runnable() {
@@ -55,8 +56,10 @@ public class ExecutorServices
                                                                 }
                                                               };
 
+  // TODO: Should not be static, likely move to ACTRRuntime or make ExecutorServices a part of ACTRRuntime
   static private Map<String, ExecutorService> _executors      = new TreeMap<String, ExecutorService>();
 
+  // TODO: Should not be static, likely move to ACTRRuntime or make ExecutorServices a part of ACTRRuntime
   static private boolean                      _isShuttingDown = false;
 
   static public void initialize()
