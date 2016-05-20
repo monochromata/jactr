@@ -136,7 +136,8 @@ public class MotorModuleTest extends AbstractModuleTest
           }
         }, ExecutorServices.INLINE_EXECUTOR);
 
-    JFrame window = openWindow();
+    final boolean createWindow = false;
+    JFrame window = createWindow?openWindow():null;
     _controller.start().get();
     if (LOGGER.isDebugEnabled()) LOGGER.debug("model run has started");
 
@@ -145,7 +146,8 @@ public class MotorModuleTest extends AbstractModuleTest
     assertThat("Not all the productions have fired",
         _productionSequence.length, equalTo(_productionFireCount));
     
-    closeWindow(window);
+    if(createWindow)
+    	closeWindow(window);
   }
 
   protected void testProduction(IProduction production)
