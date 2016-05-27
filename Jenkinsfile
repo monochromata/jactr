@@ -1,4 +1,4 @@
-node {
+node("1gb") {
    installToolsIfNecessary()
    def newVersion="3.1."+env.BUILD_NUMBER
    withCredentials([[$class: 'FileBinding', credentialsId: 'settings.xml', variable: 'PATH_TO_SETTINGS_XML'],
