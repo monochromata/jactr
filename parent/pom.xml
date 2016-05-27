@@ -72,7 +72,7 @@
 		<javolution.version>5.2.3</javolution.version>
 		<javolution.core.java.version>6.0.0</javolution.core.java.version>
 		<antlr.version>3.1.1</antlr.version>
-		<commonreality.version>3.1.24</commonreality.version>
+		<commonreality.version>3.1.32</commonreality.version>
 		<mars-repo.url>http://download.eclipse.org/releases/mars</mars-repo.url>
 		<!-- TODO: Use commonreality.org -->
 		<commonreality.server>monochromata.de</commonreality.server>
