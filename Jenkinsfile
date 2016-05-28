@@ -45,8 +45,6 @@ node("1gb") {
 	     	}
          }
    }
-   
-   // TODO: Publish JUnit test reports ... **/target/surefire-reports/*.xml ?
 }
 
 // TODO: Move to workflowLibs
