@@ -1,6 +1,11 @@
+class Config {
+	public static String versionPrefix = '3.1.'
+	public static String gitRepo = 'https://github.com/monochromata/jactr.git'
+}
+
+// TODO: Even this might be moved into workflowLibs, passing just a Config instance
 node("1gb") {
    installToolsIfNecessary()
-   def newVersion="3.1."+env.BUILD_NUMBER
    withCredentials([[$class: 'FileBinding', credentialsId: 'settings.xml', variable: 'PATH_TO_SETTINGS_XML'],
    					[$class: 'FileBinding', credentialsId: 'jarsigner.keystore', variable: 'PATH_TO_JARSIGNER_KEYSTORE'],
    					[$class: 'FileBinding', credentialsId: 'pubring.gpg', variable: 'PATH_TO_GPG_PUBLIC_KEYRING'],
@@ -11,44 +16,59 @@ node("1gb") {
 		withEnv(["PATH+MAVEN=${tool 'mvn'}/bin", 
 				 "PATH+JAVA=${tool 'jdk8'}/bin"]) {
 		   stage 'Checkout'
-		   git url: 'https://github.com/monochromata/jactr.git'
-		
+		   git url: Config.gitRepo
+		   
 		   stage 'Set versions'
-	       sh '''mvn \
-	             --errors \
-	             --settings $PATH_TO_SETTINGS_XML \
-	             --file parent/pom.xml \
-	             -DnewVersion='''+newVersion+''' \
-	             versions:set'''
+		   maven("--file parent/pom.xml \
+				  versions:set")
 	       
 	       stage "Clean & verify"
-	       sh '''mvn \
-	       		 -Djarsigner.keystore.path=$PATH_TO_JARSIGNER_KEYSTORE \
-	       		 -Dgpg.publicKeyring=$PATH_TO_GPG_PUBLIC_KEYRING \
-	       		 -Dgpg.secretKeyring=$PATH_TO_GPG_SECRET_KEYRING \
-	             --errors \
-	             --settings $PATH_TO_SETTINGS_XML \
-	             -DnewVersion='''+newVersion+''' \
-	             clean verify'''
+	       maven("clean verify")
 	
-	       stage name:"Deploy & site deploy", concurrency: 1
+	       stage name:"Deploy", concurrency: 1
 	       sh '''touch ~/.ssh/known_hosts \
 	       		 && ssh-keygen -f ~/.ssh/known_hosts -R $UPLOAD_SERVER_NAME \
 	       		 && cat $PATH_TO_UPLOAD_SERVER_SSH_FINGERPRINT_FILE >> ~/.ssh/known_hosts'''
-	       sh '''mvn \
-	       		 -Djarsigner.keystore.path=$PATH_TO_JARSIGNER_KEYSTORE \
-	       		 -Dgpg.publicKeyring=$PATH_TO_GPG_PUBLIC_KEYRING \
-	       		 -Dgpg.secretKeyring=$PATH_TO_GPG_SECRET_KEYRING \
-	             --errors \
-	             --settings $PATH_TO_SETTINGS_XML \
-	             -DnewVersion='''+newVersion+''' \
-	             -DskipTests=true \
-				 -DskipITs=true \
-	             deploy site-deploy'''
-		}
-    }
+	       // Retry is necessary because upload is unreliable
+	       retry(3) {
+	       		maven('''-DskipTests=true \
+	       				 -DskipITs=true \
+	       				 deploy''')
+	       }
+	             
+	       stage name:"Site deploy", concurrency: 1
+	       // Retry is necessary because upload is unreliable
+	       retry(3) {
+	       		maven('''-DskipTests=true \
+	       				 -DskipITs=true \
+	       				 site-deploy''')
+	     	}
+         }
+   }
    
    // TODO: Publish JUnit test reports ... **/target/surefire-reports/*.xml ?
+}
+
+// TODO: Move to workflowLibs
+def maven(String optionsAndGoals) {
+   def newVersion=getNextVersion()
+   sh '''mvn \
+   		 -Djarsigner.keystore.path=$PATH_TO_JARSIGNER_KEYSTORE \
+   		 -Dgpg.publicKeyring=$PATH_TO_GPG_PUBLIC_KEYRING \
+   		 -Dgpg.secretKeyring=$PATH_TO_GPG_SECRET_KEYRING \
+         --errors \
+         --settings $PATH_TO_SETTINGS_XML \
+         -DnewVersion='''+newVersion+''' \
+         '''+optionsAndGoals
+}
+
+// TODO: Move to workflowLibs
+// TODO: Auto-assign version numbers via an algorithm that
+//		 * does not yield un-deployed versions for failed builds
+// 		 * permits major and minor numbers to be incremented via tags in the commit message
+//		 * starts with a patch number of 0 if the minor was incremented (same for minor if major was incremented)
+def getNextVersion() {
+	return Config.versionPrefix+env.BUILD_NUMBER
 }
 
 // TODO: Move to workflowLibs
