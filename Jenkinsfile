@@ -19,13 +19,14 @@ node("1gb") {
 		   git url: Config.gitRepo
 		   
 		   stage 'Set versions'
-		   maven("--file parent/pom.xml \
-				  versions:set")
+		   maven('''--file parent/pom.xml \
+				  versions:set''')
 	       
 	       stage "Clean & verify"
 	       maven("clean verify")
 	
 	       stage name:"Deploy", concurrency: 1
+	       // TODO: Deploy to Maven Central will require the maven central ssh fingerprint
 	       sh '''touch ~/.ssh/known_hosts \
 	       		 && ssh-keygen -f ~/.ssh/known_hosts -R $UPLOAD_SERVER_NAME \
 	       		 && cat $PATH_TO_UPLOAD_SERVER_SSH_FINGERPRINT_FILE >> ~/.ssh/known_hosts'''
@@ -65,6 +66,8 @@ def maven(String optionsAndGoals) {
 //		 * does not yield un-deployed versions for failed builds
 // 		 * permits major and minor numbers to be incremented via tags in the commit message
 //		 * starts with a patch number of 0 if the minor was incremented (same for minor if major was incremented)
+//       ! Note that from then on (including "Set versions" stage, concurrency 1
+//		   will be required.
 def getNextVersion() {
 	return Config.versionPrefix+env.BUILD_NUMBER
 }
